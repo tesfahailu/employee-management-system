@@ -1,18 +1,25 @@
 import { Sequelize } from 'sequelize-typescript';
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/config.js')[env];
 
 export default async () => {
-  console.log('Sequlize db URL: ' + process.env.SQL_CONNECT_URL);
-  const sequelize = await new Sequelize(process.env.SQL_CONNECT_URL || '', {
-    define: {
-      timestamps: false,
+  const sequelize = await new Sequelize(
+    process.env[config.use_env_variable] as string,
+    {
+      define: {
+        timestamps: false,
+      },
+      dialect: 'postgres',
+      models: [__dirname + '/models'],
     },
-    dialect: 'postgres',
-  });
+  );
 
   sequelize
     .authenticate()
-    .then(async () => console.log('Database connected successfully'))
-    .catch((err: any) => console.error('Error', err));
+    .then(async () => {
+      console.log('Data base connected successfully');
+    })
+    .catch((err: any) => console.log('Error', err));
 
   return sequelize;
 };
