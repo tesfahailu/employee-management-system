@@ -37,30 +37,30 @@ registerEnumType(EmployeeType, {
 
 @ObjectType()
 @Table({ tableName: 'employee', modelName: 'Employee', underscored: true })
-export class Employee extends Model<Employee> {
+export class Employee extends Model {
   @ForeignKey(() => EmployeeAddress)
   @Column
-  employeeAddressId: EmployeeAddress;
+  employeeAddressId?: number;
 
-  @Field(() => EmployeeAddress)
+  @Field(() => EmployeeAddress, { nullable: true })
   @BelongsTo(() => EmployeeAddress)
-  employeeAddress: EmployeeAddress;
+  employeeAddress?: EmployeeAddress;
 
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
 
-  @Field(() => [Employee], { nullable: 'items' })
+  @Field(() => [Employee], { nullable: 'itemsAndList' })
   @HasMany(() => Employee)
-  supervisors: Employee[];
+  supervisors?: Employee[];
 
-  @Field(() => [Experience], { nullable: 'items' })
+  @Field(() => [Experience], { nullable: 'itemsAndList' })
   @HasMany(() => Experience)
-  experiences: Experience[];
+  experiences?: Experience[];
 
-  @Field(() => [Leave], { nullable: 'items' })
+  @Field(() => [Leave], { nullable: 'itemsAndList' })
   @HasMany(() => Leave)
-  leaves: Leave[];
+  leaves?: Leave[];
 
   @Field(() => Login, { nullable: true })
   @HasOne(() => Login)
@@ -70,56 +70,64 @@ export class Employee extends Model<Employee> {
   @HasMany(() => EmployeeProject)
   employeeProjects?: EmployeeProject[];
 
-  @Field(() => [Project], { nullable: 'items' })
+  @Field(() => [Project], { nullable: 'itemsAndList' })
   @BelongsToMany(() => Project, () => EmployeeProject)
-  projects: Project[];
+  projects?: Project[];
 
-  @Field(() => [Salary])
+  @Field(() => [Salary], { nullable: 'itemsAndList' })
   @HasMany(() => Salary)
-  salaries: Salary[];
+  salaries?: Salary[];
 
   @Field()
   @Column
-  name: string;
+  firstName: string;
+
+  @Field()
+  @Column
+  lastName: string;
+
+  @Field()
+  @Column
+  fullName: string;
 
   @Field({ nullable: true })
   @Column
-  mobile: string;
+  mobile?: string;
 
   @Field({ nullable: true })
   @Column
-  email: string;
+  email?: string;
 
   @ForeignKey(() => Employee)
   @Column
-  supervisorId: number;
+  supervisorId?: number;
 
   @ForeignKey(() => Office)
   @Column
   officeId: number;
 
-  @Field(() => Office)
+  @Field(() => Office, { nullable: true })
   @BelongsTo(() => Office)
-  office: Office;
+  office?: Office;
 
-  @Field(() => EmployeeType)
+  @Field(() => EmployeeType, { nullable: true })
   @Column(DataType.ENUM(...Object.values(EmployeeType)))
-  type: number;
+  type?: string;
 
   @ForeignKey(() => Department)
   @Column
   departmentId: number;
 
-  @Field(() => Department)
+  @Field(() => Department, { nullable: 'itemsAndList' })
   @BelongsTo(() => Department)
-  department: Department;
+  department?: Department;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

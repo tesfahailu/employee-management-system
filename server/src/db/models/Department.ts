@@ -26,7 +26,7 @@ registerEnumType(DepartmentType, {
 
 @ObjectType()
 @Table({ tableName: 'department', modelName: 'Department', underscored: true })
-export class Department extends Model<Department> {
+export class Department extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
@@ -44,11 +44,11 @@ export class Department extends Model<Department> {
   description: string;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

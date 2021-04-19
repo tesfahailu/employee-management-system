@@ -14,7 +14,7 @@ import { Employee } from './Employee';
 
 @ObjectType()
 @Table({ tableName: 'project', modelName: 'Project', underscored: true })
-export class Project extends Model<Project> {
+export class Project extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
@@ -36,11 +36,11 @@ export class Project extends Model<Project> {
   description: string;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

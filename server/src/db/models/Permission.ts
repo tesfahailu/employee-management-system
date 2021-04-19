@@ -1,4 +1,3 @@
-import { Resource } from './Resource';
 import { Role } from './Role';
 import {
   Model,
@@ -8,16 +7,14 @@ import {
   UpdatedAt,
   DeletedAt,
   ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
-import { Field, ObjectType, Int } from 'type-graphql';
+import { ObjectType, Field, Int } from 'type-graphql';
+import { Resource } from './Resource';
 
 @ObjectType()
-@Table({
-  tableName: 'permission',
-  modelName: 'Permission',
-  underscored: true,
-})
-export class Permission extends Model<Permission> {
+@Table({ tableName: 'permission', modelName: 'Permission', underscored: true })
+export class Permission extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
@@ -26,32 +23,44 @@ export class Permission extends Model<Permission> {
   @Column
   roleId: number;
 
+  @Field(() => Role, { nullable: true })
+  @BelongsTo(() => Role)
+  role?: Role;
+
   @ForeignKey(() => Resource)
   @Column
   resourceId: number;
 
-  @Field()
-  @Column
-  canView: boolean;
+  @Field(() => Resource, { nullable: true })
+  @BelongsTo(() => Resource)
+  resource?: Resource;
 
   @Field()
   @Column
-  canCreate: boolean;
+  canViewSelf: Boolean;
 
   @Field()
   @Column
-  canEdit: boolean;
+  canViewAll: Boolean;
 
   @Field()
   @Column
-  canDelete: boolean;
+  canCreate: Boolean;
+
+  @Field()
+  @Column
+  canEdit: Boolean;
+
+  @Field()
+  @Column
+  canDelete: Boolean;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }
