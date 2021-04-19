@@ -13,7 +13,7 @@ import { OfficeAddress } from './OfficeAddress';
 
 @ObjectType()
 @Table({ tableName: 'state', modelName: 'State', underscored: true })
-export class State extends Model<State> {
+export class State extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
@@ -30,12 +30,16 @@ export class State extends Model<State> {
   @Column
   name: string;
 
+  @Field()
+  @Column
+  abbreviation: string;
+
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

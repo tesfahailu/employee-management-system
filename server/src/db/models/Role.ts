@@ -15,7 +15,7 @@ import { Permission } from './Permission';
 
 @ObjectType()
 @Table({ tableName: 'role', modelName: 'Role', underscored: true })
-export class Role extends Model<Role> {
+export class Role extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
@@ -24,27 +24,28 @@ export class Role extends Model<Role> {
   @HasMany(() => Login)
   login?: Login[];
 
+  @Field(() => [Resource], { nullable: 'itemsAndList' })
   @BelongsToMany(() => Resource, () => Permission)
-  resources: Resource[];
+  resources?: Resource[];
 
-  @Field(() => Permission)
+  @Field(() => [Permission], { nullable: 'itemsAndList' })
   @HasMany(() => Permission)
-  permissions: Permission[];
+  permissions?: Permission[];
 
   @Field()
   @Column
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column
-  description: string;
+  description?: string;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

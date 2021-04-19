@@ -10,48 +10,43 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { ObjectType, Field, Int } from 'type-graphql';
+import { ObjectType, Field } from 'type-graphql';
 
 @ObjectType()
 @Table({ tableName: 'login', modelName: 'Login', underscored: true })
-export class Login extends Model<Login> {
-  @Field(() => Int)
-  @Column({ primaryKey: true, autoIncrement: true })
-  id: number;
+export class Login extends Model {
+  @Field()
+  @Column({ primaryKey: true })
+  username: string;
 
   @ForeignKey(() => Employee)
   @Column
-  employeeId: Employee;
+  employeeId?: number;
 
   @BelongsTo(() => Employee)
   employee: Employee;
 
   @ForeignKey(() => Role)
   @Column
-  roleId: number;
+  roleId?: number;
 
-  @Field(() => Role)
+  @Field(() => Role, { nullable: true })
   @BelongsTo(() => Role)
-  role: Role;
+  role?: Role;
 
-  @Field()
-  @Column
-  userName: string;
-
-  @Field()
   @Column
   password: string;
 
-  @Field()
-  @Column
-  lastLogin: Date;
+  @Field({ nullable: true })
+  @Column({ defaultValue: new Date() })
+  lastLogin?: Date;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

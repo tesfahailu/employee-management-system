@@ -19,7 +19,7 @@ import { ObjectType, Field, Int } from 'type-graphql';
   modelName: 'OfficeAddress',
   underscored: true,
 })
-export class OfficeAddress extends Model<OfficeAddress> {
+export class OfficeAddress extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
@@ -64,11 +64,11 @@ export class OfficeAddress extends Model<OfficeAddress> {
   zipCode: string;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

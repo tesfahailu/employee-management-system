@@ -13,7 +13,7 @@ import { ObjectType, Field, Int } from 'type-graphql';
 
 @ObjectType()
 @Table({ tableName: 'country', modelName: 'Country', underscored: true })
-export class Country extends Model<Country> {
+export class Country extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
@@ -31,11 +31,11 @@ export class Country extends Model<Country> {
   name: string;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

@@ -1,4 +1,5 @@
 import { Role } from './Role';
+import { Permission } from './Permission';
 import {
   Model,
   Table,
@@ -6,36 +7,40 @@ import {
   CreatedAt,
   UpdatedAt,
   DeletedAt,
+  HasMany,
   BelongsToMany,
 } from 'sequelize-typescript';
 import { ObjectType, Field, Int } from 'type-graphql';
-import { Permission } from './Permission';
 
 @ObjectType()
 @Table({ tableName: 'resource', modelName: 'Resource', underscored: true })
-export class Resource extends Model<Resource> {
+export class Resource extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
-
-  @Field(() => [Role], { nullable: 'itemsAndList' })
-  @BelongsToMany(() => Role, () => Permission)
-  roles?: Role[];
 
   @Field()
   @Column
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column
-  description: string;
+  description?: string;
+
+  @Field(() => [Permission], { nullable: 'itemsAndList' })
+  @HasMany(() => Permission)
+  permissions?: Permission[];
+
+  @Field(() => [Role], { nullable: 'itemsAndList' })
+  @BelongsToMany(() => Role, () => Permission)
+  roles?: Role[];
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

@@ -26,7 +26,7 @@ registerEnumType(LeaveType, {
 
 @ObjectType()
 @Table({ tableName: 'leave', modelName: 'Leave', underscored: true })
-export class Leave extends Model<Leave> {
+export class Leave extends Model {
   @Field(() => ID)
   @Column({ primaryKey: true, autoIncrement: true })
   readonly id: number;
@@ -44,10 +44,6 @@ export class Leave extends Model<Leave> {
 
   @Field()
   @Column
-  status: string;
-
-  @Field()
-  @Column
   to: Date;
 
   @Field()
@@ -59,11 +55,11 @@ export class Leave extends Model<Leave> {
   description?: string;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }

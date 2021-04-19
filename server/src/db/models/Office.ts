@@ -14,7 +14,7 @@ import { ObjectType, Field, Int, ID } from 'type-graphql';
 
 @ObjectType()
 @Table({ tableName: 'office', modelName: 'Office', underscored: true })
-export class Office extends Model<Office> {
+export class Office extends Model {
   @Field(() => ID)
   @Column({ primaryKey: true, autoIncrement: true })
   readonly id: number;
@@ -32,11 +32,11 @@ export class Office extends Model<Office> {
   capacity: number;
 
   @CreatedAt
-  creationDate: Date;
+  createdAt: Date;
 
   @UpdatedAt
-  updatedOn: Date;
+  updatedAt: Date;
 
   @DeletedAt
-  deletionDate: Date;
+  deletedAt: Date;
 }
