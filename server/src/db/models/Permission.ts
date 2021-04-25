@@ -13,7 +13,7 @@ import { ObjectType, Field, Int } from 'type-graphql';
 import { Resource } from './Resource';
 
 @ObjectType()
-@Table({ tableName: 'permission', modelName: 'Permission', underscored: true })
+@Table({ tableName: 'permission', modelName: 'permission', underscored: true })
 export class Permission extends Model {
   @Field(() => Int)
   @Column({ primaryKey: true, autoIncrement: true })
