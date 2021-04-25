@@ -2,8 +2,9 @@ import { Sequelize } from 'sequelize-typescript';
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/config.js')[env];
 
+let sequelize: Sequelize;
 export default async () => {
-  const sequelize = await new Sequelize(
+  sequelize = await new Sequelize(
     process.env[config.use_env_variable] as string,
     {
       define: {
@@ -14,12 +15,14 @@ export default async () => {
     },
   );
 
-  sequelize
+  await sequelize
     .authenticate()
     .then(async () => {
       console.log('Data base connected successfully');
     })
     .catch((err: any) => console.log('Error', err));
-
-  return sequelize;
 };
+
+export function getSequelize(): Sequelize {
+  return sequelize;
+}
