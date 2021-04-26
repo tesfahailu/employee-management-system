@@ -5,7 +5,10 @@ export enum ErrorCode {
 
 export enum ErrorMessage {
   UNKNOWN = 'unknown error occurred.',
-  NAME_ALREADY_EXIST = 'name already exist',
+  NAME_ALREADY_EXIST = 'name already exist.',
+
+  LOGIN_ALREADY_EXIST = 'check login credentials.',
+  LOGIN_ARG_ERROR = 'could not find username or password does not match',
 
   ROLE_ARG_ERROR = 'provide a role id or name.',
   ROLE_NOT_FOUND = 'role not found. check role id or name.',
