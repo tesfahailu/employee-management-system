@@ -28,9 +28,12 @@ export class Role extends Model {
   @BelongsToMany(() => Resource, () => Permission)
   resources?: Array<Resource & { permission: Permission }>;
 
+  @Field({ nullable: true })
+  permission?: Permission;
+
   @Field()
   @Column({ unique: true })
-  name?: string;
+  name: string;
 
   @Field({ nullable: true })
   @Column
