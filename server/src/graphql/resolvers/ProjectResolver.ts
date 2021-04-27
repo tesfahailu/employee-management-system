@@ -78,7 +78,7 @@ export class ProjectResolver {
         throw new UserInputError(ErrorMessage.NAME_ALREADY_EXIST, error.errors);
       if (error.message === ErrorCode.BAD_USER_INPUT)
         throw new UserInputError(ErrorMessage.PROJECT_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.UNKNOWN);
     }
     return { success: true };
   }
@@ -118,7 +118,7 @@ export class ProjectResolver {
     } catch (error) {
       if (error.message === ErrorCode.BAD_USER_INPUT)
         throw new UserInputError(ErrorMessage.PROJECT_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.UNKNOWN);
     }
     return { success: true };
   }

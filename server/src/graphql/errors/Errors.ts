@@ -23,6 +23,11 @@ export enum ErrorMessage {
   PERMISSION_NOT_FOUND = 'permission not found. check permission id.',
   PERMISSION_INVALID_RESOURCE_ID = 'permission does not have a valid resource id.',
 
+  PROJECT_ARG_ERROR = 'provide either a valid project id or a valid project name.',
+  PROJECT_NOT_FOUND = 'project not found. check the permission id or name',
+
   RESOURCE_ARG_ERROR = 'provide a resource id or name',
   RESOURCE_NOT_FOUND = 'resource not found. check resource id or name.',
+
+  SALARY_NOT_FOUND = 'salary not found. check salary id.',
 }

@@ -102,7 +102,7 @@ export class ResourceResolver {
 
       if (!resource) throw new Error(ErrorCode.BAD_USER_INPUT);
       await getSequelize().transaction(async (t) => {
-        await Resource.destroy({ where: { id: resource.id }, transaction: t });
+        await Resource.destroy({ where: { id }, transaction: t });
         await Permission.destroy({
           where: { resourceId: resource.id },
           transaction: t,

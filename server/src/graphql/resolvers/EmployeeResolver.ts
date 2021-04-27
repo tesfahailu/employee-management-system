@@ -194,7 +194,6 @@ export class EmployeeResolver {
 
   @Mutation(() => SuccessResponse)
   async deleteEmployee(@Arg('id') id: number): Promise<SuccessResponse> {
-    if (!id) throw new UserInputError(ErrorMessage.EMPLOYEE_ARG_ERROR);
     try {
       const employee = await Employee.findOne({ where: { id } });
       if (!employee) throw new Error(ErrorCode.BAD_USER_INPUT);
