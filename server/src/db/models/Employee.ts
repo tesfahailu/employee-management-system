@@ -23,7 +23,7 @@ import {
 import { ObjectType, Field, Int, registerEnumType } from 'type-graphql';
 import { Leave } from './Leave';
 
-enum EmployeeType {
+export enum EmployeeType {
   PERMENANT = 'permenant',
   CONTRACT = 'contract',
   FULLTIME = 'fulltime',
@@ -38,6 +38,7 @@ registerEnumType(EmployeeType, {
 @ObjectType()
 @Table({ tableName: 'employee', modelName: 'Employee', underscored: true })
 export class Employee extends Model {
+  // @Field({ nullable: true })
   @ForeignKey(() => EmployeeAddress)
   @Column
   employeeAddressId?: number;
@@ -78,17 +79,18 @@ export class Employee extends Model {
   @HasMany(() => Salary)
   salaries?: Salary[];
 
-  @Field()
+  @Field({ nullable: true })
   @Column
-  firstName: string;
+  firstName?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column
   lastName: string;
 
-  @Field()
-  @Column
-  fullName: string;
+  @Field(() => String, { name: 'fullName', nullable: true })
+  getFullname() {
+    return [this.firstName, this.lastName].join(' ');
+  }
 
   @Field({ nullable: true })
   @Column
@@ -118,7 +120,7 @@ export class Employee extends Model {
   @Column
   departmentId: number;
 
-  @Field(() => Department, { nullable: 'itemsAndList' })
+  @Field(() => Department, { nullable: true })
   @BelongsTo(() => Department)
   department?: Department;
 

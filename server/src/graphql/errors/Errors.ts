@@ -10,6 +10,12 @@ export enum ErrorMessage {
   LOGIN_ALREADY_EXIST = 'check login credentials.',
   LOGIN_ARG_ERROR = 'could not find username or password does not match',
 
+  EMPLOYEE_ARG_ERROR = 'include a valid employee id.',
+  EMPLOYEE_NOT_FOUND = 'employee not found. check employee id.',
+  EMPLOYEE_VALIDATION_ERROR = 'failed to create employee due to validation errors.',
+  EMPLOYEE_INVALID_EMAIL = 'please provide a valid email.',
+  EMPLOYEE_INVALID_MOBILE = 'please provide a vaild mobile number.',
+
   ROLE_ARG_ERROR = 'provide a role id or name.',
   ROLE_NOT_FOUND = 'role not found. check role id or name.',
 
