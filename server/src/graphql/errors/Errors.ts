@@ -30,4 +30,6 @@ export enum ErrorMessage {
   RESOURCE_NOT_FOUND = 'resource not found. check resource id or name.',
 
   SALARY_NOT_FOUND = 'salary not found. check salary id.',
+
+  DEPARTMENT_NOT_FOUND = 'department not found. check department',
 }
