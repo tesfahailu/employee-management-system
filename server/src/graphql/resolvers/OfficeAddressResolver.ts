@@ -37,7 +37,7 @@ export class OfficeAddressResolver {
     try {
       const officeAddress = await OfficeAddress.findOne({
         where: { id },
-        include: [OfficeAddress],
+        include: [State, Country],
       });
       if (!officeAddress) throw new Error(ErrorCode.BAD_USER_INPUT);
       return officeAddress;
@@ -119,7 +119,7 @@ export class OfficeAddressResolver {
       );
     } catch (error) {
       if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.LEAVE_NOT_FOUND);
+        throw new UserInputError(ErrorMessage.OFFICE_ADDRESS_NOT_FOUND);
       throw new ApolloError(ErrorMessage.UNKNOWN);
     }
     return { success: true };
