@@ -12,7 +12,7 @@ import {
 } from 'sequelize-typescript';
 import { ObjectType, Field, ID, registerEnumType } from 'type-graphql';
 
-enum LeaveType {
+export enum LeaveType {
   VACATION = 'vacation',
   SICK = 'sick',
   HOLIDAY = 'holiday',

@@ -34,4 +34,5 @@ export enum ErrorMessage {
   DEPARTMENT_NOT_FOUND = 'department not found. check department id.',
 
   EXPERIENCE_NOT_FOUND = 'experience/s not found. check experience id.',
+  LEAVE_NOT_FOUND = 'leave/s not found. check leave id.',
 }
