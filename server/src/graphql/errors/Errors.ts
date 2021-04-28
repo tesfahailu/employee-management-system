@@ -37,4 +37,6 @@ export enum ErrorMessage {
   LEAVE_NOT_FOUND = 'leave/s not found. check leave id.',
 
   OFFICE_NOT_FOUND = 'office not found. check office id.',
+
+  OFFICE_ADDRESS_NOT_FOUND = 'office address nto found. check office address id.',
 }
