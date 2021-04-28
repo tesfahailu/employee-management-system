@@ -15,6 +15,7 @@ import { LoginResolver } from './graphql/resolvers/LoginResolver';
 import { RoleResolver } from './graphql/resolvers/RoleResolver';
 import { ResourceResolver } from './graphql/resolvers/ResourceResolver';
 import { PermissionResolver } from './graphql/resolvers/PermissionResolver';
+import { OfficeResolver } from './graphql/resolvers/OfficeResolver';
 
 (async () => {
   const app = express();
@@ -40,6 +41,7 @@ import { PermissionResolver } from './graphql/resolvers/PermissionResolver';
         DepartmentResolver,
         ExperienceResolver,
         LeaveResolver,
+        OfficeResolver,
       ],
     }),
     context: ({ req, res }) => ({ req, res }),

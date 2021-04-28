@@ -35,4 +35,6 @@ export enum ErrorMessage {
 
   EXPERIENCE_NOT_FOUND = 'experience/s not found. check experience id.',
   LEAVE_NOT_FOUND = 'leave/s not found. check leave id.',
+
+  OFFICE_NOT_FOUND = 'office not found. check office id.',
 }
