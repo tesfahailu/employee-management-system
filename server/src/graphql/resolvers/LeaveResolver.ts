@@ -44,7 +44,7 @@ export class LeaveResolver {
   }
   //experiences
   @Query(() => [Leave])
-  async experiences(@Arg('employeeId') employeeId: number): Promise<Leave[]> {
+  async leaves(@Arg('employeeId') employeeId: number): Promise<Leave[]> {
     try {
       const leaves = await Leave.findAll({
         where: { id: employeeId },
