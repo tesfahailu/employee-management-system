@@ -23,10 +23,10 @@ import { getSequelize } from './../../db/sequelize';
 @ArgsType()
 class EmployeeArgs {
   @Field({ nullable: true })
-  firstName: string;
+  firstName?: string;
 
   @Field({ nullable: true })
-  lastName: string;
+  lastName?: string;
 
   @Field({ nullable: true })
   mobile?: string;
@@ -35,7 +35,7 @@ class EmployeeArgs {
   email?: string;
 
   @Field(() => EmployeeType, { nullable: true })
-  type?: string;
+  type?: EmployeeType;
 
   @Field({ nullable: true })
   employeeAddressId?: number;
@@ -67,7 +67,6 @@ export class EmployeeResolver {
       if (!employee) throw new Error(ErrorCode.BAD_USER_INPUT);
       return employee;
     } catch (error) {
-      console.error(error);
       if (error.message === ErrorCode.BAD_USER_INPUT)
         throw new UserInputError(ErrorMessage.EMPLOYEE_NOT_FOUND);
       throw new ApolloError(ErrorMessage.UNKNOWN);

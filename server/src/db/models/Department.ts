@@ -11,7 +11,7 @@ import {
 } from 'sequelize-typescript';
 import { ObjectType, Field, Int, registerEnumType } from 'type-graphql';
 
-enum DepartmentType {
+export enum DepartmentType {
   MARKETING = 'marketing',
   OPERATIONS = 'operations',
   SALES = 'sales',

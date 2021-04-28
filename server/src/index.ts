@@ -1,3 +1,5 @@
+import { ExperienceResolver } from './graphql/resolvers/ExperienceResolver';
+import { DepartmentResolver } from './graphql/resolvers/DepartmentResolver';
 import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
@@ -33,6 +35,8 @@ require('dotenv').config();
         ResourceResolver,
         PermissionResolver,
         EmployeeResolver,
+        DepartmentResolver,
+        ExperienceResolver,
       ],
     }),
     context: ({ req, res }) => ({ req, res }),

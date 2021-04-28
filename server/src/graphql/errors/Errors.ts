@@ -8,7 +8,7 @@ export enum ErrorMessage {
   NAME_ALREADY_EXIST = 'name already exist.',
 
   LOGIN_ALREADY_EXIST = 'check login credentials.',
-  LOGIN_ARG_ERROR = 'could not find username or password does not match',
+  LOGIN_ARG_ERROR = 'could not find username or password does not match.',
 
   EMPLOYEE_ARG_ERROR = 'include a valid employee id.',
   EMPLOYEE_NOT_FOUND = 'employee not found. check employee id.',
@@ -24,12 +24,14 @@ export enum ErrorMessage {
   PERMISSION_INVALID_RESOURCE_ID = 'permission does not have a valid resource id.',
 
   PROJECT_ARG_ERROR = 'provide either a valid project id or a valid project name.',
-  PROJECT_NOT_FOUND = 'project not found. check the permission id or name',
+  PROJECT_NOT_FOUND = 'project not found. check the permission id or name.',
 
-  RESOURCE_ARG_ERROR = 'provide a resource id or name',
+  RESOURCE_ARG_ERROR = 'provide a resource id or name.',
   RESOURCE_NOT_FOUND = 'resource not found. check resource id or name.',
 
-  SALARY_NOT_FOUND = 'salary not found. check salary id.',
+  SALARY_NOT_FOUND = 'salary/s not found. check salary id.',
 
-  DEPARTMENT_NOT_FOUND = 'department not found. check department',
+  DEPARTMENT_NOT_FOUND = 'department not found. check department id.',
+
+  EXPERIENCE_NOT_FOUND = 'experience/s not found. check experience id.',
 }
