@@ -1,4 +1,14 @@
 'use strict';
+
+const departmentTypeValues = [
+  'marketing',
+  'operations',
+  'finance',
+  'sales',
+  'hr',
+  'engineering',
+];
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('department', {
@@ -11,14 +21,7 @@ module.exports = {
       },
       title: {
         type: Sequelize.ENUM,
-        values: [
-          'marketing',
-          'operations',
-          'finance',
-          'sales',
-          'hr',
-          'engineering',
-        ],
+        values: departmentTypeValues,
         allowNull: false,
         unique: false,
       },
@@ -47,4 +50,5 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('department');
   },
+  departmentTypeValues: departmentTypeValues,
 };

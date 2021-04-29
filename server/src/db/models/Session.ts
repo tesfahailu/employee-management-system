@@ -10,6 +10,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { ObjectType, Field, Int } from 'type-graphql';
+import { DepartmentType } from './Department';
 
 @ObjectType()
 @Table({ tableName: 'session', modelName: 'Session', underscored: true })
@@ -29,6 +30,14 @@ export class Session extends Model {
   @ForeignKey(() => EmployeeProject)
   @Column
   employeeProjectId: number;
+
+  @Field()
+  @Column
+  task: string;
+
+  @Field()
+  @Column
+  department: DepartmentType;
 
   @BelongsTo(() => EmployeeProject)
   employeeProject: EmployeeProject;

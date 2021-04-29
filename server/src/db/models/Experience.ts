@@ -1,3 +1,4 @@
+import { DepartmentType } from './Department';
 import { Employee } from './Employee';
 import {
   Model,
@@ -33,13 +34,13 @@ export class Experience extends Model {
   @Column
   end: Date;
 
-  @Field()
+  @Field({ nullable: true })
   @Column
-  type: string;
+  position?: string;
 
   @Field({ nullable: true })
   @Column
-  description?: string;
+  department?: DepartmentType;
 
   @CreatedAt
   createdAt: Date;

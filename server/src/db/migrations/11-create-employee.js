@@ -17,8 +17,8 @@ module.exports = {
         },
         onUpdate: 'cascade',
         onDelete: 'cascade',
+        allowNull: true,
         unique: false,
-        allowNull: false,
       },
       first_name: {
         type: Sequelize.STRING,
@@ -60,12 +60,12 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade',
         unique: false,
-        allowNull: false,
+        allowNull: true,
       },
       type: {
         type: Sequelize.ENUM,
         values: ['permenant', 'contract', 'fulltime', 'parttime'],
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       department_id: {
@@ -77,7 +77,7 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade',
         unique: false,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

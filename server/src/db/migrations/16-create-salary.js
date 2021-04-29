@@ -9,10 +9,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      employee_project_id: {
+      employee_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'employee_project',
+          model: 'employee',
           key: 'id',
         },
         onUpdate: 'cascade',

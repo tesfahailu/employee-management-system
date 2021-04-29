@@ -7,7 +7,7 @@ import {
   CreatedAt,
   UpdatedAt,
   DeletedAt,
-  HasMany,
+  // HasMany,
   BelongsToMany,
 } from 'sequelize-typescript';
 import { ObjectType, Field, Int } from 'type-graphql';
@@ -20,20 +20,19 @@ export class Resource extends Model {
   id: number;
 
   @Field()
-  @Column
+  @Column({ unique: true })
   name: string;
 
   @Field({ nullable: true })
   @Column
   description?: string;
 
-  @Field(() => [Permission], { nullable: 'itemsAndList' })
-  @HasMany(() => Permission)
-  permissions?: Permission[];
-
   @Field(() => [Role], { nullable: 'itemsAndList' })
   @BelongsToMany(() => Role, () => Permission)
-  roles?: Role[];
+  roles?: Array<Role & { permission: Permission }>;
+
+  @Field({ nullable: true })
+  permission?: Permission;
 
   @CreatedAt
   createdAt: Date;
