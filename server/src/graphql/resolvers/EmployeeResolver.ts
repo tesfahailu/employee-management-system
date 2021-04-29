@@ -19,7 +19,7 @@ import { Login } from './../../db/models/Login';
 import { SuccessResponse } from '../types/Common';
 import { getSequelize } from './../../db/sequelize';
 
-// const modelIncludeArray = [Login, EmployeeProject, Salary, Experience, Leave];
+const modelIncludeArray = [Login, EmployeeProject, Salary, Experience, Leave];
 @ArgsType()
 class EmployeeArgs {
   @Field({ nullable: true })
@@ -62,7 +62,7 @@ export class EmployeeResolver {
     try {
       const employee = await Employee.findOne({
         where: { id },
-        // include: modelIncludeArray,
+        include: modelIncludeArray,
       });
       if (!employee) throw new Error(ErrorCode.BAD_USER_INPUT);
       return employee;
@@ -77,7 +77,7 @@ export class EmployeeResolver {
   async employees(): Promise<Employee[]> {
     try {
       return await Employee.findAll({
-        // include: modelIncludeArray,
+        include: modelIncludeArray,
       });
     } catch (error) {
       throw new ApolloError(ErrorMessage.UNKNOWN);
@@ -208,7 +208,6 @@ export class EmployeeResolver {
         await Employee.destroy({ where: { id }, transaction: t });
       });
     } catch (error) {
-      console.log(error);
       if (error.message === ErrorCode.BAD_USER_INPUT)
         throw new UserInputError(ErrorMessage.EMPLOYEE_NOT_FOUND);
       throw new UserInputError(ErrorMessage.UNKNOWN);

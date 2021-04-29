@@ -36,7 +36,7 @@ class PermissionArgs {
 export class PermissionResolver {
   @Query(() => Permission)
   async permission(
-    @Arg('id') id: number,
+    @Arg('id', { nullable: true }) id?: number,
     @Arg('roleId', { nullable: true }) roleId?: number,
     @Arg('resourceId', { nullable: true }) resourceId?: number,
   ): Promise<Permission> {
@@ -65,10 +65,9 @@ export class PermissionResolver {
   @Query(() => [Permission])
   async permissions(): Promise<Permission[]> {
     try {
-      const permissions = await Permission.findAll({
+      return await Permission.findAll({
         include: [Role, Resource],
       });
-      return permissions;
     } catch (error) {
       throw new ApolloError(ErrorMessage.UNKNOWN);
     }
