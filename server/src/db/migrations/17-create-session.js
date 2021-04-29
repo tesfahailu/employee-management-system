@@ -1,4 +1,6 @@
 'use strict';
+const createDepartment = require('./07-create-department');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('session', {
@@ -16,6 +18,17 @@ module.exports = {
       },
       end_date: {
         type: Sequelize.DATE,
+        allowNull: false,
+        unique: false,
+      },
+      task: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      department: {
+        type: Sequelize.ENUM,
+        values: createDepartment.departmentTypeValues,
         allowNull: false,
         unique: false,
       },
