@@ -1,4 +1,3 @@
-import { SessionResolver } from './graphql/resolvers/SessionResolver';
 import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
@@ -18,6 +17,7 @@ import { ResourceResolver } from './graphql/resolvers/ResourceResolver';
 import { PermissionResolver } from './graphql/resolvers/PermissionResolver';
 import { OfficeResolver } from './graphql/resolvers/OfficeResolver';
 import { ProjectResolver } from './graphql/resolvers/ProjectResolver';
+import { SessionResolver } from './graphql/resolvers/SessionResolver'
 
 (async () => {
   const app = express();
