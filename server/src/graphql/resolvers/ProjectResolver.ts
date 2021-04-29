@@ -1,15 +1,14 @@
-import { Session } from './../../db/models/Session';
-import { EmployeeProject } from './../../db/models/EmployeeProject';
-import { ApolloError, UserInputError } from 'apollo-server-express';
-import { Project } from './../../db/models/Project';
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
-import { ErrorMessage, ErrorCode } from '../errors/Errors';
+import { ApolloError, UserInputError } from 'apollo-server-express';
+import { ErrorMessage, ErrorCode } from './../errors/Errors';
+import { Session } from './../../db/models/Session';
 import { SuccessResponse } from '../types/Common';
-import { getSequelize } from 'src/db/sequelize';
+import { EmployeeProject } from './../../db/models/EmployeeProject';
+import { Project } from './../../db/models/Project';
+import { getSequelize } from './../../db/sequelize';
 
 @Resolver()
 export class ProjectResolver {
-  //view project
   @Query(() => Project)
   async project(
     @Arg('id', { nullable: true }) id?: number,
@@ -29,7 +28,7 @@ export class ProjectResolver {
       throw new ApolloError(ErrorMessage.UNKNOWN);
     }
   }
-  //view all projects
+
   @Query(() => [Project])
   async projects(): Promise<Project[]> {
     try {
@@ -40,7 +39,7 @@ export class ProjectResolver {
       throw new ApolloError(ErrorMessage.UNKNOWN);
     }
   }
-  //create project
+
   @Mutation(() => SuccessResponse)
   async createProject(
     @Arg('name') name: string,
@@ -55,7 +54,7 @@ export class ProjectResolver {
     }
     return { success: true };
   }
-  //update project
+
   @Mutation(() => SuccessResponse)
   async updateProject(
     @Arg('id', { nullable: true }) id?: number,
@@ -82,7 +81,7 @@ export class ProjectResolver {
     }
     return { success: true };
   }
-  //delete project
+
   @Mutation(() => SuccessResponse)
   async deleteResource(
     @Arg('id', { nullable: true }) id?: number,

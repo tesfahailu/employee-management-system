@@ -23,17 +23,24 @@ export enum ErrorMessage {
   PERMISSION_NOT_FOUND = 'permission not found. check permission id.',
   PERMISSION_INVALID_RESOURCE_ID = 'permission does not have a valid resource id.',
 
+  RESOURCE_ARG_ERROR = 'provide a resource id or name.',
+  RESOURCE_NOT_FOUND = 'resource not found. check resource id or name.',
+
   PROJECT_ARG_ERROR = 'provide either a valid project id or a valid project name.',
   PROJECT_NOT_FOUND = 'project not found. check the permission id or name.',
 
-  RESOURCE_ARG_ERROR = 'provide a resource id or name.',
-  RESOURCE_NOT_FOUND = 'resource not found. check resource id or name.',
+  EMPLOYEE_PROJECT_ARG_ERROR = 'provide either a valid employee project id or a valid employee id and project id',
+  EMPLOYEE_PROJECT_NOT_FOUND = 'employee project not found. check employee project id.',
+  EMPLOYEE_PROJECT_INVALID_PROJECT_ID = 'employee project does not have a valid project id.',
+
+  SESSION_NOT_FOUND = 'session/s not found. check session id.',
 
   SALARY_NOT_FOUND = 'salary/s not found. check salary id.',
 
   DEPARTMENT_NOT_FOUND = 'department not found. check department id.',
 
   EXPERIENCE_NOT_FOUND = 'experience/s not found. check experience id.',
+
   LEAVE_NOT_FOUND = 'leave/s not found. check leave id.',
 
   OFFICE_NOT_FOUND = 'office not found. check office id.',
