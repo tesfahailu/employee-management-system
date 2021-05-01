@@ -5,7 +5,7 @@ import { Permission } from './../../db/models/Permission';
 import { Role } from './../../db/models/Role';
 import { getSequelize } from './../../db/sequelize';
 import { ErrorCode, ErrorMessage } from '../errors/Errors';
-import { SuccessResponse } from './../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 
 @Resolver(() => Role)
 export class RoleResolver {

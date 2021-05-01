@@ -4,7 +4,7 @@ import { Resource } from './../../db/models/Resource';
 import { Role } from './../../db/models/Role';
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 import { ApolloError, UserInputError } from 'apollo-server-express';
-import { SuccessResponse } from '../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 import { getSequelize } from './../../db/sequelize';
 
 @Resolver()

@@ -2,7 +2,7 @@ import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 import { UserInputError, ApolloError } from 'apollo-server-express';
 import { Department, DepartmentType } from './../../db/models/Department';
 import { ErrorCode, ErrorMessage } from '../errors/Errors';
-import { SuccessResponse } from '../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 
 @Resolver()
 export class DepartmentResolver {

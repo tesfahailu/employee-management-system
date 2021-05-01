@@ -4,7 +4,7 @@ import { OfficeAddress } from './../../db/models/OfficeAddress';
 import { Arg, ArgsType, Field, Mutation, Query, Resolver } from 'type-graphql';
 import { UserInputError, ApolloError } from 'apollo-server-express';
 import { ErrorCode, ErrorMessage } from '../errors/Errors';
-import { SuccessResponse } from '../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 
 @ArgsType()
 class OfficeAddressArgs {

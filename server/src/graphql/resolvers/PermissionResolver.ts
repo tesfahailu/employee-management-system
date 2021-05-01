@@ -12,7 +12,7 @@ import { Role } from './../../db/models/Role';
 import { Permission } from './../../db/models/Permission';
 import { ErrorCode, ErrorMessage } from '../errors/Errors';
 import { Resource } from './../../db/models/Resource';
-import { SuccessResponse } from './../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 
 @ArgsType()
 class PermissionArgs {

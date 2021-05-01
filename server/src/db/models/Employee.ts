@@ -3,7 +3,7 @@ import { Department } from './Department';
 import { Office } from './Office';
 import { Salary } from './Salary';
 import { EmployeeProject } from './EmployeeProject';
-import { Login } from './Login';
+import { User } from './User';
 import { Experience } from './Experience';
 import { EmployeeAddress } from './EmployeeAddress';
 import {
@@ -63,9 +63,9 @@ export class Employee extends Model {
   @HasMany(() => Leave)
   leaves?: Leave[];
 
-  @Field(() => Login, { nullable: true })
-  @HasOne(() => Login)
-  login?: Login;
+  @Field(() => User, { nullable: true })
+  @HasOne(() => User)
+  login?: User;
 
   @Field(() => [EmployeeProject], { nullable: 'itemsAndList' })
   @HasMany(() => EmployeeProject)

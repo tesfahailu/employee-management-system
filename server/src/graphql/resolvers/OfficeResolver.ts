@@ -3,7 +3,7 @@ import { Office } from './../../db/models/Office';
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 import { ErrorCode, ErrorMessage } from '../errors/Errors';
 import { ApolloError, UserInputError } from 'apollo-server-express';
-import { SuccessResponse } from '../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 
 @Resolver()
 export class OfficeResolver {

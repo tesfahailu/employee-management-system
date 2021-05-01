@@ -1,5 +1,5 @@
 import { Resource } from './Resource';
-import { Login } from './Login';
+import { User } from './User';
 import {
   Model,
   Table,
@@ -20,9 +20,9 @@ export class Role extends Model {
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
 
-  @Field(() => [Login], { nullable: 'itemsAndList' })
-  @HasMany(() => Login)
-  login?: Login[];
+  @Field(() => [User], { nullable: 'itemsAndList' })
+  @HasMany(() => User)
+  login?: User[];
 
   @Field(() => [Resource], { nullable: 'itemsAndList' })
   @BelongsToMany(() => Resource, () => Permission)

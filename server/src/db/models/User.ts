@@ -10,13 +10,17 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { ObjectType, Field } from 'type-graphql';
+import { ObjectType, Field, Int } from 'type-graphql';
 
 @ObjectType()
-@Table({ tableName: 'login', modelName: 'Login', underscored: true })
-export class Login extends Model {
+@Table({ tableName: 'user', modelName: 'User', underscored: true })
+export class User extends Model {
+  @Field(() => Int)
+  @Column({ primaryKey: true, autoIncrement: true })
+  id: number;
+
   @Field()
-  @Column({ primaryKey: true })
+  @Column({ unique: true })
   username: string;
 
   @ForeignKey(() => Employee)
@@ -36,6 +40,9 @@ export class Login extends Model {
 
   @Column
   password: string;
+
+  @Column({ defaultValue: 0 })
+  tokenVersion: number;
 
   @Field({ nullable: true })
   @Column({ defaultValue: new Date() })
