@@ -2,7 +2,7 @@ import { Salary } from './../../db/models/Salary';
 import { ApolloError, UserInputError } from 'apollo-server-express';
 import { ErrorCode, ErrorMessage } from './../errors/Errors';
 import { Employee } from './../../db/models/Employee';
-import { SuccessResponse } from './../types/common';
+import { SuccessResponse } from '../types/SuccessResponse';
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 
 @Resolver()

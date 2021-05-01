@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('login', {
+    return queryInterface.createTable('user', {
       id: {
         primaryKey: true,
         autoIncrement: true,
@@ -41,6 +41,11 @@ module.exports = {
         allowNull: false,
         unique: false,
       },
+      token_version: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: false,
+      },
       last_login: {
         type: Sequelize.DATE,
         allowNull: true,
@@ -64,6 +69,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('login');
+    return queryInterface.dropTable('user');
   },
 };

@@ -2,7 +2,7 @@ import { Arg, Mutation, Query, Resolver } from 'type-graphql';
 import { ApolloError, UserInputError } from 'apollo-server-express';
 import { ErrorMessage, ErrorCode } from './../errors/Errors';
 import { Session } from './../../db/models/Session';
-import { SuccessResponse } from '../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 import { EmployeeProject } from './../../db/models/EmployeeProject';
 import { Project } from './../../db/models/Project';
 import { getSequelize } from './../../db/sequelize';

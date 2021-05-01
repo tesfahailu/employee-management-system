@@ -15,11 +15,11 @@ import { Leave } from './../../db/models/Leave';
 import { Experience } from './../../db/models/Experience';
 import { Salary } from './../../db/models/Salary';
 import { EmployeeProject } from './../../db/models/EmployeeProject';
-import { Login } from './../../db/models/Login';
-import { SuccessResponse } from '../types/Common';
+import { User } from '../../db/models/User';
+import { SuccessResponse } from '../types/SuccessResponse';
 import { getSequelize } from './../../db/sequelize';
 
-const modelIncludeArray = [Login, EmployeeProject, Salary, Experience, Leave];
+const modelIncludeArray = [User, EmployeeProject, Salary, Experience, Leave];
 @ArgsType()
 class EmployeeArgs {
   @Field({ nullable: true })
@@ -197,7 +197,7 @@ export class EmployeeResolver {
       const employee = await Employee.findOne({ where: { id } });
       if (!employee) throw new Error(ErrorCode.BAD_USER_INPUT);
       await getSequelize().transaction(async (t) => {
-        await Login.destroy({ where: { employeeId: id }, transaction: t });
+        await User.destroy({ where: { employeeId: id }, transaction: t });
         await EmployeeProject.destroy({
           where: { employeeId: id },
           transaction: t,

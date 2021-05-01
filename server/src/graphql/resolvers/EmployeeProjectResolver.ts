@@ -13,7 +13,7 @@ import { EmployeeProject } from './../../db/models/EmployeeProject';
 import { Session } from './../../db/models/Session';
 import { ErrorCode, ErrorMessage } from '../errors/Errors';
 import { Project } from './../../db/models/Project';
-import { SuccessResponse } from './../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 import { getSequelize } from 'src/db/sequelize';
 
 const modelIncludeArray = [Employee, Project, Session];

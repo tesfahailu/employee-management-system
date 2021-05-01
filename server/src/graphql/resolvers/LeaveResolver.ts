@@ -10,7 +10,7 @@ import {
   Resolver,
 } from 'type-graphql';
 import { ErrorCode, ErrorMessage } from '../errors/Errors';
-import { SuccessResponse } from '../types/Common';
+import { SuccessResponse } from '../types/SuccessResponse';
 
 @ArgsType()
 class LeaveArgs {
