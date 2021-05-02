@@ -50,6 +50,11 @@ export class UserResolver {
   }
 
   @Query(() => String)
+  hello() {
+    return 'YOOOO!';
+  }
+
+  @Query(() => String)
   @UseMiddleware(isAuth)
   bye(@Ctx() { payload }: MyContext) {
     return `id is: ${payload!.userId}`;
@@ -61,7 +66,7 @@ export class UserResolver {
     @Arg('password') password: string,
     @Arg('employeeId', { nullable: true }) employeeId?: number,
     @Arg('roleId', { nullable: true }) roleId?: number,
-  ) {
+  ): Promise<Boolean> {
     try {
       const hashedPassword = await hash(password, 12);
       await User.create({
