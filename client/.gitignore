@@ -1,3 +1,5 @@
 /node_modules
+.env
+/src/environments/*
 /dist
 /toDo.txt
