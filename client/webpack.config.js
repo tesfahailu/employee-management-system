@@ -22,6 +22,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'public', 'index.html'),
+    // port: 6000,
   },
   module: {
     rules: [
