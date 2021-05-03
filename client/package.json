@@ -6,7 +6,8 @@
   "scripts": {
     "config": "node ./utils/set-env.js",
     "start": "npm run config && webpack serve --open",
-    "build": "webpack"
+    "build": "webpack",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +27,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.4",
     "@types/graphql": "^14.5.0",
     "@types/react": "^17.0.4",
     "@types/react-dom": "^17.0.3",
@@ -38,6 +40,9 @@
     "typescript": "^4.2.4",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "@graphql-codegen/typescript-operations": "1.17.16",
+    "@graphql-codegen/typescript-react-apollo": "2.2.4",
+    "@graphql-codegen/typescript": "1.22.0"
   }
 }
