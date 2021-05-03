@@ -11,7 +11,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: '[id].[chunkhash].js',
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -22,7 +22,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'public', 'index.html'),
-    // port: 6000,
+    historyApiFallback: true,
   },
   module: {
     rules: [
