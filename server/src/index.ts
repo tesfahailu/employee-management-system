@@ -35,7 +35,6 @@ import { User } from './db/models/User';
   app.use(cookieParser());
 
   app.get('/', (_req, res) => {
-    console.log('hello');
     res.send('hello');
   });
 
@@ -87,7 +86,7 @@ import { User } from './db/models/User';
     context: ({ req, res }) => ({ req, res }),
   });
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(port, () =>
     console.log(`App listening at http://localhost:${port}`),
