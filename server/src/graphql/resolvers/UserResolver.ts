@@ -2,6 +2,8 @@ import { createRefreshToken, createAccessToken } from './../auth';
 import { MyContext } from '../types/MyContext';
 import {
   Arg,
+  Args,
+  ArgsType,
   Ctx,
   Field,
   Int,
@@ -9,13 +11,11 @@ import {
   ObjectType,
   Query,
   Resolver,
-  UseMiddleware,
 } from 'type-graphql';
 import { compare, hash } from 'bcryptjs';
 import { ErrorCode, ErrorMessage } from '../errors/Errors';
 import { ApolloError, UserInputError } from 'apollo-server-express';
 import { User } from '../../db/models/User';
-import { isAuth } from '../isAuth';
 import { sendRefeshToken } from '../sendRefreshToken';
 import { getSequelize } from './../../db/sequelize';
 import { verify } from 'jsonwebtoken';
@@ -26,6 +26,29 @@ class LoginResponse {
   accessToken: string;
   @Field(() => User)
   user: User;
+}
+
+@ObjectType()
+class RegisterResponse {
+  @Field()
+  success: Boolean;
+  @Field(() => User)
+  user: User;
+}
+
+@ArgsType()
+class RegisterArgs {
+  @Field()
+  username: string;
+
+  @Field()
+  password: string;
+
+  @Field({ nullable: true })
+  employeeId?: number;
+
+  @Field({ nullable: true })
+  roleId?: number;
 }
 
 @Resolver(() => User)
@@ -66,27 +89,14 @@ export class UserResolver {
     }
   }
 
-  @Query(() => String)
-  hello() {
-    return 'YOOOO!';
-  }
-
-  @Query(() => String)
-  @UseMiddleware(isAuth)
-  bye(@Ctx() { payload }: MyContext) {
-    return `id is: ${payload!.userId}`;
-  }
-
-  @Mutation(() => Boolean)
+  @Mutation(() => RegisterResponse)
   async register(
-    @Arg('username') username: string,
-    @Arg('password') password: string,
-    @Arg('employeeId', { nullable: true }) employeeId?: number,
-    @Arg('roleId', { nullable: true }) roleId?: number,
-  ): Promise<Boolean> {
+    @Args() { username, password, employeeId, roleId }: RegisterArgs,
+  ): Promise<RegisterResponse> {
+    let user;
     try {
       const hashedPassword = await hash(password, 12);
-      await User.create({
+      user = await User.create({
         username,
         password: hashedPassword,
         employeeId,
@@ -97,7 +107,10 @@ export class UserResolver {
         throw new UserInputError(ErrorMessage.USER_ALREADY_EXIST, error.errors);
       throw new ApolloError(ErrorMessage.UNKNOWN);
     }
-    return true;
+    return {
+      success: true,
+      user,
+    };
   }
 
   @Mutation(() => LoginResponse)

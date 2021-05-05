@@ -1,3 +1,9 @@
 mutation Register($username: String!, $password: String!) {
-  register(username: $username, password: $password)
+  register(username: $username, password: $password) {
+    success
+    user {
+      id
+      username
+    }
+  }
 }

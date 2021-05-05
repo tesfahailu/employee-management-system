@@ -139,7 +139,7 @@ export type Mutation = {
   createEmployee: SuccessResponse;
   updateEmployee: SuccessResponse;
   deleteEmployee: SuccessResponse;
-  register: Scalars['Boolean'];
+  register: RegisterResponse;
   login: LoginResponse;
   logout: Scalars['Boolean'];
   revokeRefreshTokensForUser: Scalars['Boolean'];
@@ -256,10 +256,10 @@ export type MutationDeleteEmployeeArgs = {
 
 
 export type MutationRegisterArgs = {
-  roleId?: Maybe<Scalars['Float']>;
-  employeeId?: Maybe<Scalars['Float']>;
-  password: Scalars['String'];
   username: Scalars['String'];
+  password: Scalars['String'];
+  employeeId?: Maybe<Scalars['Float']>;
+  roleId?: Maybe<Scalars['Float']>;
 };
 
 
@@ -505,6 +505,12 @@ export type QuerySessionArgs = {
   id: Scalars['Float'];
 };
 
+export type RegisterResponse = {
+  __typename?: 'RegisterResponse';
+  success: Scalars['Boolean'];
+  user: User;
+};
+
 export type Resource = {
   __typename?: 'Resource';
   id: Scalars['Int'];
@@ -624,7 +630,14 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'register'>
+  & { register: (
+    { __typename?: 'RegisterResponse' }
+    & Pick<RegisterResponse, 'success'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username'>
+    ) }
+  ) }
 );
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -808,7 +821,13 @@ export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const RegisterDocument = gql`
     mutation Register($username: String!, $password: String!) {
-  register(username: $username, password: $password)
+  register(username: $username, password: $password) {
+    success
+    user {
+      id
+      username
+    }
+  }
 }
     `;
 export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
