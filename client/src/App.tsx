@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Routes } from './Routes';
 import { setAccessToken } from './services/session/accessToken';
+import { GeneralRoutes } from './routes/Routes';
 
 interface AppProps {}
 
@@ -11,13 +11,13 @@ export const App: React.FC<AppProps> = ({}) => {
     fetch('http://localhost:3000/refresh_token', {
       method: 'POST',
       credentials: 'include',
-    }).then(async (x) => {
-      const { accessToken } = await x.json();
+    }).then(async (data) => {
+      const { accessToken } = await data.json();
       setAccessToken(accessToken);
       setLoading(false);
     });
   }, []);
 
   if (loading) return <div>loading...</div>;
-  return <Routes />;
+  return <GeneralRoutes />;
 };
