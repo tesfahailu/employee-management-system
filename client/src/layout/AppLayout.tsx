@@ -3,14 +3,14 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 import { Drawer } from './components/Drawer';
 import { GeneralAppBar } from './components/GeneralAppBar';
+import { Grid } from '@material-ui/core';
 
 interface Props {
   children?: React.ReactNode;
   drawerWidth: number;
 }
 
-export function AppLayout(props: Props) {
-  const { children, drawerWidth } = props;
+export function AppLayout({ children, drawerWidth }: Props) {
   const classes = useStyles(drawerWidth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -18,42 +18,34 @@ export function AppLayout(props: Props) {
   };
 
   return (
-    <div className={classes.root}>
-      <Drawer
-        handleDrawerToggle={handleDrawerToggle}
-        drawerWidth={drawerWidth}
-        mobileOpen={mobileOpen}
-      />
-      <div>
-        <GeneralAppBar
-          drawerWidth={drawerWidth}
+    <Grid container className={classes.root} wrap="nowrap">
+      <Grid item>
+        <Drawer
           handleDrawerToggle={handleDrawerToggle}
+          drawerWidth={drawerWidth}
+          mobileOpen={mobileOpen}
         />
-        <div className={classes.appBarSpacing} />
-        <main className={classes.main}>{children}</main>
-      </div>
-    </div>
+      </Grid>
+      <Grid item container direction="column" xs>
+        <Grid item>
+          <GeneralAppBar handleDrawerToggle={handleDrawerToggle} />
+        </Grid>
+        <Grid item xs>
+          <main className={classes.main}>{children}</main>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'flex',
-      height: '100%',
-      overflow: 'scroll',
+      height: '100vh',
     },
     main: {
-      height: 'calc(100% - 65px)',
       padding: '20px',
-      [theme.breakpoints.up('sm')]: {
-        width: (drawerWidth: any) => `calc(100vw - ${drawerWidth}px )`,
-      },
-      [theme.breakpoints.down('sm')]: {
-        width: '100vw',
-      },
-      overflow: 'auto',
+      height: '100%',
     },
-    appBarSpacing: { width: '100%', height: '65px' },
   }),
 );
