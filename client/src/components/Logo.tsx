@@ -3,8 +3,8 @@ import { Share } from '@material-ui/icons';
 import React from 'react';
 
 type StyleTextProp = {
-  name?: string;
   children?: React.ReactNode;
+  userClassName?: string;
   color?:
     | 'inherit'
     | 'initial'
@@ -20,14 +20,24 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(0.5),
   },
+  secondRow: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
-const StyleText = ({ name, children, color }: StyleTextProp) => (
-  <Typography component="div" variant="h5" display="inline" color={color}>
-    {name}
-    {children}
-  </Typography>
-);
+const StyleText = ({ children, color, userClassName }: StyleTextProp) => {
+  return (
+    <Typography
+      component="div"
+      variant="h5"
+      display="block"
+      color={color}
+      className={userClassName ? userClassName : ''}
+    >
+      {children}
+    </Typography>
+  );
+};
 
 export const StyledLogo = ({
   secondaryClass,
@@ -39,7 +49,9 @@ export const StyledLogo = ({
     <StyleText>
       <Share color="primary" className={`${classes.icon} ${secondaryClass}`} />
       Employee
-      <StyleText color="primary">Management</StyleText>
+      <StyleText color="primary" userClassName={classes.secondRow}>
+        Management
+      </StyleText>
     </StyleText>
   );
 };

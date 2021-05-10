@@ -10,6 +10,7 @@ import { httpLink } from './services/Links/httpLink';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from './components/Theme';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { CssBaseline } from '@material-ui/core';
 
 const client = new ApolloClient({
   link: from([tokenRefreshLink, requestLink, errorLink, httpLink]),
@@ -20,6 +21,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
       <Router>
+        <CssBaseline />
         <App />
       </Router>
     </ThemeProvider>

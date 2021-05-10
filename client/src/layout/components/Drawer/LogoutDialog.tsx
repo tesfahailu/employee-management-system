@@ -10,8 +10,18 @@ import {
   Typography,
   ListItemText,
   TextField,
+  ListItem,
+  ListItemIcon,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
+import Slide from '@material-ui/core/Slide';
+import { TransitionProps } from '@material-ui/core/transitions';
+import {
+  Close as CloseIcon,
+  ExitToApp as LogoutIcon,
+} from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
+import { setAccessToken } from '../../../services/session/accessToken';
+import { useLogoutMutation } from '../../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,6 +46,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  ref: React.Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export interface DialogTitleProps {
   id: string;
@@ -87,8 +104,10 @@ const DialogActions = ({ children }: { children?: React.ReactNode }) => {
   );
 };
 
-export default function PlaylistDialog() {
+export function LogoutDialog() {
   const [open, setOpen] = React.useState(false);
+  const [logout, { client }] = useLogoutMutation();
+  const history = useHistory();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -96,43 +115,42 @@ export default function PlaylistDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-  const classes = useStyles();
+
+  const handleLogout = async () => {
+    handleClose();
+    await logout();
+    setAccessToken('');
+    await client.resetStore();
+    history.push('/login');
+  };
 
   return (
     <div>
-      <ListItemText primary="Create New Playlist" onClick={handleClickOpen} />
+      <ListItem button key="logout">
+        <ListItemIcon>
+          <LogoutIcon />
+        </ListItemIcon>
+        <ListItemText primary="Logout" onClick={handleClickOpen} />
+      </ListItem>
       <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={open}
-        color="primary"
-        className={classes.root}
       >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Create new playlist
+          Logout
         </DialogTitle>
         <DialogContent id="customized-dialog-content">
-          <form noValidate autoComplete="off">
-            <TextField
-              autoFocus
-              required
-              margin="dense"
-              id="playlist-title"
-              label="Title"
-              fullWidth
-              placeholder="Playlist name"
-            />
-            <TextField
-              margin="dense"
-              id="playlist-description"
-              label="Description"
-              fullWidth
-            />
-          </form>
+          <Typography>Are you sure you want to logout?</Typography>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose}>
-            Create new
+          <Button onClick={handleClose} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleLogout} color="primary">
+            Logout
           </Button>
         </DialogActions>
       </Dialog>

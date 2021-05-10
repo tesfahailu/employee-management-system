@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 enum ErrorMessage {
-  USERNAME_TOO_SHORT = 'username must be greater than 5 alphanumeric characters.',
+  USERNAME_TOO_SHORT = 'username must be greater than 5 characters.',
+  USERNAME_CHARACTER_ERROR = 'username should only include numbers, letters, and underscores.',
   USERNAME_MISMATCH = 'username does not match.',
   PASSWORD_TOO_SHORT = 'password must be greater than 5 alphanumeric charcters. ',
   PASSWORD_MISMATCH = 'password does not match.',
@@ -62,57 +63,48 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const formValidation = () => {
     let isInvalidInput = false;
 
+    let usernameErrorText = '';
     if (username.length < 5) {
-      setError((previousError) => ({
-        ...previousError,
-        username: ErrorMessage.USERNAME_TOO_SHORT,
-      }));
+      usernameErrorText = ErrorMessage.USERNAME_TOO_SHORT;
       isInvalidInput = true;
-    } else {
-      setError((previousError) => ({
-        ...previousError,
-        username: '',
-      }));
+    } else if (!RegExp('^[a-zA-Z0-9_]*$').test(username)) {
+      usernameErrorText = ErrorMessage.USERNAME_CHARACTER_ERROR;
+      isInvalidInput = true;
     }
+    setError((previousError) => ({
+      ...previousError,
+      username: usernameErrorText,
+    }));
 
+    let confirmUsernameErrorText = '';
     if (confirmUsername !== username) {
-      setError((previousError) => ({
-        ...previousError,
-        confirmUsername: ErrorMessage.USERNAME_MISMATCH,
-      }));
+      confirmUsernameErrorText = ErrorMessage.USERNAME_MISMATCH;
       isInvalidInput = true;
-    } else {
-      setError((previousError) => ({
-        ...previousError,
-        confirmUsername: '',
-      }));
     }
+    setError((previousError) => ({
+      ...previousError,
+      confirmUsername: confirmUsernameErrorText,
+    }));
 
+    let passwordErrorText = '';
     if (password.length < 5) {
-      setError((previousError) => ({
-        ...previousError,
-        password: ErrorMessage.PASSWORD_TOO_SHORT,
-      }));
+      passwordErrorText = ErrorMessage.PASSWORD_TOO_SHORT;
       isInvalidInput = true;
-    } else {
-      setError((previousError) => ({
-        ...previousError,
-        password: '',
-      }));
     }
+    setError((previousError) => ({
+      ...previousError,
+      password: passwordErrorText,
+    }));
 
+    let confirmPasswordErrorText = '';
     if (confirmPassword !== password) {
-      setError((previousError) => ({
-        ...previousError,
-        confirmPassword: ErrorMessage.PASSWORD_MISMATCH,
-      }));
+      confirmPasswordErrorText = ErrorMessage.PASSWORD_MISMATCH;
       isInvalidInput = true;
-    } else {
-      setError((previousError) => ({
-        ...previousError,
-        confirmPassword: '',
-      }));
     }
+    setError((previousError) => ({
+      ...previousError,
+      confirmPassword: confirmPasswordErrorText,
+    }));
 
     return isInvalidInput;
   };
