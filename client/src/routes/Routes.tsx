@@ -1,30 +1,42 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import { Home } from '../pages/Home';
+import { Switch, Route } from 'react-router-dom';
+import { Employees } from '../pages/Employees';
 import { Register } from '../pages/Register';
 import { Login } from '../pages/Login';
-import { Bye } from '../pages/Bye';
-import { Header } from '../Header';
 import { AppLayout } from './../layout/AppLayout';
+import { User } from '../pages/User';
+import { Projects } from '../pages/Projects';
+import { Offices } from '../pages/Offices';
+import { Settings } from '../pages/Settings';
+import { Departments } from '../pages/Departments';
+import { Roles } from '../pages/Roles';
+import { useMediaQuery } from '@material-ui/core';
 
 export const PageRoutes: React.FC = () => {
+  const isAboveMinWidth = useMediaQuery('(min-width:1000px)');
   return (
-    <BrowserRouter>
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/bye" component={Bye} />
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path="/register" component={Register} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/user" component={User} />
+      <Route
+        exact
+        path="/employees"
+        render={(props) => (
+          <Employees {...props} isAboveMinWidth={isAboveMinWidth} />
+        )}
+      />
+      <Route exact path="/projects" component={Projects} />
+      <Route exact path="/offices" component={Offices} />
+      <Route exact path="/departments" component={Departments} />
+      <Route exact path="/roles" component={Roles} />
+      <Route exact path="/settings" component={Settings} />
+    </Switch>
   );
 };
 
 export const GeneralRoutes = () => {
-  const drawerWidth = 300;
+  const drawerWidth = 200;
   return (
     <Switch>
       <Route exact path="/register" component={Register} />
