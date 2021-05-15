@@ -66,9 +66,9 @@ export type Employee = {
 export type EmployeeAddress = {
   __typename?: 'EmployeeAddress';
   id: Scalars['Int'];
-  employes: Array<Employee>;
+  employees: Array<Employee>;
   streetAddress1: Scalars['String'];
-  streetaddress2: Scalars['String'];
+  streetAddress2: Scalars['String'];
   city: Scalars['String'];
   state: State;
   country: Country;
@@ -426,8 +426,6 @@ export type Query = {
   user: User;
   users: Array<User>;
   me?: Maybe<User>;
-  hello: Scalars['String'];
-  bye: Scalars['String'];
   role: Role;
   roles: Array<Role>;
   resource: Resource;
@@ -569,20 +567,47 @@ export type User = {
   lastLogin?: Maybe<Scalars['DateTime']>;
 };
 
-export type ByeQueryVariables = Exact<{ [key: string]: never; }>;
+export type EmployeeQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
 
 
-export type ByeQuery = (
+export type EmployeeQuery = (
   { __typename?: 'Query' }
-  & Pick<Query, 'bye'>
-);
-
-export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type HelloQuery = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'hello'>
+  & { employee: (
+    { __typename?: 'Employee' }
+    & Pick<Employee, 'id' | 'firstName' | 'lastName' | 'mobile' | 'email' | 'type'>
+    & { department?: Maybe<(
+      { __typename?: 'Department' }
+      & Pick<Department, 'title' | 'description'>
+    )>, projects?: Maybe<Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'id' | 'name'>
+    )>>>, employeeAddress?: Maybe<(
+      { __typename?: 'EmployeeAddress' }
+      & Pick<EmployeeAddress, 'id' | 'streetAddress1' | 'streetAddress2' | 'city' | 'zipCode'>
+      & { state: (
+        { __typename?: 'State' }
+        & Pick<State, 'id' | 'abbreviation'>
+      ), country: (
+        { __typename?: 'Country' }
+        & Pick<Country, 'id' | 'name'>
+      ) }
+    )>, office?: Maybe<(
+      { __typename?: 'Office' }
+      & { address: (
+        { __typename?: 'OfficeAddress' }
+        & Pick<OfficeAddress, 'id' | 'streetAddress1' | 'streetAddress2' | 'city' | 'zipCode'>
+        & { state: (
+          { __typename?: 'State' }
+          & Pick<State, 'id' | 'abbreviation'>
+        ), country: (
+          { __typename?: 'Country' }
+          & Pick<Country, 'id' | 'name'>
+        ) }
+      ) }
+    )> }
+  ) }
 );
 
 export type LoginMutationVariables = Exact<{
@@ -652,70 +677,86 @@ export type UsersQuery = (
 );
 
 
-export const ByeDocument = gql`
-    query Bye {
-  bye
+export const EmployeeDocument = gql`
+    query Employee($id: Float!) {
+  employee(id: $id) {
+    id
+    firstName
+    lastName
+    mobile
+    email
+    type
+    department {
+      title
+      description
+    }
+    projects {
+      id
+      name
+    }
+    employeeAddress {
+      id
+      streetAddress1
+      streetAddress2
+      city
+      state {
+        id
+        abbreviation
+      }
+      country {
+        id
+        name
+      }
+      zipCode
+    }
+    office {
+      address {
+        id
+        streetAddress1
+        streetAddress2
+        city
+        state {
+          id
+          abbreviation
+        }
+        country {
+          id
+          name
+        }
+        zipCode
+      }
+    }
+  }
 }
     `;
 
 /**
- * __useByeQuery__
+ * __useEmployeeQuery__
  *
- * To run a query within a React component, call `useByeQuery` and pass it any options that fit your needs.
- * When your component renders, `useByeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useEmployeeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEmployeeQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useByeQuery({
+ * const { data, loading, error } = useEmployeeQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useByeQuery(baseOptions?: Apollo.QueryHookOptions<ByeQuery, ByeQueryVariables>) {
+export function useEmployeeQuery(baseOptions: Apollo.QueryHookOptions<EmployeeQuery, EmployeeQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ByeQuery, ByeQueryVariables>(ByeDocument, options);
+        return Apollo.useQuery<EmployeeQuery, EmployeeQueryVariables>(EmployeeDocument, options);
       }
-export function useByeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ByeQuery, ByeQueryVariables>) {
+export function useEmployeeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EmployeeQuery, EmployeeQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ByeQuery, ByeQueryVariables>(ByeDocument, options);
+          return Apollo.useLazyQuery<EmployeeQuery, EmployeeQueryVariables>(EmployeeDocument, options);
         }
-export type ByeQueryHookResult = ReturnType<typeof useByeQuery>;
-export type ByeLazyQueryHookResult = ReturnType<typeof useByeLazyQuery>;
-export type ByeQueryResult = Apollo.QueryResult<ByeQuery, ByeQueryVariables>;
-export const HelloDocument = gql`
-    query Hello {
-  hello
-}
-    `;
-
-/**
- * __useHelloQuery__
- *
- * To run a query within a React component, call `useHelloQuery` and pass it any options that fit your needs.
- * When your component renders, `useHelloQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useHelloQuery({
- *   variables: {
- *   },
- * });
- */
-export function useHelloQuery(baseOptions?: Apollo.QueryHookOptions<HelloQuery, HelloQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<HelloQuery, HelloQueryVariables>(HelloDocument, options);
-      }
-export function useHelloLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HelloQuery, HelloQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<HelloQuery, HelloQueryVariables>(HelloDocument, options);
-        }
-export type HelloQueryHookResult = ReturnType<typeof useHelloQuery>;
-export type HelloLazyQueryHookResult = ReturnType<typeof useHelloLazyQuery>;
-export type HelloQueryResult = Apollo.QueryResult<HelloQuery, HelloQueryVariables>;
+export type EmployeeQueryHookResult = ReturnType<typeof useEmployeeQuery>;
+export type EmployeeLazyQueryHookResult = ReturnType<typeof useEmployeeLazyQuery>;
+export type EmployeeQueryResult = Apollo.QueryResult<EmployeeQuery, EmployeeQueryVariables>;
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
   login(username: $username, password: $password) {

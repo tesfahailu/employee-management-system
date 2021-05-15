@@ -11,6 +11,7 @@ import { Settings } from '../pages/Settings';
 import { Departments } from '../pages/Departments';
 import { Roles } from '../pages/Roles';
 import { useMediaQuery } from '@material-ui/core';
+import { EmployeeView } from '../pages/EmployeeView';
 
 export const PageRoutes: React.FC = () => {
   const isAboveMinWidth = useMediaQuery('(min-width:1000px)');
@@ -26,6 +27,7 @@ export const PageRoutes: React.FC = () => {
           <Employees {...props} isAboveMinWidth={isAboveMinWidth} />
         )}
       />
+      <Route path="/employee/:id" component={EmployeeView} />
       <Route exact path="/projects" component={Projects} />
       <Route exact path="/offices" component={Offices} />
       <Route exact path="/departments" component={Departments} />

@@ -1,0 +1,50 @@
+query Employee($id: Float!) {
+  employee(id: $id) {
+    id
+    firstName
+    lastName
+    mobile
+    email
+    type
+    department {
+      title
+      description
+    }
+    projects {
+      id
+      name
+    }
+    employeeAddress {
+      id
+      streetAddress1
+      streetAddress2
+      city
+      state {
+        id
+        abbreviation
+      }
+      country {
+        id
+        name
+      }
+      zipCode
+    }
+    office {
+      address {
+        id
+        streetAddress1
+        streetAddress2
+        city
+        state {
+          id
+          abbreviation
+        }
+        country {
+          id
+          name
+        }
+        zipCode
+      }
+    }
+  }
+}

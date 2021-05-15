@@ -26,11 +26,11 @@ export function AppLayout({ children, drawerWidth }: Props) {
           mobileOpen={mobileOpen}
         />
       </Grid>
-      <Grid item container direction="column" xs>
+      <Grid item container direction="column" wrap="nowrap" xs>
         <Grid item>
           <GeneralAppBar handleDrawerToggle={handleDrawerToggle} />
         </Grid>
-        <Grid item xs>
+        <Grid item xs style={{ overflowY: 'auto' }}>
           <main className={classes.main}>{children}</main>
         </Grid>
       </Grid>
