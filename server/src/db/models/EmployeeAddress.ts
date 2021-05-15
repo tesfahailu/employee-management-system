@@ -27,7 +27,7 @@ export class EmployeeAddress extends Model {
 
   @HasMany(() => Employee)
   @Field(() => [Employee])
-  employes: Employee[];
+  employees: Employee[];
 
   @Field()
   @Column
@@ -35,7 +35,7 @@ export class EmployeeAddress extends Model {
 
   @Field()
   @Column
-  streetaddress2: string;
+  streetAddress2: string;
 
   @Field()
   @Column

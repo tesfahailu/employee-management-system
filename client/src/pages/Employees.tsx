@@ -4,6 +4,7 @@ import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
 import {
   Card,
   CardContent,
+  CardHeader,
   createStyles,
   Grid,
   IconButton,
@@ -123,6 +124,13 @@ const useStyles = makeStyles(() =>
       height: 'inherit',
       width: 'inherit',
     },
+    fullParentContainer: {
+      height: '100%',
+      width: '100%',
+    },
+    card: {
+      minHeight: '400px',
+    },
   }),
 );
 
@@ -132,55 +140,53 @@ export const Employees: React.FC<EmployeesProps> = ({ isAboveMinWidth }) => {
   if (!data) return <div>...loading</div>;
 
   return (
-    <Card className={classes.inheritHeight}>
-      <CardContent className={classes.inheritHeight}>
-        <Grid container direction="column" className={classes.inheritHeight}>
-          <Grid item>
-            <Typography variant="h5" gutterBottom>
-              Employees:
-            </Typography>
-          </Grid>
-          <Grid item>
-            <TextField
-              id="outlined-basic"
-              placeholder="search..."
-              margin="dense"
-              fullWidth
-              autoFocus
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid
-            item
-            container
-            xs
-            wrap="nowrap"
-            className={classes.inheritHeight}
-          >
-            <Grid item xs>
-              <div
-                style={{
-                  height: '100%',
-                }}
-              >
-                <DataGrid
-                  key="data-grid"
-                  rows={rows}
-                  columns={isAboveMinWidth ? mapColumn1() : mapColumn2()}
-                  autoPageSize
+    <Card className={`${classes.inheritHeight} ${classes.card}`}>
+      <Grid
+        container
+        direction="column"
+        className={classes.inheritHeight}
+        wrap="nowrap"
+      >
+        <CardHeader title={<Typography variant="h5">Employees:</Typography>} />
+        <Grid item xs>
+          <CardContent className={classes.fullParentContainer}>
+            <Grid
+              container
+              direction="column"
+              className={classes.inheritHeight}
+              wrap="nowrap"
+            >
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  placeholder="search..."
+                  margin="dense"
+                  fullWidth
+                  autoFocus
+                  variant="outlined"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-              </div>
+              </Grid>
+              <Grid item container xs wrap="nowrap">
+                <Grid item xs>
+                  <DataGrid
+                    key="data-grid"
+                    rows={rows}
+                    columns={isAboveMinWidth ? mapColumn1() : mapColumn2()}
+                    autoPageSize
+                  />
+                </Grid>
+              </Grid>
             </Grid>
-          </Grid>
+          </CardContent>
         </Grid>
-      </CardContent>
+      </Grid>
     </Card>
     // <Fragment>
     //   <Card>
