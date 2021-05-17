@@ -15,6 +15,7 @@ import { EmployeeView } from '../pages/EmployeeView/employeeViewData';
 import { EmployeeInfoData } from '../pages/EmployeeEdit/EmployeeInfoData';
 import { DepartmentData } from '../pages/EmployeeEdit/DepartmentData';
 import { EmployeeAddressData } from '../pages/EmployeeEdit/EmployeeAddressData';
+import { OfficeAddressData } from '../pages/EmployeeEdit/OfficeAddressData';
 
 export const PageRoutes: React.FC = () => {
   const isAboveMinWidth = useMediaQuery('(min-width:1000px)');
@@ -39,6 +40,10 @@ export const PageRoutes: React.FC = () => {
       <Route
         path="/employee/edit/:id/employeeAddress"
         component={EmployeeAddressData}
+      />
+      <Route
+        path="/employee/edit/:id/officeAddress"
+        component={OfficeAddressData}
       />
       <Route exact path="/projects" component={Projects} />
       <Route exact path="/offices" component={Offices} />
