@@ -8,17 +8,16 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import React, { Dispatch, Fragment, SetStateAction } from 'react';
+import React, { Fragment } from 'react';
 import { EditEmployeePageText } from '../../text';
-import { ViewEmployeeType } from '../../types/types';
+import { EditEmployeeInfoType } from '../../types/types';
 
 export const EmployeeInfoPresentation = ({
   employee,
-  setEmployee,
-}: {
-  employee: ViewEmployeeType;
-  setEmployee: Dispatch<SetStateAction<{}>>;
-}) => {
+  onEmployeeInfoChange,
+  isFormChanged,
+  saveDescription,
+}: EditEmployeeInfoType) => {
   const classes = useStyles();
   return (
     <Fragment>
@@ -33,7 +32,12 @@ export const EmployeeInfoPresentation = ({
             </Typography>
           }
           action={
-            <Button color="primary" variant="outlined" onClick={() => {}}>
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={saveDescription}
+              disabled={!isFormChanged}
+            >
               {EditEmployeePageText.SAVE_BUTTON_TEXT}
             </Button>
           }
@@ -46,7 +50,7 @@ export const EmployeeInfoPresentation = ({
             id="firstName"
             label="First Name:"
             value={employee.firstName}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={onEmployeeInfoChange('firstName')}
             color="primary"
           />
           <TextField
@@ -56,7 +60,7 @@ export const EmployeeInfoPresentation = ({
             id="lastName"
             label="Last Name:"
             value={employee.lastName}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={onEmployeeInfoChange('lastName')}
             color="primary"
           />
           <TextField
@@ -66,7 +70,7 @@ export const EmployeeInfoPresentation = ({
             id="mobile"
             label="Mobile:"
             value={employee.mobile}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={onEmployeeInfoChange('mobile')}
             color="primary"
           />
           <TextField
@@ -76,7 +80,7 @@ export const EmployeeInfoPresentation = ({
             id="email"
             label="Email:"
             value={employee.email}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={onEmployeeInfoChange('email')}
             color="primary"
           />
           <TextField
@@ -86,7 +90,7 @@ export const EmployeeInfoPresentation = ({
             id="type"
             label="Type:"
             value={employee.type}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={onEmployeeInfoChange('type')}
             color="primary"
           />
         </CardContent>

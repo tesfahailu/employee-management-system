@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export interface ViewEmployeeType {
   [index: string]: string;
   firstName: string;
@@ -7,10 +9,34 @@ export interface ViewEmployeeType {
   type: string;
 }
 
+export type EmployeeFieldType =
+  | 'firstName'
+  | 'lastName'
+  | 'mobile'
+  | 'email'
+  | 'type';
+export interface EditEmployeeInfoType {
+  employee: ViewEmployeeType;
+  onEmployeeInfoChange: (
+    field: EmployeeFieldType,
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  isFormChanged: boolean;
+  saveDescription: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 export interface EmployeeDepartmentType {
   [index: string]: string;
   title: string;
   description: string;
+}
+
+export interface EditEmployeeDepartmentType {
+  title: string;
+  onTitleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  description: string;
+  onDescriptionChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  isFormChanged: boolean;
+  saveDescription: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface AddressType {
