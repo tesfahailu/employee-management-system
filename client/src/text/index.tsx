@@ -12,5 +12,6 @@ export enum EditEmployeePageText {
   PAGE_HEADER_TEXT = 'Edit Employee:',
   EMPLOYEE_INFO_TEXT = 'Employee Info:',
   DEPARTMENT_TEXT = 'Department:',
+  EMPLOYEE_ADDRESS_TEXT = 'Employee Address:',
   SAVE_BUTTON_TEXT = 'Save',
 }

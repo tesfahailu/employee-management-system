@@ -15,6 +15,7 @@ export type EmployeeFieldType =
   | 'mobile'
   | 'email'
   | 'type';
+
 export interface EditEmployeeInfoType {
   employee: ViewEmployeeType;
   onEmployeeInfoChange: (
@@ -46,6 +47,24 @@ export interface AddressType {
   city: string;
   state: string;
   country: string;
+  zipCode: string;
+}
+
+export type AddressFieldType =
+  | 'streetAddress1'
+  | 'streetAddress2'
+  | 'city'
+  | 'state'
+  | 'country'
+  | 'zipCode';
+
+export interface EditEmployeeAddressType {
+  address: AddressType;
+  onAddressChange: (
+    field: AddressFieldType,
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  isFormChanged: boolean;
+  saveAddress: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface ProjectType {
