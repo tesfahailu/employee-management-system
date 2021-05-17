@@ -34,3 +34,11 @@ export interface FormattedCardProp {
   onEditButtonClick: () => void;
   cardContentData: any;
 }
+
+export interface EmployeeViewPresentationProp {
+  employee: ViewEmployeeType;
+  department: EmployeeDepartmentType;
+  employeeAddress: AddressType;
+  officeAddress: AddressType;
+  projects: Array<ProjectType>;
+}

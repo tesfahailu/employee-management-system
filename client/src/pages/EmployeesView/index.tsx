@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUsersQuery } from '../generated/graphql';
+import { useUsersQuery } from '../../generated/graphql';
 import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
 import {
   Card,
@@ -134,7 +134,9 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export const Employees: React.FC<EmployeesProps> = ({ isAboveMinWidth }) => {
+export const EmployeesView: React.FC<EmployeesProps> = ({
+  isAboveMinWidth,
+}) => {
   const classes = useStyles();
   const { data } = useUsersQuery({ fetchPolicy: 'network-only' });
   if (!data) return <div>...loading</div>;
@@ -156,23 +158,6 @@ export const Employees: React.FC<EmployeesProps> = ({ isAboveMinWidth }) => {
               className={classes.inheritHeight}
               wrap="nowrap"
             >
-              <Grid item>
-                <TextField
-                  id="outlined-basic"
-                  placeholder="search..."
-                  margin="dense"
-                  fullWidth
-                  autoFocus
-                  variant="outlined"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
               <Grid item container xs wrap="nowrap">
                 <Grid item xs>
                   <DataGrid

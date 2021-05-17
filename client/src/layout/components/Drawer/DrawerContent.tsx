@@ -26,7 +26,6 @@ export const DrawerContent = () => {
 
   useEffect(() => {
     const pathname = location.pathname;
-    console.log(pathname);
     const route = pathname.split('/');
     setSelectedRoute('/' + route[route.length - 1]);
   }, [location]);
@@ -49,7 +48,7 @@ export const DrawerContent = () => {
         </ListItem>
       </StyledLink>
       {[
-        ['Employees', <EmployeesIcon />, '/employees'],
+        ['Employees', <EmployeesIcon />, '/employees/view'],
         ['Projects', <ProjectIcon />, '/projects'],
         ['Offices', <OfficesIcon />, '/offices'],
         ['Departments', <DepartmentIcon />, '/departments'],
