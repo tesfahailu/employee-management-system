@@ -1,6 +1,4 @@
 import React from 'react';
-import { useUsersQuery } from '../../generated/graphql';
-import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
 import {
   Card,
   CardContent,
@@ -8,22 +6,16 @@ import {
   createStyles,
   Grid,
   IconButton,
-  InputAdornment,
   makeStyles,
-  TextField,
   Typography,
 } from '@material-ui/core';
-
 import {
-  Search as SearchIcon,
   Pageview as PageViewIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from '@material-ui/icons';
-
-interface EmployeesProps {
-  isAboveMinWidth: boolean;
-}
+import { DataGrid, GridColDef } from '@material-ui/data-grid';
+import { Rows } from './testData';
 
 const renderDetailsButton = () => (
   <Grid container justify="center" wrap="nowrap">
@@ -91,33 +83,6 @@ const mapColumn2 = () => {
   });
 };
 
-const rows = [
-  {
-    id: 1,
-    lastName: 'Snow',
-    firstName: 'Jon',
-    age: 35,
-  },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  { id: 10, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 11, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 12, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 13, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 14, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 15, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 16, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 17, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 18, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 19, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
-
 const useStyles = makeStyles(() =>
   createStyles({
     inheritHeight: {
@@ -134,12 +99,16 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export const EmployeesView: React.FC<EmployeesProps> = ({
+interface EmployeesViewPresentationProp {
+  rowsData: Rows[];
+  isAboveMinWidth: boolean;
+}
+
+export const EmployeesViewPresentation: React.FC<EmployeesViewPresentationProp> = ({
+  rowsData,
   isAboveMinWidth,
 }) => {
   const classes = useStyles();
-  const { data } = useUsersQuery({ fetchPolicy: 'network-only' });
-  if (!data) return <div>...loading</div>;
 
   return (
     <Card className={`${classes.inheritHeight} ${classes.card}`}>
@@ -162,7 +131,7 @@ export const EmployeesView: React.FC<EmployeesProps> = ({
                 <Grid item xs>
                   <DataGrid
                     key="data-grid"
-                    rows={rows}
+                    rows={rowsData}
                     columns={isAboveMinWidth ? mapColumn1() : mapColumn2()}
                     autoPageSize
                   />
