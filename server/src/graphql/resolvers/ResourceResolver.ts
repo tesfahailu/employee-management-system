@@ -14,7 +14,8 @@ export class ResourceResolver {
     @Arg('id', { nullable: true }) id?: number,
     @Arg('name', { nullable: true }) name?: string,
   ): Promise<Resource> {
-    if (!id && !name) throw new UserInputError(ErrorMessage.RESOURCE_ARG_ERROR);
+    if (!id && !name)
+      throw new UserInputError(ErrorMessage.ResourceArgumentError);
     try {
       const resource = id
         ? await Resource.findOne({
@@ -25,12 +26,12 @@ export class ResourceResolver {
             where: { name },
             include: [{ model: Role }],
           });
-      if (!resource) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!resource) throw new Error(ErrorCode.BadUserInput);
       return resource;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.RESOURCE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.ResourceNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -41,7 +42,7 @@ export class ResourceResolver {
         include: [Role],
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -53,9 +54,9 @@ export class ResourceResolver {
     try {
       await Resource.create({ name, description });
     } catch (error) {
-      if (error.message === ErrorCode.VALIDATION_ERROR)
-        throw new UserInputError(ErrorMessage.NAME_ALREADY_EXIST, error.errors);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.ValidationError)
+        throw new UserInputError(ErrorMessage.NameAlreadyExist, error.errors);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -66,24 +67,25 @@ export class ResourceResolver {
     @Arg('name', { nullable: true }) name?: string,
     @Arg('description', { nullable: true }) description?: string,
   ): Promise<SuccessResponse> {
-    if (!id && !name) throw new UserInputError(ErrorMessage.RESOURCE_ARG_ERROR);
+    if (!id && !name)
+      throw new UserInputError(ErrorMessage.ResourceArgumentError);
 
     try {
       if (id) {
         const resource = await Resource.findOne({ where: { id } });
-        if (!resource) throw new Error(ErrorCode.BAD_USER_INPUT);
+        if (!resource) throw new Error(ErrorCode.BadUserInput);
         await Resource.update({ name, description }, { where: { id } });
       } else if (name) {
         const resource = await Resource.findOne({ where: { name } });
-        if (!resource) throw new Error(ErrorCode.BAD_USER_INPUT);
+        if (!resource) throw new Error(ErrorCode.BadUserInput);
         await Resource.update({ name, description }, { where: { name } });
       }
     } catch (error) {
-      if (error.message === ErrorCode.VALIDATION_ERROR)
-        throw new UserInputError(ErrorMessage.NAME_ALREADY_EXIST, error.errors);
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.RESOURCE_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.ValidationError)
+        throw new UserInputError(ErrorMessage.NameAlreadyExist, error.errors);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.ResourceNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -93,14 +95,15 @@ export class ResourceResolver {
     @Arg('id', { nullable: true }) id?: number,
     @Arg('name', { nullable: true }) name?: string,
   ): Promise<SuccessResponse> {
-    if (!id && !name) throw new UserInputError(ErrorMessage.RESOURCE_ARG_ERROR);
+    if (!id && !name)
+      throw new UserInputError(ErrorMessage.ResourceArgumentError);
 
     try {
       const resource = id
         ? await Resource.findOne({ where: { id } })
         : await Resource.findOne({ where: { name } });
 
-      if (!resource) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!resource) throw new Error(ErrorCode.BadUserInput);
       await getSequelize().transaction(async (t) => {
         await Resource.destroy({ where: { id }, transaction: t });
         await Permission.destroy({
@@ -109,9 +112,9 @@ export class ResourceResolver {
         });
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.RESOURCE_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.ResourceNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

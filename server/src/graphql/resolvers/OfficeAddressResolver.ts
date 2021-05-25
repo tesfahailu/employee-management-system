@@ -39,12 +39,12 @@ export class OfficeAddressResolver {
         where: { id },
         include: [State, Country],
       });
-      if (!officeAddress) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!officeAddress) throw new Error(ErrorCode.BadUserInput);
       return officeAddress;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.OFFICE_ADDRESS_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.OfficeAddressNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -54,12 +54,12 @@ export class OfficeAddressResolver {
       const officeAddresses = await OfficeAddress.findAll({
         include: [State, Country],
       });
-      if (!officeAddresses) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!officeAddresses) throw new Error(ErrorCode.BadUserInput);
       return officeAddresses;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.OFFICE_ADDRESS_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.OfficeAddressNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -84,7 +84,7 @@ export class OfficeAddressResolver {
         zipCode,
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -104,7 +104,7 @@ export class OfficeAddressResolver {
   ): Promise<SuccessResponse> {
     try {
       const officeAddress = await OfficeAddress.findOne({ where: { id } });
-      if (!officeAddress) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!officeAddress) throw new Error(ErrorCode.BadUserInput);
       await OfficeAddress.update(
         {
           officeId,
@@ -118,9 +118,9 @@ export class OfficeAddressResolver {
         { where: { id } },
       );
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.OFFICE_ADDRESS_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.OfficeAddressNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -129,14 +129,14 @@ export class OfficeAddressResolver {
   async deleteOffice(@Arg('id') id: number): Promise<SuccessResponse> {
     try {
       const officeAddress = await OfficeAddress.findOne({ where: { id } });
-      if (!officeAddress) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!officeAddress) throw new UserInputError(ErrorCode.BadUserInput);
       await OfficeAddress.destroy({
         where: { id },
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.OFFICE_ADDRESS_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.OfficeAddressNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

@@ -14,18 +14,19 @@ export class ProjectResolver {
     @Arg('id', { nullable: true }) id?: number,
     @Arg('name', { nullable: true }) name?: string,
   ): Promise<Project> {
-    if (!id && !name) throw new UserInputError(ErrorMessage.PROJECT_ARG_ERROR);
+    if (!id && !name)
+      throw new UserInputError(ErrorMessage.ProjectArgumentError);
 
     try {
       const project = id
         ? await Project.findOne({ where: { id } })
         : await Project.findOne({ where: { name } });
-      if (!project) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!project) throw new Error(ErrorCode.BadUserInput);
       return project;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.PROJECT_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.ProjectNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -36,7 +37,7 @@ export class ProjectResolver {
         include: { all: true },
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -48,9 +49,9 @@ export class ProjectResolver {
     try {
       await Project.create({ name, description });
     } catch (error) {
-      if (error.message === ErrorCode.VALIDATION_ERROR)
-        throw new UserInputError(ErrorMessage.NAME_ALREADY_EXIST, error.errors);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.ValidationError)
+        throw new UserInputError(ErrorMessage.NameAlreadyExist, error.errors);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -61,23 +62,24 @@ export class ProjectResolver {
     @Arg('name', { nullable: true }) name?: number,
     @Arg('description', { nullable: true }) description?: string,
   ): Promise<SuccessResponse> {
-    if (!id && !name) throw new UserInputError(ErrorMessage.PROJECT_ARG_ERROR);
+    if (!id && !name)
+      throw new UserInputError(ErrorMessage.ProjectArgumentError);
     try {
       if (id) {
         const project = await Project.findOne({ where: { id } });
-        if (!project) throw new Error(ErrorCode.BAD_USER_INPUT);
+        if (!project) throw new Error(ErrorCode.BadUserInput);
         await Project.update({ name, description }, { where: { id } });
       } else if (name) {
         const project = await Project.findOne({ where: { name } });
-        if (!project) throw new Error(ErrorCode.BAD_USER_INPUT);
+        if (!project) throw new Error(ErrorCode.BadUserInput);
         await Project.update({ name, description }, { where: { name } });
       }
     } catch (error) {
-      if (error.message === ErrorCode.VALIDATION_ERROR)
-        throw new UserInputError(ErrorMessage.NAME_ALREADY_EXIST, error.errors);
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.PROJECT_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.ValidationError)
+        throw new UserInputError(ErrorMessage.NameAlreadyExist, error.errors);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.ProjectNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -87,14 +89,15 @@ export class ProjectResolver {
     @Arg('id', { nullable: true }) id?: number,
     @Arg('name', { nullable: true }) name?: string,
   ): Promise<SuccessResponse> {
-    if (!id && !name) throw new UserInputError(ErrorMessage.PROJECT_ARG_ERROR);
+    if (!id && !name)
+      throw new UserInputError(ErrorMessage.ProjectArgumentError);
 
     try {
       const project = id
         ? await Project.findOne({ where: { id } })
         : await Project.findOne({ where: { name } });
 
-      if (!project) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!project) throw new Error(ErrorCode.BadUserInput);
       await getSequelize().transaction(async (t) => {
         await Project.destroy({ where: { id }, transaction: t });
         const employeeProjects = await EmployeeProject.findAll({
@@ -115,9 +118,9 @@ export class ProjectResolver {
         });
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.PROJECT_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.ProjectNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
