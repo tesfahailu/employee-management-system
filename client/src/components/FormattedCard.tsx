@@ -35,13 +35,15 @@ export const FormattedCard = ({
       <CardHeader
         title={<Typography variant="h6">{cardHeaderText}</Typography>}
         action={
-          <Button
-            color="primary"
-            variant="outlined"
-            onClick={onEditButtonClick}
-          >
-            {cardHeaderActionButtonText}
-          </Button>
+          cardHeaderActionButtonText && (
+            <Button
+              color="primary"
+              variant="outlined"
+              onClick={onEditButtonClick}
+            >
+              {cardHeaderActionButtonText}
+            </Button>
+          )
         }
       />
       <CardContent className={classes.removeContentTopPaddding}>
