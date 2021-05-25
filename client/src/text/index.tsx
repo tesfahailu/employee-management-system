@@ -1,5 +1,6 @@
 export enum ViewEmployeesPageText {
   PageHeaderText = 'View Employees:',
+  CreateButtonText = 'Create',
 }
 
 export enum ViewEmployeePageText {
