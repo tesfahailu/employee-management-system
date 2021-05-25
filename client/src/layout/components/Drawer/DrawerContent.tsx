@@ -48,7 +48,7 @@ export const DrawerContent = () => {
         </ListItem>
       </StyledLink>
       {[
-        ['Employees', <EmployeesIcon />, '/employees/view'],
+        ['Employees', <EmployeesIcon />, '/employees/viewAll'],
         ['Projects', <ProjectIcon />, '/projects'],
         ['Offices', <OfficesIcon />, '/offices'],
         ['Departments', <DepartmentIcon />, '/departments'],

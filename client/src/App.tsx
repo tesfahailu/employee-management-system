@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { setAccessToken } from './services/session/accessToken';
 import { GeneralRoutes } from './routes/Routes';
+import './App.css';
 
 interface AppProps {}
 
