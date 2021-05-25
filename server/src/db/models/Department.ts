@@ -12,11 +12,12 @@ import {
 import { ObjectType, Field, Int, registerEnumType } from 'type-graphql';
 
 export enum DepartmentType {
-  MARKETING = 'marketing',
-  OPERATIONS = 'operations',
-  SALES = 'sales',
-  HUMAN_RESOURCES = 'human resources',
-  ENGINEERING = 'engineering',
+  Marketing = 'MARKETING',
+  Operations = 'OPERATIONS',
+  Finance = 'FINANCE',
+  Sales = 'SALES',
+  HumanResources = 'HUMAN RESOURCE',
+  Product = 'PRODUCT',
 }
 
 registerEnumType(DepartmentType, {

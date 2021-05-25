@@ -41,7 +41,7 @@ export class PermissionResolver {
     @Arg('resourceId', { nullable: true }) resourceId?: number,
   ): Promise<Permission> {
     if (!id && !(roleId && resourceId))
-      throw new UserInputError(ErrorMessage.PERMISSION_ARG_ERROR);
+      throw new UserInputError(ErrorMessage.PermissionArgumentError);
     try {
       const permission = id
         ? await Permission.findOne({
@@ -53,12 +53,12 @@ export class PermissionResolver {
             include: [Role, Resource],
           });
 
-      if (!permission) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!permission) throw new Error(ErrorCode.BadUserInput);
       return permission;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.PERMISSION_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.PermissionNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -69,7 +69,7 @@ export class PermissionResolver {
         include: [Role, Resource],
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -82,11 +82,11 @@ export class PermissionResolver {
     @Arg('resourceId', { nullable: true }) resourceId?: number,
   ): Promise<SuccessResponse> {
     if (!id && !(roleId && resourceId))
-      throw new UserInputError(ErrorMessage.PERMISSION_ARG_ERROR);
+      throw new UserInputError(ErrorMessage.PermissionArgumentError);
     try {
       if (id) {
         const permission = await Permission.findOne({ where: { id } });
-        if (!permission) throw new Error(ErrorCode.BAD_USER_INPUT);
+        if (!permission) throw new Error(ErrorCode.BadUserInput);
         await Permission.update(
           {
             canViewSelf,
@@ -101,7 +101,7 @@ export class PermissionResolver {
         const permission = await Permission.findOne({
           where: { roleId, resourceId },
         });
-        if (!permission) throw new Error(ErrorCode.BAD_USER_INPUT);
+        if (!permission) throw new Error(ErrorCode.BadUserInput);
         await Permission.update(
           {
             canViewSelf,
@@ -114,9 +114,9 @@ export class PermissionResolver {
         );
       }
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.PERMISSION_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.PermissionNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return {
       success: true,

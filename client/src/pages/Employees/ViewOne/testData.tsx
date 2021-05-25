@@ -2,7 +2,7 @@ import {
   DepartmentType,
   EmployeeQuery,
   EmployeeType,
-} from '../../generated/graphql';
+} from '../../../generated/graphql';
 
 export const employeeData: EmployeeQuery = {
   __typename: 'Query',
@@ -13,7 +13,7 @@ export const employeeData: EmployeeQuery = {
     lastName: 'Hailu',
     mobile: '855-540-3214',
     email: 'telu@gmail.com',
-    type: EmployeeType.Parttime,
+    type: EmployeeType.PartTime,
     department: {
       title: DepartmentType.Sales,
       description: 'Helping me get work',
@@ -23,16 +23,19 @@ export const employeeData: EmployeeQuery = {
         __typename: 'Project',
         id: 1,
         name: 'Amazon Echo',
+        description: 'Cool',
       },
       {
         __typename: 'Project',
         id: 2,
         name: 'Amazon Web',
+        description: 'cooler',
       },
       {
         __typename: 'Project',
         id: 3,
         name: 'Amazon Web Services',
+        description: 'coolest',
       },
     ],
     employeeAddress: {

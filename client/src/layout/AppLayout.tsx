@@ -30,7 +30,7 @@ export function AppLayout({ children, drawerWidth }: Props) {
         <Grid item>
           <GeneralAppBar handleDrawerToggle={handleDrawerToggle} />
         </Grid>
-        <Grid item xs style={{ overflowY: 'auto' }}>
+        <Grid item xs className={classes.mainWrapper}>
           <main className={classes.main}>{children}</main>
         </Grid>
       </Grid>
@@ -43,9 +43,13 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       height: '100vh',
     },
+    mainWrapper: {
+      overflowY: 'auto',
+    },
     main: {
-      padding: '20px',
       height: '100%',
+      overflowY: 'auto',
+      padding: theme.spacing(2),
     },
   }),
 );

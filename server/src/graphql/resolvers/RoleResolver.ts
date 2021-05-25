@@ -16,12 +16,12 @@ export class RoleResolver {
         where: { id },
         include: [Resource],
       });
-      if (!role) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!role) throw new Error(ErrorCode.BadUserInput);
       return role;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.ROLE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.RoleNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -32,7 +32,7 @@ export class RoleResolver {
         include: [Resource],
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -64,9 +64,9 @@ export class RoleResolver {
         );
       });
     } catch (error) {
-      if (error.message === ErrorCode.VALIDATION_ERROR)
-        throw new UserInputError(ErrorMessage.NAME_ALREADY_EXIST, error.errors);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.ValidationError)
+        throw new UserInputError(ErrorMessage.NameAlreadyExist, error.errors);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
 
     return { success: true };
@@ -78,24 +78,24 @@ export class RoleResolver {
     @Arg('name', { nullable: true }) name?: string,
     @Arg('description', { nullable: true }) description?: string,
   ): Promise<SuccessResponse> {
-    if (!id && !name) throw new UserInputError(ErrorMessage.ROLE_ARG_ERROR);
+    if (!id && !name) throw new UserInputError(ErrorMessage.RoleArgumentError);
 
     try {
       if (id) {
         const role = await Role.findOne({ where: { id } });
-        if (!role) throw new Error(ErrorCode.BAD_USER_INPUT);
+        if (!role) throw new Error(ErrorCode.BadUserInput);
         await Role.update({ name, description }, { where: { id } });
       } else if (name) {
         const role = await Role.findOne({ where: { name } });
-        if (!role) throw new Error(ErrorCode.BAD_USER_INPUT);
+        if (!role) throw new Error(ErrorCode.BadUserInput);
         await Role.update({ name, description }, { where: { name } });
       }
     } catch (error) {
-      if (error.message === ErrorCode.VALIDATION_ERROR)
-        throw new UserInputError(ErrorMessage.NAME_ALREADY_EXIST, error.errors);
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.ROLE_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.ValidationError)
+        throw new UserInputError(ErrorMessage.NameAlreadyExist, error.errors);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.RoleNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -105,14 +105,14 @@ export class RoleResolver {
     @Arg('id', { nullable: true }) id?: number,
     @Arg('name', { nullable: true }) name?: string,
   ): Promise<SuccessResponse> {
-    if (!id && !name) throw new UserInputError(ErrorMessage.ROLE_ARG_ERROR);
+    if (!id && !name) throw new UserInputError(ErrorMessage.RoleArgumentError);
 
     try {
       const role = id
         ? await Role.findOne({ where: { id } })
         : await Role.findOne({ where: { name } });
 
-      if (!role) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!role) throw new Error(ErrorCode.BadUserInput);
       await getSequelize().transaction(async (t) => {
         await Role.destroy({ where: { id: role.id }, transaction: t });
         await Permission.destroy({
@@ -121,9 +121,9 @@ export class RoleResolver {
         });
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.ROLE_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.RoleNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

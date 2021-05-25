@@ -5,8 +5,8 @@ const departmentTypeValues = [
   'operations',
   'finance',
   'sales',
-  'hr',
-  'engineering',
+  'human resources',
+  'product',
 ];
 
 module.exports = {

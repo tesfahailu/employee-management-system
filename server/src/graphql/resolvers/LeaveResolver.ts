@@ -34,12 +34,12 @@ export class LeaveResolver {
   async leave(@Arg('id') id?: number): Promise<Leave> {
     try {
       const leave = await Leave.findOne({ where: { id } });
-      if (!leave) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!leave) throw new Error(ErrorCode.BadUserInput);
       return leave;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.LEAVE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.LeaveNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
   //experiences
@@ -49,12 +49,12 @@ export class LeaveResolver {
       const leaves = await Leave.findAll({
         where: { id: employeeId },
       });
-      if (!leaves) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!leaves) throw new Error(ErrorCode.BadUserInput);
       return leaves;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.LEAVE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.LeaveNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -65,7 +65,7 @@ export class LeaveResolver {
     try {
       await Leave.create({ to, from, description, type });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -76,12 +76,12 @@ export class LeaveResolver {
   ): Promise<SuccessResponse> {
     try {
       const leave = await Leave.findOne({ where: { id } });
-      if (!leave) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!leave) throw new Error(ErrorCode.BadUserInput);
       await Leave.update({ to, from, description, type }, { where: { id } });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.LEAVE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.LeaveNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -90,14 +90,14 @@ export class LeaveResolver {
   async deleteLeave(@Arg('id') id: number): Promise<SuccessResponse> {
     try {
       const leave = await Leave.findOne({ where: { id } });
-      if (!leave) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!leave) throw new UserInputError(ErrorCode.BadUserInput);
       await Leave.destroy({
         where: { id },
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.LEAVE_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.LeaveNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

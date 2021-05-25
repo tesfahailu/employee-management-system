@@ -35,7 +35,7 @@ export class EmployeeProjectResolver {
     @Arg('projectId', { nullable: true }) projectId?: number,
   ): Promise<EmployeeProject> {
     if (!id && !(employeeProjectId && projectId))
-      throw new UserInputError(ErrorMessage.EMPLOYEE_PROJECT_ARG_ERROR);
+      throw new UserInputError(ErrorMessage.EmployeeProjectArgumentError);
     try {
       const employeeProject = id
         ? await EmployeeProject.findOne({
@@ -47,12 +47,12 @@ export class EmployeeProjectResolver {
             include: modelIncludeArray,
           });
 
-      if (!employeeProject) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!employeeProject) throw new Error(ErrorCode.BadUserInput);
       return employeeProject;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_PROJECT_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeProjectNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -63,7 +63,7 @@ export class EmployeeProjectResolver {
         include: modelIncludeArray,
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -82,7 +82,7 @@ export class EmployeeProjectResolver {
         projectId,
       });
     } catch (error) {
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return {
       success: true,
@@ -98,7 +98,7 @@ export class EmployeeProjectResolver {
     @Arg('projectId', { nullable: true }) projectId?: number,
   ): Promise<SuccessResponse> {
     if (!id && !(employeeProjectId && projectId))
-      throw new UserInputError(ErrorMessage.EMPLOYEE_PROJECT_ARG_ERROR);
+      throw new UserInputError(ErrorMessage.EmployeeProjectArgumentError);
     try {
       const employeeProject = id
         ? await EmployeeProject.findOne({
@@ -107,7 +107,7 @@ export class EmployeeProjectResolver {
         : await EmployeeProject.findOne({
             where: { employeeProjectId, projectId },
           });
-      if (!employeeProject) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!employeeProject) throw new Error(ErrorCode.BadUserInput);
       await EmployeeProject.update(
         {
           addDate,
@@ -116,9 +116,9 @@ export class EmployeeProjectResolver {
         { where: { id: employeeProject.id } },
       );
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_PROJECT_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeProjectNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return {
       success: true,
@@ -132,7 +132,7 @@ export class EmployeeProjectResolver {
     @Arg('projectId', { nullable: true }) projectId?: number,
   ): Promise<SuccessResponse> {
     if (!id && !(employeeProjectId && projectId))
-      throw new UserInputError(ErrorMessage.EMPLOYEE_PROJECT_ARG_ERROR);
+      throw new UserInputError(ErrorMessage.EmployeeProjectArgumentError);
 
     try {
       const employeeProject = id
@@ -140,7 +140,7 @@ export class EmployeeProjectResolver {
         : await EmployeeProject.findOne({
             where: { employeeProjectId, projectId },
           });
-      if (!employeeProject) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!employeeProject) throw new UserInputError(ErrorCode.BadUserInput);
       await getSequelize().transaction(async (t) => {
         await Session.destroy({
           where: { employeeProjectId: employeeProject.id },
@@ -155,9 +155,9 @@ export class EmployeeProjectResolver {
         where: { id: employeeProject.id },
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_PROJECT_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeProjectNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

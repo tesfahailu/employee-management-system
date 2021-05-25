@@ -31,12 +31,12 @@ export class SessionResolver {
   async session(@Arg('id') id: number): Promise<Session> {
     try {
       const session = await Session.findOne({ where: { id } });
-      if (!session) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!session) throw new Error(ErrorCode.BadUserInput);
       return session;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.SESSION_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.SessionNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -45,7 +45,7 @@ export class SessionResolver {
     try {
       return await Session.findAll();
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -56,7 +56,7 @@ export class SessionResolver {
     try {
       await Session.create({ task, department, startDate, endDate });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -68,15 +68,15 @@ export class SessionResolver {
   ): Promise<SuccessResponse> {
     try {
       const session = await Session.findOne({ where: { id } });
-      if (!session) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!session) throw new Error(ErrorCode.BadUserInput);
       await Session.update(
         { task, department, startDate, endDate },
         { where: { id } },
       );
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.DEPARTMENT_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.DepartmentNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -85,14 +85,14 @@ export class SessionResolver {
   async deleteSession(@Arg('id') id: number): Promise<SuccessResponse> {
     try {
       const session = await Session.findOne({ where: { id } });
-      if (!session) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!session) throw new UserInputError(ErrorCode.BadUserInput);
       await Session.destroy({
         where: { id },
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.DEPARTMENT_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.DepartmentNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

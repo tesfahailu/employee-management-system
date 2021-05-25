@@ -14,12 +14,12 @@ export class SalaryResolver {
         where: { id },
         include: [Employee],
       });
-      if (!salary) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!salary) throw new Error(ErrorCode.BadUserInput);
       return salary;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.SALARY_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.SalaryNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -31,7 +31,7 @@ export class SalaryResolver {
         include: [Employee],
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -44,7 +44,7 @@ export class SalaryResolver {
     try {
       await Salary.create({ amount, startDate, endDate });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -57,12 +57,12 @@ export class SalaryResolver {
   ) {
     try {
       const salary = await Salary.findOne({ where: { id } });
-      if (!salary) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!salary) throw new Error(ErrorCode.BadUserInput);
       await Salary.update({ amount, startDate, endDate }, { where: { id } });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.SALARY_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.SalaryNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -71,14 +71,14 @@ export class SalaryResolver {
   async deleteSalary(@Arg('id') id: number) {
     try {
       const salary = await Salary.findOne({ where: { id } });
-      if (!salary) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!salary) throw new UserInputError(ErrorCode.BadUserInput);
       await Salary.destroy({
         where: { id },
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.SALARY_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.SalaryNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
   }
 }

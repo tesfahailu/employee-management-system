@@ -36,12 +36,12 @@ export class EmployeeAddressResolver {
         where: { id },
         include: [State, Country],
       });
-      if (!employeeAddress) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!employeeAddress) throw new Error(ErrorCode.BadUserInput);
       return employeeAddress;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_ADDRESS_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeAddressNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -51,12 +51,12 @@ export class EmployeeAddressResolver {
       const employeeAddresses = await EmployeeAddress.findAll({
         include: [State, Country],
       });
-      if (!employeeAddresses) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!employeeAddresses) throw new Error(ErrorCode.BadUserInput);
       return employeeAddresses;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_ADDRESS_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeAddressNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -79,7 +79,7 @@ export class EmployeeAddressResolver {
         zipCode,
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -98,7 +98,7 @@ export class EmployeeAddressResolver {
   ): Promise<SuccessResponse> {
     try {
       const employeeAddress = await EmployeeAddress.findOne({ where: { id } });
-      if (!employeeAddress) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!employeeAddress) throw new Error(ErrorCode.BadUserInput);
       await EmployeeAddress.update(
         {
           streetAddress1,
@@ -111,9 +111,9 @@ export class EmployeeAddressResolver {
         { where: { id } },
       );
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_ADDRESS_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeAddressNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -122,14 +122,14 @@ export class EmployeeAddressResolver {
   async deleteOffice(@Arg('id') id: number): Promise<SuccessResponse> {
     try {
       const employeeAddress = await EmployeeAddress.findOne({ where: { id } });
-      if (!employeeAddress) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!employeeAddress) throw new UserInputError(ErrorCode.BadUserInput);
       await EmployeeAddress.destroy({
         where: { id },
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_ADDRESS_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeAddressNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

@@ -10,12 +10,12 @@ export class DepartmentResolver {
   async department(@Arg('id') id: number): Promise<Department> {
     try {
       const department = await Department.findOne({ where: { id } });
-      if (!department) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!department) throw new Error(ErrorCode.BadUserInput);
       return department;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.DEPARTMENT_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.DepartmentNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -24,7 +24,7 @@ export class DepartmentResolver {
     try {
       return await Department.findAll();
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -37,7 +37,7 @@ export class DepartmentResolver {
     try {
       await Department.create({ title, description });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -53,12 +53,12 @@ export class DepartmentResolver {
   ): Promise<SuccessResponse> {
     try {
       const department = await Department.findOne({ where: { id } });
-      if (!department) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!department) throw new Error(ErrorCode.BadUserInput);
       await Department.update({ title, description }, { where: { id } });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.DEPARTMENT_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.DepartmentNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -67,14 +67,14 @@ export class DepartmentResolver {
   async deleteDepartment(@Arg('id') id: number): Promise<SuccessResponse> {
     try {
       const department = await Department.findOne({ where: { id } });
-      if (!department) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!department) throw new UserInputError(ErrorCode.BadUserInput);
       await Department.destroy({
         where: { id },
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.DEPARTMENT_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.DepartmentNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

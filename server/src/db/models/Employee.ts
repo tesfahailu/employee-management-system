@@ -24,10 +24,10 @@ import { ObjectType, Field, Int, registerEnumType } from 'type-graphql';
 import { Leave } from './Leave';
 
 export enum EmployeeType {
-  PERMENANT = 'permenant',
-  CONTRACT = 'contract',
-  FULLTIME = 'fulltime',
-  PARTTIME = 'parttime',
+  Permenant = 'PERMENANT',
+  Contract = 'CONTRACT',
+  FullTime = 'FULLTIME',
+  PartTime = 'PARTTIME',
 }
 
 registerEnumType(EmployeeType, {
@@ -113,8 +113,8 @@ export class Employee extends Model {
   office?: Office;
 
   @Field(() => EmployeeType, { nullable: true })
-  @Column(DataType.ENUM(...Object.values(EmployeeType)))
-  type?: string;
+  @Column(DataType.ENUM(...Object.keys(EmployeeType)))
+  type?: EmployeeType;
 
   @ForeignKey(() => Department)
   @Column

@@ -14,12 +14,12 @@ export class OfficeResolver {
         where: { id },
         include: [OfficeAddress],
       });
-      if (!office) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!office) throw new Error(ErrorCode.BadUserInput);
       return office;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.OFFICE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.OfficeNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -27,12 +27,12 @@ export class OfficeResolver {
   async offices(): Promise<Office[]> {
     try {
       const offices = await Office.findAll({ include: [OfficeAddress] });
-      if (!offices) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!offices) throw new Error(ErrorCode.BadUserInput);
       return offices;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.OFFICE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.OfficeNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -43,7 +43,7 @@ export class OfficeResolver {
     try {
       await Office.create({ officeCapacity });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -55,12 +55,12 @@ export class OfficeResolver {
   ): Promise<SuccessResponse> {
     try {
       const office = await Office.findOne({ where: { id } });
-      if (!office) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!office) throw new Error(ErrorCode.BadUserInput);
       await Office.update({ officeCapacity }, { where: { id } });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.LEAVE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.LeaveNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
@@ -69,14 +69,14 @@ export class OfficeResolver {
   async deleteOffice(@Arg('id') id: number): Promise<SuccessResponse> {
     try {
       const office = await Office.findOne({ where: { id } });
-      if (!office) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!office) throw new UserInputError(ErrorCode.BadUserInput);
       await Office.destroy({
         where: { id },
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.OFFICE_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.OfficeNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }

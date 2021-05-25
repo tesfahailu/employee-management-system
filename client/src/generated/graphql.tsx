@@ -35,11 +35,12 @@ export type Department = {
 
 /** Department Type */
 export enum DepartmentType {
-  Marketing = 'MARKETING',
-  Operations = 'OPERATIONS',
-  Sales = 'SALES',
-  HumanResources = 'HUMAN_RESOURCES',
-  Engineering = 'ENGINEERING'
+  Marketing = 'Marketing',
+  Operations = 'Operations',
+  Finance = 'Finance',
+  Sales = 'Sales',
+  HumanResources = 'HumanResources',
+  Product = 'Product'
 }
 
 export type Employee = {
@@ -87,10 +88,10 @@ export type EmployeeProject = {
 
 /** Employee Type */
 export enum EmployeeType {
-  Permenant = 'PERMENANT',
-  Contract = 'CONTRACT',
-  Fulltime = 'FULLTIME',
-  Parttime = 'PARTTIME'
+  Permenant = 'Permenant',
+  Contract = 'Contract',
+  FullTime = 'FullTime',
+  PartTime = 'PartTime'
 }
 
 export type Experience = {
@@ -113,10 +114,10 @@ export type Leave = {
 
 /** Leave Types */
 export enum LeaveType {
-  Vacation = 'VACATION',
-  Sick = 'SICK',
-  Holiday = 'HOLIDAY',
-  Personal = 'PERSONAL'
+  Vacation = 'Vacation',
+  Sick = 'Sick',
+  Holiday = 'Holiday',
+  Personal = 'Personal'
 }
 
 export type LoginResponse = {
@@ -582,7 +583,7 @@ export type EmployeeQuery = (
       & Pick<Department, 'title' | 'description'>
     )>, projects?: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'name'>
+      & Pick<Project, 'id' | 'name' | 'description'>
     )>>>, employeeAddress?: Maybe<(
       { __typename?: 'EmployeeAddress' }
       & Pick<EmployeeAddress, 'id' | 'streetAddress1' | 'streetAddress2' | 'city' | 'zipCode'>
@@ -693,6 +694,7 @@ export const EmployeeDocument = gql`
     projects {
       id
       name
+      description
     }
     employeeAddress {
       id

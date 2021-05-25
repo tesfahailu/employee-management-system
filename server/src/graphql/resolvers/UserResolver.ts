@@ -57,12 +57,12 @@ export class UserResolver {
   async user(@Arg('id') id: number): Promise<User> {
     try {
       const user = await User.findOne({ where: { id } });
-      if (!user) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!user) throw new Error(ErrorCode.BadUserInput);
       return user;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.USER_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.UserNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -71,7 +71,7 @@ export class UserResolver {
     try {
       return await User.findAll();
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -103,9 +103,9 @@ export class UserResolver {
         roleId,
       });
     } catch (error) {
-      if (error.message === ErrorCode.VALIDATION_ERROR)
-        throw new UserInputError(ErrorMessage.USER_ALREADY_EXIST, error.errors);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.ValidationError)
+        throw new UserInputError(ErrorMessage.UserAlreadyExist, error.errors);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
     return {
       success: true,
@@ -122,16 +122,16 @@ export class UserResolver {
     let user;
     try {
       user = await User.findOne({ where: { username } });
-      if (!user) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!user) throw new UserInputError(ErrorCode.BadUserInput);
 
       const validPassword = await compare(password, user.password);
-      if (!validPassword) throw new UserInputError(ErrorCode.BAD_USER_INPUT);
+      if (!validPassword) throw new UserInputError(ErrorCode.BadUserInput);
 
       await User.update({ lastLogin: new Date() }, { where: { username } });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.USER_ARG_ERROR);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.UserArgumentError);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
 
     sendRefeshToken(res, createRefreshToken(user));

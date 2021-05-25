@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Employees } from '../pages/Employees';
+import { ViewAllData as EmployeesViewAll } from '../pages/Employees/ViewAll/ViewAllData';
 import { Register } from '../pages/Register';
 import { Login } from '../pages/Login';
 import { AppLayout } from './../layout/AppLayout';
@@ -11,23 +11,23 @@ import { Settings } from '../pages/Settings';
 import { Departments } from '../pages/Departments';
 import { Roles } from '../pages/Roles';
 import { useMediaQuery } from '@material-ui/core';
-import { EmployeeView } from '../pages/EmployeeView';
+import { ViewOneData as EmployeesViewOne } from '../pages/Employees/ViewOne/ViewOneData';
+import { EditData as EmployeesEdit } from '../pages/Employees/Edit/EditData';
 
 export const PageRoutes: React.FC = () => {
-  const isAboveMinWidth = useMediaQuery('(min-width:1000px)');
+  const isAboveMinWidth = useMediaQuery('(min-width:1200px)');
   return (
     <Switch>
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/login" component={Login} />
       <Route exact path="/user" component={User} />
       <Route
         exact
-        path="/employees"
+        path="/employees/viewAll"
         render={(props) => (
-          <Employees {...props} isAboveMinWidth={isAboveMinWidth} />
+          <EmployeesViewAll {...props} isAboveMinWidth={isAboveMinWidth} />
         )}
       />
-      <Route path="/employee/:id" component={EmployeeView} />
+      <Route path="/employees/viewOne/:id" component={EmployeesViewOne} />
+      <Route path="/employees/edit/:id/" component={EmployeesEdit} />
       <Route exact path="/projects" component={Projects} />
       <Route exact path="/offices" component={Offices} />
       <Route exact path="/departments" component={Departments} />

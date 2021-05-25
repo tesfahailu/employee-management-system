@@ -64,12 +64,12 @@ export class EmployeeResolver {
         where: { id },
         include: modelIncludeArray,
       });
-      if (!employee) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!employee) throw new Error(ErrorCode.BadUserInput);
       return employee;
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -80,7 +80,7 @@ export class EmployeeResolver {
         include: modelIncludeArray,
       });
     } catch (error) {
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
   }
 
@@ -102,13 +102,13 @@ export class EmployeeResolver {
     const validationErrors: ValidationErrorOjbect = {};
 
     if (email && !validator.isEmail(email))
-      validationErrors.email = ErrorMessage.EMPLOYEE_INVALID_EMAIL;
+      validationErrors.email = ErrorMessage.EmployeeInvalidEmail;
 
     if (mobile && !validator.isMobilePhone(mobile))
-      validationErrors.mobile = ErrorMessage.EMPLOYEE_INVALID_MOBILE;
+      validationErrors.mobile = ErrorMessage.EmployeeInvalidMobile;
 
     if (Object.keys(validationErrors).length > 0) {
-      throw new UserInputError(ErrorMessage.EMPLOYEE_VALIDATION_ERROR, {
+      throw new UserInputError(ErrorMessage.EmployeeValidationError, {
         validationErrors,
       });
     }
@@ -127,7 +127,7 @@ export class EmployeeResolver {
       });
     } catch (error) {
       console.error(error);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
 
     return { success: true };
@@ -149,24 +149,24 @@ export class EmployeeResolver {
       departmentId,
     }: EmployeeArgs,
   ): Promise<SuccessResponse> {
-    if (!id) throw new UserInputError(ErrorMessage.EMPLOYEE_ARG_ERROR);
+    if (!id) throw new UserInputError(ErrorMessage.EmployeeArgumentError);
     const validationErrors: ValidationErrorOjbect = {};
 
     if (email && !validator.isEmail(email))
-      validationErrors.email = ErrorMessage.EMPLOYEE_INVALID_EMAIL;
+      validationErrors.email = ErrorMessage.EmployeeInvalidEmail;
 
     if (mobile && !validator.isMobilePhone(mobile))
-      validationErrors.mobile = ErrorMessage.EMPLOYEE_INVALID_MOBILE;
+      validationErrors.mobile = ErrorMessage.EmployeeInvalidMobile;
 
     if (Object.keys(validationErrors).length > 0) {
-      throw new UserInputError(ErrorMessage.EMPLOYEE_VALIDATION_ERROR, {
+      throw new UserInputError(ErrorMessage.EmployeeValidationError, {
         validationErrors,
       });
     }
 
     try {
       const employee = await Employee.findOne({ where: { id } });
-      if (!employee) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!employee) throw new Error(ErrorCode.BadUserInput);
 
       await Employee.update(
         {
@@ -183,9 +183,9 @@ export class EmployeeResolver {
         { where: { id } },
       );
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_NOT_FOUND);
-      throw new ApolloError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeNotFound);
+      throw new ApolloError(ErrorMessage.Unknown);
     }
 
     return { success: true };
@@ -195,7 +195,7 @@ export class EmployeeResolver {
   async deleteEmployee(@Arg('id') id: number): Promise<SuccessResponse> {
     try {
       const employee = await Employee.findOne({ where: { id } });
-      if (!employee) throw new Error(ErrorCode.BAD_USER_INPUT);
+      if (!employee) throw new Error(ErrorCode.BadUserInput);
       await getSequelize().transaction(async (t) => {
         await User.destroy({ where: { employeeId: id }, transaction: t });
         await EmployeeProject.destroy({
@@ -208,9 +208,9 @@ export class EmployeeResolver {
         await Employee.destroy({ where: { id }, transaction: t });
       });
     } catch (error) {
-      if (error.message === ErrorCode.BAD_USER_INPUT)
-        throw new UserInputError(ErrorMessage.EMPLOYEE_NOT_FOUND);
-      throw new UserInputError(ErrorMessage.UNKNOWN);
+      if (error.message === ErrorCode.BadUserInput)
+        throw new UserInputError(ErrorMessage.EmployeeNotFound);
+      throw new UserInputError(ErrorMessage.Unknown);
     }
     return { success: true };
   }
