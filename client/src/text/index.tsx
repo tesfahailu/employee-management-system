@@ -1,18 +1,24 @@
+export enum ViewEmployeesPageText {
+  PageHeaderText = 'View Employees:',
+}
+
 export enum ViewEmployeePageText {
-  PAGE_HEADER_TEXT = 'View Employee:',
-  EMPLOYEE_INFO_TEXT = 'Employee Info:',
-  DEPARTMENT_TEXT = 'Department:',
-  EMPLOYEE_ADDRESS_TEXT = 'Employee Address:',
-  OFFICE_ADDRESS_TEXT = 'Office Address:',
-  CURRENT_PROJECTS_TEXT = 'Current Projects: ',
-  EDIT_BUTTON_TEXT = 'Edit',
+  PageHeaderText = 'View Employee:',
+  EmployeeInfoText = 'Employee Info:',
+  DepartmentText = 'Department:',
+  EmployeeAddressText = 'Employee Address:',
+  OfficeeAddressText = 'Office Address:',
+  CurrrentProjectsText = 'Current Projects: ',
+  EditButtonText = 'Edit',
+  EditAllButtonText = 'Edit All',
 }
 
 export enum EditEmployeePageText {
-  PAGE_HEADER_TEXT = 'Edit Employee:',
-  EMPLOYEE_INFO_TEXT = 'Employee Info:',
-  DEPARTMENT_TEXT = 'Department:',
-  EMPLOYEE_ADDRESS_TEXT = 'Employee Address:',
-  OFFICE_ADDRESS_TEXT = 'Office Address:',
-  SAVE_BUTTON_TEXT = 'Save',
+  PageHeaderText = 'Edit Employee:',
+  EmployeeInfoText = 'Employee Info:',
+  DepartmentText = 'Department:',
+  EmployeeAddressText = 'Employee Address:',
+  OfficeeAddressText = 'Office Address:',
+  ProjectsText = 'Projects:',
+  SaveButtonText = 'Save',
 }

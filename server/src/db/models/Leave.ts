@@ -13,10 +13,10 @@ import {
 import { ObjectType, Field, ID, registerEnumType } from 'type-graphql';
 
 export enum LeaveType {
-  VACATION = 'vacation',
-  SICK = 'sick',
-  HOLIDAY = 'holiday',
-  PERSONAL = 'personal',
+  Vacation = 'VACATION',
+  Sick = 'SICK',
+  Holiday = 'HOLIDAY',
+  Personal = 'PERSONAL',
 }
 
 registerEnumType(LeaveType, {
@@ -39,7 +39,7 @@ export class Leave extends Model {
   employee: Employee;
 
   @Field(() => LeaveType)
-  @Column(DataType.ENUM(...Object.values(LeaveType)))
+  @Column(DataType.ENUM(...Object.keys(LeaveType)))
   type: LeaveType;
 
   @Field()

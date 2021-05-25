@@ -13,6 +13,7 @@ query Employee($id: Float!) {
     projects {
       id
       name
+      description
     }
     employeeAddress {
       id

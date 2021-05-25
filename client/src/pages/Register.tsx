@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 enum ErrorMessage {
-  USERNAME_TOO_SHORT = 'username must be greater than 5 characters.',
-  USERNAME_CHARACTER_ERROR = 'username should only include numbers, letters, and underscores.',
-  USERNAME_MISMATCH = 'username does not match.',
-  PASSWORD_TOO_SHORT = 'password must be greater than 5 alphanumeric charcters. ',
-  PASSWORD_MISMATCH = 'password does not match.',
+  UsernameTooShort = 'username must be greater than 5 characters.',
+  UsernameCharacterError = 'username should only include numbers, letters, and underscores.',
+  UsernameMismatch = 'username does not match.',
+  PasswordTooShort = 'password must be greater than 5 alphanumeric charcters. ',
+  PasswordMismatch = 'password does not match.',
 }
 
 export const Register: React.FC<RouteComponentProps> = ({ history }) => {
@@ -65,10 +65,10 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
     let usernameErrorText = '';
     if (username.length < 5) {
-      usernameErrorText = ErrorMessage.USERNAME_TOO_SHORT;
+      usernameErrorText = ErrorMessage.UsernameTooShort;
       isInvalidInput = true;
     } else if (!RegExp('^[a-zA-Z0-9_]*$').test(username)) {
-      usernameErrorText = ErrorMessage.USERNAME_CHARACTER_ERROR;
+      usernameErrorText = ErrorMessage.UsernameCharacterError;
       isInvalidInput = true;
     }
     setError((previousError) => ({
@@ -78,7 +78,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
     let confirmUsernameErrorText = '';
     if (confirmUsername !== username) {
-      confirmUsernameErrorText = ErrorMessage.USERNAME_MISMATCH;
+      confirmUsernameErrorText = ErrorMessage.UsernameMismatch;
       isInvalidInput = true;
     }
     setError((previousError) => ({
@@ -88,7 +88,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
     let passwordErrorText = '';
     if (password.length < 5) {
-      passwordErrorText = ErrorMessage.PASSWORD_TOO_SHORT;
+      passwordErrorText = ErrorMessage.PasswordTooShort;
       isInvalidInput = true;
     }
     setError((previousError) => ({
@@ -98,7 +98,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
     let confirmPasswordErrorText = '';
     if (confirmPassword !== password) {
-      confirmPasswordErrorText = ErrorMessage.PASSWORD_MISMATCH;
+      confirmPasswordErrorText = ErrorMessage.PasswordMismatch;
       isInvalidInput = true;
     }
     setError((previousError) => ({

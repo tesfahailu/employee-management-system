@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 enum ErrorMessage {
-  USERNAME_EMPTY = 'username required.',
-  PASSWORD_EMPTY = 'password required. ',
+  UsernameEmpty = 'username required.',
+  PasswordEmpty = 'password required. ',
 }
 
 export const Login: React.FC<RouteComponentProps> = ({ history }) => {
@@ -61,7 +61,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
     let usernameErrorText = '';
     if (username === '') {
-      usernameErrorText = ErrorMessage.USERNAME_EMPTY;
+      usernameErrorText = ErrorMessage.UsernameEmpty;
       isInvalidInput = true;
     }
     setError((previousError) => ({
@@ -71,7 +71,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
     let passwordErrorText = '';
     if (password === '') {
-      passwordErrorText = ErrorMessage.PASSWORD_EMPTY;
+      passwordErrorText = ErrorMessage.PasswordEmpty;
       isInvalidInput = true;
     }
     setError((previousError) => ({
