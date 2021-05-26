@@ -178,3 +178,21 @@ export interface CreateEmployeeType {
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+export interface EditProjectType {
+  project: ProjectType;
+  onProjectChange: (
+    field: ProjectFieldType,
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  isFormChanged: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface CreateProjectType {
+  project: ProjectType;
+  onProjectChange: (
+    field: ProjectFieldType,
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}

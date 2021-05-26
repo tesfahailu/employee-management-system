@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ProjectFieldType } from '../../../types/types';
 import { EditPresentation } from '../../Projects/Edit/EditPresentation';
 
-interface EditDataProps {}
+export const EditData = ({}) => {
+  const [project, setProject] = useState({
+    id: 0,
+    name: '',
+    description: '',
+  });
+  const [isFormChanged, setIsFormChanged] = useState(false);
 
-export const EditData: React.FC<EditDataProps> = ({}) => {
-  return <EditPresentation />;
+  const dataProject = { id: 1, name: 'Amazon', description: 'sdfadf' };
+  useEffect(() => {
+    setProject(dataProject);
+  }, []);
+
+  const onProjectChange = (field: ProjectFieldType) => {
+    return (event: ChangeEvent<HTMLInputElement>) => {
+      setIsFormChanged(true);
+      setProject((previousProject) => {
+        return { ...previousProject, [field]: event.target.value };
+      });
+    };
+  };
+
+  const saveChanges = () => {
+    console.log('Saved changes');
+    setIsFormChanged(false);
+  };
+
+  return (
+    <EditPresentation
+      project={project}
+      onProjectChange={onProjectChange}
+      isFormChanged={isFormChanged}
+      saveChanges={saveChanges}
+    />
+  );
 };
