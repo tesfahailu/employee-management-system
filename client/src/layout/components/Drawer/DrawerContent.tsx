@@ -27,7 +27,8 @@ export const DrawerContent = () => {
   useEffect(() => {
     const pathname = location.pathname;
     const route = pathname.split('/');
-    setSelectedRoute('/' + route[route.length - 1]);
+    console.log(route);
+    setSelectedRoute(route[1]);
   }, [location]);
 
   return (
@@ -59,7 +60,7 @@ export const DrawerContent = () => {
           <ListItem
             button
             key={text + index.toString()}
-            selected={selectedRoute === route}
+            selected={selectedRoute === (route as string).split('/')[1]}
           >
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={text} />
