@@ -28,3 +28,8 @@ export enum CreateEmployeePageText {
   PageHeaderText = 'Create Employee:',
   SaveButtonText = 'Save',
 }
+
+export enum ViewProjectsPageText {
+  PageHeaderText = 'View Projects:',
+  CreateButtonText = 'Create',
+}
