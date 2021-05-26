@@ -12,8 +12,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditEmployeePageText } from '../../../../text';
-import { EditEmployeeDepartmentType } from '../../../../types/types';
+import { EditEmployeePageText } from '../../../text';
+import { EditEmployeeDepartmentType } from '../../../types/types';
 
 export const DepartmentCard = ({
   department,

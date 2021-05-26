@@ -7,45 +7,34 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { EditEmployeePageText } from '../../../text';
-import { EditEmployeeType } from '../../../types/types';
+import { CreateEmployeePageText, EditEmployeePageText } from '../../../text';
+import { CreateEmployeeType } from '../../../types/types';
 import { DepartmentCard } from '../components/DepartmentCard';
 import { EmployeeAddressCard } from '../components/EmployeeAddressCard';
 import { EmployeeInfoCard } from '../components/EmployeeInfoCard';
 import { OfficeAddressCard } from '../components/OfficeAddressCard';
 import { ProjectsCard } from '../components/ProjectsCard';
 
-export const EditPresentation = ({
+export const CreatePresentation = ({
   employee,
   onEmployeeInfoChange,
-  employeeAddress,
-  onEmployeeAddressChange,
   department,
   onDepartmentChange,
+  employeeAddress,
+  onEmployeeAddressChange,
   officeAddress,
   onOfficeAddressChange,
   projects,
   onProjectChange,
-  isFormChanged,
+  isFormComplete,
   saveChanges,
-}: EditEmployeeType) => {
+}: CreateEmployeeType) => {
   const classes = useStyles();
   return (
     <Fragment>
-      <Grid container justify="space-between">
-        <Typography variant="h5" className={classes.header}>
-          {EditEmployeePageText.PageHeaderText}
-        </Typography>
-        <Button
-          color="primary"
-          variant="contained"
-          className={classes.actionButtonSpacing}
-          disabled={!isFormChanged}
-          onClick={saveChanges}
-        >
-          {EditEmployeePageText.SaveButtonText}
-        </Button>
-      </Grid>
+      <Typography variant="h5" className={classes.header}>
+        {CreateEmployeePageText.PageHeaderText}
+      </Typography>
       <EmployeeInfoCard
         employee={employee}
         onEmployeeInfoChange={onEmployeeInfoChange}
@@ -63,6 +52,15 @@ export const EditPresentation = ({
         onAddressChange={onOfficeAddressChange}
       />
       <ProjectsCard projects={projects} onProjectChange={onProjectChange} />
+      <Button
+        color="primary"
+        variant="contained"
+        className={classes.actionButtonSpacing}
+        disabled={!isFormComplete}
+        onClick={saveChanges}
+      >
+        {CreateEmployeePageText.SaveButtonText}
+      </Button>
     </Fragment>
   );
 };

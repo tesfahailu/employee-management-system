@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import {
+  Button,
   createStyles,
   Grid,
   IconButton,
@@ -16,6 +17,7 @@ import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
 import { Rows } from './testData';
 import { ViewEmployeesPageText } from '../../../text';
 import { useHistory } from 'react-router';
+import { Add as AddIcon } from '@material-ui/icons';
 
 const renderDetailsButton = (id: number | string) => {
   const history = useHistory();
@@ -108,6 +110,10 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       minHeight: '400px',
     },
+    actionButtonSpacing: {
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
   }),
 );
 
@@ -121,6 +127,7 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
   isAboveMinWidth,
 }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <Fragment>
@@ -130,9 +137,20 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
         direction="column"
         className={classes.fullParentContainer}
       >
-        <Typography variant="h5" className={classes.header}>
-          {ViewEmployeesPageText.PageHeaderText}
-        </Typography>
+        <Grid container justify="space-between">
+          <Typography variant="h5" className={classes.header}>
+            {ViewEmployeesPageText.PageHeaderText}
+          </Typography>
+          <Button
+            color="primary"
+            variant="contained"
+            className={classes.actionButtonSpacing}
+            startIcon={<AddIcon />}
+            onClick={() => history.push('/employees/create')}
+          >
+            {ViewEmployeesPageText.CreateButtonText}
+          </Button>
+        </Grid>
         <Grid item xs className={classes.inheritHeight}>
           <Grid
             container

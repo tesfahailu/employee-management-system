@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ViewAllData as EmployeesViewAll } from '../pages/Employees/ViewAll/ViewAllData';
 import { Register } from '../pages/Register';
 import { Login } from '../pages/Login';
 import { AppLayout } from './../layout/AppLayout';
@@ -11,8 +10,10 @@ import { Settings } from '../pages/Settings';
 import { Departments } from '../pages/Departments';
 import { Roles } from '../pages/Roles';
 import { useMediaQuery } from '@material-ui/core';
+import { ViewAllData as EmployeesViewAll } from '../pages/Employees/ViewAll/ViewAllData';
 import { ViewOneData as EmployeesViewOne } from '../pages/Employees/ViewOne/ViewOneData';
 import { EditData as EmployeesEdit } from '../pages/Employees/Edit/EditData';
+import { CreateData as EmployeesCreate } from '../pages/Employees/Create/CreateData';
 
 export const PageRoutes: React.FC = () => {
   const isAboveMinWidth = useMediaQuery('(min-width:1200px)');
@@ -27,7 +28,8 @@ export const PageRoutes: React.FC = () => {
         )}
       />
       <Route path="/employees/viewOne/:id" component={EmployeesViewOne} />
-      <Route path="/employees/edit/:id/" component={EmployeesEdit} />
+      <Route path="/employees/edit/:id" component={EmployeesEdit} />
+      <Route path="/employees/create" component={EmployeesCreate} />
       <Route exact path="/projects" component={Projects} />
       <Route exact path="/offices" component={Offices} />
       <Route exact path="/departments" component={Departments} />

@@ -12,10 +12,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditEmployeePageText } from '../../../../text';
-import { EditAddressType } from '../../../../types/types';
+import { EditEmployeePageText } from '../../../text';
+import { EditAddressType } from '../../../types/types';
 
-export const EmployeeAddressCard = ({
+export const OfficeAddressCard = ({
   address,
   onAddressChange,
 }: EditAddressType) => {
@@ -31,7 +31,7 @@ export const EmployeeAddressCard = ({
       <CardHeader
         title={
           <Typography variant="h6">
-            {EditEmployeePageText.EmployeeAddressText}
+            {EditEmployeePageText.OfficeeAddressText}
           </Typography>
         }
       />
@@ -40,7 +40,7 @@ export const EmployeeAddressCard = ({
           variant="outlined"
           margin="normal"
           fullWidth
-          id="eStreetAddress1"
+          id="oStreetAddress1"
           label="Street Address 1:"
           value={address.streetAddress1}
           onChange={onAddressChange('streetAddress1')}
@@ -50,7 +50,7 @@ export const EmployeeAddressCard = ({
           variant="outlined"
           margin="normal"
           fullWidth
-          id="eStreetAddress2"
+          id="oStreetAddress2"
           label="Street Address 2:"
           value={address.streetAddress2}
           onChange={onAddressChange('streetAddress2')}
@@ -60,7 +60,7 @@ export const EmployeeAddressCard = ({
           variant="outlined"
           margin="normal"
           fullWidth
-          id="eCity"
+          id="oCity"
           label="City:"
           value={address.city}
           onChange={onAddressChange('city')}
@@ -114,7 +114,7 @@ export const EmployeeAddressCard = ({
           variant="outlined"
           margin="normal"
           fullWidth
-          id="eZipCode"
+          id="oZipCode"
           label="Zip Code:"
           value={address.zipCode}
           onChange={onAddressChange('zipCode')}
