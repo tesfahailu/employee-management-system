@@ -127,6 +127,7 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
   isAboveMinWidth,
 }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <Fragment>
@@ -145,12 +146,11 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
             variant="contained"
             className={classes.actionButtonSpacing}
             startIcon={<AddIcon />}
-            onClick={() => console.log('Trying to save')}
+            onClick={() => history.push('/employees/create')}
           >
             {ViewEmployeesPageText.CreateButtonText}
           </Button>
         </Grid>
-
         <Grid item xs className={classes.inheritHeight}>
           <Grid
             container

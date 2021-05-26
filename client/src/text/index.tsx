@@ -23,3 +23,8 @@ export enum EditEmployeePageText {
   ProjectsText = 'Projects:',
   SaveButtonText = 'Save',
 }
+
+export enum CreateEmployeePageText {
+  PageHeaderText = 'Create Employee:',
+  SaveButtonText = 'Save',
+}

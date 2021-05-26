@@ -13,8 +13,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditEmployeePageText } from '../../../../text';
-import { EditEmployeeInfoType } from '../../../../types/types';
+import { EditEmployeePageText } from '../../../text';
+import { EditEmployeeInfoType } from '../../../types/types';
 
 export const EmployeeInfoCard = ({
   employee,
@@ -43,7 +43,7 @@ export const EmployeeInfoCard = ({
           fullWidth
           id="firstName"
           label="First Name:"
-          value={employee.firstName}
+          value={employee!.firstName}
           onChange={onEmployeeInfoChange('firstName')}
           color="primary"
         />
@@ -53,7 +53,7 @@ export const EmployeeInfoCard = ({
           fullWidth
           id="lastName"
           label="Last Name:"
-          value={employee.lastName}
+          value={employee!.lastName}
           onChange={onEmployeeInfoChange('lastName')}
           color="primary"
         />
@@ -63,7 +63,7 @@ export const EmployeeInfoCard = ({
           fullWidth
           id="mobile"
           label="Mobile:"
-          value={employee.mobile}
+          value={employee!.mobile}
           onChange={onEmployeeInfoChange('mobile')}
           color="primary"
         />
@@ -73,7 +73,7 @@ export const EmployeeInfoCard = ({
           fullWidth
           id="email"
           label="Email:"
-          value={employee.email}
+          value={employee!.email}
           onChange={onEmployeeInfoChange('email')}
           color="primary"
         />
@@ -85,7 +85,7 @@ export const EmployeeInfoCard = ({
           <InputLabel htmlFor="outlined-type-native-simple">Type:</InputLabel>
           <Select
             native
-            value={employee.type}
+            value={employee!.type}
             onChange={onEmployeeInfoChange('type')}
             label="Type"
             inputProps={{

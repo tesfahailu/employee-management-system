@@ -139,3 +139,42 @@ export interface EmployeeViewPresentationProp {
   officeAddress: AddressType;
   projects: Array<ProjectType>;
 }
+
+export interface CreateEmployeeType {
+  employee: EmployeeType;
+  onEmployeeInfoChange: (
+    field: EmployeeFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
+
+  employeeAddress: AddressType;
+  onEmployeeAddressChange: (
+    field: AddressFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
+
+  department: DepartmentType;
+  onDepartmentChange: (
+    field: DepartmentFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
+
+  officeAddress: AddressType;
+  onOfficeAddressChange: (
+    field: AddressFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
+
+  projects: Array<ProjectType>;
+  onProjectChange: (
+    index: number,
+    field: ProjectFieldType,
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}

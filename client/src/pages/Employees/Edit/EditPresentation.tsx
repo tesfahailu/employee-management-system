@@ -9,11 +9,11 @@ import {
 import React, { Fragment } from 'react';
 import { EditEmployeePageText } from '../../../text';
 import { EditEmployeeType } from '../../../types/types';
-import { DepartmentCard } from './components/DepartmentCard';
-import { EmployeeAddressCard } from './components/EmployeeAddressCard';
-import { EmployeeInfoCard } from './components/EmployeeInfoCard';
-import { OfficeAddressCard } from './components/OfficeAddressCard';
-import { ProjectsPresentation } from './components/ProjectsPresentation';
+import { DepartmentCard } from '../components/DepartmentCard';
+import { EmployeeAddressCard } from '../components/EmployeeAddressCard';
+import { EmployeeInfoCard } from '../components/EmployeeInfoCard';
+import { OfficeAddressCard } from '../components/OfficeAddressCard';
+import { ProjectsCard } from '../components/ProjectsCard';
 
 export const EditPresentation = ({
   employee,
@@ -62,10 +62,7 @@ export const EditPresentation = ({
         address={officeAddress}
         onAddressChange={onOfficeAddressChange}
       />
-      <ProjectsPresentation
-        projects={projects}
-        onProjectChange={onProjectChange}
-      />
+      <ProjectsCard projects={projects} onProjectChange={onProjectChange} />
     </Fragment>
   );
 };

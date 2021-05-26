@@ -8,10 +8,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditEmployeePageText } from '../../../../text';
-import { EditProjectsType } from '../../../../types/types';
+import { EditEmployeePageText } from '../../../text';
+import { EditProjectsType } from '../../../types/types';
 
-export const ProjectsPresentation = ({
+export const ProjectsCard = ({
   projects,
   onProjectChange,
 }: EditProjectsType) => {
@@ -26,7 +26,7 @@ export const ProjectsPresentation = ({
         }
       />
       <CardContent>
-        {projects.map(({ id, name, description }) => {
+        {projects!.map(({ id, name, description }) => {
           return (
             <div key={`text-section-${id}`}>
               <TextField
