@@ -50,7 +50,7 @@ export const DrawerContent = () => {
       </StyledLink>
       {[
         ['Employees', <EmployeesIcon />, '/employees/viewAll'],
-        ['Projects', <ProjectIcon />, '/projects'],
+        ['Projects', <ProjectIcon />, '/projects/viewAll'],
         ['Offices', <OfficesIcon />, '/offices'],
         ['Departments', <DepartmentIcon />, '/departments'],
         ['Roles', <RolesIcon />, '/roles'],
