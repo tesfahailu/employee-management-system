@@ -13,8 +13,12 @@ import { ViewOneData as ProjectsViewOne } from '../pages/Projects/ViewOne/ViewOn
 import { EditData as ProjectsEdit } from '../pages/Projects/Edit/EditData';
 import { CreateData as ProjectsCreate } from '../pages/Projects/Create/CreateData';
 
+import { ViewAllData as OfficesViewAll } from '../pages/Offices/ViewAll/ViewAllData';
+import { ViewOneData as OfficesViewOne } from '../pages/Offices/ViewOne/ViewOneData';
+import { EditData as OfficesEdit } from '../pages/Offices/Edit/EditData';
+import { CreateData as OfficesCreate } from '../pages/Offices/Create/CreateData';
+
 import { User } from '../pages/User';
-import { Offices } from '../pages/Offices';
 import { Settings } from '../pages/Settings';
 import { Departments } from '../pages/Departments';
 import { Roles } from '../pages/Roles';
@@ -42,7 +46,17 @@ export const PageRoutes: React.FC = () => {
       <Route path="/projects/edit/:id" component={ProjectsEdit} />
       <Route path="/projects/create" component={ProjectsCreate} />
 
-      <Route exact path="/offices" component={Offices} />
+      <Route
+        exact
+        path="/offices/viewAll"
+        render={(props) => (
+          <OfficesViewAll {...props} isAboveMinWidth={isAboveMinWidth} />
+        )}
+      />
+      <Route path="/offices/viewOne/:id" component={OfficesViewOne} />
+      <Route path="/offices/edit/:id" component={OfficesEdit} />
+      <Route path="/offices/create" component={OfficesCreate} />
+
       <Route exact path="/departments" component={Departments} />
       <Route exact path="/roles" component={Roles} />
       <Route exact path="/settings" component={Settings} />

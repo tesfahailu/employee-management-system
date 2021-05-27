@@ -51,7 +51,7 @@ export const DrawerContent = () => {
       {[
         ['Employees', <EmployeesIcon />, '/employees/viewAll'],
         ['Projects', <ProjectIcon />, '/projects/viewAll'],
-        ['Offices', <OfficesIcon />, '/offices'],
+        ['Offices', <OfficesIcon />, '/offices/viewAll'],
         ['Departments', <DepartmentIcon />, '/departments'],
         ['Roles', <RolesIcon />, '/roles'],
         ['Settings', <SettingIcon />, '/settings'],

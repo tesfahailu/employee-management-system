@@ -16,7 +16,8 @@ export interface DepartmentType {
 }
 
 export interface AddressType {
-  [index: string]: string;
+  [index: string]: number | string | undefined;
+  id?: number;
   streetAddress1: string;
   streetAddress2: string;
   city: string;
@@ -193,6 +194,17 @@ export interface CreateProjectType {
   onProjectChange: (
     field: ProjectFieldType,
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface CreateOfficeAddressType {
+  address: AddressType;
+  onAddressChange: (
+    field: AddressFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
