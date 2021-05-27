@@ -17,6 +17,7 @@ export const EditData = ({}) => {
     type: '',
   });
   const [employeeAddress, setEmployeeAddress] = useState({
+    id: 0,
     streetAddress1: '',
     streetAddress2: '',
     city: '',
@@ -29,6 +30,7 @@ export const EditData = ({}) => {
     description: '',
   });
   const [officeAddress, setOfficeAddress] = useState({
+    id: 0,
     streetAddress1: '',
     streetAddress2: '',
     city: '',
@@ -43,6 +45,7 @@ export const EditData = ({}) => {
 
   const { firstName, lastName, mobile, email, type } = employeeData.employee!;
   const {
+    id: employeeId,
     streetAddress1: employeeStreetAddress1,
     streetAddress2: employeeStreetAddress2,
     city: employeeCity,
@@ -55,6 +58,7 @@ export const EditData = ({}) => {
     description: departmentDescription,
   } = employeeData.employee.department!;
   const {
+    id: officeId,
     streetAddress1: officeStreetAddress1,
     streetAddress2: officeStreetAddress2,
     city: officeCity,
@@ -77,6 +81,7 @@ export const EditData = ({}) => {
       type: type!,
     });
     setEmployeeAddress({
+      id: employeeId,
       streetAddress1: employeeStreetAddress1,
       streetAddress2: employeeStreetAddress2,
       city: employeeCity,
@@ -85,6 +90,7 @@ export const EditData = ({}) => {
       zipCode: employeeZipCode,
     });
     setOfficeAddress({
+      id: officeId,
       streetAddress1: officeStreetAddress1,
       streetAddress2: officeStreetAddress2,
       city: officeCity,

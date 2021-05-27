@@ -49,3 +49,24 @@ export enum CreateProjectPageText {
   PageHeaderText = 'Create Project:',
   SaveButtonText = 'Save',
 }
+
+export enum ViewOfficesPageText {
+  PageHeaderText = 'View Offices:',
+  CreateButtonText = 'Create',
+}
+
+export enum ViewOfficePageText {
+  PageHeaderText = 'View Office:',
+  EditButtonText = 'Edit',
+  EditAllButtonText = 'Edit All',
+}
+
+export enum EditOfficePageText {
+  PageHeaderText = 'Edit Office:',
+  SaveButtonText = 'Save',
+}
+
+export enum CreateOfficePageText {
+  PageHeaderText = 'Create Office:',
+  SaveButtonText = 'Save',
+}
