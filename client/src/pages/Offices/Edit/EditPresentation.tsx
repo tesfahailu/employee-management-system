@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { EditOfficePageText } from '../../../text';
-import { CreateOfficeAddressType } from '../../../types/types';
+import { EditOfficeAddressType } from '../../../types/types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,9 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
 export const EditPresentation = ({
   address,
   onAddressChange,
-  isFormComplete,
+  isFormChanged,
   saveChanges,
-}: CreateOfficeAddressType) => {
+}: EditOfficeAddressType) => {
   const classes = useStyles();
   const countries = [{ value: 'USA', text: 'USA' }];
   const states = [
@@ -58,7 +58,7 @@ export const EditPresentation = ({
           color="primary"
           variant="contained"
           className={classes.actionButtonSpacing}
-          disabled={!isFormComplete}
+          disabled={!isFormChanged}
           onClick={saveChanges}
         >
           {EditOfficePageText.SaveButtonText}

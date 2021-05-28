@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ViewOnePresentation } from '../../Projects/ViewOne/ViewOnePresentation';
 
-interface ViewOneDataProps {}
+export const ViewOneData = () => {
+  const [project, setProject] = useState({ id: 0, name: '', description: '' });
 
-export const ViewOneData: React.FC<ViewOneDataProps> = ({}) => {
-  const project = { id: 1, name: 'Amazon', description: 'Going' };
+  useEffect(() => {
+    setProject({ id: 1, name: 'Amazon', description: 'Going' });
+  }, []);
+
   return <ViewOnePresentation project={project} />;
 };

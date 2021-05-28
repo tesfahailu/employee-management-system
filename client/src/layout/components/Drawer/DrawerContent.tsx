@@ -52,7 +52,7 @@ export const DrawerContent = () => {
         ['Employees', <EmployeesIcon />, '/employees/viewAll'],
         ['Projects', <ProjectIcon />, '/projects/viewAll'],
         ['Offices', <OfficesIcon />, '/offices/viewAll'],
-        ['Departments', <DepartmentIcon />, '/departments'],
+        ['Departments', <DepartmentIcon />, '/departments/ViewAll'],
         ['Roles', <RolesIcon />, '/roles'],
         ['Settings', <SettingIcon />, '/settings'],
       ].map(([text, icon, route], index) => (

@@ -10,7 +10,8 @@ export interface EmployeeType {
 }
 
 export interface DepartmentType {
-  [index: string]: string;
+  [index: string]: number | string | undefined;
+  id?: number;
   title: string;
   description: string;
 }
@@ -198,10 +199,43 @@ export interface CreateProjectType {
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
+export interface EditOfficeAddressType {
+  address: AddressType;
+  onAddressChange: (
+    field: AddressFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
+  isFormChanged: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 export interface CreateOfficeAddressType {
   address: AddressType;
   onAddressChange: (
     field: AddressFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface EditDepartmentType {
+  department: DepartmentType;
+  onDepartmentChange: (
+    field: DepartmentFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
+  isFormChanged: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface CreateDepartmentType {
+  department: DepartmentType;
+  onDepartmentChange: (
+    field: DepartmentFieldType,
   ) => (
     event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
   ) => void;
