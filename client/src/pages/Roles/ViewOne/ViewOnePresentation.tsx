@@ -1,17 +1,17 @@
 import {
+  makeStyles,
+  createStyles,
+  Grid,
+  Typography,
   Button,
   Card,
   CardContent,
-  createStyles,
-  Grid,
-  makeStyles,
-  Typography,
 } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { addSpaceAndUpperCaseText } from '../../../helper_functions/helperFunctions';
-import { ViewProjectPageText } from '../../../text';
-import { ProjectType } from '../../../types/types';
 import { useHistory } from 'react-router';
+import { addSpaceAndUpperCaseText } from '../../../helper_functions/helperFunctions';
+import { ViewRolePageText } from '../../../text';
+import { RoleType } from '../../../types/types';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -26,11 +26,11 @@ const useStyles = makeStyles(() =>
 );
 
 interface ViewOnePresentationProps {
-  project: ProjectType;
+  role: RoleType;
 }
 
 export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
-  project,
+  role,
 }) => {
   const classes = useStyles();
   const history = useHistory();
@@ -38,25 +38,25 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
     <Fragment>
       <Grid container justify="space-between">
         <Typography variant="h5" className={classes.textSpacingBelow}>
-          {ViewProjectPageText.PageHeaderText}
+          {ViewRolePageText.PageHeaderText}
         </Typography>
         <Button
           color="primary"
           variant="contained"
           className={classes.actionButtonSpacing}
-          onClick={() => history.push(`/projects/edit/${project.id}`)}
+          onClick={() => history.push(`/roles/edit/${role.id}`)}
         >
-          {ViewProjectPageText.EditButtonText}
+          {ViewRolePageText.EditButtonText}
         </Button>
       </Grid>
       <Card>
         <CardContent>
-          {Object.keys(project).map((key) => {
+          {Object.keys(role).map((key) => {
             if (key === 'id') return;
             return (
               <CardRow
                 index={addSpaceAndUpperCaseText(key)}
-                value={project[key]}
+                value={role[key]}
               />
             );
           })}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ViewAllPresentation } from '../../Projects/ViewAll/ViewAllPresentation';
 
-export const ViewAllData: React.FC = () => {
+export const ViewAllData = () => {
   const rowsData = [
     {
       id: 1,

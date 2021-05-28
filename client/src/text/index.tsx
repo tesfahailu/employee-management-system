@@ -91,3 +91,24 @@ export enum CreateDepartmentPageText {
   PageHeaderText = 'Create Department:',
   SaveButtonText = 'Save',
 }
+
+export enum ViewRolesPageText {
+  PageHeaderText = 'View Roles:',
+  CreateButtonText = 'Create',
+}
+
+export enum ViewRolePageText {
+  PageHeaderText = 'View Role:',
+  EditButtonText = 'Edit',
+  EditAllButtonText = 'Edit All',
+}
+
+export enum EditRolePageText {
+  PageHeaderText = 'Edit Role:',
+  SaveButtonText = 'Save',
+}
+
+export enum CreateRolePageText {
+  PageHeaderText = 'Create Role:',
+  SaveButtonText = 'Save',
+}

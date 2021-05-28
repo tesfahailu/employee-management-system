@@ -53,7 +53,7 @@ export const DrawerContent = () => {
         ['Projects', <ProjectIcon />, '/projects/viewAll'],
         ['Offices', <OfficesIcon />, '/offices/viewAll'],
         ['Departments', <DepartmentIcon />, '/departments/ViewAll'],
-        ['Roles', <RolesIcon />, '/roles'],
+        ['Roles', <RolesIcon />, '/roles/viewAll'],
         ['Settings', <SettingIcon />, '/settings'],
       ].map(([text, icon, route], index) => (
         <StyledLink to={route as string}>
