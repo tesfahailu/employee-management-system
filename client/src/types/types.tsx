@@ -34,6 +34,13 @@ export interface ProjectType {
   description: string;
 }
 
+export interface RoleType {
+  [index: string]: number | string;
+  id: number;
+  name: string;
+  description: string;
+}
+
 export type EmployeeFieldType =
   | 'firstName'
   | 'lastName'
@@ -52,6 +59,7 @@ export type AddressFieldType =
   | 'zipCode';
 
 export type ProjectFieldType = 'name' | 'description';
+export type RoleFieldType = 'name' | 'description';
 
 export interface EditEmployeeType {
   employee: EmployeeType;
@@ -239,6 +247,26 @@ export interface CreateDepartmentType {
   ) => (
     event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
   ) => void;
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface EditRoleType {
+  role: RoleType;
+  onRoleChange: (
+    field: RoleFieldType,
+  ) => (
+    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  ) => void;
+  isFormChanged: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface CreateRoleType {
+  role: RoleType;
+  onRoleChange: (
+    field: RoleFieldType,
+  ) => (event: ChangeEvent<{ name?: string; value: unknown }>) => void;
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
