@@ -1,17 +1,17 @@
 import {
+  makeStyles,
+  Theme,
+  createStyles,
+  Grid,
+  Typography,
   Button,
   Card,
   CardContent,
-  createStyles,
-  Grid,
-  makeStyles,
   TextField,
-  Theme,
-  Typography,
 } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { EditProjectPageText } from '../../../text';
-import { EditProjectType } from '../../../types/types';
+import { EditDepartmentPageText } from '../../../text';
+import { EditDepartmentType } from '../../../types/types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,17 +29,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const EditPresentation = ({
-  project: { id, name, description },
-  onProjectChange,
+  department: { id, title, description },
+  onDepartmentChange,
   isFormChanged,
   saveChanges,
-}: EditProjectType) => {
+}: EditDepartmentType) => {
   const classes = useStyles();
   return (
     <Fragment>
       <Grid container justify="space-between">
         <Typography variant="h5" className={classes.header}>
-          {EditProjectPageText.PageHeaderText}
+          {EditDepartmentPageText.PageHeaderText}
         </Typography>
         <Button
           color="primary"
@@ -48,7 +48,7 @@ export const EditPresentation = ({
           disabled={!isFormChanged}
           onClick={saveChanges}
         >
-          {EditProjectPageText.SaveButtonText}
+          {EditDepartmentPageText.SaveButtonText}
         </Button>
       </Grid>
       <Card className={classes.card}>
@@ -57,10 +57,10 @@ export const EditPresentation = ({
             variant="outlined"
             margin="normal"
             fullWidth
-            key={`${id}-name`}
-            label="Name:"
-            value={name}
-            onChange={onProjectChange('name')}
+            key={`${id}-title`}
+            label="Title:"
+            value={title}
+            onChange={onDepartmentChange('title')}
             color="primary"
           />
           <TextField
@@ -70,7 +70,7 @@ export const EditPresentation = ({
             key={`${id}-description`}
             label="Description:"
             value={description}
-            onChange={onProjectChange('description')}
+            onChange={onDepartmentChange('description')}
             color="primary"
           />
         </CardContent>

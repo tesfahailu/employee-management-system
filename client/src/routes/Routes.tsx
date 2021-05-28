@@ -18,9 +18,13 @@ import { ViewOneData as OfficesViewOne } from '../pages/Offices/ViewOne/ViewOneD
 import { EditData as OfficesEdit } from '../pages/Offices/Edit/EditData';
 import { CreateData as OfficesCreate } from '../pages/Offices/Create/CreateData';
 
+import { ViewAllData as DepartmentsViewAll } from '../pages/Departments/ViewAll/ViewAllData';
+import { ViewOneData as DepartmentsViewOne } from '../pages/Departments/ViewOne/ViewOneData';
+import { EditData as DepartmentsEdit } from '../pages/Departments/Edit/EditData';
+import { CreateData as DepartmentsCreate } from '../pages/Departments/Create/CreateData';
+
 import { User } from '../pages/User';
 import { Settings } from '../pages/Settings';
-import { Departments } from '../pages/Departments';
 import { Roles } from '../pages/Roles';
 import { Register } from '../pages/Register';
 import { Login } from '../pages/Login';
@@ -57,7 +61,15 @@ export const PageRoutes: React.FC = () => {
       <Route path="/offices/edit/:id" component={OfficesEdit} />
       <Route path="/offices/create" component={OfficesCreate} />
 
-      <Route exact path="/departments" component={Departments} />
+      <Route exact path="/departments/viewAll" component={DepartmentsViewAll} />
+      <Route
+        exact
+        path="/departments/viewOne/:id"
+        component={DepartmentsViewOne}
+      />
+      <Route exact path="/departments/edit/:id" component={DepartmentsEdit} />
+      <Route exact path="/departments/create" component={DepartmentsCreate} />
+
       <Route exact path="/roles" component={Roles} />
       <Route exact path="/settings" component={Settings} />
     </Switch>

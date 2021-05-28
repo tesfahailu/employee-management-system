@@ -23,7 +23,7 @@ export const EditData = () => {
     });
   }, []);
 
-  const [isFormComplete, setIsFormComplete] = useState(false);
+  const [isFormChanged, setIsFormChanged] = useState(false);
 
   const onAddressChange = (field: AddressFieldType) => {
     return (
@@ -40,12 +40,12 @@ export const EditData = () => {
 
   const saveChanges = () => {
     console.log('Saved changes');
-    setIsFormComplete(false);
+    setIsFormChanged(false);
   };
   return (
     <EditPresentation
       address={address}
-      isFormComplete={isFormComplete}
+      isFormChanged={isFormChanged}
       onAddressChange={onAddressChange}
       saveChanges={saveChanges}
     />

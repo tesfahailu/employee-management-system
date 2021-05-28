@@ -70,3 +70,24 @@ export enum CreateOfficePageText {
   PageHeaderText = 'Create Office:',
   SaveButtonText = 'Save',
 }
+
+export enum ViewDepartmentsPageText {
+  PageHeaderText = 'View Departments:',
+  CreateButtonText = 'Create',
+}
+
+export enum ViewDepartmentPageText {
+  PageHeaderText = 'View Department:',
+  EditButtonText = 'Edit',
+  EditAllButtonText = 'Edit All',
+}
+
+export enum EditDepartmentPageText {
+  PageHeaderText = 'Edit Department:',
+  SaveButtonText = 'Save',
+}
+
+export enum CreateDepartmentPageText {
+  PageHeaderText = 'Create Department:',
+  SaveButtonText = 'Save',
+}

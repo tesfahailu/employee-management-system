@@ -10,8 +10,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { EditProjectPageText } from '../../../text';
-import { EditProjectType } from '../../../types/types';
+import { CreateDepartmentPageText } from '../../../text';
+import { CreateDepartmentType } from '../../../types/types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,27 +28,27 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const EditPresentation = ({
-  project: { id, name, description },
-  onProjectChange,
-  isFormChanged,
+export const CreatePresentation = ({
+  department: { id, title, description },
+  onDepartmentChange,
+  isFormComplete,
   saveChanges,
-}: EditProjectType) => {
+}: CreateDepartmentType) => {
   const classes = useStyles();
   return (
     <Fragment>
       <Grid container justify="space-between">
         <Typography variant="h5" className={classes.header}>
-          {EditProjectPageText.PageHeaderText}
+          {CreateDepartmentPageText.PageHeaderText}
         </Typography>
         <Button
           color="primary"
           variant="contained"
           className={classes.actionButtonSpacing}
-          disabled={!isFormChanged}
+          disabled={!isFormComplete}
           onClick={saveChanges}
         >
-          {EditProjectPageText.SaveButtonText}
+          {CreateDepartmentPageText.SaveButtonText}
         </Button>
       </Grid>
       <Card className={classes.card}>
@@ -58,9 +58,9 @@ export const EditPresentation = ({
             margin="normal"
             fullWidth
             key={`${id}-name`}
-            label="Name:"
-            value={name}
-            onChange={onProjectChange('name')}
+            label="Title:"
+            value={title}
+            onChange={onDepartmentChange('title')}
             color="primary"
           />
           <TextField
@@ -70,7 +70,7 @@ export const EditPresentation = ({
             key={`${id}-description`}
             label="Description:"
             value={description}
-            onChange={onProjectChange('description')}
+            onChange={onDepartmentChange('description')}
             color="primary"
           />
         </CardContent>
