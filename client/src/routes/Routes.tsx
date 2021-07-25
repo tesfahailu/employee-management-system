@@ -29,7 +29,7 @@ import { EditData as RolesEdit } from '../pages/Roles/Edit/EditData';
 import { CreateData as RolesCreate } from '../pages/Roles/Create/CreateData';
 
 import { User } from '../pages/User';
-import { Settings } from '../pages/Settings';
+import { SettingsData as Settings } from '../pages/Settings/SettingsData';
 import { Register } from '../pages/Register';
 import { Login } from '../pages/Login';
 
