@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  Drawer as MaterialDrawer,
-  Hidden,
-  useTheme,
-  makeStyles,
-  Theme,
-  createStyles,
-} from '@material-ui/core';
+import { Drawer as MaterialDrawer, Hidden, useTheme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import { DrawerContent } from './DrawerContent';
 
 interface StyleProps {

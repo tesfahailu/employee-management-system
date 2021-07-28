@@ -1,7 +1,4 @@
 import {
-  makeStyles,
-  Theme,
-  createStyles,
   Grid,
   Typography,
   Button,
@@ -9,6 +6,8 @@ import {
   CardContent,
   TextField,
 } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { CreateRolePageText } from '../../../text';
 import { CreateRoleType } from '../../../types/types';
@@ -38,7 +37,7 @@ export const CreatePresentation = ({
 
   return (
     <Fragment>
-      <Grid container justify="space-between">
+      <Grid container justifyContent="space-between">
         <Typography variant="h5" className={classes.header}>
           {CreateRolePageText.PageHeaderText}
         </Typography>

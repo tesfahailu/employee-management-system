@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import {
   AddressFieldType,
@@ -53,10 +54,8 @@ export const EditData = ({}) => {
     country: employeeCountry,
     zipCode: employeeZipCode,
   } = employeeData.employee.employeeAddress!;
-  const {
-    title: departmentTitle,
-    description: departmentDescription,
-  } = employeeData.employee.department!;
+  const { title: departmentTitle, description: departmentDescription } =
+    employeeData.employee.department!;
   const {
     id: officeId,
     streetAddress1: officeStreetAddress1,
@@ -105,29 +104,33 @@ export const EditData = ({}) => {
     setProjects(remoteProjectData);
   }, []);
 
-  const onEmployeeInfoChange = (field: EmployeeFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  const onEmployeeInfoChange =
+    (field: EmployeeFieldType) =>
+    (
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setIsFormChanged(true);
       setEmployee((previousEmployee) => {
         return {
           ...previousEmployee,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
-  };
 
   const onEmployeeAddressChange = (field: AddressFieldType) => {
     return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setIsFormChanged(true);
       setEmployeeAddress((previousAddress) => {
         return {
           ...previousAddress,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
@@ -135,13 +138,15 @@ export const EditData = ({}) => {
 
   const onDepartmentChange = (field: DepartmentFieldType) => {
     return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setIsFormChanged(true);
       setDepartment((previousDepartment) => {
         return {
           ...previousDepartment,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
@@ -149,13 +154,15 @@ export const EditData = ({}) => {
 
   const onOfficeAddressChange = (field: AddressFieldType) => {
     return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setIsFormChanged(true);
       setOfficeAddress((previousAddress) => {
         return {
           ...previousAddress,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };

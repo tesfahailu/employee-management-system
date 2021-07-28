@@ -1,6 +1,8 @@
-import { Typography, makeStyles } from '@material-ui/core';
-import { Share } from '@material-ui/icons';
 import React from 'react';
+import { Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
+import { Share } from '@material-ui/icons';
 
 type StyleTextProp = {
   children?: React.ReactNode;
@@ -16,14 +18,16 @@ type StyleTextProp = {
     | undefined;
 };
 
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(0.5),
-  },
-  secondRow: {
-    marginLeft: theme.spacing(1),
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    icon: {
+      marginRight: theme.spacing(0.5),
+    },
+    secondRow: {
+      marginLeft: theme.spacing(1),
+    },
+  }),
+);
 
 const StyleText = ({ children, color, userClassName }: StyleTextProp) => {
   return (

@@ -1,15 +1,14 @@
+import React, { Fragment } from 'react';
 import {
   Button,
   Card,
   CardContent,
-  createStyles,
   Grid,
-  makeStyles,
   TextField,
-  Theme,
   Typography,
 } from '@material-ui/core';
-import React, { Fragment } from 'react';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import { CreateDepartmentPageText } from '../../../text';
 import { CreateDepartmentType } from '../../../types/types';
 
@@ -37,7 +36,7 @@ export const CreatePresentation = ({
   const classes = useStyles();
   return (
     <Fragment>
-      <Grid container justify="space-between">
+      <Grid container justifyContent="space-between">
         <Typography variant="h5" className={classes.header}>
           {CreateDepartmentPageText.PageHeaderText}
         </Typography>

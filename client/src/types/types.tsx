@@ -1,4 +1,5 @@
-import { ChangeEvent } from 'react';
+import { SelectChangeEvent } from '@material-ui/core';
+import { ChangeEvent, ChangeEventHandler } from 'react';
 
 export interface EmployeeType {
   [index: string]: string | undefined;
@@ -66,28 +67,36 @@ export interface EditEmployeeType {
   onEmployeeInfoChange: (
     field: EmployeeFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
   employeeAddress: AddressType;
   onEmployeeAddressChange: (
     field: AddressFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
   department: DepartmentType;
   onDepartmentChange: (
     field: DepartmentFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
   officeAddress: AddressType;
   onOfficeAddressChange: (
     field: AddressFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
   projects: Array<ProjectType>;
@@ -105,7 +114,9 @@ export interface EditEmployeeInfoType {
   onEmployeeInfoChange: (
     field: EmployeeFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 }
 
@@ -114,7 +125,9 @@ export interface EditEmployeeDepartmentType {
   onDepartmentChange: (
     field: DepartmentFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 }
 
@@ -123,7 +136,9 @@ export interface EditAddressType {
   onAddressChange: (
     field: AddressFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 }
 
@@ -155,28 +170,36 @@ export interface CreateEmployeeType {
   onEmployeeInfoChange: (
     field: EmployeeFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
   employeeAddress: AddressType;
   onEmployeeAddressChange: (
     field: AddressFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
   department: DepartmentType;
   onDepartmentChange: (
     field: DepartmentFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
   officeAddress: AddressType;
   onOfficeAddressChange: (
     field: AddressFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
   projects: Array<ProjectType>;
@@ -212,7 +235,9 @@ export interface EditOfficeAddressType {
   onAddressChange: (
     field: AddressFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
@@ -223,7 +248,9 @@ export interface CreateOfficeAddressType {
   onAddressChange: (
     field: AddressFieldType,
   ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
@@ -233,9 +260,7 @@ export interface EditDepartmentType {
   department: DepartmentType;
   onDepartmentChange: (
     field: DepartmentFieldType,
-  ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
-  ) => void;
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -244,9 +269,7 @@ export interface CreateDepartmentType {
   department: DepartmentType;
   onDepartmentChange: (
     field: DepartmentFieldType,
-  ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
-  ) => void;
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -255,9 +278,7 @@ export interface EditRoleType {
   role: RoleType;
   onRoleChange: (
     field: RoleFieldType,
-  ) => (
-    event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
-  ) => void;
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -266,7 +287,7 @@ export interface CreateRoleType {
   role: RoleType;
   onRoleChange: (
     field: RoleFieldType,
-  ) => (event: ChangeEvent<{ name?: string; value: unknown }>) => void;
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }

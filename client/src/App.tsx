@@ -3,14 +3,13 @@ import { ToggleThemeContext, useDarkMode } from './components/Theme';
 import { setAccessToken } from './services/session/accessToken';
 import { GeneralRoutes } from './routes/Routes';
 import './App.css';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 
-interface AppProps {}
-
-export const App: React.FC<AppProps> = ({}) => {
+export const App: React.FC = ({}) => {
   const [theme, toggleDarkMode] = useDarkMode();
 
-  const themeConfig = createMuiTheme(theme, toggleDarkMode);
+  const themeConfig = createTheme(theme);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,10 +25,11 @@ export const App: React.FC<AppProps> = ({}) => {
 
   if (loading) return <div>loading...</div>;
   return (
-    <MuiThemeProvider theme={themeConfig}>
+    <ThemeProvider theme={themeConfig}>
       <ToggleThemeContext.Provider value={toggleDarkMode}>
+        <CssBaseline />
         <GeneralRoutes />
       </ToggleThemeContext.Provider>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 };

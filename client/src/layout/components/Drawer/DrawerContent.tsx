@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
-import {
-  Avatar,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from '@material-ui/core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import { StyledLogo } from './../../../components/Logo';
 import {
   Face as EmployeesIcon,
@@ -21,13 +16,11 @@ import { Link, useLocation } from 'react-router-dom';
 
 export const DrawerContent = () => {
   const [selectedRoute, setSelectedRoute] = React.useState('');
-
   const location = useLocation();
 
   useEffect(() => {
     const pathname = location.pathname;
     const route = pathname.split('/');
-    console.log(route);
     setSelectedRoute(route[1]);
   }, [location]);
 
@@ -89,9 +82,6 @@ export const StyledLink = ({
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    icon: {
-      marginRight: 10,
-    },
     link: {
       textDecoration: 'none',
       color: `${theme.palette.text.primary}`,

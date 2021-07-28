@@ -1,17 +1,16 @@
 import {
-  Button,
   Card,
   CardContent,
   CardHeader,
-  createStyles,
   FormControl,
   InputLabel,
-  makeStyles,
   Select,
+  SelectChangeEvent,
   TextField,
-  Theme,
   Typography,
 } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { EditEmployeePageText } from '../../../text';
 import { EditEmployeeInfoType } from '../../../types/types';

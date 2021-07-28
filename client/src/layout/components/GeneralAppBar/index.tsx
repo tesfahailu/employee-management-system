@@ -1,13 +1,5 @@
 import React, { Fragment } from 'react';
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-} from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import {
   ArrowBack as ArrowBackIcon,
   ArrowForward as ArrowForwardIcon,

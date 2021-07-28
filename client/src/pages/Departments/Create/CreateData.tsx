@@ -12,9 +12,7 @@ export const CreateData = ({}) => {
   const saveChanges = () => console.log('save changes');
 
   const onDepartmentChange = (field: DepartmentFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
-    ) => {
+    return (event: ChangeEvent<HTMLInputElement>) => {
       setDepartment((previousDepartment) => {
         return {
           ...previousDepartment,

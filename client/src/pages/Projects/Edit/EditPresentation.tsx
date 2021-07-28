@@ -2,13 +2,12 @@ import {
   Button,
   Card,
   CardContent,
-  createStyles,
   Grid,
-  makeStyles,
   TextField,
-  Theme,
   Typography,
 } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { EditProjectPageText } from '../../../text';
 import { EditProjectType } from '../../../types/types';
@@ -37,7 +36,7 @@ export const EditPresentation = ({
   const classes = useStyles();
   return (
     <Fragment>
-      <Grid container justify="space-between">
+      <Grid container justifyContent="space-between">
         <Typography variant="h5" className={classes.header}>
           {EditProjectPageText.PageHeaderText}
         </Typography>

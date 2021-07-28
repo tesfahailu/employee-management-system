@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AddressFieldType } from '../../../types/types';
 import { EditPresentation } from './EditPresentation';
@@ -25,18 +26,20 @@ export const EditData = () => {
 
   const [isFormChanged, setIsFormChanged] = useState(false);
 
-  const onAddressChange = (field: AddressFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  const onAddressChange =
+    (field: AddressFieldType) =>
+    (
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setAddress((previousAddress) => {
         return {
           ...previousAddress,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
-  };
 
   const saveChanges = () => {
     console.log('Saved changes');

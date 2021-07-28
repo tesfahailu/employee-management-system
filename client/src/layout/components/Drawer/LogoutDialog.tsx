@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import {
   Button,
   Dialog,
@@ -9,7 +10,6 @@ import {
   IconButton,
   Typography,
   ListItemText,
-  TextField,
   ListItem,
   ListItemIcon,
 } from '@material-ui/core';
@@ -64,7 +64,7 @@ const DialogTitle = (props: DialogTitleProps) => {
   const { children, onClose, ...other } = props;
   const classes = useStyles();
   return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+    <MuiDialogTitle className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton

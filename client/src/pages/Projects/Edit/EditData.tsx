@@ -15,14 +15,13 @@ export const EditData = ({}) => {
     setProject(dataProject);
   }, []);
 
-  const onProjectChange = (field: ProjectFieldType) => {
-    return (event: ChangeEvent<HTMLInputElement>) => {
+  const onProjectChange =
+    (field: ProjectFieldType) => (event: ChangeEvent<HTMLInputElement>) => {
       setIsFormChanged(true);
       setProject((previousProject) => {
         return { ...previousProject, [field]: event.target.value };
       });
     };
-  };
 
   const saveChanges = () => {
     console.log('Saved changes');
