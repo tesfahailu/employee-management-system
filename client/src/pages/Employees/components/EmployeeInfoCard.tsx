@@ -77,27 +77,29 @@ export const EmployeeInfoCard = ({
           onChange={onEmployeeInfoChange('email')}
           color="primary"
         />
-        <FormControl
-          variant="outlined"
-          className={classes.formControl}
-          fullWidth
-        >
-          <InputLabel htmlFor="outlined-type-native-simple">Type:</InputLabel>
-          <Select
-            native
-            value={employee!.type}
-            onChange={onEmployeeInfoChange('type')}
-            label="Type"
-            inputProps={{
-              name: 'type',
-              id: 'outlined-type-native-simple',
-            }}
+        {employee.type && (
+          <FormControl
+            variant="outlined"
+            className={classes.formControl}
+            fullWidth
           >
-            {types.map(({ value, text }) => (
-              <option value={value}>{text}</option>
-            ))}
-          </Select>
-        </FormControl>
+            <InputLabel htmlFor="outlined-type-native-simple">Type:</InputLabel>
+            <Select
+              native
+              value={employee.type}
+              onChange={onEmployeeInfoChange('type')}
+              label="Type"
+              inputProps={{
+                name: 'type',
+                id: 'outlined-type-native-simple',
+              }}
+            >
+              {types.map(({ value, text }) => (
+                <option value={value}>{text}</option>
+              ))}
+            </Select>
+          </FormControl>
+        )}
       </CardContent>
     </Card>
   );

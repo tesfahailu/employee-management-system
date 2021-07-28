@@ -1,12 +1,12 @@
 import { ChangeEvent } from 'react';
 
 export interface EmployeeType {
-  [index: string]: string;
+  [index: string]: string | undefined;
   firstName: string;
   lastName: string;
   mobile: string;
   email: string;
-  type: string;
+  type?: string;
 }
 
 export interface DepartmentType {
