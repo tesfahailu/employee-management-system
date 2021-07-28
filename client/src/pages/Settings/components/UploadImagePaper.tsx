@@ -5,16 +5,9 @@ import React, {
   useCallback,
   Fragment,
 } from 'react';
-import {
-  Avatar,
-  Button,
-  createStyles,
-  Grid,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { Avatar, Button, Grid, Paper, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import UploadButton from './UploadButton';
@@ -54,7 +47,7 @@ const UploadImage = ({
       <Grid
         container
         direction="column"
-        justify="flex-end"
+        justifyContent="flex-end"
         alignItems="center"
         spacing={1}
       >

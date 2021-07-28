@@ -1,8 +1,11 @@
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { UserInfoPaper } from './components/UserInfoPaper';
 import { UploadImagePaper } from './components/UploadImagePaper';
 import { ToggleDarkMode } from './components/ToggleDarkMode';
+import ColorTool from './components/ColorTool';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +26,7 @@ export const SettingsPresentation = () => {
       <UploadImagePaper />
       <UserInfoPaper />
       <ToggleDarkMode />
+      <ColorTool />
     </Fragment>
   );
 };

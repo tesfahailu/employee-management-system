@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { ChangeEvent } from 'react';
 
