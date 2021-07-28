@@ -8,7 +8,6 @@ import { CssBaseline } from '@material-ui/core';
 
 export const App: React.FC = ({}) => {
   const [theme, toggleDarkMode] = useDarkMode();
-
   const themeConfig = createTheme(theme);
   const [loading, setLoading] = useState(true);
 
