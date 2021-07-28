@@ -1,4 +1,4 @@
-import { createMuiTheme, ThemeOptions } from '@material-ui/core';
+import { ThemeOptions } from '@material-ui/core';
 import React from 'react';
 import { Context } from 'react';
 import { MouseEventHandler, useState } from 'react';
@@ -10,7 +10,7 @@ export const themeObject: ThemeOptions = {
   palette: {
     primary: { main: '#00838f' },
     secondary: { main: '#8f2600' },
-    type: 'light',
+    mode: 'light',
   },
 };
 
@@ -20,14 +20,14 @@ export const useDarkMode: () => [
 ] = () => {
   const [theme, setTheme] = useState<ThemeOptions>(themeObject);
 
-  const { palette: { type } = {} } = theme;
+  const { palette: { mode } = {} } = theme;
 
   const toggleDarkMode = () => {
     const updatedTheme: ThemeOptions = {
       ...theme,
       palette: {
         ...theme.palette,
-        type: type === 'light' ? 'dark' : 'light',
+        mode: mode === 'light' ? 'dark' : 'light',
       },
     };
     setTheme(updatedTheme);

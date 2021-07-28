@@ -4,24 +4,21 @@ import {
   Card,
   CardContent,
   CardHeader,
-  createStyles,
-  makeStyles,
   Typography,
 } from '@material-ui/core';
 import { addSpaceAndUpperCaseText } from '../helper_functions/helperFunctions';
 import { FormattedCardProp } from '../types/types';
+import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    textSpacingBelow: {
-      marginBottom: '0.5REM',
-    },
-    cardSpacing: {
-      marginBottom: '1REM',
-    },
-    removeContentTopPaddding: { paddingTop: 0 },
-  }),
-);
+const useStyles = makeStyles({
+  textSpacingBelow: {
+    marginBottom: '0.5REM',
+  },
+  cardSpacing: {
+    marginBottom: '1REM',
+  },
+  removeContentTopPaddding: { paddingTop: 0 },
+});
 
 export const FormattedCard = ({
   cardHeaderText,

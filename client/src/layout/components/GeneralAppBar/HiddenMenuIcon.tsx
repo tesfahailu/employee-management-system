@@ -1,5 +1,7 @@
 import React from 'react';
-import { IconButton, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
 export const HiddenMenuIcon = ({

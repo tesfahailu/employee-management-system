@@ -15,13 +15,13 @@ export const EditData = () => {
     setRole(dataRole);
   }, []);
 
-  const onRoleChange = (field: RoleFieldType) => {
-    return (event: ChangeEvent<{ name?: string; value: unknown }>) => {
+  const onRoleChange =
+    (field: RoleFieldType) =>
+    (event: ChangeEvent<{ name?: string; value: unknown }>) => {
       setRole((previousRole) => {
         return { ...previousRole, [field]: event.target.value };
       });
     };
-  };
 
   const saveChanges = () => {
     console.log('Saved changes');

@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useState } from 'react';
 import { AddressFieldType } from '../../../types/types';
 import { CreatePresentation } from './CreatePresentation';
@@ -13,18 +14,20 @@ export const CreateData = ({}) => {
   });
   const [isFormComplete, setIsFormComplete] = useState(false);
 
-  const onAddressChange = (field: AddressFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  const onAddressChange =
+    (field: AddressFieldType) =>
+    (
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setAddress((previousAddress) => {
         return {
           ...previousAddress,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
-  };
 
   const saveChanges = () => {
     console.log('Saved changes');

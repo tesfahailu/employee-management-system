@@ -1,13 +1,8 @@
-import {
-  Button,
-  createStyles,
-  Grid,
-  makeStyles,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
-import { CreateEmployeePageText, EditEmployeePageText } from '../../../text';
+import { CreateEmployeePageText } from '../../../text';
 import { CreateEmployeeType } from '../../../types/types';
 import { DepartmentCard } from '../components/DepartmentCard';
 import { EmployeeAddressCard } from '../components/EmployeeAddressCard';

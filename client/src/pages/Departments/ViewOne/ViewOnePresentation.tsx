@@ -1,29 +1,20 @@
-import {
-  makeStyles,
-  createStyles,
-  Grid,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-} from '@material-ui/core';
+import { Grid, Typography, Button, Card, CardContent } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
 import { addSpaceAndUpperCaseText } from '../../../helper_functions/helperFunctions';
 import { ViewDepartmentPageText } from '../../../text';
 import { DepartmentType } from '../../../types/types';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    textSpacingBelow: {
-      marginBottom: '0.5REM',
-    },
-    actionButtonSpacing: {
-      marginRight: '0.5REM',
-      marginBottom: '0.5REM',
-    },
-  }),
-);
+const useStyles = makeStyles({
+  textSpacingBelow: {
+    marginBottom: '0.5REM',
+  },
+  actionButtonSpacing: {
+    marginRight: '0.5REM',
+    marginBottom: '0.5REM',
+  },
+});
 
 interface ViewOnePresentationProps {
   department: DepartmentType;
@@ -36,7 +27,7 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
   const history = useHistory();
   return (
     <Fragment>
-      <Grid container justify="space-between">
+      <Grid container justifyContent="space-between">
         <Typography variant="h5" className={classes.textSpacingBelow}>
           {ViewDepartmentPageText.PageHeaderText}
         </Typography>

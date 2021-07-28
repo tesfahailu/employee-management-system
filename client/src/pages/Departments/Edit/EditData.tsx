@@ -21,9 +21,7 @@ export const EditData: React.FC<EditDataProps> = ({}) => {
   }, []);
 
   const onDepartmentChange = (field: DepartmentFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
-    ) => {
+    return (event: ChangeEvent<HTMLInputElement>) => {
       setIsFormChanged(true);
       setDepartment((previousDepartment) => {
         return { ...previousDepartment, [field]: event.target.value };

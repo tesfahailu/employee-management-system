@@ -1,11 +1,6 @@
-import {
-  Button,
-  createStyles,
-  Grid,
-  makeStyles,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { EditEmployeePageText } from '../../../text';
 import { EditEmployeeType } from '../../../types/types';
@@ -32,7 +27,7 @@ export const EditPresentation = ({
   const classes = useStyles();
   return (
     <Fragment>
-      <Grid container justify="space-between">
+      <Grid container justifyContent="space-between">
         <Typography variant="h5" className={classes.header}>
           {EditEmployeePageText.PageHeaderText}
         </Typography>

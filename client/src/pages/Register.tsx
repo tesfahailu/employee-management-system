@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Typography,
   Link,
-  makeStyles,
   Container,
   Grid,
   TextField,
@@ -10,29 +9,33 @@ import {
   Box,
   Card,
 } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import { StyledLogo } from '../components/Logo';
 import { CopyRight } from '../components/CopyRight';
 import { RouteComponentProps } from 'react-router-dom';
 import { MeDocument, MeQuery, useRegisterMutation } from '../generated/graphql';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: 100,
-  },
-  card: {
-    padding: theme.spacing(3),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      marginTop: 100,
+    },
+    card: {
+      padding: theme.spacing(3),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    form: {
+      width: '100%',
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }),
+);
 
 enum ErrorMessage {
   UsernameTooShort = 'username must be greater than 5 characters.',

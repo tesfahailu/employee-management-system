@@ -2,11 +2,10 @@ import {
   Card,
   CardContent,
   CardHeader,
-  createStyles,
-  makeStyles,
   TextField,
   Typography,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 import { EditEmployeePageText } from '../../../text';
 import { EditProjectsType } from '../../../types/types';
@@ -57,10 +56,8 @@ export const ProjectsCard = ({
   );
 };
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    card: {
-      marginBottom: '1REM',
-    },
-  }),
-);
+const useStyles = makeStyles({
+  card: {
+    marginBottom: '1REM',
+  },
+});

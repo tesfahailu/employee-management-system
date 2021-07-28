@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useState } from 'react';
 import {
   AddressFieldType,
@@ -42,60 +43,69 @@ export const CreateData = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
   const saveChanges = () => console.log('save changes');
 
-  const onEmployeeInfoChange = (field: EmployeeFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  const onEmployeeInfoChange =
+    (field: EmployeeFieldType) =>
+    (
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setEmployee((previousEmployee) => {
         return {
           ...previousEmployee,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
-  };
 
-  const onEmployeeAddressChange = (field: AddressFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  const onEmployeeAddressChange =
+    (field: AddressFieldType) =>
+    (
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setEmployeeAddress((previousAddress) => {
         return {
           ...previousAddress,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
-  };
 
-  const onDepartmentChange = (field: DepartmentFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  const onDepartmentChange =
+    (field: DepartmentFieldType) =>
+    (
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setDepartment((previousDepartment) => {
         return {
           ...previousDepartment,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
-  };
 
-  const onOfficeAddressChange = (field: AddressFieldType) => {
-    return (
-      event: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>,
+  const onOfficeAddressChange =
+    (field: AddressFieldType) =>
+    (
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
     ) => {
       setOfficeAddress((previousAddress) => {
         return {
           ...previousAddress,
-          [field]: event.target.value,
+          [field]: event.target!.value,
         };
       });
     };
-  };
 
-  const onProjectChange = (id: number, field: ProjectFieldType) => {
-    return (event: ChangeEvent<HTMLInputElement>) => {
+  const onProjectChange =
+    (id: number, field: ProjectFieldType) =>
+    (event: ChangeEvent<HTMLInputElement>) => {
       setProjects((previousProjects) => {
         const foundProject = previousProjects.find(
           (project) => project.id === id,
@@ -104,7 +114,6 @@ export const CreateData = () => {
         return [...previousProjects];
       });
     };
-  };
   return (
     <CreatePresentation
       employee={employee}

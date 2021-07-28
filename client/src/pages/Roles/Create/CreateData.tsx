@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useState } from 'react';
 import { RoleFieldType } from '../../../types/types';
 import { CreatePresentation } from './CreatePresentation';
@@ -10,13 +11,17 @@ export const CreateData = () => {
   });
   const [isFormComplete, setIsFormComplete] = useState(false);
 
-  const onRoleChange = (field: RoleFieldType) => {
-    return (event: ChangeEvent<{ name?: string; value: unknown }>) => {
+  const onRoleChange =
+    (field: RoleFieldType) =>
+    (
+      event:
+        | SelectChangeEvent
+        | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
       setRole((previousRole) => {
         return { ...previousRole, [field]: event.target.value };
       });
     };
-  };
 
   const saveChanges = () => {
     console.log('Saved changes');

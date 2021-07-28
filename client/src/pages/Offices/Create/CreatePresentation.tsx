@@ -1,7 +1,4 @@
 import {
-  makeStyles,
-  Theme,
-  createStyles,
   Card,
   Typography,
   CardContent,
@@ -11,7 +8,10 @@ import {
   Select,
   Button,
   Grid,
+  SelectChangeEvent,
 } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { CreateOfficePageText } from '../../../text';
 import { CreateOfficeAddressType } from '../../../types/types';
@@ -50,7 +50,7 @@ export const CreatePresentation = ({
 
   return (
     <Fragment>
-      <Grid container justify="space-between">
+      <Grid container justifyContent="space-between">
         <Typography variant="h5" className={classes.header}>
           {CreateOfficePageText.PageHeaderText}
         </Typography>

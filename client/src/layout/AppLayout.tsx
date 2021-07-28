@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import { Drawer } from './components/Drawer';
 import { GeneralAppBar } from './components/GeneralAppBar';
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export function AppLayout({ children, drawerWidth }: Props) {
-  const classes = useStyles(drawerWidth);
+  const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -38,18 +39,16 @@ export function AppLayout({ children, drawerWidth }: Props) {
   );
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      height: '100vh',
-    },
-    mainWrapper: {
-      overflowY: 'auto',
-    },
-    main: {
-      height: '100%',
-      overflowY: 'auto',
-      padding: theme.spacing(2),
-    },
-  }),
-);
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    height: '100vh',
+  },
+  mainWrapper: {
+    overflowY: 'auto',
+  },
+  main: {
+    height: '100%',
+    overflowY: 'auto',
+    padding: theme.spacing(2),
+  },
+}));

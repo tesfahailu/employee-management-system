@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Typography,
   Link,
-  makeStyles,
   Container,
   TextField,
   Button,
@@ -10,32 +9,36 @@ import {
   Box,
   Card,
   Snackbar,
+  Alert,
 } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import { StyledLogo } from '../components/Logo';
 import { CopyRight } from '../components/CopyRight';
 import { MeDocument, MeQuery, useLoginMutation } from '../generated/graphql';
 import { setAccessToken } from '../services/session/accessToken';
 import { RouteComponentProps } from 'react-router';
-import { Alert } from '@material-ui/lab';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: 100,
-  },
-  card: {
-    padding: theme.spacing(3),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      marginTop: 100,
+    },
+    card: {
+      padding: theme.spacing(3),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    form: {
+      width: '100%',
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }),
+);
 
 enum ErrorMessage {
   UsernameEmpty = 'username required.',

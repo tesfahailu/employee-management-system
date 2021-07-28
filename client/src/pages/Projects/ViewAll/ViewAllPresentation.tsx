@@ -1,12 +1,6 @@
-import {
-  Button,
-  createStyles,
-  Grid,
-  IconButton,
-  makeStyles,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { Button, Grid, IconButton, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
@@ -22,7 +16,7 @@ import { ProjectType } from '../../../types/types';
 const renderDetailsButton = (id: number | string) => {
   const history = useHistory();
   return (
-    <Grid container justify="center" wrap="nowrap">
+    <Grid container justifyContent="center" wrap="nowrap">
       <Grid item xs>
         <IconButton
           color="primary"
@@ -55,7 +49,7 @@ const columns: GridColDef[] = [
     field: '',
     headerName: 'Actions',
     sortable: false,
-    disableClickEventBubbling: true,
+    // disableClickEventBubbling: true,
     renderCell: (params: GridCellParams) => renderDetailsButton(params.id),
     width: 200,
   },
@@ -96,11 +90,11 @@ export const ViewAllPresentation: React.FC<ProjectsProps> = ({ rowsData }) => {
     <Fragment>
       <Grid
         container
-        justify="space-between"
+        justifyContent="space-between"
         direction="column"
         className={classes.fullParentContainer}
       >
-        <Grid container justify="space-between">
+        <Grid container justifyContent="space-between">
           <Typography variant="h5" className={classes.header}>
             {ViewProjectsPageText.PageHeaderText}
           </Typography>
