@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { rgbToHex, useTheme } from '@material-ui/core/styles';
 import * as colors from '@material-ui/core/colors';
 import Box from '@material-ui/core/Box';
@@ -11,20 +10,17 @@ import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
 import Slider from '@material-ui/core/Slider';
 import { capitalize } from '@material-ui/core/utils';
+import { DispatchContext } from '../../../components/Theme';
 import { PaletteAugmentColorOptions } from '@material-ui/core/styles/createPalette';
+import { Button } from '@material-ui/core';
 
 const defaults = {
   primary: '#2196f3',
   secondary: '#f50057',
 };
 
-const hues = (Object.keys(colors) as Array<keyof typeof colors>).slice(1, 17);
-const shade = Object.keys(
-  (Object.keys(colors) as Array<keyof typeof colors>)
-    .map((key) => colors[key])
-    .slice(1, 17),
-);
-
+type hue = keyof typeof colors;
+const hues = (Object.keys(colors) as Array<hue>).slice(1, 17);
 const shades = [
   900,
   800,
@@ -40,54 +36,35 @@ const shades = [
   'A400',
   'A200',
   'A100',
-];
+] as const;
 
-interface TooltipRadioType {
-  'aria-label': string | undefined;
-  'aria-labelledby': string | undefined;
-  inputProps: object;
-  sx: object;
-}
+const TooltipRadio = React.forwardRef<HTMLButtonElement, RadioProps>(
+  function TooltipRadio(props, ref) {
+    const {
+      'aria-labelledby': ariaLabelledBy,
+      'aria-label': ariaLabel,
+      inputProps,
+      ...other
+    } = props;
 
-const TooltipRadio = React.forwardRef(function TooltipRadio(
-  props: RadioProps,
-  ref: any,
-) {
-  const {
-    'aria-labelledby': ariaLabelledBy,
-    'aria-label': ariaLabel,
-    inputProps,
-    ...other
-  } = props;
-
-  return (
-    <Radio
-      ref={ref}
-      {...other}
-      inputProps={{
-        ...inputProps,
-        'aria-labelledby': ariaLabelledBy,
-        'aria-label': ariaLabel,
-      }}
-    />
-  );
-});
-
-interface StateProp {
-  [index: string]: string | number;
-  primary: string;
-  secondary: string;
-  primaryInput: string;
-  secondaryInput: string;
-  primaryHue: 'blue';
-  secondaryHue: 'pink';
-  primaryShade: number;
-  secondaryShade: number;
-}
+    return (
+      <Radio
+        ref={ref}
+        {...other}
+        inputProps={{
+          ...inputProps,
+          'aria-labelledby': ariaLabelledBy,
+          'aria-label': ariaLabel,
+        }}
+      />
+    );
+  },
+);
 
 function ColorTool() {
+  const dispatch = React.useContext(DispatchContext);
   const theme = useTheme();
-  const [state, setState] = React.useState<StateProp>({
+  const [state, setState] = React.useState({
     primary: defaults.primary,
     secondary: defaults.secondary,
     primaryInput: defaults.primary,
@@ -99,7 +76,8 @@ function ColorTool() {
   });
 
   const handleChangeColor =
-    (name: 'primary' | 'secondary') => (event: { target: { value: any } }) => {
+    (name: 'primary' | 'secondary') =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       const isRgb = (string: string) =>
         /rgb\([0-9]{1,3}\s*,\s*[0-9]{1,3}\s*,\s*[0-9]{1,3}\)/i.test(string);
 
@@ -112,7 +90,7 @@ function ColorTool() {
 
       setState((prevState) => ({
         ...prevState,
-        [`${name}Input`]: color,
+        [`${name}Input` as const]: color,
       }));
 
       let isValidColor = false;
@@ -134,34 +112,74 @@ function ColorTool() {
       }
     };
 
+  interface IShades {
+    50: string;
+    100: string;
+    200: string;
+    300: string;
+    400: string;
+    500: string;
+    600: string;
+    700: string;
+    800: string;
+    900: string;
+    A100: string;
+    A200: string;
+    A400: string;
+    A700: string;
+  }
+
   const handleChangeHue =
     (name: 'primary' | 'secondary') =>
-    (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {};
-  // const handleChangeHue =
-  //   (name: string) => (event: { target: { value: string } }) => {
-  //     const hue = event.target.value;
-  //     const color = colors[hue][shades[state[`${name}Shade`]]];
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const hue = event.target.value as hue;
+      const color = (colors[hue] as IShades)[
+        shades[state[`${name}Shade` as const]]
+      ];
 
-  //     setState({
-  //       ...state,
-  //       [`${name}Hue`]: hue,
-  //       [name]: color,
-  //       [`${name}Input`]: color,
-  //     });
-  //   };
+      setState({
+        ...state,
+        [`${name}Hue`]: hue,
+        [name]: color,
+        [`${name}Input`]: color,
+      });
+    };
 
   const handleChangeShade =
     (name: 'primary' | 'secondary') =>
-    (event: Event, value: number | number[], activeThumb: number) => {
-      // const color =
-      //   colors[state[`${name}Hue` as string] as string][shades[shade]];
-      // setState({
-      //   ...state,
-      //   [`${name}Shade`]: shade,
-      //   [name]: color,
-      //   [`${name}Input`]: color,
-      // });
+    (event: Event, shade: number | number[]) => {
+      const color = (colors[state[`${name}Hue` as const] as hue] as IShades)[
+        shades[shade as number]
+      ];
+      setState({
+        ...state,
+        [`${name}Shade`]: shade,
+        [name]: color,
+        [`${name}Input`]: color,
+      });
     };
+
+  const handleChangeDocsColors = () => {
+    const paletteColors = {
+      primary: { main: state.primary },
+      secondary: { main: state.secondary },
+    };
+
+    dispatch({
+      type: 'CHANGE',
+      payload: { paletteColors },
+    });
+
+    document.cookie = `paletteColors=${JSON.stringify(
+      paletteColors,
+    )};path=/;max-age=31536000`;
+  };
+
+  const handleResetDocsColors = () => {
+    dispatch({ type: 'RESET_COLORS' });
+
+    document.cookie = 'paletteColors=;path=/;max-age=0';
+  };
 
   const colorBar = (color: string) => {
     const background = theme.palette.augmentColor({
@@ -172,38 +190,36 @@ function ColorTool() {
 
     return (
       <Grid container sx={{ mt: 2 }}>
-        {(['dark', 'main', 'light'] as ('light' | 'main' | 'dark')[]).map(
-          (key) => (
-            <Box
-              sx={{
-                width: 64,
-                height: 64,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+        {(['dark', 'main', 'light'] as const).map((key) => (
+          <Box
+            sx={{
+              width: 64,
+              height: 64,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            style={{ backgroundColor: background[key] }}
+            key={key}
+          >
+            <Typography
+              variant="caption"
+              style={{
+                color: theme.palette.getContrastText(background[key]),
               }}
-              style={{ backgroundColor: background[key] }}
-              key={key}
             >
-              <Typography
-                variant="caption"
-                style={{
-                  color: theme.palette.getContrastText(background[key]),
-                }}
-              >
-                {rgbToHex(background[key])}
-              </Typography>
-            </Box>
-          ),
-        )}
+              {rgbToHex(background[key])}
+            </Typography>
+          </Box>
+        ))}
       </Grid>
     );
   };
 
   const colorPicker = (intent: 'primary' | 'secondary') => {
-    const intentInput = state[`${intent}Input`];
-    const intentShade = state[`${intent}Shade`];
-    const color = state[`${intent}`];
+    const intentInput = state[`${intent}Input` as const];
+    const intentShade = state[`${intent}Shade` as const];
+    const color = state[`${intent}` as const];
 
     return (
       <Grid item xs={12} sm={6} md={4}>
@@ -288,6 +304,18 @@ function ColorTool() {
     <Grid container spacing={5} sx={{ p: 0 }}>
       {colorPicker('primary')}
       {colorPicker('secondary')}
+      <Grid item xs={12}>
+        <Button variant="contained" onClick={handleChangeDocsColors}>
+          Set Docs Colors
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={handleResetDocsColors}
+          sx={{ ml: 1 }}
+        >
+          Reset Docs Colors
+        </Button>
+      </Grid>
     </Grid>
   );
 }

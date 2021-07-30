@@ -11,7 +11,6 @@ export const UserInfoPaper = () => {
     mobile: '6666666666',
   });
 
-  //React.ChangeEvent<HTMLInputElement> or SelectChangeEvent
   const onEmployeeInfoChange =
     (field: EmployeeFieldType) =>
     (
