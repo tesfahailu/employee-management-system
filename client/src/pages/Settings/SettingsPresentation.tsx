@@ -2,18 +2,16 @@ import { Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
-import { UserInfoPaper } from './components/UserInfoPaper';
-import { UploadImagePaper } from './components/UploadImagePaper';
-import { ToggleDarkMode } from './components/ToggleDarkMode';
-import ColorTool from './components/ColorTool';
+import ColorTool from '../../modules/components/ColorTool';
+import { ToggleDarkMode } from '../../modules/components/ToggleDarkMode';
+import { UploadImagePaper } from '../../modules/components/UploadImagePaper';
+import { UserInfoPaper } from '../../modules/components/UserInfoPaper';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    headerSpacing: {
-      marginBottom: 10,
-    },
-  }),
-);
+const useStyles = makeStyles({
+  headerSpacing: {
+    marginBottom: 10,
+  },
+});
 
 export const SettingsPresentation = () => {
   const classes = useStyles();

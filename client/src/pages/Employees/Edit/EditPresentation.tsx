@@ -4,11 +4,23 @@ import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { EditEmployeePageText } from '../../../text';
 import { EditEmployeeType } from '../../../types/types';
-import { DepartmentCard } from '../components/DepartmentCard';
-import { EmployeeAddressCard } from '../components/EmployeeAddressCard';
-import { EmployeeInfoCard } from '../components/EmployeeInfoCard';
-import { OfficeAddressCard } from '../components/OfficeAddressCard';
-import { ProjectsCard } from '../components/ProjectsCard';
+import { DepartmentCard } from '../../../modules/components/DepartmentCard';
+import { EmployeeAddressCard } from '../../../modules/components/EmployeeAddressCard';
+import { EmployeeInfoCard } from '../../../modules/components/EmployeeInfoCard';
+import { OfficeAddressCard } from '../../../modules/components/OfficeAddressCard';
+import { ProjectsCard } from '../../../modules/components/ProjectsCard';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    header: {
+      marginBottom: theme.spacing(2),
+    },
+    actionButtonSpacing: {
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
+  }),
+);
 
 export const EditPresentation = ({
   employee,
@@ -32,8 +44,6 @@ export const EditPresentation = ({
           {EditEmployeePageText.PageHeaderText}
         </Typography>
         <Button
-          color="primary"
-          variant="contained"
           className={classes.actionButtonSpacing}
           disabled={!isFormChanged}
           onClick={saveChanges}
@@ -61,15 +71,3 @@ export const EditPresentation = ({
     </Fragment>
   );
 };
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    header: {
-      marginBottom: theme.spacing(2),
-    },
-    actionButtonSpacing: {
-      marginRight: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-    },
-  }),
-);

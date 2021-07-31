@@ -2,9 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { DepartmentFieldType } from '../../../types/types';
 import { EditPresentation } from './EditPresentation';
 
-interface EditDataProps {}
-
-export const EditData: React.FC<EditDataProps> = ({}) => {
+export const EditData = () => {
   const [department, setDepartment] = useState({
     id: 0,
     title: '',

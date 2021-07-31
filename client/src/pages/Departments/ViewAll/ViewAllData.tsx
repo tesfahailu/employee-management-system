@@ -1,9 +1,7 @@
 import React from 'react';
 import { ViewAllPresentation } from './ViewAllPresentation';
 
-interface ViewAllDataProps {}
-
-export const ViewAllData: React.FC<ViewAllDataProps> = ({}) => {
+export const ViewAllData = () => {
   const rowsData = [
     {
       id: 1,

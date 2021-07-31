@@ -8,7 +8,6 @@ import {
   Select,
   Button,
   Grid,
-  SelectChangeEvent,
 } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
@@ -19,7 +18,7 @@ import { EditOfficeAddressType } from '../../../types/types';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      marginBottom: '1REM',
+      marginBottom: theme.spacing(1),
     },
     header: {
       marginBottom: theme.spacing(2),
@@ -55,8 +54,6 @@ export const EditPresentation = ({
           {EditOfficePageText.PageHeaderText}
         </Typography>
         <Button
-          color="primary"
-          variant="contained"
           className={classes.actionButtonSpacing}
           disabled={!isFormChanged}
           onClick={saveChanges}
@@ -67,40 +64,30 @@ export const EditPresentation = ({
       <Card className={classes.card}>
         <CardContent>
           <TextField
-            variant="outlined"
             margin="normal"
             fullWidth
             id="oStreetAddress1"
             label="Street Address 1:"
             value={address.streetAddress1}
             onChange={onAddressChange('streetAddress1')}
-            color="primary"
           />
           <TextField
-            variant="outlined"
             margin="normal"
             fullWidth
             id="oStreetAddress2"
             label="Street Address 2:"
             value={address.streetAddress2}
             onChange={onAddressChange('streetAddress2')}
-            color="primary"
           />
           <TextField
-            variant="outlined"
             margin="normal"
             fullWidth
             id="oCity"
             label="City:"
             value={address.city}
             onChange={onAddressChange('city')}
-            color="primary"
           />
-          <FormControl
-            variant="outlined"
-            className={classes.formControl}
-            fullWidth
-          >
+          <FormControl className={classes.formControl} fullWidth>
             <InputLabel htmlFor="outlined-state-native-simple">
               State:
             </InputLabel>
@@ -119,11 +106,7 @@ export const EditPresentation = ({
               ))}
             </Select>
           </FormControl>
-          <FormControl
-            variant="outlined"
-            className={classes.formControl}
-            fullWidth
-          >
+          <FormControl className={classes.formControl} fullWidth>
             <InputLabel htmlFor="outlined-country-native-simple">
               Country:
             </InputLabel>
@@ -143,14 +126,12 @@ export const EditPresentation = ({
             </Select>
           </FormControl>
           <TextField
-            variant="outlined"
             margin="normal"
             fullWidth
             id="oZipCode"
             label="Zip Code:"
             value={address.zipCode}
             onChange={onAddressChange('zipCode')}
-            color="primary"
           />
         </CardContent>
       </Card>

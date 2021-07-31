@@ -1,20 +1,22 @@
 import { Button, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
 import React from 'react';
-import { FormattedCard } from '../../../components/FormattedCard';
 import { ViewEmployeePageText } from '../../../text';
 import { EmployeeViewPresentationProp } from '../../../types/types';
+import { FormattedCard } from '../../../modules/components/FormattedCard';
 
-const useStyles = makeStyles({
-  textSpacingBelow: {
-    marginBottom: '0.5REM',
-  },
-  actionButtonSpacing: {
-    marginRight: '0.5REM',
-    marginBottom: '0.5REM',
-  },
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    textSpacingBelow: {
+      marginBottom: theme.spacing(0.5),
+    },
+    actionButtonSpacing: {
+      marginRight: theme.spacing(0.5),
+      marginBottom: theme.spacing(0.5),
+    },
+  }),
+);
 
 export const ViewOnePresentation = ({
   employee,
@@ -31,11 +33,7 @@ export const ViewOnePresentation = ({
         <Typography variant="h5" className={classes.textSpacingBelow}>
           {ViewEmployeePageText.PageHeaderText}
         </Typography>
-        <Button
-          color="primary"
-          variant="contained"
-          className={classes.actionButtonSpacing}
-        >
+        <Button className={classes.actionButtonSpacing}>
           {ViewEmployeePageText.EditAllButtonText}
         </Button>
       </Grid>

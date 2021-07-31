@@ -4,13 +4,13 @@ import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { CreateEmployeePageText } from '../../../text';
 import { CreateEmployeeType } from '../../../types/types';
-import { DepartmentCard } from '../components/DepartmentCard';
-import { EmployeeAddressCard } from '../components/EmployeeAddressCard';
-import { EmployeeInfoCard } from '../components/EmployeeInfoCard';
-import { OfficeAddressCard } from '../components/OfficeAddressCard';
-import { ProjectsCard } from '../components/ProjectsCard';
+import { DepartmentCard } from '../../../modules/components/DepartmentCard';
+import { EmployeeAddressCard } from '../../../modules/components/EmployeeAddressCard';
+import { EmployeeInfoCard } from '../../../modules/components/EmployeeInfoCard';
+import { OfficeAddressCard } from '../../../modules/components/OfficeAddressCard';
+import { ProjectsCard } from '../../../modules/components/ProjectsCard';
 
-export const CreatePresentation = ({
+export const CreatePresentation: React.FC<CreateEmployeeType> = ({
   employee,
   onEmployeeInfoChange,
   department,
@@ -23,7 +23,7 @@ export const CreatePresentation = ({
   onProjectChange,
   isFormComplete,
   saveChanges,
-}: CreateEmployeeType) => {
+}) => {
   const classes = useStyles();
   return (
     <Fragment>
@@ -48,8 +48,6 @@ export const CreatePresentation = ({
       />
       <ProjectsCard projects={projects} onProjectChange={onProjectChange} />
       <Button
-        color="primary"
-        variant="contained"
         className={classes.actionButtonSpacing}
         disabled={!isFormComplete}
         onClick={saveChanges}

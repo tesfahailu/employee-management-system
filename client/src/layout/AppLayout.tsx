@@ -1,10 +1,8 @@
 import React from 'react';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-
-import { Drawer } from './components/Drawer';
-import { GeneralAppBar } from './components/GeneralAppBar';
 import { Grid } from '@material-ui/core';
+import { Drawer } from '../modules/components/Drawer';
 
 interface Props {
   children?: React.ReactNode;
@@ -28,9 +26,6 @@ export function AppLayout({ children, drawerWidth }: Props) {
         />
       </Grid>
       <Grid item container direction="column" wrap="nowrap" xs>
-        <Grid item>
-          <GeneralAppBar handleDrawerToggle={handleDrawerToggle} />
-        </Grid>
         <Grid item xs className={classes.mainWrapper}>
           <main className={classes.main}>{children}</main>
         </Grid>

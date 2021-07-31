@@ -1,21 +1,23 @@
 import { Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
-import { addSpaceAndUpperCaseText } from '../../../helper_functions/helperFunctions';
+import { addSpaceAndUpperCaseText } from '../../../modules/utils/textRegex';
 import { ViewProjectPageText } from '../../../text';
 import { ProjectType } from '../../../types/types';
 import { useHistory } from 'react-router';
 
-const useStyles = makeStyles({
-  textSpacingBelow: {
-    marginBottom: '0.5REM',
-  },
-  actionButtonSpacing: {
-    marginRight: '0.5REM',
-    marginBottom: '0.5REM',
-  },
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    textSpacingBelow: {
+      marginBottom: theme.spacing(1),
+    },
+    actionButtonSpacing: {
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
+  }),
+);
 
 interface ViewOnePresentationProps {
   project: ProjectType;
@@ -33,8 +35,6 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
           {ViewProjectPageText.PageHeaderText}
         </Typography>
         <Button
-          color="primary"
-          variant="contained"
           className={classes.actionButtonSpacing}
           onClick={() => history.push(`/projects/edit/${project.id}`)}
         >

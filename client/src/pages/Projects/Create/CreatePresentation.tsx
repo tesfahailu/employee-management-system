@@ -15,7 +15,7 @@ import { CreateProjectType } from '../../../types/types';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      marginBottom: '1REM',
+      marginBottom: theme.spacing(1),
     },
     header: {
       marginBottom: theme.spacing(2),
@@ -41,8 +41,6 @@ export const CreatePresentation = ({
           {CreateProjectPageText.PageHeaderText}
         </Typography>
         <Button
-          color="primary"
-          variant="contained"
           className={classes.actionButtonSpacing}
           disabled={!isFormComplete}
           onClick={saveChanges}
@@ -53,24 +51,20 @@ export const CreatePresentation = ({
       <Card className={classes.card}>
         <CardContent>
           <TextField
-            variant="outlined"
             margin="normal"
             fullWidth
             key={`${id}-name`}
             label="Name:"
             value={name}
             onChange={onProjectChange('name')}
-            color="primary"
           />
           <TextField
-            variant="outlined"
             margin="normal"
             fullWidth
             key={`${id}-description`}
             label="Description:"
             value={description}
             onChange={onProjectChange('description')}
-            color="primary"
           />
         </CardContent>
       </Card>
