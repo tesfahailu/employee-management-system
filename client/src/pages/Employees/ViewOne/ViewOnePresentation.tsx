@@ -5,6 +5,7 @@ import React from 'react';
 import { ViewEmployeePageText } from '../../../text';
 import { EmployeeViewPresentationProp } from '../../../types/types';
 import { FormattedCard } from '../../../modules/components/FormattedCard';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +27,11 @@ export const ViewOnePresentation = ({
   projects,
 }: EmployeeViewPresentationProp) => {
   const classes = useStyles();
+  const location = useLocation();
+  const splitPath = location.pathname.split('/');
+  const id = splitPath[splitPath.length - 1];
+  console.log('id', id);
+  const history = useHistory();
 
   return (
     <>
@@ -33,7 +39,10 @@ export const ViewOnePresentation = ({
         <Typography variant="h5" className={classes.textSpacingBelow}>
           {ViewEmployeePageText.PageHeaderText}
         </Typography>
-        <Button className={classes.actionButtonSpacing}>
+        <Button
+          className={classes.actionButtonSpacing}
+          onClick={() => history.push(`/employees/viewOne/edit/${id}`)}
+        >
           {ViewEmployeePageText.EditAllButtonText}
         </Button>
       </Grid>

@@ -37,14 +37,17 @@ export const PageRoutes: React.FC = () => {
     <Switch>
       <Route
         exact
-        path="/employees/viewAll"
+        path="/employees"
         render={(props) => (
           <EmployeesViewAll {...props} isAboveMinWidth={isAboveMinWidth} />
         )}
       />
-      <Route path="/employees/viewOne/:id" component={EmployeesViewOne} />
-      <Route path="/employees/edit/:id" component={EmployeesEdit} />
+      <Route
+        path={['/employees/edit/:id', '/employees/viewOne/edit/:id']}
+        component={EmployeesEdit}
+      />
       <Route path="/employees/create" component={EmployeesCreate} />
+      <Route path="/employees/viewOne/:id" component={EmployeesViewOne} />
 
       <Route exact path="/projects/viewAll" component={ProjectsViewAll} />
       <Route path="/projects/viewOne/:id" component={ProjectsViewOne} />

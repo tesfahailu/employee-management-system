@@ -126,7 +126,7 @@ const DrawerContent = () => {
         </ListItem>
       </StyledLink>
       {[
-        ['Employees', <EmployeesIcon />, '/employees/viewAll'],
+        ['Employees', <EmployeesIcon />, '/employees'],
         ['Projects', <ProjectIcon />, '/projects/viewAll'],
         ['Offices', <OfficesIcon />, '/offices/viewAll'],
         ['Departments', <DepartmentIcon />, '/departments/ViewAll'],
