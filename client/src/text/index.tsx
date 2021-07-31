@@ -1,5 +1,6 @@
 export enum ViewEmployeesPageText {
   PageHeaderText = 'View Employees:',
+  PageSubHeaderText = 'View, edit or delete employee by clicking on the appropriate button in the action column',
   CreateButtonText = 'Create',
 }
 

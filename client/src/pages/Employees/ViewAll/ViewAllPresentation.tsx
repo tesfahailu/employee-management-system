@@ -12,6 +12,7 @@ import { Rows } from './testData';
 import { ViewEmployeesPageText } from '../../../text';
 import { useHistory } from 'react-router';
 import { Add as AddIcon } from '@material-ui/icons';
+import BreadCrumb from '../../../modules/components/BreadCrumb';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,10 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       minHeight: '400px',
-    },
-    actionButtonSpacing: {
-      marginRight: theme.spacing(1),
-      marginBottom: theme.spacing(1),
     },
   }),
 );
@@ -127,29 +124,32 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
     <Fragment>
       <Grid
         container
-        justifyContent="space-between"
         direction="column"
         className={classes.fullParentContainer}
       >
-        <Grid container justifyContent="space-between">
-          <Typography variant="h5" className={classes.header}>
-            {ViewEmployeesPageText.PageHeaderText}
-          </Typography>
-          <Button
-            className={classes.actionButtonSpacing}
-            startIcon={<AddIcon />}
-            onClick={() => history.push('/employees/create')}
-          >
-            {ViewEmployeesPageText.CreateButtonText}
-          </Button>
+        <Grid item container direction="row" justifyContent="space-between">
+          <Grid item>
+            <Grid container direction="column">
+              <Typography variant="h5">
+                {ViewEmployeesPageText.PageHeaderText}
+              </Typography>
+              <Typography variant="subtitle2">
+                {ViewEmployeesPageText.PageSubHeaderText}
+              </Typography>
+              <BreadCrumb />
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Button
+              startIcon={<AddIcon />}
+              onClick={() => history.push('/employees/create')}
+            >
+              {ViewEmployeesPageText.CreateButtonText}
+            </Button>
+          </Grid>
         </Grid>
         <Grid item xs className={classes.inheritHeight}>
-          <Grid
-            container
-            direction="column"
-            className={classes.inheritHeight}
-            wrap="nowrap"
-          >
+          <Grid container direction="column" className={classes.inheritHeight}>
             <Grid item container xs wrap="nowrap">
               <Grid item xs>
                 <DataGrid

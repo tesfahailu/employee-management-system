@@ -93,14 +93,16 @@ export function ThemeProvider(props: { children: any }) {
             defaultProps: {
               disableRipple: true,
             },
-            styleOverrides: {
-              textTransform: 'none',
-            },
           },
           MuiButton: {
             defaultProps: {
               variant: 'contained',
               color: 'primary',
+            },
+            styleOverrides: {
+              root: {
+                textTransform: 'none',
+              },
             },
           },
           MuiCard: {
@@ -139,7 +141,7 @@ export function ThemeProvider(props: { children: any }) {
           },
           MuiTypography: {
             defaultProps: {
-              gutterBottom: true,
+              gutterBottom: false,
             },
           },
         },
