@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { ThemeProvider } from './components/Theme';
+import { ThemeProvider } from './modules/components/Theme';
+import { StyledEngineProvider, Theme } from '@material-ui/core/styles';
 import { setAccessToken } from './services/session/accessToken';
 import { GeneralRoutes } from './routes/Routes';
 import './App.css';
 import { CssBaseline } from '@material-ui/core';
+
+declare module '@material-ui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 export const App: React.FC = ({}) => {
   const [loading, setLoading] = useState(true);
@@ -21,9 +27,11 @@ export const App: React.FC = ({}) => {
 
   if (loading) return <div>loading...</div>;
   return (
-    <ThemeProvider>
-      <CssBaseline />
-      <GeneralRoutes />
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider>
+        <CssBaseline />
+        <GeneralRoutes />
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };

@@ -13,28 +13,51 @@ import {
   Delete as DeleteIcon,
 } from '@material-ui/icons';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    header: {
+      marginBottom: theme.spacing(2),
+    },
+    inheritHeight: {
+      height: 'inherit',
+      width: 'inherit',
+    },
+    fullParentContainer: {
+      height: '100%',
+      width: '100%',
+    },
+    card: {
+      minHeight: '400px',
+    },
+    actionButtonSpacing: {
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
+  }),
+);
+
 const renderDetailsButton = (id: number | string) => {
   const history = useHistory();
   return (
     <Grid container justifyContent="center" wrap="nowrap">
       <Grid item xs>
         <IconButton
-          color="primary"
           onClick={() => history.push(`/offices/viewOne/${id}`)}
+          size="large"
         >
           <PageViewIcon />
         </IconButton>
       </Grid>
       <Grid item xs>
         <IconButton
-          color="primary"
           onClick={() => history.push(`/offices/edit/${id}`)}
+          size="large"
         >
           <EditIcon />
         </IconButton>
       </Grid>
       <Grid item xs>
-        <IconButton color="primary">
+        <IconButton size="large">
           <DeleteIcon />
         </IconButton>
       </Grid>
@@ -88,29 +111,6 @@ const fixedWidthColumn = () => {
   });
 };
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    header: {
-      marginBottom: theme.spacing(2),
-    },
-    inheritHeight: {
-      height: 'inherit',
-      width: 'inherit',
-    },
-    fullParentContainer: {
-      height: '100%',
-      width: '100%',
-    },
-    card: {
-      minHeight: '400px',
-    },
-    actionButtonSpacing: {
-      marginRight: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-    },
-  }),
-);
-
 interface AddressProps {
   rowsData: AddressType[];
   isAboveMinWidth: boolean;
@@ -136,8 +136,6 @@ export const ViewAllPresentation: React.FC<AddressProps> = ({
             {ViewOfficesPageText.PageHeaderText}
           </Typography>
           <Button
-            color="primary"
-            variant="contained"
             className={classes.actionButtonSpacing}
             startIcon={<AddIcon />}
             onClick={() => history.push('/offices/create')}

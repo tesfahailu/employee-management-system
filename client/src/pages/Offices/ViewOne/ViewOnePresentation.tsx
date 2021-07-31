@@ -1,20 +1,23 @@
 import { Grid, Typography, Button, Card, CardContent } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
-import { addSpaceAndUpperCaseText } from '../../../helper_functions/helperFunctions';
+import { addSpaceAndUpperCaseText } from '../../../modules/utils/textRegex';
 import { ViewOfficePageText } from '../../../text';
 import { AddressType } from '../../../types/types';
 
-const useStyles = makeStyles({
-  textSpacingBelow: {
-    marginBottom: '0.5REM',
-  },
-  actionButtonSpacing: {
-    marginRight: '0.5REM',
-    marginBottom: '0.5REM',
-  },
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    textSpacingBelow: {
+      marginBottom: theme.spacing(0.5),
+    },
+    actionButtonSpacing: {
+      marginRight: theme.spacing(0.5),
+      marginBottom: theme.spacing(0.5),
+    },
+  }),
+);
 
 interface ViewOnePresentationProps {
   office: AddressType;
@@ -32,8 +35,6 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
           {ViewOfficePageText.PageHeaderText}
         </Typography>
         <Button
-          color="primary"
-          variant="contained"
           className={classes.actionButtonSpacing}
           onClick={() => history.push(`/offices/edit/${office.id}`)}
         >

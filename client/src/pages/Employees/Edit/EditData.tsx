@@ -182,9 +182,9 @@ export const EditData = ({}) => {
   };
 
   const saveChanges = () => {
-    console.log('Saved changes');
     setIsFormChanged(false);
   };
+
   return (
     <EditPresentation
       employee={employee}

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { DepartmentFieldType } from '../../../types/types';
 import { CreatePresentation } from './CreatePresentation';
 
-export const CreateData = ({}) => {
+export const CreateData = () => {
   const [department, setDepartment] = useState({
     title: '',
     description: '',

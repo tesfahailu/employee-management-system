@@ -8,7 +8,7 @@ import {
   EmployeeType,
 } from '../../../types/types';
 
-export const ViewOneData = ({}) => {
+export const ViewOneData = () => {
   const {
     __typename: __typenameEmployee,
     id: employeeId,

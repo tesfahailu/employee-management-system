@@ -5,12 +5,12 @@ import {
   ToggleButtonGroup,
   useMediaQuery,
 } from '@material-ui/core';
-import { useChangeTheme } from '../../../components/Theme';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
 import { makeStyles } from '@material-ui/styles';
-import { getCookie } from '../../../helper_functions/helperFunctions';
+import { getCookie } from '../../../modules/utils/getCookie';
+import { useChangeTheme } from '../../../modules/components/Theme';
 
 const useStyles = makeStyles({
   paper: {
@@ -53,7 +53,6 @@ export const ToggleDarkMode = () => {
     <ToggleButtonGroup
       exclusive
       value={mode}
-      color="primary"
       onChange={handleChangeThemeMode}
       aria-labelledby="settings-mode"
       fullWidth

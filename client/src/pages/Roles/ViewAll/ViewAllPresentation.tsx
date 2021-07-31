@@ -19,22 +19,22 @@ const renderDetailsButton = (id: number | string) => {
     <Grid container justifyContent="center" wrap="nowrap">
       <Grid item xs>
         <IconButton
-          color="primary"
           onClick={() => history.push(`/roles/viewOne/${id}`)}
+          size="large"
         >
           <PageViewIcon />
         </IconButton>
       </Grid>
       <Grid item xs>
         <IconButton
-          color="primary"
           onClick={() => history.push(`/roles/edit/${id}`)}
+          size="large"
         >
           <EditIcon />
         </IconButton>
       </Grid>
       <Grid item xs>
-        <IconButton color="primary">
+        <IconButton size="large">
           <DeleteIcon />
         </IconButton>
       </Grid>
@@ -99,8 +99,6 @@ export const ViewAllPresentation: React.FC<RolesProps> = ({ rowsData }) => {
             {ViewRolesPageText.PageHeaderText}
           </Typography>
           <Button
-            color="primary"
-            variant="contained"
             className={classes.actionButtonSpacing}
             startIcon={<AddIcon />}
             onClick={() => history.push('/roles/create')}

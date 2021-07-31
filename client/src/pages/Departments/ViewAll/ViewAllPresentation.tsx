@@ -13,47 +13,6 @@ import {
 } from '@material-ui/icons';
 import { DepartmentType } from '../../../types/types';
 
-const renderDetailsButton = (id: number | string) => {
-  const history = useHistory();
-  return (
-    <Grid container justifyContent="center" wrap="nowrap">
-      <Grid item xs>
-        <IconButton
-          color="primary"
-          onClick={() => history.push(`/departments/viewOne/${id}`)}
-        >
-          <PageViewIcon />
-        </IconButton>
-      </Grid>
-      <Grid item xs>
-        <IconButton
-          color="primary"
-          onClick={() => history.push(`/departments/edit/${id}`)}
-        >
-          <EditIcon />
-        </IconButton>
-      </Grid>
-      <Grid item xs>
-        <IconButton color="primary">
-          <DeleteIcon />
-        </IconButton>
-      </Grid>
-    </Grid>
-  );
-};
-
-const columns: GridColDef[] = [
-  { field: 'title', headerName: 'Title', flex: 1 },
-  { field: 'description', headerName: 'Description', flex: 2 },
-  {
-    field: '',
-    headerName: 'Actions',
-    sortable: false,
-    renderCell: (params: GridCellParams) => renderDetailsButton(params.id),
-    width: 200,
-  },
-];
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -76,6 +35,47 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
+const renderDetailsButton = (id: number | string) => {
+  const history = useHistory();
+  return (
+    <Grid container justifyContent="center" wrap="nowrap">
+      <Grid item xs>
+        <IconButton
+          onClick={() => history.push(`/departments/viewOne/${id}`)}
+          size="large"
+        >
+          <PageViewIcon />
+        </IconButton>
+      </Grid>
+      <Grid item xs>
+        <IconButton
+          onClick={() => history.push(`/departments/edit/${id}`)}
+          size="large"
+        >
+          <EditIcon />
+        </IconButton>
+      </Grid>
+      <Grid item xs>
+        <IconButton size="large">
+          <DeleteIcon />
+        </IconButton>
+      </Grid>
+    </Grid>
+  );
+};
+
+const columns: GridColDef[] = [
+  { field: 'title', headerName: 'Title', flex: 1 },
+  { field: 'description', headerName: 'Description', flex: 2 },
+  {
+    field: '',
+    headerName: 'Actions',
+    sortable: false,
+    renderCell: (params: GridCellParams) => renderDetailsButton(params.id),
+    width: 200,
+  },
+];
 
 interface DepartmentProps {
   rowsData: DepartmentType[];
@@ -100,8 +100,6 @@ export const ViewAllPresentation: React.FC<DepartmentProps> = ({
             {ViewDepartmentsPageText.PageHeaderText}
           </Typography>
           <Button
-            color="primary"
-            variant="contained"
             className={classes.actionButtonSpacing}
             startIcon={<AddIcon />}
             onClick={() => history.push('/departments/create')}

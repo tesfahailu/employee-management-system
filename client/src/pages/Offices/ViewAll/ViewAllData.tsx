@@ -5,7 +5,9 @@ interface ViewAllDataProps {
   isAboveMinWidth: boolean;
 }
 
-export const ViewAllData = ({ isAboveMinWidth }: ViewAllDataProps) => {
+export const ViewAllData: React.FC<ViewAllDataProps> = ({
+  isAboveMinWidth,
+}) => {
   const [employeeAddress, setEmployeeAddress] = useState([
     {
       streetAddress1: '',

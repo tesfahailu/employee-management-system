@@ -15,7 +15,7 @@ import { EditDepartmentType } from '../../../types/types';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      marginBottom: '1REM',
+      marginBottom: theme.spacing(1),
     },
     header: {
       marginBottom: theme.spacing(2),
@@ -27,12 +27,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const EditPresentation = ({
+export const EditPresentation: React.FC<EditDepartmentType> = ({
   department: { id, title, description },
   onDepartmentChange,
   isFormChanged,
   saveChanges,
-}: EditDepartmentType) => {
+}) => {
   const classes = useStyles();
   return (
     <Fragment>
@@ -41,8 +41,6 @@ export const EditPresentation = ({
           {EditDepartmentPageText.PageHeaderText}
         </Typography>
         <Button
-          color="primary"
-          variant="contained"
           className={classes.actionButtonSpacing}
           disabled={!isFormChanged}
           onClick={saveChanges}
@@ -53,24 +51,20 @@ export const EditPresentation = ({
       <Card className={classes.card}>
         <CardContent>
           <TextField
-            variant="outlined"
             margin="normal"
             fullWidth
             key={`${id}-title`}
             label="Title:"
             value={title}
             onChange={onDepartmentChange('title')}
-            color="primary"
           />
           <TextField
-            variant="outlined"
             margin="normal"
             fullWidth
             key={`${id}-description`}
             label="Description:"
             value={description}
             onChange={onDepartmentChange('description')}
-            color="primary"
           />
         </CardContent>
       </Card>
