@@ -35,13 +35,7 @@ export const PageRoutes: React.FC = () => {
   const isAboveMinWidth = useMediaQuery('(min-width:1200px)');
   return (
     <Switch>
-      <Route
-        exact
-        path="/employees"
-        render={(props) => (
-          <EmployeesViewAll {...props} isAboveMinWidth={isAboveMinWidth} />
-        )}
-      />
+      <Route exact path="/employees" component={EmployeesViewAll} />
       <Route
         path={['/employees/edit/:id', '/employees/viewOne/edit/:id']}
         component={EmployeesEdit}
