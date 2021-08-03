@@ -17,6 +17,7 @@ export enum ViewEmployeePageText {
 
 export enum EditEmployeePageText {
   PageHeaderText = 'Edit Employee:',
+  PageSubHeaderText = "Edit employee / employee address or assign to a department, office, or projects. Don't forget to save",
   EmployeeInfoText = 'Employee Info:',
   DepartmentText = 'Department:',
   EmployeeAddressText = 'Employee Address:',
