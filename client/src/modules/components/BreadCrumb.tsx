@@ -13,7 +13,7 @@ const StyledLink = ({
   splitPath: Array<string>;
 }) => {
   const history = useHistory();
-  const locationUrl = splitPath.join('');
+  const locationUrl = splitPath.join('/');
   return (
     <Link
       underline="hover"

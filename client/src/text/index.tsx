@@ -27,6 +27,7 @@ export enum EditEmployeePageText {
 
 export enum CreateEmployeePageText {
   PageHeaderText = 'Create Employee:',
+  PageSubHeaderText = 'Fill in the information below to create a new employee',
   SaveButtonText = 'Save',
 }
 

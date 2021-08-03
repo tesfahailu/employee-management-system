@@ -4,11 +4,11 @@ import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { EditEmployeePageText } from '../../../text';
 import { EditEmployeeType } from '../../../types/types';
-import { DepartmentCard } from '../../../modules/components/DepartmentCard';
-import { EmployeeAddressCard } from '../../../modules/components/EmployeeAddressCard';
-import { EmployeeInfoCard } from '../../../modules/components/EmployeeInfoCard';
-import { OfficeAddressCard } from '../../../modules/components/OfficeAddressCard';
-import { ProjectsCard } from '../../../modules/components/ProjectsCard';
+import { CardDepartment } from '../../../modules/components/CardDepartment';
+import { CardEmployeeAddress } from '../../../modules/components/CardEmployeeAddress';
+import { CardEmployee } from '../../../modules/components/CardEmployee';
+import { CardOffice } from '../../../modules/components/CardOffice';
+import { CardProjects } from '../../../modules/components/CardProjects';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,23 +51,23 @@ export const EditPresentation = ({
           {EditEmployeePageText.SaveButtonText}
         </Button>
       </Grid>
-      <EmployeeInfoCard
+      <CardEmployee
         employee={employee}
         onEmployeeInfoChange={onEmployeeInfoChange}
       />
-      <DepartmentCard
+      <CardDepartment
         department={department}
         onDepartmentChange={onDepartmentChange}
       />
-      <EmployeeAddressCard
+      <CardEmployeeAddress
         address={employeeAddress}
         onAddressChange={onEmployeeAddressChange}
       />
-      <OfficeAddressCard
+      <CardOffice
         address={officeAddress}
         onAddressChange={onOfficeAddressChange}
       />
-      <ProjectsCard projects={projects} onProjectChange={onProjectChange} />
+      <CardProjects projects={projects} onProjectChange={onProjectChange} />
     </Fragment>
   );
 };

@@ -1,7 +1,7 @@
 import { SelectChangeEvent } from '@material-ui/core/Select';
 import React, { ChangeEvent, useState } from 'react';
 import { EmployeeFieldType } from '../../types/types';
-import { EmployeeInfoCard } from './EmployeeInfoCard';
+import { CardEmployee } from './CardEmployee';
 
 export const UserInfoPaper = () => {
   const [employee, setEmployee] = useState({
@@ -27,7 +27,7 @@ export const UserInfoPaper = () => {
     };
 
   return (
-    <EmployeeInfoCard
+    <CardEmployee
       employee={employee}
       onEmployeeInfoChange={onEmployeeInfoChange}
     />
