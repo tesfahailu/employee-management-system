@@ -1,30 +1,101 @@
 import React, { Fragment } from 'react';
-import { Button, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
+import { IconButton, Stack } from '@material-ui/core';
 import { Rows } from './testData';
 import { ViewEmployeesPageText } from '../../../text';
 import { useHistory } from 'react-router';
-import Table from './Table';
+import Table from '../../../modules/components/Table';
 import { PageHeader } from '../../../modules/components/PageHeader';
+import {
+  Pageview as PageViewIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+} from '@material-ui/icons';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    header: {
-      marginBottom: theme.spacing(2),
-    },
-    inheritHeight: {
-      height: 'inherit',
-      width: 'inherit',
-    },
-    fullParentContainer: {
-      width: '100%',
-    },
-    card: {
-      minHeight: '400px',
-    },
-  }),
-);
+export interface HeadCell {
+  disablePadding: boolean;
+  id: keyof Rows | 'action';
+  label: string;
+  numeric: boolean;
+}
+
+const headCells: readonly HeadCell[] = [
+  {
+    id: 'lastName',
+    numeric: false,
+    disablePadding: true,
+    label: 'Last Name',
+  },
+  {
+    id: 'firstName',
+    numeric: false,
+    disablePadding: false,
+    label: 'First Name',
+  },
+  {
+    id: 'email',
+    numeric: false,
+    disablePadding: false,
+    label: 'Email',
+  },
+  {
+    id: 'mobile',
+    numeric: false,
+    disablePadding: false,
+    label: 'Mobile',
+  },
+  {
+    id: 'role',
+    numeric: false,
+    disablePadding: false,
+    label: 'Role',
+  },
+  {
+    id: 'office',
+    numeric: false,
+    disablePadding: false,
+    label: 'Office',
+  },
+  {
+    id: 'department',
+    numeric: false,
+    disablePadding: true,
+    label: 'Department',
+  },
+  {
+    id: 'action',
+    numeric: false,
+    disablePadding: true,
+    label: 'Action',
+  },
+];
+
+export interface ActionButtons {
+  rowId: number;
+}
+
+const ActionButtons: React.FC<ActionButtons> = ({ rowId }) => {
+  const history = useHistory();
+  return (
+    <Stack direction="row" spacing={0.8} justifyContent="flex-start">
+      <IconButton
+        onClick={() => history.push(`/employees/viewOne/${rowId}`)}
+        size="large"
+        sx={{ ml: -1.5 }}
+      >
+        <PageViewIcon />
+      </IconButton>
+      <IconButton
+        onClick={() => history.push(`/employees/edit/${rowId}`)}
+        size="large"
+      >
+        <EditIcon />
+      </IconButton>
+      <IconButton size="large">
+        <DeleteIcon />
+      </IconButton>
+    </Stack>
+  );
+};
 
 interface ViewAllPresentationProp {
   rowsData: Rows[];
@@ -32,28 +103,19 @@ interface ViewAllPresentationProp {
 
 export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
   rowsData,
-}) => {
-  const classes = useStyles();
-  const history = useHistory();
-
-  return (
-    <Grid container direction="column" className={classes.fullParentContainer}>
-      <PageHeader
-        title={ViewEmployeesPageText.PageHeaderText}
-        subtitle={ViewEmployeesPageText.PageSubHeaderText}
-        isButton={true}
-        buttonText={ViewEmployeesPageText.CreateButtonText}
-        buttonHref="/employees/create"
-      />
-      <Grid item xs className={classes.inheritHeight}>
-        <Grid container direction="column" className={classes.inheritHeight}>
-          <Grid item container xs>
-            <Grid item xs>
-              <Table rowsData={rowsData} />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
-  );
-};
+}) => (
+  <Fragment>
+    <PageHeader
+      title={ViewEmployeesPageText.PageHeaderText}
+      subtitle={ViewEmployeesPageText.PageSubHeaderText}
+      isButton={true}
+      buttonText={ViewEmployeesPageText.CreateButtonText}
+      buttonHref="/employees/create"
+    />
+    <Table
+      rowsData={rowsData}
+      headCells={headCells}
+      ActionButtons={ActionButtons}
+    />
+  </Fragment>
+);
