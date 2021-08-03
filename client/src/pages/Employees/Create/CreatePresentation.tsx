@@ -4,11 +4,24 @@ import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { CreateEmployeePageText } from '../../../text';
 import { CreateEmployeeType } from '../../../types/types';
-import { DepartmentCard } from '../../../modules/components/DepartmentCard';
-import { EmployeeAddressCard } from '../../../modules/components/EmployeeAddressCard';
-import { EmployeeInfoCard } from '../../../modules/components/EmployeeInfoCard';
-import { OfficeAddressCard } from '../../../modules/components/OfficeAddressCard';
-import { ProjectsCard } from '../../../modules/components/ProjectsCard';
+import { CardDepartment } from '../../../modules/components/CardDepartment';
+import { CardEmployeeAddress } from '../../../modules/components/CardEmployeeAddress';
+import { CardEmployee } from '../../../modules/components/CardEmployee';
+import { CardOffice } from '../../../modules/components/CardOffice';
+import { CardProjects } from '../../../modules/components/CardProjects';
+import { PageHeader } from '../../../modules/components/PageHeader';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    header: {
+      marginBottom: theme.spacing(2),
+    },
+    actionButtonSpacing: {
+      marginRight: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
+  }),
+);
 
 export const CreatePresentation: React.FC<CreateEmployeeType> = ({
   employee,
@@ -27,26 +40,28 @@ export const CreatePresentation: React.FC<CreateEmployeeType> = ({
   const classes = useStyles();
   return (
     <Fragment>
-      <Typography variant="h5" className={classes.header}>
-        {CreateEmployeePageText.PageHeaderText}
-      </Typography>
-      <EmployeeInfoCard
+      <PageHeader
+        title={CreateEmployeePageText.PageHeaderText}
+        subtitle={CreateEmployeePageText.PageSubHeaderText}
+        isButton={false}
+      />
+      <CardEmployee
         employee={employee}
         onEmployeeInfoChange={onEmployeeInfoChange}
       />
-      <DepartmentCard
+      <CardDepartment
         department={department}
         onDepartmentChange={onDepartmentChange}
       />
-      <EmployeeAddressCard
+      <CardEmployeeAddress
         address={employeeAddress}
         onAddressChange={onEmployeeAddressChange}
       />
-      <OfficeAddressCard
+      <CardOffice
         address={officeAddress}
         onAddressChange={onOfficeAddressChange}
       />
-      <ProjectsCard projects={projects} onProjectChange={onProjectChange} />
+      <CardProjects projects={projects} onProjectChange={onProjectChange} />
       <Button
         className={classes.actionButtonSpacing}
         disabled={!isFormComplete}
@@ -57,15 +72,3 @@ export const CreatePresentation: React.FC<CreateEmployeeType> = ({
     </Fragment>
   );
 };
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    header: {
-      marginBottom: theme.spacing(2),
-    },
-    actionButtonSpacing: {
-      marginRight: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-    },
-  }),
-);
