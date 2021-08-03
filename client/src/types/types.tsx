@@ -150,11 +150,11 @@ export interface EditProjectsType {
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface FormattedCardProp {
-  cardHeaderText: string;
-  cardHeaderActionButtonText: string | null;
+export interface CardFormattedProp {
+  headerText: string;
+  buttonText: string | null;
   onEditButtonClick: () => void;
-  cardContentData: any;
+  data: any;
 }
 
 export interface EmployeeViewPresentationProp {
