@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-import { CSVLink, CSVDownload } from 'react-csv';
-import { Rows } from './testData';
+import { CSVLink } from 'react-csv';
+import { Rows } from '../../pages/Employees/ViewAll/testData';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -66,12 +66,12 @@ function SearchBox({ toggleSearchBox }: { toggleSearchBox: () => void }) {
   );
 }
 
-interface EnhancedTableToolbarProps {
+interface TableToolBar {
   numSelected: number;
   rowsData: Array<Rows>;
 }
 
-export const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
+export const TableToolBar = (props: TableToolBar) => {
   const { numSelected, rowsData } = props;
   const [isSearch, setIsSearch] = useState(false);
 
