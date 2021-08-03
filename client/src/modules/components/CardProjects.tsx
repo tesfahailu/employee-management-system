@@ -2,6 +2,7 @@ import {
   Box,
   Card,
   CardContent,
+  Grid,
   TextField,
   Typography,
 } from '@material-ui/core';
@@ -34,22 +35,28 @@ export const CardProjects = ({
           {projects!.map(({ id, name, description }) => {
             return (
               <div key={`text-section-${id}`}>
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  key={`${id}-name`}
-                  label="Name:"
-                  value={name}
-                  onChange={onProjectChange(id, 'name')}
-                />
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  key={`${id}-description`}
-                  label="Description:"
-                  value={description}
-                  onChange={onProjectChange(id, 'description')}
-                />
+                <Grid container spacing={2}>
+                  <Grid item xs={4}>
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      key={`${id}-name`}
+                      label="Name:"
+                      value={name}
+                      onChange={onProjectChange(id, 'name')}
+                    />
+                  </Grid>
+                  <Grid item xs>
+                    <TextField
+                      margin="normal"
+                      fullWidth
+                      key={`${id}-description`}
+                      label="Description:"
+                      value={description}
+                      onChange={onProjectChange(id, 'description')}
+                    />
+                  </Grid>
+                </Grid>
               </div>
             );
           })}
