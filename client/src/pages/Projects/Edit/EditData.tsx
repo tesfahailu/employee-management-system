@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { ProjectFieldType } from '../../../types/types';
 import { EditPresentation } from '../../Projects/Edit/EditPresentation';
 
-export const EditData = ({}) => {
+export const EditData = () => {
   const [project, setProject] = useState({
     id: 0,
     name: '',
@@ -24,7 +24,6 @@ export const EditData = ({}) => {
     };
 
   const saveChanges = () => {
-    console.log('Saved changes');
     setIsFormChanged(false);
   };
 

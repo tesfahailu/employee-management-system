@@ -54,6 +54,7 @@ export enum EditProjectPageText {
 
 export enum CreateProjectPageText {
   PageHeaderText = 'Create Project:',
+  PageSubHeaderText = 'Create a new project and include any additional information if necessary',
   SaveButtonText = 'Save',
 }
 

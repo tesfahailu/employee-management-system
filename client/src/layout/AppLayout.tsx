@@ -25,7 +25,14 @@ export function AppLayout({ children, drawerWidth }: Props) {
           mobileOpen={mobileOpen}
         />
       </Grid>
-      <Grid item container direction="column" wrap="nowrap" xs>
+      <Grid
+        item
+        container
+        direction="column"
+        wrap="nowrap"
+        xs
+        sx={{ width: `calc(100vw - ${drawerWidth}px )` }}
+      >
         <Grid item xs className={classes.mainWrapper}>
           <main className={classes.main}>{children}</main>
         </Grid>

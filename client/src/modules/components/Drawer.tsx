@@ -127,10 +127,10 @@ const DrawerContent = () => {
       </StyledLink>
       {[
         ['Employees', <EmployeesIcon />, '/employees'],
-        ['Projects', <ProjectIcon />, '/projects/viewAll'],
-        ['Offices', <OfficesIcon />, '/offices/viewAll'],
-        ['Departments', <DepartmentIcon />, '/departments/ViewAll'],
-        ['Roles', <RolesIcon />, '/roles/viewAll'],
+        ['Projects', <ProjectIcon />, '/projects'],
+        ['Offices', <OfficesIcon />, '/offices'],
+        ['Departments', <DepartmentIcon />, '/departments'],
+        ['Roles', <RolesIcon />, '/roles'],
         ['Settings', <SettingIcon />, '/settings'],
       ].map(([text, icon, route], index) => (
         <StyledLink to={route as string}>

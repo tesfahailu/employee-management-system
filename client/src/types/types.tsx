@@ -143,10 +143,10 @@ export interface EditAddressType {
 }
 
 export interface EditProjectsType {
-  projects: Array<ProjectType>;
+  projects: Array<ProjectType> | ProjectType;
   onProjectChange: (
-    index: number,
     field: ProjectFieldType,
+    index?: number,
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -225,6 +225,7 @@ export interface CreateProjectType {
   project: ProjectType;
   onProjectChange: (
     field: ProjectFieldType,
+    index?: number,
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;

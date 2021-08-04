@@ -63,7 +63,7 @@ export const EditPresentation = ({
           address={officeAddress}
           onAddressChange={onOfficeAddressChange}
         />
-        <CardProjects projects={projects} onProjectChange={onProjectChange} />
+        {/* <CardProjects projects={projects} onProjectChange={onProjectChange} /> */}
       </Box>
       <Button
         className={classes.actionButtonSpacing}

@@ -61,7 +61,7 @@ export const CreatePresentation: React.FC<CreateEmployeeType> = ({
         address={officeAddress}
         onAddressChange={onOfficeAddressChange}
       />
-      <CardProjects projects={projects} onProjectChange={onProjectChange} />
+      {/* <CardProjects projects={projects} onProjectChange={onProjectChange} /> */}
       <Button
         className={classes.actionButtonSpacing}
         disabled={!isFormComplete}

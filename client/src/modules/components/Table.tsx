@@ -85,7 +85,7 @@ export default function Table<R extends { id: number }>({
   };
 
   return (
-    <Paper sx={{ width: '100%', minWidth, mb: 2 }}>
+    <Paper sx={{ mb: 2 }}>
       <TableToolBar<R>
         numSelected={selected.length}
         title={title}
@@ -93,7 +93,7 @@ export default function Table<R extends { id: number }>({
       />
       <TableContainer>
         <MaterialTable
-          sx={{ tableLayout: 'fixed' }}
+          sx={{ tableLayout: 'auto', overflowY: 'auto', width: '100%' }}
           aria-labelledby="tableTitle"
         >
           <TableHead<R>
