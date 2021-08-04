@@ -49,6 +49,7 @@ export enum ViewProjectPageText {
 
 export enum EditProjectPageText {
   PageHeaderText = 'Edit Project:',
+  PageSubHeaderText = "Edit project name and/or description and don't forget to save",
   SaveButtonText = 'Save',
 }
 
