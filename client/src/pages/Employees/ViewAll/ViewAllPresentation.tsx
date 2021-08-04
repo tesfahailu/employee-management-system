@@ -11,14 +11,14 @@ import {
   Delete as DeleteIcon,
 } from '@material-ui/icons';
 
-export interface HeadCell {
-  disablePadding: boolean;
-  id: keyof Rows | 'action';
-  label: string;
+export interface HeadCell<R> {
+  id: Omit<keyof R, 'id'> | 'action';
   numeric: boolean;
+  disablePadding: boolean;
+  label: string;
 }
 
-const headCells: readonly HeadCell[] = [
+const headCells: Array<HeadCell<Rows>> = [
   {
     id: 'lastName',
     numeric: false,
@@ -69,11 +69,11 @@ const headCells: readonly HeadCell[] = [
   },
 ];
 
-export interface ActionButtons {
+export interface ActionButton {
   rowId: number;
 }
 
-const ActionButtons: React.FC<ActionButtons> = ({ rowId }) => {
+const ActionButtons: React.FC<ActionButton> = ({ rowId }) => {
   const history = useHistory();
   return (
     <Stack direction="row" spacing={0.8} justifyContent="flex-start">
@@ -103,19 +103,22 @@ interface ViewAllPresentationProp {
 
 export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
   rowsData,
-}) => (
-  <Fragment>
-    <PageHeader
-      title={ViewEmployeesPageText.PageHeaderText}
-      subtitle={ViewEmployeesPageText.PageSubHeaderText}
-      isButton={true}
-      buttonText={ViewEmployeesPageText.CreateButtonText}
-      buttonHref="/employees/create"
-    />
-    <Table
-      rowsData={rowsData}
-      headCells={headCells}
-      ActionButtons={ActionButtons}
-    />
-  </Fragment>
-);
+}) => {
+  return (
+    <Fragment>
+      <PageHeader
+        title={ViewEmployeesPageText.PageHeaderText}
+        subtitle={ViewEmployeesPageText.PageSubHeaderText}
+        isButton={true}
+        buttonText={ViewEmployeesPageText.CreateButtonText}
+        buttonHref="/employees/create"
+      />
+      <Table<Rows>
+        rowsData={rowsData}
+        headCells={headCells}
+        ActionButtons={ActionButtons}
+        minTableWidth="850px"
+      />
+    </Fragment>
+  );
+};

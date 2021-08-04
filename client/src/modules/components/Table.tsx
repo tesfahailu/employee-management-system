@@ -6,31 +6,35 @@ import Paper from '@material-ui/core/Paper';
 import { Rows } from '../../pages/Employees/ViewAll/testData';
 import { TableToolBar } from './TableToolBar';
 import { TableHead } from './TableHead';
-import {
-  HeadCell,
-  ActionButtons,
-} from '../../pages/Employees/ViewAll/ViewAllPresentation';
 import { Order } from './TableUtils';
 import { TableBody } from './TableBody';
+import {
+  ActionButton,
+  HeadCell,
+} from '../../pages/Employees/ViewAll/ViewAllPresentation';
 
-export default function Table({
+export interface Props<R> {
+  rowsData: R[];
+  headCells: HeadCell<R>[];
+  ActionButtons: React.FC<ActionButton>;
+  minTableWidth: string;
+}
+
+export default function Table<R extends { id: number }>({
   rowsData,
   headCells,
   ActionButtons,
-}: {
-  rowsData: Array<Rows>;
-  headCells: readonly HeadCell[];
-  ActionButtons: React.FC<ActionButtons>;
-}) {
+  minTableWidth,
+}: Props<R>) {
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Rows>('lastName');
+  const [orderBy, setOrderBy] = React.useState<HeadCell<R>['id']>('');
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: keyof Rows,
+    property: HeadCell<R>['id'],
   ) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -79,14 +83,14 @@ export default function Table({
   };
 
   return (
-    <Paper sx={{ width: '100%', mb: 2 }}>
-      <TableToolBar numSelected={selected.length} rowsData={rowsData} />
+    <Paper sx={{ width: '100%', minWidth: minTableWidth, mb: 2 }}>
+      <TableToolBar<R> numSelected={selected.length} rowsData={rowsData} />
       <TableContainer>
         <MaterialTable
           sx={{ minWidth: 750, tableLayout: 'fixed' }}
           aria-labelledby="tableTitle"
         >
-          <TableHead
+          <TableHead<R>
             numSelected={selected.length}
             order={order}
             orderBy={orderBy}
@@ -95,7 +99,8 @@ export default function Table({
             rowCount={rowsData.length}
             headCells={headCells}
           />
-          <TableBody
+          <TableBody<R>
+            headCells={headCells}
             rowsData={rowsData}
             order={order}
             orderBy={orderBy}

@@ -12,20 +12,20 @@ import { Order } from './TableUtils';
 import { Rows } from './../../pages/Employees/ViewAll/testData';
 import { HeadCell } from './../../pages/Employees/ViewAll/ViewAllPresentation';
 
-interface TableHead {
+interface TableHead<R> {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof Rows,
+    property: HeadCell<R>['id'],
   ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
-  orderBy: string | number;
+  orderBy: HeadCell<R>['id'];
   rowCount: number;
-  headCells: readonly HeadCell[];
+  headCells: HeadCell<R>[];
 }
 
-export function TableHead(props: TableHead) {
+export function TableHead<R extends object>(props: TableHead<R>) {
   const {
     onSelectAllClick,
     order,
@@ -36,7 +36,7 @@ export function TableHead(props: TableHead) {
     headCells,
   } = props;
   const createSortHandler =
-    (property: keyof Rows) => (event: React.MouseEvent<unknown>) => {
+    (property: HeadCell<R>['id']) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 
@@ -57,7 +57,7 @@ export function TableHead(props: TableHead) {
         {headCells.map((headCell) => {
           return headCell.id !== 'action' ? (
             <TableCell
-              key={headCell.id}
+              key={`key-${headCell.id}`}
               align={headCell.numeric ? 'right' : 'left'}
               padding={headCell.disablePadding ? 'none' : 'normal'}
               sortDirection={orderBy === headCell.id ? order : false}
