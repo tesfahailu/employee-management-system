@@ -1,7 +1,7 @@
 import { IconButton, Stack } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
-import { ViewProjectsPageText } from '../../../text';
+import { ViewProjectPageText, ViewProjectsPageText } from '../../../text';
 import {
   Pageview as PageViewIcon,
   Edit as EditIcon,
@@ -19,13 +19,19 @@ export interface HeadCell {
   numeric: boolean;
 }
 
-const columns: readonly HeadCell[] = [
+const columns: HeadCell[] = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
   {
     id: 'description',
     numeric: false,
     disablePadding: false,
     label: 'Description',
+  },
+  {
+    id: 'action',
+    numeric: false,
+    disablePadding: true,
+    label: 'Action',
   },
 ];
 
@@ -43,19 +49,19 @@ export interface ActionButtons {
   rowId: number;
 }
 
-const ActionButtons = (id: number | string) => {
+const ActionButtons: React.FC<ActionButtons> = ({ rowId }) => {
   const history = useHistory();
   return (
     <Stack direction="row" spacing={0.8} justifyContent="flex-start">
       <IconButton
-        onClick={() => history.push(`/projects/viewOne/${id}`)}
+        onClick={() => history.push(`/projects/viewOne/${rowId}`)}
         size="large"
         sx={{ ml: -1.5 }}
       >
         <PageViewIcon />
       </IconButton>
       <IconButton
-        onClick={() => history.push(`/projects/edit/${id}`)}
+        onClick={() => history.push(`/projects/edit/${rowId}`)}
         size="large"
       >
         <EditIcon />
@@ -77,11 +83,13 @@ export const ViewAllPresentation: React.FC<ProjectsProps> = ({ rowsData }) => {
         buttonText={ViewProjectsPageText.CreateButtonText}
         buttonHref="/projects/create"
       />
-      {/* <Table
+      <Table<Rows>
+        title={ViewProjectsPageText.TableHeaderText}
         rowsData={rowsData}
         headCells={columns}
         ActionButtons={ActionButtons}
-      /> */}
+        minWidth="500px"
+      />
     </Fragment>
   );
 };

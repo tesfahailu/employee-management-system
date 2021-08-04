@@ -2,6 +2,7 @@ export enum ViewEmployeesPageText {
   PageHeaderText = 'View Employees:',
   PageSubHeaderText = 'View, edit or delete employee by clicking on the appropriate button in the action column',
   CreateButtonText = 'Create',
+  TableHeaderText = 'Employees',
 }
 
 export enum ViewEmployeePageText {
@@ -37,6 +38,7 @@ export enum ViewProjectsPageText {
   PageHeaderText = 'View Projects:',
   PageSubHeaderText = 'View employee details or edit employee information by clicking on the edit button in the appropriate section',
   CreateButtonText = 'Create',
+  TableHeaderText = 'Projects',
 }
 
 export enum ViewProjectPageText {

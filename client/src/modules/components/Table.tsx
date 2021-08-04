@@ -14,17 +14,19 @@ import {
 } from '../../pages/Employees/ViewAll/ViewAllPresentation';
 
 export interface Props<R> {
+  title: string;
   rowsData: R[];
   headCells: HeadCell<R>[];
   ActionButtons: React.FC<ActionButton>;
-  minTableWidth: string;
+  minWidth: string;
 }
 
 export default function Table<R extends { id: number }>({
+  title,
   rowsData,
   headCells,
   ActionButtons,
-  minTableWidth,
+  minWidth,
 }: Props<R>) {
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<HeadCell<R>['id']>('');
@@ -83,11 +85,15 @@ export default function Table<R extends { id: number }>({
   };
 
   return (
-    <Paper sx={{ width: '100%', minWidth: minTableWidth, mb: 2 }}>
-      <TableToolBar<R> numSelected={selected.length} rowsData={rowsData} />
+    <Paper sx={{ width: '100%', minWidth, mb: 2 }}>
+      <TableToolBar<R>
+        numSelected={selected.length}
+        title={title}
+        rowsData={rowsData}
+      />
       <TableContainer>
         <MaterialTable
-          sx={{ minWidth: 750, tableLayout: 'fixed' }}
+          sx={{ tableLayout: 'fixed' }}
           aria-labelledby="tableTitle"
         >
           <TableHead<R>

@@ -84,7 +84,6 @@ export const TableBody = <R extends { id: number }>({
                     <TableCell
                       align="left"
                       sx={{
-                        width: '150px',
                         pl: 0,
                       }}
                     >

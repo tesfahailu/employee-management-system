@@ -68,13 +68,14 @@ function SearchBox({ toggleSearchBox }: { toggleSearchBox: () => void }) {
 
 interface TableToolBar<R> {
   numSelected: number;
+  title: string;
   rowsData: R[];
 }
 
 export const TableToolBar = <R extends { id: number }>(
   props: TableToolBar<R>,
 ) => {
-  const { numSelected, rowsData } = props;
+  const { numSelected, title, rowsData } = props;
   const [isSearch, setIsSearch] = useState(false);
 
   const toggleSearchBox = () => {
@@ -113,7 +114,7 @@ export const TableToolBar = <R extends { id: number }>(
           id="tableTitle"
           component="div"
         >
-          Employees
+          {title}
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -136,7 +137,7 @@ export const TableToolBar = <R extends { id: number }>(
           <CSVLink
             data={rowsData.map(({ id, ...rest }) => rest)}
             id="contained-button-csv"
-            filename="employees.csv"
+            filename={`${title}.csv`}
           >
             <Tooltip title="Download CSV">
               <IconButton>
