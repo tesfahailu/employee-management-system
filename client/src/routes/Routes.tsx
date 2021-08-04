@@ -43,14 +43,14 @@ export const PageRoutes: React.FC = () => {
       <Route path="/employees/create" component={EmployeesCreate} />
       <Route path="/employees/viewOne/:id" component={EmployeesViewOne} />
 
-      <Route exact path="/projects/viewAll" component={ProjectsViewAll} />
+      <Route exact path="/projects" component={ProjectsViewAll} />
       <Route path="/projects/viewOne/:id" component={ProjectsViewOne} />
       <Route path="/projects/edit/:id" component={ProjectsEdit} />
       <Route path="/projects/create" component={ProjectsCreate} />
 
       <Route
         exact
-        path="/offices/viewAll"
+        path="/offices"
         render={(props) => (
           <OfficesViewAll {...props} isAboveMinWidth={isAboveMinWidth} />
         )}
@@ -59,7 +59,7 @@ export const PageRoutes: React.FC = () => {
       <Route path="/offices/edit/:id" component={OfficesEdit} />
       <Route path="/offices/create" component={OfficesCreate} />
 
-      <Route exact path="/departments/viewAll" component={DepartmentsViewAll} />
+      <Route exact path="/departments" component={DepartmentsViewAll} />
       <Route
         exact
         path="/departments/viewOne/:id"
@@ -68,7 +68,7 @@ export const PageRoutes: React.FC = () => {
       <Route exact path="/departments/edit/:id" component={DepartmentsEdit} />
       <Route exact path="/departments/create" component={DepartmentsCreate} />
 
-      <Route exact path="/roles/viewAll" component={RolesViewAll} />
+      <Route exact path="/roles" component={RolesViewAll} />
       <Route exact path="/roles/viewOne/:id" component={RolesViewOne} />
       <Route exact path="/roles/edit/:id" component={RolesEdit} />
       <Route exact path="/roles/create" component={RolesCreate} />
