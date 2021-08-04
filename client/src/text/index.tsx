@@ -6,7 +6,7 @@ export enum ViewEmployeesPageText {
 
 export enum ViewEmployeePageText {
   PageHeaderText = 'View Employee:',
-  PageSubHeaderText = 'View employee details or edit employee information by clicking on the edit butotn in the appropriate section',
+  PageSubHeaderText = 'View employee details or edit employee information by clicking on the edit button in the appropriate section',
   EmployeeInfoText = 'Employee Info:',
   DepartmentText = 'Department:',
   EmployeeAddressText = 'Employee Address:',
@@ -35,6 +35,7 @@ export enum CreateEmployeePageText {
 
 export enum ViewProjectsPageText {
   PageHeaderText = 'View Projects:',
+  PageSubHeaderText = 'View employee details or edit employee information by clicking on the edit button in the appropriate section',
   CreateButtonText = 'Create',
 }
 

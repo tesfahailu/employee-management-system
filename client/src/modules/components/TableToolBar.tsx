@@ -66,12 +66,14 @@ function SearchBox({ toggleSearchBox }: { toggleSearchBox: () => void }) {
   );
 }
 
-interface TableToolBar {
+interface TableToolBar<R> {
   numSelected: number;
-  rowsData: Array<Rows>;
+  rowsData: R[];
 }
 
-export const TableToolBar = (props: TableToolBar) => {
+export const TableToolBar = <R extends { id: number }>(
+  props: TableToolBar<R>,
+) => {
   const { numSelected, rowsData } = props;
   const [isSearch, setIsSearch] = useState(false);
 
