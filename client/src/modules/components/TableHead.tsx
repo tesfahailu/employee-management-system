@@ -54,9 +54,10 @@ export function TableHead<R extends object>(props: TableHead<R>) {
             }}
           />
         </TableCell>
-        {headCells.map((headCell) => {
+        {headCells.map((headCell, index) => {
           return headCell.id !== 'action' ? (
             <TableCell
+              sx={{ width: index === 0 ? '15%' : 'none' }}
               key={`key-${headCell.id}`}
               align={headCell.numeric ? 'right' : 'left'}
               padding={headCell.disablePadding ? 'none' : 'normal'}

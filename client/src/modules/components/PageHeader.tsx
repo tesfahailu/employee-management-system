@@ -21,8 +21,8 @@ export const PageHeader: React.FC<HeaderProps> = ({
 }) => {
   const history = useHistory();
   return (
-    <Grid item container direction="row" justifyContent="space-between">
-      <Grid item>
+    <Grid container direction="row" justifyContent="space-between" spacing={4}>
+      <Grid item xs>
         <Grid container direction="column">
           <Typography variant="h5">{title}</Typography>
           <Typography variant="subtitle2">{subtitle}</Typography>

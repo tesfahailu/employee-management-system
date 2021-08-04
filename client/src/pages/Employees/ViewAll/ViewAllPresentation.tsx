@@ -114,10 +114,11 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
         buttonHref="/employees/create"
       />
       <Table<Rows>
+        title={ViewEmployeesPageText.TableHeaderText}
         rowsData={rowsData}
         headCells={headCells}
         ActionButtons={ActionButtons}
-        minTableWidth="850px"
+        minWidth="850px"
       />
     </Fragment>
   );
