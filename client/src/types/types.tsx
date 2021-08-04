@@ -18,10 +18,10 @@ export interface DepartmentType {
 }
 
 export interface AddressType {
-  [index: string]: number | string | undefined;
-  id?: number;
+  [index: string]: number | string | null;
+  id: number;
   streetAddress1: string;
-  streetAddress2: string;
+  streetAddress2: string | null;
   city: string;
   state: string;
   country: string;
