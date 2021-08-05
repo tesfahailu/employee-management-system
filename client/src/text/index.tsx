@@ -49,6 +49,7 @@ export enum ViewProjectPageText {
 
 export enum EditProjectPageText {
   PageHeaderText = 'Edit Project:',
+  PageSubHeaderText = "Edit project name and/or description and don't forget to save",
   SaveButtonText = 'Save',
 }
 
@@ -60,11 +61,14 @@ export enum CreateProjectPageText {
 
 export enum ViewOfficesPageText {
   PageHeaderText = 'View Offices:',
+  PageSubHeaderText = 'View office details or edit office address by clicking on the edit button in the appropriate section',
   CreateButtonText = 'Create',
+  TableHeaderText = 'Offices',
 }
 
 export enum ViewOfficePageText {
   PageHeaderText = 'View Office:',
+  PageSubHeaderText = 'View office details or edit office address by clicking on the edit button in the appropriate section',
   EditButtonText = 'Edit',
   EditAllButtonText = 'Edit All',
 }
