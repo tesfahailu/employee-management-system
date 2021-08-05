@@ -37,8 +37,12 @@ export interface CreateAddressType {
 }
 
 export interface ProjectType {
-  [index: string]: number | string;
   id: number;
+  name: string;
+  description: string;
+}
+
+export interface LimitedProjectType {
   name: string;
   description: string;
 }
