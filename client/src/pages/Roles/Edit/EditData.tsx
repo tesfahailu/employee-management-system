@@ -24,7 +24,6 @@ export const EditData = () => {
     };
 
   const saveChanges = () => {
-    console.log('Saved changes');
     setIsFormComplete(false);
   };
   return (
