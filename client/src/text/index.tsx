@@ -95,6 +95,8 @@ export enum ViewDepartmentsPageText {
 
 export enum ViewDepartmentPageText {
   PageHeaderText = 'View Department:',
+  PageSubHeaderText = 'View or edit department details by clicking on the edit button at the bottom of the page',
+  DepartmentText = 'Department:',
   EditButtonText = 'Edit',
   EditAllButtonText = 'Edit All',
 }
