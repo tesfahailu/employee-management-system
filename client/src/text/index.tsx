@@ -122,6 +122,8 @@ export enum ViewRolesPageText {
 
 export enum ViewRolePageText {
   PageHeaderText = 'View Role:',
+  PageSubHeaderText = 'View or edit role details by clicking on the edit button at the bottom of the page',
+  RoleText = 'Role:',
   EditButtonText = 'Edit',
   EditAllButtonText = 'Edit All',
 }

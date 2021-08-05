@@ -4,15 +4,8 @@ import { ViewOnePresentation } from './ViewOnePresentation';
 interface ViewOneDataProps {}
 
 export const ViewOneData: React.FC<ViewOneDataProps> = ({}) => {
-  const [role, setRole] = useState({
-    id: 0,
-    name: '',
-    description: '',
-  });
+  const role = { id: 1, name: 'limited', description: 'temporary access' };
 
-  useEffect(() => {
-    setRole({ id: 1, name: 'limited', description: 'temporary access' });
-  }, []);
-
-  return <ViewOnePresentation role={role} />;
+  const { id, ...spreadRole } = role;
+  return <ViewOnePresentation role={spreadRole} />;
 };

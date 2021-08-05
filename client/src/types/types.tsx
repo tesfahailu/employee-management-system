@@ -49,6 +49,11 @@ export interface RoleType {
   description: string | null;
 }
 
+export interface LimitedRoleType {
+  name: string;
+  description: string | null;
+}
+
 export type EmployeeFieldType =
   | 'firstName'
   | 'lastName'
