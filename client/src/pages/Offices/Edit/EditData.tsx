@@ -5,6 +5,7 @@ import { EditPresentation } from './EditPresentation';
 
 export const EditData = () => {
   const [address, setAddress] = useState({
+    id: 0,
     streetAddress1: '',
     streetAddress2: '',
     city: '',
@@ -15,6 +16,7 @@ export const EditData = () => {
 
   useEffect(() => {
     setAddress({
+      id: 1,
       streetAddress1: '134 Camelot St.',
       streetAddress2: 'Apt. 4',
       city: 'Camps',

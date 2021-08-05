@@ -80,6 +80,7 @@ export enum EditOfficePageText {
 
 export enum CreateOfficePageText {
   PageHeaderText = 'Create Office:',
+  PageSubHeaderText = 'Create a new office and include any additional information if necessary',
   SaveButtonText = 'Save',
 }
 
