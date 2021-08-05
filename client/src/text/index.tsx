@@ -75,6 +75,7 @@ export enum ViewOfficePageText {
 
 export enum EditOfficePageText {
   PageHeaderText = 'Edit Office:',
+  PageSubHeaderText = "Edit office name or address and don't forget to save",
   SaveButtonText = 'Save',
 }
 

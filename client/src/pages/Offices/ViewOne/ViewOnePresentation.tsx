@@ -43,12 +43,12 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
       </Grid>
       <Card>
         <CardContent>
-          {Object.keys(office).map((key) => {
+          {(Object.keys(office) as [keyof AddressType]).map((key) => {
             if (key === 'id') return;
             return (
               <CardRow
                 index={addSpaceAndUpperCaseText(key)}
-                value={office[key]}
+                value={office[key]!}
               />
             );
           })}

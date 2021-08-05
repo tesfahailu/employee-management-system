@@ -18,8 +18,16 @@ export interface DepartmentType {
 }
 
 export interface AddressType {
-  [index: string]: number | string | null;
   id: number;
+  streetAddress1: string;
+  streetAddress2: string | null;
+  city: string;
+  state: string;
+  country: string;
+  zipCode: string;
+}
+
+export interface CreateAddressType {
   streetAddress1: string;
   streetAddress2: string | null;
   city: string;
@@ -132,7 +140,7 @@ export interface EditEmployeeDepartmentType {
 }
 
 export interface EditAddressType {
-  address: AddressType;
+  address: CreateAddressType;
   onAddressChange: (
     field: AddressFieldType,
   ) => (
@@ -175,7 +183,7 @@ export interface CreateEmployeeType {
       | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
-  employeeAddress: AddressType;
+  employeeAddress: CreateAddressType;
   onEmployeeAddressChange: (
     field: AddressFieldType,
   ) => (
@@ -193,7 +201,7 @@ export interface CreateEmployeeType {
       | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
-  officeAddress: AddressType;
+  officeAddress: CreateAddressType;
   onOfficeAddressChange: (
     field: AddressFieldType,
   ) => (
@@ -245,7 +253,7 @@ export interface EditOfficeAddressType {
 }
 
 export interface CreateOfficeAddressType {
-  address: AddressType;
+  address: CreateAddressType;
   onAddressChange: (
     field: AddressFieldType,
   ) => (
