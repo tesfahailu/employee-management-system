@@ -31,52 +31,43 @@ import { SettingsData as Settings } from '../pages/Settings/SettingsData';
 import { Register } from '../pages/Register/Register';
 import { Login } from '../pages/Login/Login';
 
-export const PageRoutes: React.FC = () => {
-  const isAboveMinWidth = useMediaQuery('(min-width:1200px)');
-  return (
-    <Switch>
-      <Route exact path="/employees" component={EmployeesViewAll} />
-      <Route
-        path={['/employees/edit/:id', '/employees/viewOne/edit/:id']}
-        component={EmployeesEdit}
-      />
-      <Route path="/employees/create" component={EmployeesCreate} />
-      <Route path="/employees/viewOne/:id" component={EmployeesViewOne} />
+export const PageRoutes: React.FC = () => (
+  <Switch>
+    <Route exact path="/employees" component={EmployeesViewAll} />
+    <Route
+      path={['/employees/edit/:id', '/employees/viewOne/edit/:id']}
+      component={EmployeesEdit}
+    />
+    <Route path="/employees/create" component={EmployeesCreate} />
+    <Route path="/employees/viewOne/:id" component={EmployeesViewOne} />
 
-      <Route exact path="/projects" component={ProjectsViewAll} />
-      <Route path="/projects/viewOne/:id" component={ProjectsViewOne} />
-      <Route path="/projects/edit/:id" component={ProjectsEdit} />
-      <Route path="/projects/create" component={ProjectsCreate} />
+    <Route exact path="/projects" component={ProjectsViewAll} />
+    <Route path="/projects/viewOne/:id" component={ProjectsViewOne} />
+    <Route path="/projects/edit/:id" component={ProjectsEdit} />
+    <Route path="/projects/create" component={ProjectsCreate} />
 
-      <Route
-        exact
-        path="/offices"
-        render={(props) => (
-          <OfficesViewAll {...props} isAboveMinWidth={isAboveMinWidth} />
-        )}
-      />
-      <Route path="/offices/viewOne/:id" component={OfficesViewOne} />
-      <Route path="/offices/edit/:id" component={OfficesEdit} />
-      <Route path="/offices/create" component={OfficesCreate} />
+    <Route exact path="/offices" component={OfficesViewAll} />
+    <Route path="/offices/viewOne/:id" component={OfficesViewOne} />
+    <Route path="/offices/edit/:id" component={OfficesEdit} />
+    <Route path="/offices/create" component={OfficesCreate} />
 
-      <Route exact path="/departments" component={DepartmentsViewAll} />
-      <Route
-        exact
-        path="/departments/viewOne/:id"
-        component={DepartmentsViewOne}
-      />
-      <Route exact path="/departments/edit/:id" component={DepartmentsEdit} />
-      <Route exact path="/departments/create" component={DepartmentsCreate} />
+    <Route exact path="/departments" component={DepartmentsViewAll} />
+    <Route
+      exact
+      path="/departments/viewOne/:id"
+      component={DepartmentsViewOne}
+    />
+    <Route exact path="/departments/edit/:id" component={DepartmentsEdit} />
+    <Route exact path="/departments/create" component={DepartmentsCreate} />
 
-      <Route exact path="/roles" component={RolesViewAll} />
-      <Route exact path="/roles/viewOne/:id" component={RolesViewOne} />
-      <Route exact path="/roles/edit/:id" component={RolesEdit} />
-      <Route exact path="/roles/create" component={RolesCreate} />
+    <Route exact path="/roles" component={RolesViewAll} />
+    <Route exact path="/roles/viewOne/:id" component={RolesViewOne} />
+    <Route exact path="/roles/edit/:id" component={RolesEdit} />
+    <Route exact path="/roles/create" component={RolesCreate} />
 
-      <Route exact path="/settings" component={Settings} />
-    </Switch>
-  );
-};
+    <Route exact path="/settings" component={Settings} />
+  </Switch>
+);
 
 export const GeneralRoutes = () => {
   const drawerWidth = 200;

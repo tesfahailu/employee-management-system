@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { ViewAllPresentation } from './ViewAllPresentation';
 
-interface ViewAllDataProps {
-  isAboveMinWidth: boolean;
-}
-
-export const ViewAllData: React.FC<ViewAllDataProps> = ({
-  isAboveMinWidth,
-}) => {
+export const ViewAllData: React.FC = () => {
   const [employeeAddress, setEmployeeAddress] = useState([
     {
       streetAddress1: '',
@@ -39,10 +33,5 @@ export const ViewAllData: React.FC<ViewAllDataProps> = ({
     },
   ];
 
-  return (
-    <ViewAllPresentation
-      rowsData={rowsData}
-      isAboveMinWidth={isAboveMinWidth}
-    />
-  );
+  return <ViewAllPresentation rowsData={rowsData} />;
 };

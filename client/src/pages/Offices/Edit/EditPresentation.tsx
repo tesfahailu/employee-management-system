@@ -14,6 +14,8 @@ import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { EditOfficePageText } from '../../../text';
 import { EditOfficeAddressType } from '../../../types/types';
+import { PageHeader } from '../../../modules/components/PageHeader';
+import { CardOffice } from '../../../modules/components/CardOffice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,19 +51,20 @@ export const EditPresentation = ({
 
   return (
     <Fragment>
-      <Grid container justifyContent="space-between">
-        <Typography variant="h5" className={classes.header}>
-          {EditOfficePageText.PageHeaderText}
-        </Typography>
-        <Button
-          className={classes.actionButtonSpacing}
-          disabled={!isFormChanged}
-          onClick={saveChanges}
-        >
-          {EditOfficePageText.SaveButtonText}
-        </Button>
-      </Grid>
-      <Card className={classes.card}>
+      <PageHeader
+        title={EditOfficePageText.PageHeaderText}
+        subtitle={EditOfficePageText.PageSubHeaderText}
+        isButton={false}
+      />
+      <CardOffice address={address} onAddressChange={onAddressChange} />
+      <Button
+        className={classes.actionButtonSpacing}
+        disabled={!isFormChanged}
+        onClick={saveChanges}
+      >
+        {EditOfficePageText.SaveButtonText}
+      </Button>
+      {/* <Card className={classes.card}>
         <CardContent>
           <TextField
             margin="normal"
@@ -134,7 +137,7 @@ export const EditPresentation = ({
             onChange={onAddressChange('zipCode')}
           />
         </CardContent>
-      </Card>
+      </Card> */}
     </Fragment>
   );
 };
