@@ -130,6 +130,7 @@ export enum ViewRolePageText {
 
 export enum EditRolePageText {
   PageHeaderText = 'Edit Role:',
+  PageSubHeaderText = "Edit role name and/or description and don't forget to save",
   SaveButtonText = 'Save',
 }
 
