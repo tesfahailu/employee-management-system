@@ -103,23 +103,21 @@ interface ViewAllPresentationProp {
 
 export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
   rowsData,
-}) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={ViewEmployeesPageText.PageHeaderText}
-        subtitle={ViewEmployeesPageText.PageSubHeaderText}
-        isButton={true}
-        buttonText={ViewEmployeesPageText.CreateButtonText}
-        buttonHref="/employees/create"
-      />
-      <Table<Rows>
-        title={ViewEmployeesPageText.TableHeaderText}
-        rowsData={rowsData}
-        headCells={headCells}
-        ActionButtons={ActionButtons}
-        minWidth="850px"
-      />
-    </Fragment>
-  );
-};
+}) => (
+  <Fragment>
+    <PageHeader
+      title={ViewEmployeesPageText.PageHeaderText}
+      subtitle={ViewEmployeesPageText.PageSubHeaderText}
+      isButton={true}
+      buttonText={ViewEmployeesPageText.CreateButtonText}
+      buttonHref="/employees/create"
+    />
+    <Table<Rows>
+      title={ViewEmployeesPageText.TableHeaderText}
+      rowsData={rowsData}
+      headCells={headCells}
+      ActionButtons={ActionButtons}
+      minWidth="850px"
+    />
+  </Fragment>
+);
