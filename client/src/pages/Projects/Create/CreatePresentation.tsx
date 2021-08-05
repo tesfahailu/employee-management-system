@@ -19,11 +19,7 @@ export const CreatePresentation = ({
         isButton={false}
       />
       <CardProjects project={project} onProjectChange={onProjectChange} />
-      <Button
-        sx={{ mr: 1, mb: 1 }}
-        disabled={!isFormComplete}
-        onClick={saveChanges}
-      >
+      <Button sx={{ mt: 1 }} disabled={!isFormComplete} onClick={saveChanges}>
         {CreateProjectPageText.SaveButtonText}
       </Button>
     </Fragment>
