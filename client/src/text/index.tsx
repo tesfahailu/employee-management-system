@@ -115,7 +115,9 @@ export enum CreateDepartmentPageText {
 
 export enum ViewRolesPageText {
   PageHeaderText = 'View Roles:',
+  PageSubHeaderText = 'View roles detail or edit role by clicking on the edit button in the action column',
   CreateButtonText = 'Create',
+  TableHeaderText = 'Roles:',
 }
 
 export enum ViewRolePageText {

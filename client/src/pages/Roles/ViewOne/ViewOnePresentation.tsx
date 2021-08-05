@@ -43,7 +43,7 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
       </Grid>
       <Card>
         <CardContent>
-          {Object.keys(role).map((key) => {
+          {/* {(Object.keys(role) as RoleType[]).map((key) => {
             if (key === 'id') return;
             return (
               <CardRow
@@ -51,7 +51,7 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
                 value={role[key]}
               />
             );
-          })}
+          })} */}
         </CardContent>
       </Card>
     </Fragment>
