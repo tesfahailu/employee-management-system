@@ -101,6 +101,7 @@ export enum ViewDepartmentPageText {
 
 export enum EditDepartmentPageText {
   PageHeaderText = 'Edit Department:',
+  PageSubHeaderText = "Edit department name or description and don't forget to save",
   SaveButtonText = 'Save',
 }
 
