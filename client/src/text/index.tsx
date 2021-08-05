@@ -88,7 +88,9 @@ export enum CreateOfficePageText {
 
 export enum ViewDepartmentsPageText {
   PageHeaderText = 'View Departments:',
+  PageSubHeaderText = 'View department details or edit departments by clicking on the edit button in the appropriate section',
   CreateButtonText = 'Create',
+  TableHeaderText = 'Departments:',
 }
 
 export enum ViewDepartmentPageText {
