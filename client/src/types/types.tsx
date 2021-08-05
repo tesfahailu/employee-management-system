@@ -278,7 +278,11 @@ export interface CreateDepartmentType {
   department: DepartmentType;
   onDepartmentChange: (
     field: DepartmentFieldType,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  ) => (
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
