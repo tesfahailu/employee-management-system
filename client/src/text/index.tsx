@@ -68,7 +68,8 @@ export enum ViewOfficesPageText {
 
 export enum ViewOfficePageText {
   PageHeaderText = 'View Office:',
-  PageSubHeaderText = 'View office details or edit office address by clicking on the edit button in the appropriate section',
+  PageSubHeaderText = 'View office details or edit office address by clicking on the edit button at the bottom of the page',
+  OfficeAddressText = 'Office Address:',
   EditButtonText = 'Edit',
   EditAllButtonText = 'Edit All',
 }

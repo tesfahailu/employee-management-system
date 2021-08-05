@@ -13,12 +13,6 @@ export const ViewOnePresentation = ({
   officeAddress,
   projects,
 }: EmployeeViewPresentationProp) => {
-  const location = useLocation();
-  const splitPath = location.pathname.split('/');
-  const id = splitPath[splitPath.length - 1];
-  console.log('id', id);
-  const history = useHistory();
-
   return (
     <Fragment>
       <PageHeader
