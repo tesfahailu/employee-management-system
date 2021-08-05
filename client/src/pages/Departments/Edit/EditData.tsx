@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { DepartmentFieldType } from '../../../types/types';
 import { EditPresentation } from './EditPresentation';
@@ -19,10 +20,14 @@ export const EditData = () => {
   }, []);
 
   const onDepartmentChange = (field: DepartmentFieldType) => {
-    return (event: ChangeEvent<HTMLInputElement>) => {
+    return (
+      event: Partial<
+        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      >,
+    ) => {
       setIsFormChanged(true);
       setDepartment((previousDepartment) => {
-        return { ...previousDepartment, [field]: event.target.value };
+        return { ...previousDepartment, [field]: event.target!.value };
       });
     };
   };

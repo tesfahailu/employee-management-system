@@ -269,7 +269,11 @@ export interface EditDepartmentType {
   department: DepartmentType;
   onDepartmentChange: (
     field: DepartmentFieldType,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  ) => (
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -291,7 +295,11 @@ export interface EditRoleType {
   role: RoleType;
   onRoleChange: (
     field: RoleFieldType,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  ) => (
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
