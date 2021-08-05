@@ -44,10 +44,9 @@ export interface ProjectType {
 }
 
 export interface RoleType {
-  [index: string]: number | string;
   id: number;
   name: string;
-  description: string;
+  description: string | null;
 }
 
 export type EmployeeFieldType =

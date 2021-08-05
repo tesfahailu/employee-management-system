@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { useHistory } from 'react-router';
 import { ViewDepartmentPageText } from '../../../text';
 import { DepartmentType } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
