@@ -43,6 +43,8 @@ export enum ViewProjectsPageText {
 
 export enum ViewProjectPageText {
   PageHeaderText = 'View Project:',
+  PageSubHeaderText = 'View project details or edit project information by clicking on the edit button',
+  ProjectText = 'Project:',
   EditButtonText = 'Edit',
   EditAllButtonText = 'Edit All',
 }
