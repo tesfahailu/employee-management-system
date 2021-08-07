@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { CreateProjectPageText } from '../../../text';
 import { CreateProjectType } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardProjects } from '../../../modules/components/CardProjects';
+import { FormProjects } from '../../../modules/components/FormProjects';
 
 export const CreatePresentation = ({
   project,
@@ -18,7 +18,7 @@ export const CreatePresentation = ({
         subtitle={CreateProjectPageText.PageSubHeaderText}
         isButton={false}
       />
-      <CardProjects project={project} onProjectChange={onProjectChange} />
+      <FormProjects project={project} onProjectChange={onProjectChange} />
       <Button sx={{ mt: 1 }} disabled={!isFormComplete} onClick={saveChanges}>
         {CreateProjectPageText.SaveButtonText}
       </Button>

@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { EditDepartmentPageText } from '../../../text';
 import { EditDepartmentType } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardDepartment } from '../../../modules/components/CardDepartment';
+import { FormDepartment } from '../../../modules/components/FormDepartment';
 
 export const EditPresentation: React.FC<EditDepartmentType> = ({
   department,
@@ -17,7 +17,7 @@ export const EditPresentation: React.FC<EditDepartmentType> = ({
       subtitle={EditDepartmentPageText.PageSubHeaderText}
       isButton={false}
     />
-    <CardDepartment
+    <FormDepartment
       department={department}
       onDepartmentChange={onDepartmentChange}
     />

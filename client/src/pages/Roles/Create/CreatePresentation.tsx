@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { CreateRolePageText } from '../../../text';
 import { CreateRoleType } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardRole } from '../../../modules/components/CardRole';
+import { FormRole } from '../../../modules/components/FormRole';
 
 export const CreatePresentation = ({
   role,
@@ -17,7 +17,7 @@ export const CreatePresentation = ({
       subtitle={CreateRolePageText.PageSubHeaderText}
       isButton={false}
     />
-    <CardRole role={role} onRoleChange={onRoleChange} />
+    <FormRole role={role} onRoleChange={onRoleChange} />
     <Button sx={{ mt: 1 }} disabled={!isFormComplete} onClick={saveChanges}>
       {CreateRolePageText.SaveButtonText}
     </Button>

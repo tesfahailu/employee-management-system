@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 import { CreateDepartmentPageText } from '../../../text';
 import { CreateDepartmentType } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardDepartment } from '../../../modules/components/CardDepartment';
+import { FormDepartment } from '../../../modules/components/FormDepartment';
 
 export const CreatePresentation = ({
   department,
@@ -17,7 +17,7 @@ export const CreatePresentation = ({
       subtitle={CreateDepartmentPageText.PageSubHeaderText}
       isButton={false}
     />
-    <CardDepartment
+    <FormDepartment
       department={department}
       onDepartmentChange={onDepartmentChange}
     />

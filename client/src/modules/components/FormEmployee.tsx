@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const CardEmployee = ({
+export const FormEmployee = ({
   employee,
   onEmployeeInfoChange,
 }: EditEmployeeInfoType) => {

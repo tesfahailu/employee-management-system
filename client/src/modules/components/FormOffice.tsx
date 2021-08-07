@@ -11,8 +11,8 @@ import {
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
 import React from 'react';
-import { EditAddressType } from '../../types/types';
 import { EditEmployeePageText } from '../../text';
+import { EditAddressType } from '../../types/types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,10 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const CardEmployeeAddress = ({
-  address,
-  onAddressChange,
-}: EditAddressType) => {
+export const FormOffice = ({ address, onAddressChange }: EditAddressType) => {
   const classes = useStyles();
   const countries = [{ value: 'USA', text: 'USA' }];
   const states = [
@@ -41,13 +38,13 @@ export const CardEmployeeAddress = ({
     <Card className={classes.card}>
       <CardContent>
         <Typography variant="subtitle1">
-          {EditEmployeePageText.EmployeeAddressText}
+          {EditEmployeePageText.OfficeeAddressText}
         </Typography>
         <Box sx={{ mt: 2 }}>
           <TextField
             margin="normal"
             fullWidth
-            id="eStreetAddress1"
+            id="oStreetAddress1"
             label="Street Address 1:"
             value={address.streetAddress1}
             onChange={onAddressChange('streetAddress1')}
@@ -55,7 +52,7 @@ export const CardEmployeeAddress = ({
           <TextField
             margin="normal"
             fullWidth
-            id="eStreetAddress2"
+            id="oStreetAddress2"
             label="Street Address 2:"
             value={address.streetAddress2}
             onChange={onAddressChange('streetAddress2')}
@@ -63,7 +60,7 @@ export const CardEmployeeAddress = ({
           <TextField
             margin="normal"
             fullWidth
-            id="eCity"
+            id="oCity"
             label="City:"
             value={address.city}
             onChange={onAddressChange('city')}
@@ -109,7 +106,7 @@ export const CardEmployeeAddress = ({
           <TextField
             margin="normal"
             fullWidth
-            id="eZipCode"
+            id="oZipCode"
             label="Zip Code:"
             value={address.zipCode}
             onChange={onAddressChange('zipCode')}
