@@ -4,11 +4,11 @@ import { Theme } from '@material-ui/core/styles';
 import React, { Fragment } from 'react';
 import { CreateEmployeePageText } from '../../../text';
 import { CreateEmployeeType } from '../../../types/types';
-import { CardDepartment } from '../../../modules/components/CardDepartment';
-import { CardEmployeeAddress } from '../../../modules/components/CardEmployeeAddress';
-import { CardEmployee } from '../../../modules/components/CardEmployee';
-import { CardOffice } from '../../../modules/components/CardOffice';
-import { CardProjects } from '../../../modules/components/CardProjects';
+import { FormDepartment } from '../../../modules/components/FormDepartment';
+import { FormEmployeeAddress } from '../../../modules/components/FormEmployeeAddress';
+import { FormEmployee } from '../../../modules/components/FormEmployee';
+import { FormOffice } from '../../../modules/components/FormOffice';
+import { FormProjects } from '../../../modules/components/FormProjects';
 import { PageHeader } from '../../../modules/components/PageHeader';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,23 +45,23 @@ export const CreatePresentation: React.FC<CreateEmployeeType> = ({
         subtitle={CreateEmployeePageText.PageSubHeaderText}
         isButton={false}
       />
-      <CardEmployee
+      <FormEmployee
         employee={employee}
         onEmployeeInfoChange={onEmployeeInfoChange}
       />
-      <CardDepartment
+      <FormDepartment
         department={department}
         onDepartmentChange={onDepartmentChange}
       />
-      <CardEmployeeAddress
+      <FormEmployeeAddress
         address={employeeAddress}
         onAddressChange={onEmployeeAddressChange}
       />
-      <CardOffice
+      <FormOffice
         address={officeAddress}
         onAddressChange={onOfficeAddressChange}
       />
-      {/* <CardProjects projects={projects} onProjectChange={onProjectChange} /> */}
+      {/* <FormProjects projects={projects} onProjectChange={onProjectChange} /> */}
       <Button
         className={classes.actionButtonSpacing}
         disabled={!isFormComplete}

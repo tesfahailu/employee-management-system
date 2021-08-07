@@ -16,7 +16,7 @@ import React, { Fragment } from 'react';
 import { CreateOfficePageText } from '../../../text';
 import { CreateOfficeAddressType } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardOffice } from '../../../modules/components/CardOffice';
+import { FormOffice } from '../../../modules/components/FormOffice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,7 +57,7 @@ export const CreatePresentation = ({
         subtitle={CreateOfficePageText.PageSubHeaderText}
         isButton={false}
       />
-      <CardOffice address={address} onAddressChange={onAddressChange} />
+      <FormOffice address={address} onAddressChange={onAddressChange} />
       <Button
         className={classes.actionButtonSpacing}
         disabled={!isFormComplete}

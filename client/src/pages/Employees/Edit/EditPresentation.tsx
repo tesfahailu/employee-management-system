@@ -4,12 +4,12 @@ import { Theme } from '@material-ui/core/styles';
 import React from 'react';
 import { EditEmployeePageText } from '../../../text';
 import { EditEmployeeType } from '../../../types/types';
-import { CardDepartment } from '../../../modules/components/CardDepartment';
-import { CardEmployeeAddress } from '../../../modules/components/CardEmployeeAddress';
-import { CardEmployee } from '../../../modules/components/CardEmployee';
-import { CardOffice } from '../../../modules/components/CardOffice';
+import { FormDepartment } from '../../../modules/components/FormDepartment';
+import { FormEmployeeAddress } from '../../../modules/components/FormEmployeeAddress';
+import { FormEmployee } from '../../../modules/components/FormEmployee';
+import { FormOffice } from '../../../modules/components/FormOffice';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardProjects } from '../../../modules/components/CardProjects';
+import { FormProjects } from '../../../modules/components/FormProjects';
 import { Fragment } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,23 +47,23 @@ export const EditPresentation = ({
         isButton={false}
       />
       <Box sx={{ mt: 2 }}>
-        <CardEmployee
+        <FormEmployee
           employee={employee}
           onEmployeeInfoChange={onEmployeeInfoChange}
         />
-        <CardEmployeeAddress
+        <FormEmployeeAddress
           address={employeeAddress}
           onAddressChange={onEmployeeAddressChange}
         />
-        <CardDepartment
+        <FormDepartment
           department={department}
           onDepartmentChange={onDepartmentChange}
         />
-        <CardOffice
+        <FormOffice
           address={officeAddress}
           onAddressChange={onOfficeAddressChange}
         />
-        {/* <CardProjects projects={projects} onProjectChange={onProjectChange} /> */}
+        {/* <FormProjects projects={projects} onProjectChange={onProjectChange} /> */}
       </Box>
       <Button
         className={classes.actionButtonSpacing}

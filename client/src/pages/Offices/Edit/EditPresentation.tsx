@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { EditOfficePageText } from '../../../text';
 import { EditOfficeAddressType } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardOffice } from '../../../modules/components/CardOffice';
+import { FormOffice } from '../../../modules/components/FormOffice';
 
 export const EditPresentation = ({
   address,
@@ -24,7 +24,7 @@ export const EditPresentation = ({
         subtitle={EditOfficePageText.PageSubHeaderText}
         isButton={false}
       />
-      <CardOffice address={address} onAddressChange={onAddressChange} />
+      <FormOffice address={address} onAddressChange={onAddressChange} />
       <Button
         sx={{ mr: 1, mb: 1 }}
         disabled={!isFormChanged}

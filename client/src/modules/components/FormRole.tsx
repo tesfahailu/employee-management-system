@@ -8,12 +8,9 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EditEmployeePageText } from '../../text';
-import { CreateProjectType, ProjectType } from '../../types/types';
+import { CreateRoleType } from '../../types/types';
 
-export const CardProjects = ({
-  project,
-  onProjectChange,
-}: Partial<CreateProjectType>) => {
+export const FormRole = ({ role, onRoleChange }: Partial<CreateRoleType>) => {
   return (
     <Card sx={{ mb: 1 }}>
       <CardContent>
@@ -21,18 +18,15 @@ export const CardProjects = ({
           {EditEmployeePageText.ProjectsText}
         </Typography>
         <Box sx={{ mt: 2 }}>
-          <Project project={project} onProjectChange={onProjectChange} />
+          <Role role={role} onRoleChange={onRoleChange} />
         </Box>
       </CardContent>
     </Card>
   );
 };
 
-const Project: React.FC<Partial<CreateProjectType>> = ({
-  project,
-  onProjectChange,
-}) => {
-  const { name, description } = project!;
+const Role: React.FC<Partial<CreateRoleType>> = ({ role, onRoleChange }) => {
+  const { name, description } = role!;
   return (
     <Grid container spacing={2}>
       <Grid item xs={4}>
@@ -42,7 +36,7 @@ const Project: React.FC<Partial<CreateProjectType>> = ({
           key={'name'}
           label="Name:"
           value={name}
-          onChange={onProjectChange!('name')}
+          onChange={onRoleChange!('name')}
         />
       </Grid>
       <Grid item xs>
@@ -52,7 +46,7 @@ const Project: React.FC<Partial<CreateProjectType>> = ({
           key={'description'}
           label="Description:"
           value={description}
-          onChange={onProjectChange!('description')}
+          onChange={onRoleChange!('description')}
         />
       </Grid>
     </Grid>
