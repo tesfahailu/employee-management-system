@@ -2,7 +2,7 @@ export enum ViewEmployeesPageText {
   PageHeaderText = 'View Employees:',
   PageSubHeaderText = 'View, edit or delete employee by clicking on the appropriate button in the action column',
   CreateButtonText = 'Create',
-  TableHeaderText = 'Employees',
+  TableHeaderText = 'Employees Table:',
 }
 
 export enum ViewEmployeePageText {
@@ -38,7 +38,7 @@ export enum ViewProjectsPageText {
   PageHeaderText = 'View Projects:',
   PageSubHeaderText = 'View employee details or edit employee information by clicking on the edit button in the appropriate section',
   CreateButtonText = 'Create',
-  TableHeaderText = 'Projects',
+  TableHeaderText = 'Projects Table:',
 }
 
 export enum ViewProjectPageText {
@@ -65,7 +65,7 @@ export enum ViewOfficesPageText {
   PageHeaderText = 'View Offices:',
   PageSubHeaderText = 'View office details or edit office address by clicking on the edit button in the appropriate section',
   CreateButtonText = 'Create',
-  TableHeaderText = 'Offices',
+  TableHeaderText = 'Offices Table:',
 }
 
 export enum ViewOfficePageText {
@@ -92,7 +92,7 @@ export enum ViewDepartmentsPageText {
   PageHeaderText = 'View Departments:',
   PageSubHeaderText = 'View department details or edit departments by clicking on the edit button in the appropriate section',
   CreateButtonText = 'Create',
-  TableHeaderText = 'Departments:',
+  TableHeaderText = 'Departments Table:',
 }
 
 export enum ViewDepartmentPageText {
@@ -119,7 +119,7 @@ export enum ViewRolesPageText {
   PageHeaderText = 'View Roles:',
   PageSubHeaderText = 'View roles detail or edit role by clicking on the edit button in the action column',
   CreateButtonText = 'Create',
-  TableHeaderText = 'Roles:',
+  TableHeaderText = 'Roles Table:',
 }
 
 export enum ViewRolePageText {
@@ -140,4 +140,9 @@ export enum CreateRolePageText {
   PageHeaderText = 'Create Role:',
   PageSubHeaderText = 'Create a new role and include a description',
   SaveButtonText = 'Save',
+}
+
+export enum SettingsPageText {
+  PageHeaderText = 'Settings:',
+  PageSubHeaderText = 'Update images, employee info, mode, or color',
 }
