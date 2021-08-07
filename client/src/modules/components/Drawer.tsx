@@ -1,165 +1,185 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {
+  AppBar,
+  Avatar,
+  Box,
   Drawer as MaterialDrawer,
-  Hidden,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  useTheme,
+  Toolbar,
+  Tooltip,
+  Typography,
 } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
 import { Link, useLocation } from 'react-router-dom';
-import { StyledLogo } from './Logo';
+import Logo from './Logo';
 import {
   Face as EmployeesIcon,
   Work as ProjectIcon,
   Business as OfficesIcon,
   Group as DepartmentIcon,
   Person as RolesIcon,
-  Settings as SettingIcon,
+  Menu as MenuIcon,
+  Settings as SettingsIcon,
+  ExitToApp as LogoutIcon,
 } from '@material-ui/icons';
 import { LogoutDialog } from './LogoutDialog';
 
-const useDrawerStyles = makeStyles<Theme, StyleProps>((theme: Theme) =>
-  createStyles({
-    drawer: {
-      [theme.breakpoints.up('sm')]: {
-        width: (props) => props.width as any,
-        flexShrink: 0,
-      },
-      height: 'auto',
-    },
-    drawerPaper: {
-      width: (props) => props.width as any,
-    },
-  }),
-);
+const routesArray: Array<{ label: string; icon: JSX.Element; url: string }> = [
+  { label: 'SmartyPants', icon: <Avatar>A</Avatar>, url: '/settings' },
+  { label: 'Employees', icon: <EmployeesIcon />, url: '/employees' },
+  { label: 'Projects', icon: <ProjectIcon />, url: '/projects' },
+  { label: 'Offices', icon: <OfficesIcon />, url: '/offices' },
+  { label: 'Departments', icon: <DepartmentIcon />, url: '/departments' },
+  { label: 'Roles', icon: <RolesIcon />, url: '/roles' },
+  { label: 'Logout', icon: <LogoutIcon />, url: '' },
+];
 
-const useLinkStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    link: {
-      textDecoration: 'none',
-      color: `${theme.palette.text.primary}`,
-    },
-  }),
-);
+const DrawerContent = ({ selectedRoute }: { selectedRoute: string }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => setOpen(true);
 
-interface StyleProps {
-  width: number;
+  return (
+    <Fragment>
+      <Box sx={{ mt: 4, mb: 4, ml: 3 }}>
+        <Logo />
+      </Box>
+      <List sx={{ p: 0 }}>
+        {routesArray.map(({ label, icon, url }, index) =>
+          label !== 'Logout' ? (
+            <Link
+              to={url}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              key={`label-${index}`}
+            >
+              <ListItem
+                button
+                selected={selectedRoute === url}
+                sx={{
+                  borderRadius: 1,
+                  mx: 'auto',
+                  width: '97%',
+                  mb: index === 0 ? 2 : 0,
+                }}
+              >
+                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemText primary={label} />
+              </ListItem>
+            </Link>
+          ) : (
+            <ListItem
+              button
+              key="logout"
+              sx={{ borderRadius: 3, mx: 'auto', width: '97%' }}
+            >
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={label} onClick={handleClickOpen} />
+            </ListItem>
+          ),
+        )}
+      </List>
+      <LogoutDialog open={open} setOpen={setOpen} />
+    </Fragment>
+  );
+};
+
+interface DrawerProp {
+  handleDrawerToggle: () => void;
+  mobileOpen: boolean;
+  drawerWidth: number;
 }
 
 export const Drawer = ({
   handleDrawerToggle,
   mobileOpen,
   drawerWidth,
-}: {
-  handleDrawerToggle: () => void;
-  mobileOpen: boolean | undefined;
-  drawerWidth: number;
-}) => {
-  const props: StyleProps = {
-    width: drawerWidth,
-  };
-  const classes = useDrawerStyles(props);
-  const theme = useTheme();
-
-  return (
-    <nav className={classes.drawer}>
-      <Hidden smUp implementation="css">
-        <MaterialDrawer
-          variant="temporary"
-          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          ModalProps={{
-            keepMounted: true,
-          }}
-        >
-          <DrawerContent />
-        </MaterialDrawer>
-      </Hidden>
-      <Hidden smDown implementation="css">
-        <MaterialDrawer
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          variant="permanent"
-          open
-        >
-          <DrawerContent />
-        </MaterialDrawer>
-      </Hidden>
-    </nav>
-  );
-};
-
-const DrawerContent = () => {
+}: DrawerProp) => {
   const [selectedRoute, setSelectedRoute] = React.useState('');
   const location = useLocation();
 
   useEffect(() => {
     const pathname = location.pathname;
     const route = pathname.split('/');
-    setSelectedRoute(route[1]);
+    setSelectedRoute(`/${route[1]}`);
   }, [location]);
 
   return (
-    <List>
-      <StyledLink to="/user">
-        <ListItem key="logo" style={{ marginTop: 5 }}>
-          <StyledLogo />
-        </ListItem>
-        <ListItem
-          button
-          key="user-settings"
-          style={{ marginTop: 10, marginBottom: 10 }}
-        >
-          <ListItemIcon>
-            {/* <Avatar alt="image of user" src="/IMG_1191.JPG" /> */}
-          </ListItemIcon>
-          <ListItemText>SmarttyPants</ListItemText>
-        </ListItem>
-      </StyledLink>
-      {[
-        ['Employees', <EmployeesIcon />, '/employees'],
-        ['Projects', <ProjectIcon />, '/projects'],
-        ['Offices', <OfficesIcon />, '/offices'],
-        ['Departments', <DepartmentIcon />, '/departments'],
-        ['Roles', <RolesIcon />, '/roles'],
-        ['Settings', <SettingIcon />, '/settings'],
-      ].map(([text, icon, route], index) => (
-        <StyledLink to={route as string}>
-          <ListItem
-            button
-            key={text + index.toString()}
-            selected={selectedRoute === (route as string).split('/')[1]}
+    <Fragment>
+      <AppBar
+        position="fixed"
+        color="primary"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` },
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            <ListItemIcon>{icon}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        </StyledLink>
-      ))}
-      <LogoutDialog />
-    </List>
-  );
-};
-
-const StyledLink = ({
-  children,
-  ...other
-}: {
-  children: React.ReactNode;
-  to: string;
-}) => {
-  const classes = useLinkStyles();
-  return (
-    <Link className={classes.link} key={other.to.toString()} {...other}>
-      {children}
-    </Link>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h5">
+            {routesArray.find(({ url }) => selectedRoute === url)?.label}
+          </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <Tooltip title="Settings">
+            <IconButton color="inherit" aria-label="open drawer" edge="start">
+              <Link
+                to={routesArray[0].url}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <SettingsIcon />
+              </Link>
+            </IconButton>
+          </Tooltip>
+        </Toolbar>
+      </AppBar>
+      <Box
+        sx={{
+          width: {
+            sm: drawerWidth,
+          },
+        }}
+      >
+        <MaterialDrawer
+          variant="temporary"
+          anchor="left"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
+          }}
+          ModalProps={{
+            keepMounted: true,
+          }}
+        >
+          <DrawerContent selectedRoute={selectedRoute} />
+        </MaterialDrawer>
+        <MaterialDrawer
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
+          }}
+          variant="permanent"
+          open
+        >
+          <DrawerContent selectedRoute={selectedRoute} />
+        </MaterialDrawer>
+      </Box>
+    </Fragment>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from './modules/components/Theme';
 import { StyledEngineProvider, Theme } from '@material-ui/core/styles';
 import { setAccessToken } from './services/session/accessToken';
-import { GeneralRoutes } from './routes/Routes';
+import { Routes } from './routes/Routes';
 import './App.css';
 import { CssBaseline } from '@material-ui/core';
 
@@ -30,7 +30,7 @@ export const App: React.FC = ({}) => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider>
         <CssBaseline />
-        <GeneralRoutes />
+        <Routes />
       </ThemeProvider>
     </StyledEngineProvider>
   );

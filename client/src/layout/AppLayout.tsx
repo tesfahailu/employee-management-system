@@ -1,56 +1,33 @@
-import React from 'react';
-import { Theme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import React, { Fragment } from 'react';
+import { Box, Grid, Toolbar } from '@material-ui/core';
 import { Drawer } from '../modules/components/Drawer';
 
-interface Props {
-  children?: React.ReactNode;
-  drawerWidth: number;
-}
-
-export function AppLayout({ children, drawerWidth }: Props) {
-  const classes = useStyles();
+export function AppLayout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const drawerWidth = 220;
   return (
-    <Grid container className={classes.root} wrap="nowrap">
-      <Grid item>
-        <Drawer
-          handleDrawerToggle={handleDrawerToggle}
-          drawerWidth={drawerWidth}
-          mobileOpen={mobileOpen}
-        />
-      </Grid>
-      <Grid
-        item
-        container
-        direction="column"
-        wrap="nowrap"
-        xs
-        sx={{ width: `calc(100vw - ${drawerWidth}px )` }}
+    <Fragment>
+      <Drawer
+        mobileOpen={mobileOpen}
+        handleDrawerToggle={handleDrawerToggle}
+        drawerWidth={drawerWidth}
+      />
+      <Box
+        sx={{
+          ml: { xs: 0, sm: `${drawerWidth}px` },
+          width: { xs: '100%', sm: `calc(100vw - ${drawerWidth}px )` },
+          maxWidth: '100%',
+        }}
       >
-        <Grid item xs className={classes.mainWrapper}>
-          <main className={classes.main}>{children}</main>
-        </Grid>
-      </Grid>
-    </Grid>
+        <Toolbar />
+        <Box component="main" sx={{ p: 3 }}>
+          {children}
+        </Box>
+      </Box>
+    </Fragment>
   );
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    height: '100vh',
-  },
-  mainWrapper: {
-    overflowY: 'auto',
-  },
-  main: {
-    height: '100%',
-    overflowY: 'auto',
-    padding: theme.spacing(2),
-  },
-}));

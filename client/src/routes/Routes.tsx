@@ -1,6 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { useMediaQuery } from '@material-ui/core';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { AppLayout } from './../layout/AppLayout';
 
 import { ViewAllData as EmployeesViewAll } from '../pages/Employees/ViewAll/ViewAllData';
@@ -31,7 +30,7 @@ import { SettingsData as Settings } from '../pages/Settings/SettingsData';
 import { Register } from '../pages/Register/Register';
 import { Login } from '../pages/Login/Login';
 
-export const PageRoutes: React.FC = () => (
+const PageRoutes: React.FC = () => (
   <Switch>
     <Route exact path="/employees" component={EmployeesViewAll} />
     <Route
@@ -66,20 +65,20 @@ export const PageRoutes: React.FC = () => (
     <Route exact path="/roles/create" component={RolesCreate} />
 
     <Route exact path="/settings" component={Settings} />
+    <Route path="/">
+      <Redirect to="/employees" />
+    </Route>
   </Switch>
 );
 
-export const GeneralRoutes = () => {
-  const drawerWidth = 200;
-  return (
+export const Routes = () => (
+  <Switch>
+    <Route exact path="/register" component={Register} />
+    <Route exact path="/login" component={Login} />
     <Switch>
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/login" component={Login} />
-      <Switch>
-        <AppLayout drawerWidth={drawerWidth}>
-          <PageRoutes />
-        </AppLayout>
-      </Switch>
+      <AppLayout>
+        <PageRoutes />
+      </AppLayout>
     </Switch>
-  );
-};
+  </Switch>
+);

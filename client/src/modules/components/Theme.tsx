@@ -86,6 +86,9 @@ export function ThemeProvider(props: { children: any }) {
           ...paletteColors,
         },
         spacing: 8,
+        shape: {
+          borderRadius: 5,
+        },
       },
       {
         components: {
@@ -107,7 +110,7 @@ export function ThemeProvider(props: { children: any }) {
           },
           MuiCard: {
             defaultProps: {
-              elevation: 3,
+              elevation: 2,
             },
           },
           MuiCssBaseline: {
@@ -122,7 +125,7 @@ export function ThemeProvider(props: { children: any }) {
           },
           MuiPaper: {
             defaultProps: {
-              elevation: 3,
+              elevation: 2,
             },
           },
           MuiRipple: {

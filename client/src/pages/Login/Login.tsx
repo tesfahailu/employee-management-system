@@ -17,7 +17,7 @@ import { MeDocument, MeQuery, useLoginMutation } from '../../generated/graphql';
 import { setAccessToken } from '../../services/session/accessToken';
 import { RouteComponentProps } from 'react-router';
 import { CopyRight } from '../../modules/components/CopyRight';
-import { StyledLogo } from '../../modules/components/Logo';
+import Logo from '../../modules/components/Logo';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -97,7 +97,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
   return (
     <Container component="main" maxWidth="xs" className={classes.container}>
       <Card className={classes.card}>
-        <StyledLogo />
+        <Logo />
         <Typography component="h1" variant="h6">
           Sign In
         </Typography>
