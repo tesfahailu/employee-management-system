@@ -9,8 +9,6 @@ import {
   Box,
   Card,
 } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
 import { RouteComponentProps } from 'react-router-dom';
 import {
   MeDocument,
@@ -19,27 +17,6 @@ import {
 } from '../../generated/graphql';
 import { CopyRight } from '../../modules/components/CopyRight';
 import Logo from '../../modules/components/Logo';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      marginTop: 100,
-    },
-    card: {
-      padding: theme.spacing(3),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    form: {
-      width: '100%',
-      marginTop: theme.spacing(3),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }),
-);
 
 enum ErrorMessage {
   UsernameTooShort = 'username must be greater than 5 characters.',
@@ -50,8 +27,6 @@ enum ErrorMessage {
 }
 
 export const Register: React.FC<RouteComponentProps> = ({ history }) => {
-  const classes = useStyles();
-
   const [username, setUsername] = useState('');
   const [confirmUsername, setConfirmUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -126,15 +101,23 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
   }, [username, confirmUsername, password, confirmPassword]);
 
   return (
-    <Container component="main" maxWidth="xs" className={classes.container}>
-      <Card className={classes.card}>
+    <Container component="main" maxWidth="xs" sx={{ mt: 12 }}>
+      <Card
+        sx={{
+          padding: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <Logo />
         <Typography component="h1" variant="h6">
           Register New User
         </Typography>
-        <form
-          className={classes.form}
-          onSubmit={async (e) => {
+        <Container
+          component="form"
+          sx={{ width: '100%', mt: 3 }}
+          onSubmit={async (e: React.SyntheticEvent) => {
             e.preventDefault();
             await register({
               variables: {
@@ -211,7 +194,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
           <Button
             type="submit"
             fullWidth
-            className={classes.submit}
+            sx={{ mt: 3, mr: 0, mb: 2 }}
             disabled={isButtonDisabled}
           >
             Register
@@ -223,7 +206,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </Container>
         <Box mt={5}>
           <CopyRight />
         </Box>

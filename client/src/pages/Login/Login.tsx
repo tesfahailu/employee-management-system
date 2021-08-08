@@ -95,7 +95,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
   }, [username, password]);
 
   return (
-    <Container component="main" maxWidth="xs" className={classes.container}>
+    <Container component="main" maxWidth="xs" sx={{ mt: 10 }}>
       <Card className={classes.card}>
         <Logo />
         <Typography component="h1" variant="h6">

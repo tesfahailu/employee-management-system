@@ -10,20 +10,18 @@ interface ViewOnePresentationProps {
 
 export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
   role,
-}) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={ViewRolePageText.PageHeaderText}
-        subtitle={ViewRolePageText.PageSubHeaderText}
-        isButton={false}
-      />
-      <CardFormatted
-        headerText={ViewRolePageText.RoleText}
-        buttonText={ViewRolePageText.EditButtonText}
-        onEditButtonClick={() => {}}
-        data={role}
-      />
-    </Fragment>
-  );
-};
+}) => (
+  <Fragment>
+    <PageHeader
+      title={ViewRolePageText.PageHeaderText}
+      subtitle={ViewRolePageText.PageSubHeaderText}
+      isButton={false}
+    />
+    <CardFormatted
+      headerText={ViewRolePageText.RoleText}
+      buttonText={ViewRolePageText.EditButtonText}
+      onEditButtonClick={() => {}}
+      data={role}
+    />
+  </Fragment>
+);

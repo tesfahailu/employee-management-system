@@ -95,23 +95,21 @@ interface AddressProps {
   rowsData: AddressType[];
 }
 
-export const ViewAllPresentation: React.FC<AddressProps> = ({ rowsData }) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={ViewOfficesPageText.PageHeaderText}
-        subtitle={ViewOfficesPageText.PageSubHeaderText}
-        isButton={true}
-        buttonText={ViewOfficesPageText.CreateButtonText}
-        buttonHref="/offices/create"
-      />
-      <Table<AddressType>
-        title={ViewOfficesPageText.TableHeaderText}
-        rowsData={rowsData}
-        headCells={headCells}
-        ActionButtons={ActionButtons}
-        minWidth="1400px"
-      />
-    </Fragment>
-  );
-};
+export const ViewAllPresentation: React.FC<AddressProps> = ({ rowsData }) => (
+  <Fragment>
+    <PageHeader
+      title={ViewOfficesPageText.PageHeaderText}
+      subtitle={ViewOfficesPageText.PageSubHeaderText}
+      isButton={true}
+      buttonText={ViewOfficesPageText.CreateButtonText}
+      buttonHref="/offices/create"
+    />
+    <Table<AddressType>
+      title={ViewOfficesPageText.TableHeaderText}
+      rowsData={rowsData}
+      headCells={headCells}
+      ActionButtons={ActionButtons}
+      minWidth="1400px"
+    />
+  </Fragment>
+);

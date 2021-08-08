@@ -5,34 +5,17 @@ import React, {
   useCallback,
   Fragment,
 } from 'react';
-import { Avatar, Button, Grid, Paper, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
+import {
+  Avatar,
+  Button,
+  Grid,
+  Paper,
+  Typography,
+  Box,
+} from '@material-ui/core';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import UploadButton from './UploadButton';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      padding: 20,
-      marginBottom: 20,
-    },
-    textSpacing: {
-      marginBottom: 10,
-    },
-    size: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-    },
-    buttonContainer: {
-      marginTop: 10,
-    },
-    buttonSpacing: {
-      marginRight: 10,
-    },
-  }),
-);
 
 const UploadImage = ({
   url,
@@ -40,27 +23,24 @@ const UploadImage = ({
 }: {
   url: string;
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
-}) => {
-  const classes = useStyles();
-  return (
-    <Grid item>
-      <Grid
-        container
-        direction="column"
-        justifyContent="flex-end"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-          <Avatar src={url} className={classes.size} />
-        </Grid>
-        <Grid item xs>
-          <UploadButton onSelectFile={onSelectFile} />
-        </Grid>
+}) => (
+  <Grid item>
+    <Grid
+      container
+      direction="column"
+      justifyContent="flex-end"
+      alignItems="center"
+      spacing={1}
+    >
+      <Grid item>
+        <Avatar src={url} sx={{ width: 70, height: 70 }} />
+      </Grid>
+      <Grid item xs>
+        <UploadButton onSelectFile={onSelectFile} />
       </Grid>
     </Grid>
-  );
-};
+  </Grid>
+);
 
 const FileAttributes = ({
   isSelected,
@@ -68,38 +48,40 @@ const FileAttributes = ({
 }: {
   isSelected: boolean;
   selectedFile: File;
-}) => {
-  return (
-    <Grid item xs={12} sm>
-      {isSelected ? (
-        <div>
-          <p>Image Name: {selectedFile!.name}</p>
-          <p>Image Type: {selectedFile!.type}</p>
-          <p>Size in bytes: {selectedFile!.size}</p>
-          <p>Last Modified Date: {selectedFile!.lastModified}</p>
-        </div>
-      ) : (
-        <p>Select an image to show details</p>
-      )}
-    </Grid>
-  );
-};
+}) => (
+  <Box sx={{ display: 'flex' }}>
+    {isSelected ? (
+      <Box sx={{ pt: 2 }}>
+        <Typography variant="body2">
+          Image Name: {selectedFile!.name}
+        </Typography>
+        <Typography variant="body2">
+          Image Type: {selectedFile!.type}
+        </Typography>
+        <Typography variant="body2">
+          Size in bytes: {selectedFile!.size}
+        </Typography>
+        <Typography variant="body2">
+          Last Modified Date: {selectedFile!.lastModified}
+        </Typography>
+      </Box>
+    ) : (
+      <Typography variant="body2" sx={{ pt: 2 }}>
+        Select an image to show details
+      </Typography>
+    )}
+  </Box>
+);
 
 const SaveImageButton = ({
   setIsSelected,
 }: {
   setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const classes = useStyles();
-  return (
-    <Button
-      onClick={() => setIsSelected(false)}
-      className={classes.buttonSpacing}
-    >
-      Save Cropped Image
-    </Button>
-  );
-};
+}) => (
+  <Button onClick={() => setIsSelected(false)} sx={{ mr: 1 }}>
+    Save Cropped Image
+  </Button>
+);
 
 const CancelButton = ({
   setIsSelected,
@@ -114,7 +96,6 @@ const CancelButton = ({
 };
 
 export const UploadImagePaper = () => {
-  const classes = useStyles();
   const [upImg, setUpImg] = useState<string>();
   const imgRef = useRef(null);
   const [crop, setCrop] = useState<ReactCrop.Crop>({
@@ -142,8 +123,8 @@ export const UploadImagePaper = () => {
   }, []);
 
   return (
-    <Paper className={classes.paper}>
-      <Typography variant="subtitle1" className={classes.textSpacing}>
+    <Paper sx={{ padding: 2, mb: 2 }}>
+      <Typography variant="h6" sx={{ mb: 1 }}>
         Upload Image:
       </Typography>
       <Grid
@@ -168,9 +149,14 @@ export const UploadImagePaper = () => {
             onComplete={(c) => setCompletedCrop(c)}
             maxWidth={250}
             maxHeight={250}
-            style={{ width: 500, height: 'auto', display: 'block' }}
+            style={{
+              width: 500,
+              height: 'auto',
+              display: 'block',
+              marginBottom: 10,
+            }}
           />
-          <div className={classes.buttonContainer}>
+          <div>
             <SaveImageButton setIsSelected={setIsSelected} />
             <CancelButton setIsSelected={setIsSelected} />
           </div>

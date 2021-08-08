@@ -1,4 +1,4 @@
-import { Grid, IconButton, Stack } from '@material-ui/core';
+import { IconButton, Stack } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
 import { ViewDepartmentsPageText } from '../../../text';
@@ -67,23 +67,21 @@ interface DepartmentProps {
 
 export const ViewAllPresentation: React.FC<DepartmentProps> = ({
   rowsData,
-}) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={ViewDepartmentsPageText.PageHeaderText}
-        subtitle={ViewDepartmentsPageText.PageSubHeaderText}
-        isButton={true}
-        buttonText={ViewDepartmentsPageText.CreateButtonText}
-        buttonHref="/departments/create"
-      />
-      <Table<Rows>
-        title={ViewDepartmentsPageText.TableHeaderText}
-        rowsData={rowsData}
-        headCells={headCells}
-        ActionButtons={ActionButtons}
-        minWidth="850px"
-      />
-    </Fragment>
-  );
-};
+}) => (
+  <Fragment>
+    <PageHeader
+      title={ViewDepartmentsPageText.PageHeaderText}
+      subtitle={ViewDepartmentsPageText.PageSubHeaderText}
+      isButton={true}
+      buttonText={ViewDepartmentsPageText.CreateButtonText}
+      buttonHref="/departments/create"
+    />
+    <Table<Rows>
+      title={ViewDepartmentsPageText.TableHeaderText}
+      rowsData={rowsData}
+      headCells={headCells}
+      ActionButtons={ActionButtons}
+      minWidth="850px"
+    />
+  </Fragment>
+);

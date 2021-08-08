@@ -10,22 +10,20 @@ export const EditPresentation = ({
   onProjectChange,
   isFormChanged,
   saveChanges,
-}: EditProjectType) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={EditProjectPageText.PageHeaderText}
-        subtitle={EditProjectPageText.PageSubHeaderText}
-        isButton={false}
-      />
-      <FormProjects project={project} onProjectChange={onProjectChange} />
-      <Button
-        sx={{ mr: 1, mb: 1 }}
-        disabled={!isFormChanged}
-        onClick={saveChanges}
-      >
-        {EditProjectPageText.SaveButtonText}
-      </Button>
-    </Fragment>
-  );
-};
+}: EditProjectType) => (
+  <Fragment>
+    <PageHeader
+      title={EditProjectPageText.PageHeaderText}
+      subtitle={EditProjectPageText.PageSubHeaderText}
+      isButton={false}
+    />
+    <FormProjects project={project} onProjectChange={onProjectChange} />
+    <Button
+      sx={{ mr: 1, mb: 1 }}
+      disabled={!isFormChanged}
+      onClick={saveChanges}
+    >
+      {EditProjectPageText.SaveButtonText}
+    </Button>
+  </Fragment>
+);

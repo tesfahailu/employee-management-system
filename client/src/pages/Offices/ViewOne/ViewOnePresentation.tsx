@@ -10,20 +10,18 @@ interface ViewOnePresentationProps {
 
 export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
   address,
-}) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={ViewOfficePageText.PageHeaderText}
-        subtitle={ViewOfficePageText.PageSubHeaderText}
-        isButton={false}
-      />
-      <CardFormatted
-        headerText={ViewOfficePageText.OfficeAddressText}
-        buttonText={ViewOfficePageText.EditButtonText}
-        onEditButtonClick={() => {}}
-        data={address}
-      />
-    </Fragment>
-  );
-};
+}) => (
+  <Fragment>
+    <PageHeader
+      title={ViewOfficePageText.PageHeaderText}
+      subtitle={ViewOfficePageText.PageSubHeaderText}
+      isButton={false}
+    />
+    <CardFormatted
+      headerText={ViewOfficePageText.OfficeAddressText}
+      buttonText={ViewOfficePageText.EditButtonText}
+      onEditButtonClick={() => {}}
+      data={address}
+    />
+  </Fragment>
+);

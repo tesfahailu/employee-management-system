@@ -9,7 +9,6 @@ import { Box } from '@material-ui/system';
 import { visuallyHidden } from '@material-ui/utils';
 import React from 'react';
 import { Order } from './TableUtils';
-import { Rows } from './../../pages/Employees/ViewAll/testData';
 import { HeadCell } from './../../pages/Employees/ViewAll/ViewAllPresentation';
 
 interface TableHead<R> {

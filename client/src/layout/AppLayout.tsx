@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Box, Grid, Toolbar } from '@material-ui/core';
+import { Box, Toolbar } from '@material-ui/core';
 import { Drawer } from '../modules/components/Drawer';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
@@ -18,8 +18,8 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       />
       <Box
         sx={{
-          ml: { xs: 0, sm: `${drawerWidth}px` },
-          width: { xs: '100%', sm: `calc(100vw - ${drawerWidth}px )` },
+          ml: { xs: 0, md: `${drawerWidth}px` },
+          width: { xs: '100%', md: `calc(100vw - ${drawerWidth}px )` },
           maxWidth: '100%',
         }}
       >

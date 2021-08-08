@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { ProjectFieldType } from '../../../types/types';
 import { CreatePresentation } from '../../Projects/Create/CreatePresentation';
 
-export const CreateData = ({}) => {
+export const CreateData = () => {
   const [project, setProject] = useState({
     id: 0,
     name: '',
