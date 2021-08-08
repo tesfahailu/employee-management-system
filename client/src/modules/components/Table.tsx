@@ -3,7 +3,6 @@ import MaterialTable from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
-import { Rows } from '../../pages/Employees/ViewAll/testData';
 import { TableToolBar } from './TableToolBar';
 import { TableHead } from './TableHead';
 import { Order } from './TableUtils';

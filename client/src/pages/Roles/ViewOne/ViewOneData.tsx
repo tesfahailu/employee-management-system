@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ViewOnePresentation } from './ViewOnePresentation';
 
-interface ViewOneDataProps {}
-
-export const ViewOneData: React.FC<ViewOneDataProps> = ({}) => {
+export const ViewOneData = () => {
   const role = { id: 1, name: 'limited', description: 'temporary access' };
 
   const { id, ...spreadRole } = role;

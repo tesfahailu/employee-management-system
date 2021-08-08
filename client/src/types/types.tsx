@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from '@material-ui/core';
-import { ChangeEvent, ChangeEventHandler } from 'react';
+import { ChangeEvent } from 'react';
 
 export interface EmployeeType {
   [index: string]: string | undefined;

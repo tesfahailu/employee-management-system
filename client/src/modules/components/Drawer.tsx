@@ -111,8 +111,8 @@ export const Drawer = ({
         position="fixed"
         color="primary"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
         }}
       >
         <Toolbar>
@@ -121,7 +121,7 @@ export const Drawer = ({
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { md: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
@@ -144,7 +144,7 @@ export const Drawer = ({
       <Box
         sx={{
           width: {
-            sm: drawerWidth,
+            md: drawerWidth,
           },
         }}
       >
@@ -154,7 +154,7 @@ export const Drawer = ({
           open={mobileOpen}
           onClose={handleDrawerToggle}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
@@ -168,7 +168,7 @@ export const Drawer = ({
         </MaterialDrawer>
         <MaterialDrawer
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { xs: 'none', md: 'block' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,

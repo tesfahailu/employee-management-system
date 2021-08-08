@@ -8,10 +8,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { CSVLink } from 'react-csv';
-import { Rows } from '../../pages/Employees/ViewAll/testData';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
+  border: `1px solid ${theme.palette.primary.main}`,
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {

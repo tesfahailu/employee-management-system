@@ -1,7 +1,7 @@
 import { IconButton, Stack } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
-import { ViewProjectPageText, ViewProjectsPageText } from '../../../text';
+import { ViewProjectsPageText } from '../../../text';
 import {
   Pageview as PageViewIcon,
   Edit as EditIcon,
@@ -73,23 +73,21 @@ const ActionButtons: React.FC<ActionButtons> = ({ rowId }) => {
   );
 };
 
-export const ViewAllPresentation: React.FC<ProjectsProps> = ({ rowsData }) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={ViewProjectsPageText.PageHeaderText}
-        subtitle={ViewProjectsPageText.PageSubHeaderText}
-        isButton={true}
-        buttonText={ViewProjectsPageText.CreateButtonText}
-        buttonHref="/projects/create"
-      />
-      <Table<Rows>
-        title={ViewProjectsPageText.TableHeaderText}
-        rowsData={rowsData}
-        headCells={columns}
-        ActionButtons={ActionButtons}
-        minWidth="500px"
-      />
-    </Fragment>
-  );
-};
+export const ViewAllPresentation: React.FC<ProjectsProps> = ({ rowsData }) => (
+  <Fragment>
+    <PageHeader
+      title={ViewProjectsPageText.PageHeaderText}
+      subtitle={ViewProjectsPageText.PageSubHeaderText}
+      isButton={true}
+      buttonText={ViewProjectsPageText.CreateButtonText}
+      buttonHref="/projects/create"
+    />
+    <Table<Rows>
+      title={ViewProjectsPageText.TableHeaderText}
+      rowsData={rowsData}
+      headCells={columns}
+      ActionButtons={ActionButtons}
+      minWidth="500px"
+    />
+  </Fragment>
+);

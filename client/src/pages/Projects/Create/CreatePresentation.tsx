@@ -10,18 +10,16 @@ export const CreatePresentation = ({
   onProjectChange,
   isFormComplete,
   saveChanges,
-}: CreateProjectType) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={CreateProjectPageText.PageHeaderText}
-        subtitle={CreateProjectPageText.PageSubHeaderText}
-        isButton={false}
-      />
-      <FormProjects project={project} onProjectChange={onProjectChange} />
-      <Button sx={{ mt: 1 }} disabled={!isFormComplete} onClick={saveChanges}>
-        {CreateProjectPageText.SaveButtonText}
-      </Button>
-    </Fragment>
-  );
-};
+}: CreateProjectType) => (
+  <Fragment>
+    <PageHeader
+      title={CreateProjectPageText.PageHeaderText}
+      subtitle={CreateProjectPageText.PageSubHeaderText}
+      isButton={false}
+    />
+    <FormProjects project={project} onProjectChange={onProjectChange} />
+    <Button sx={{ mt: 1 }} disabled={!isFormComplete} onClick={saveChanges}>
+      {CreateProjectPageText.SaveButtonText}
+    </Button>
+  </Fragment>
+);

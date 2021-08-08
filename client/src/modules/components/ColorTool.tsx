@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Fragment } from 'react';
 import { rgbToHex, useTheme } from '@material-ui/core/styles';
 import * as colors from '@material-ui/core/colors';
 import Box from '@material-ui/core/Box';
@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
 import Slider from '@material-ui/core/Slider';
 import { capitalize } from '@material-ui/core/utils';
-import { Button } from '@material-ui/core';
+import { Button, Card, CardContent } from '@material-ui/core';
 import { DispatchContext } from './Theme';
 
 const defaults = {
@@ -60,7 +60,24 @@ const TooltipRadio = React.forwardRef<HTMLButtonElement, RadioProps>(
   },
 );
 
-function ColorTool() {
+interface IShades {
+  50: string;
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+  A100: string;
+  A200: string;
+  A400: string;
+  A700: string;
+}
+
+export default function ColorTool() {
   const dispatch = React.useContext(DispatchContext);
   const theme = useTheme();
   const [state, setState] = React.useState({
@@ -110,23 +127,6 @@ function ColorTool() {
         }));
       }
     };
-
-  interface IShades {
-    50: string;
-    100: string;
-    200: string;
-    300: string;
-    400: string;
-    500: string;
-    600: string;
-    700: string;
-    800: string;
-    900: string;
-    A100: string;
-    A200: string;
-    A400: string;
-    A700: string;
-  }
 
   const handleChangeHue =
     (name: 'primary' | 'secondary') =>
@@ -221,12 +221,12 @@ function ColorTool() {
     const color = state[`${intent}` as const];
 
     return (
-      <Grid item xs={12} sm={6} md={4}>
+      <Fragment>
         <Typography
           component="label"
           gutterBottom
           htmlFor={intent}
-          variant="h6"
+          variant="subtitle1"
         >
           {capitalize(intent)}
         </Typography>
@@ -295,22 +295,27 @@ function ColorTool() {
           })}
         </Box>
         {colorBar(color as string)}
-      </Grid>
+      </Fragment>
     );
   };
 
   return (
-    <Grid container spacing={5} sx={{ p: 0 }}>
-      {colorPicker('primary')}
-      {colorPicker('secondary')}
-      <Grid item xs={12}>
-        <Button onClick={handleChangeDocsColors}>Set Docs Colors</Button>
-        <Button onClick={handleResetDocsColors} sx={{ ml: 1 }}>
-          Reset Docs Colors
-        </Button>
-      </Grid>
-    </Grid>
+    <Card>
+      <CardContent>
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Palette:
+        </Typography>
+        <Grid container xs={12} spacing={4}>
+          <Grid item>{colorPicker('primary')}</Grid>
+          <Grid item>{colorPicker('secondary')}</Grid>
+        </Grid>
+        <Grid item xs={12} sx={{ mt: 2 }}>
+          <Button onClick={handleChangeDocsColors}>Set App Colors</Button>
+          <Button onClick={handleResetDocsColors} sx={{ ml: 1 }}>
+            Reset App Colors
+          </Button>
+        </Grid>
+      </CardContent>
+    </Card>
   );
 }
-
-export default ColorTool;

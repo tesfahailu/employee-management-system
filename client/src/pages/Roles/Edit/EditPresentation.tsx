@@ -10,18 +10,16 @@ export const EditPresentation = ({
   onRoleChange,
   isFormComplete,
   saveChanges,
-}: CreateRoleType) => {
-  return (
-    <Fragment>
-      <PageHeader
-        title={EditRolePageText.PageHeaderText}
-        subtitle={EditRolePageText.PageSubHeaderText}
-        isButton={false}
-      />
-      <FormRole role={role} onRoleChange={onRoleChange} />
-      <Button sx={{ mt: 1 }} disabled={!isFormComplete} onClick={saveChanges}>
-        {EditRolePageText.SaveButtonText}
-      </Button>
-    </Fragment>
-  );
-};
+}: CreateRoleType) => (
+  <Fragment>
+    <PageHeader
+      title={EditRolePageText.PageHeaderText}
+      subtitle={EditRolePageText.PageSubHeaderText}
+      isButton={false}
+    />
+    <FormRole role={role} onRoleChange={onRoleChange} />
+    <Button sx={{ mt: 1 }} disabled={!isFormComplete} onClick={saveChanges}>
+      {EditRolePageText.SaveButtonText}
+    </Button>
+  </Fragment>
+);
