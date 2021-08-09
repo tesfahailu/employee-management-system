@@ -25,7 +25,7 @@ import {
   Settings as SettingsIcon,
   ExitToApp as LogoutIcon,
 } from '@material-ui/icons';
-import { LogoutDialog } from './LogoutDialog';
+import { DialogLogout } from './DialogLogout';
 
 const routesArray: Array<{ label: string; icon: JSX.Element; url: string }> = [
   { label: 'SmartyPants', icon: <Avatar>A</Avatar>, url: '/settings' },
@@ -80,7 +80,7 @@ const DrawerContent = ({ selectedRoute }: { selectedRoute: string }) => {
           ),
         )}
       </List>
-      <LogoutDialog open={open} setOpen={setOpen} />
+      <DialogLogout open={open} setOpen={setOpen} />
     </Fragment>
   );
 };

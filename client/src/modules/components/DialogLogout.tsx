@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export function LogoutDialog({
+export function DialogLogout({
   open,
   setOpen,
 }: {
