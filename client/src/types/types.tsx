@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from '@material-ui/core';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, MouseEvent } from 'react';
 
 export interface EmployeeType {
   id?: number;
@@ -74,7 +74,7 @@ export type AddressFieldType =
   | 'country'
   | 'zipCode';
 
-export type OfficeFieldType = 'name';
+export type OfficeFieldType = 'name' | 'description';
 export type ProjectFieldType = 'name' | 'description';
 export type RoleFieldType = 'name' | 'description';
 
@@ -97,7 +97,7 @@ export interface EditEmployeeType {
       | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
-  office: { id: number; name: string };
+  office: { id: number; name: string; description?: string };
   onOfficeChange: (
     field: OfficeFieldType,
   ) => (
@@ -105,7 +105,7 @@ export interface EditEmployeeType {
       | SelectChangeEvent
       | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
-  officesList: { id: number; name: string }[];
+  officesList: { id: number; name: string; description?: string }[];
 
   department: DepartmentType;
   onDepartmentChange: (
@@ -128,12 +128,16 @@ export interface EditEmployeeType {
   rolesList: { id: number; name: string; description: string }[];
 
   projects: Array<ProjectType>;
-  onProjectChange: (
+  onProjectAdd: (
     index: number,
-    field: ProjectFieldType,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-  projectsList: {}[];
+  ) => (event: MouseEvent<HTMLInputElement>) => void;
+  onProjectRemove: (
+    index: number,
+  ) => (event: MouseEvent<HTMLInputElement>) => void;
+  projectsList: { id: number; name: string; description?: string }[];
 
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }

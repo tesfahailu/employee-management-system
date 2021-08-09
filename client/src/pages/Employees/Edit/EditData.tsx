@@ -1,11 +1,10 @@
 import { SelectChangeEvent } from '@material-ui/core';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState, MouseEvent } from 'react';
 import {
   AddressFieldType,
   DepartmentFieldType,
   EmployeeFieldType,
   OfficeFieldType,
-  ProjectFieldType,
   RoleFieldType,
 } from '../../../types/types';
 import { employeeData } from '../ViewOne/testData';
@@ -53,6 +52,7 @@ export const EditData = () => {
   const [projects, setProjects] = useState([
     { id: 0, name: '', description: '' },
   ]);
+  const [open, setOpen] = useState(false);
   const [isFormChanged, setIsFormChanged] = useState(false);
 
   const officesList = [
@@ -81,8 +81,8 @@ export const EditData = () => {
   ];
   const projectsList = [
     { id: 0, name: 'Amazon', description: 'Integrate with AWS' },
-    { id: 0, name: 'Microsoft', description: 'Integrate with Azure' },
-    { id: 0, name: 'Google', description: 'Integrate with Firebase' },
+    { id: 1, name: 'Microsoft', description: 'Integrate with Azure' },
+    { id: 2, name: 'Google', description: 'Integrate with Firebase' },
   ];
 
   useEffect(() => {
@@ -203,16 +203,26 @@ export const EditData = () => {
       });
     };
 
-  const onProjectChange =
-    (id: number, field: ProjectFieldType) =>
-    (event: ChangeEvent<HTMLInputElement>) => {
+  const onProjectAdd =
+    (id: number) => (event: MouseEvent<HTMLInputElement>) => {
+      setIsFormChanged(true);
+      setOpen(false);
+      const projectToAdd = projectsList.find((project) => project.id === id)!;
+      setProjects((previousProjects) => {
+        return [...previousProjects, { ...projectToAdd }];
+      });
+    };
+
+  const onProjectRemove =
+    (id: number) => (event: MouseEvent<HTMLInputElement>) => {
       setIsFormChanged(true);
       setProjects((previousProjects) => {
-        const foundProject = previousProjects.find(
+        const index = previousProjects.findIndex(
           (project) => project.id === id,
-        )!;
-        foundProject[field] = event.target.value!;
-        return [...previousProjects];
+        );
+        const prevProjects = previousProjects.splice(0, index);
+        const postProjects = previousProjects.splice(index + 1);
+        return [...prevProjects, ...postProjects];
       });
     };
 
@@ -236,9 +246,12 @@ export const EditData = () => {
       onRoleChange={onRoleChange}
       rolesList={rolesList}
       projects={projects}
-      onProjectChange={onProjectChange}
+      onProjectAdd={onProjectAdd}
+      onProjectRemove={onProjectRemove}
       projectsList={projectsList}
       isFormChanged={isFormChanged}
+      open={open}
+      setOpen={setOpen}
       saveChanges={saveChanges}
     />
   );
