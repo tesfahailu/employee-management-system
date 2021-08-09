@@ -40,7 +40,7 @@ export const FormDepartment = ({
             label="Title:"
             inputProps={{
               name: 'type',
-              id: 'outlined-title-native-simple',
+              id: 'outlined-name-native-simple',
             }}
           >
             {departmentTitle.map(({ value, text }) => (

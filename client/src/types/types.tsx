@@ -2,7 +2,7 @@ import { SelectChangeEvent } from '@material-ui/core';
 import { ChangeEvent } from 'react';
 
 export interface EmployeeType {
-  [index: string]: string | undefined;
+  id?: number;
   firstName: string;
   lastName: string;
   mobile: string;
@@ -11,7 +11,6 @@ export interface EmployeeType {
 }
 
 export interface DepartmentType {
-  [index: string]: number | string | undefined;
   id?: number;
   title: string;
   description: string;
@@ -75,6 +74,7 @@ export type AddressFieldType =
   | 'country'
   | 'zipCode';
 
+export type OfficeFieldType = 'name';
 export type ProjectFieldType = 'name' | 'description';
 export type RoleFieldType = 'name' | 'description';
 
@@ -97,6 +97,16 @@ export interface EditEmployeeType {
       | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 
+  office: { id: number; name: string };
+  onOfficeChange: (
+    field: OfficeFieldType,
+  ) => (
+    event:
+      | SelectChangeEvent
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+  officesList: { id: number; name: string }[];
+
   department: DepartmentType;
   onDepartmentChange: (
     field: DepartmentFieldType,
@@ -105,21 +115,24 @@ export interface EditEmployeeType {
       | SelectChangeEvent
       | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
+  departmentsList: { id: number; name: string; description: string }[];
 
-  officeAddress: AddressType;
-  onOfficeAddressChange: (
-    field: AddressFieldType,
+  role: RoleType;
+  onRoleChange: (
+    field: RoleFieldType,
   ) => (
     event:
       | SelectChangeEvent
       | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
+  rolesList: { id: number; name: string; description: string }[];
 
   projects: Array<ProjectType>;
   onProjectChange: (
     index: number,
     field: ProjectFieldType,
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  projectsList: {}[];
 
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
