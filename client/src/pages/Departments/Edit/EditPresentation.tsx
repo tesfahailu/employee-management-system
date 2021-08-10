@@ -1,11 +1,11 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { EditDepartmentPageText } from '../../../text';
-import { EditDepartmentType } from '../../../types/types';
+import { DepartmentPageEdit } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { FormDepartment } from '../../../modules/components/FormDepartment';
 
-export const EditPresentation: React.FC<EditDepartmentType> = ({
+export const EditPresentation: React.FC<DepartmentPageEdit> = ({
   department,
   onDepartmentChange,
   isFormChanged,

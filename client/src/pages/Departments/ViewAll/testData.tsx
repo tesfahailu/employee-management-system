@@ -1,20 +1,16 @@
-export interface Rows {
-  id: number;
-  title: string;
-  description: string | null;
-}
+import { Role } from '../../../types/types';
 
-export const rows: Array<Rows> = [
+export const rows: Array<Role> = [
   {
     id: 1,
-    title: 'marketing',
+    name: 'marketing',
     description:
       'assists a business with creating, implementing, and sustaining marketing strategie.',
   },
 
   {
     id: 2,
-    title: 'operations',
+    name: 'operations',
     description:
       'responsible for the effective and successful management of labor, productivity, quality control and safety measures.',
   },

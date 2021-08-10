@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { CreateProjectPageText } from '../../../text';
-import { CreateProjectType } from '../../../types/types';
+import { ProjectPageCreate } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { FormProjects } from '../../../modules/components/FormProjects';
 
@@ -10,7 +10,7 @@ export const CreatePresentation = ({
   onProjectChange,
   isFormComplete,
   saveChanges,
-}: CreateProjectType) => (
+}: ProjectPageCreate) => (
   <Fragment>
     <PageHeader
       title={CreateProjectPageText.PageHeaderText}

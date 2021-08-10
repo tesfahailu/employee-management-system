@@ -1,11 +1,12 @@
-import { SelectChangeEvent } from '@material-ui/core';
-import React, { ChangeEvent, useEffect, useState, MouseEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  AddressFieldType,
-  DepartmentFieldType,
-  EmployeeFieldType,
-  OfficeFieldType,
-  RoleFieldType,
+  Address,
+  Department,
+  Employee,
+  OfficeLabel,
+  OnChangeSelect,
+  OnMouseClick,
+  Role,
 } from '../../../types/types';
 import { employeeData } from '../ViewOne/testData';
 import { EditPresentation } from './EditPresentation';
@@ -42,10 +43,11 @@ export const EditData = () => {
   const [office, setOffice] = useState({
     id: 0,
     name: '',
+    description: '',
   });
   const [department, setDepartment] = useState({
     id: 0,
-    title: '',
+    name: '',
     description: '',
   });
   const [role, setRole] = useState({ id: 0, name: '', description: '' });
@@ -56,9 +58,9 @@ export const EditData = () => {
   const [isFormChanged, setIsFormChanged] = useState(false);
 
   const officesList = [
-    { id: 0, name: 'los angeles' },
-    { id: 1, name: 'boston' },
-    { id: 2, name: 'miama' },
+    { id: 0, name: 'los angeles', description: '' },
+    { id: 1, name: 'boston', description: '' },
+    { id: 2, name: 'miama', description: '' },
   ];
   const departmentsList = [
     { id: 0, name: 'marketing', description: '' },
@@ -106,10 +108,11 @@ export const EditData = () => {
     setOffice({
       id: 1,
       name: 'boston',
+      description: '',
     });
     setDepartment({
       id: 3,
-      title: 'sales',
+      name: 'sales',
       description: '',
     });
     setRole({
@@ -123,29 +126,18 @@ export const EditData = () => {
     ]);
   }, []);
 
-  const onEmployeeInfoChange =
-    (field: EmployeeFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setIsFormChanged(true);
-      setEmployee((previousEmployee) => {
-        return {
-          ...previousEmployee,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onEmployeeInfoChange: OnChangeSelect<Employee> = (field) => (event) => {
+    setIsFormChanged(true);
+    setEmployee((previousEmployee) => {
+      return {
+        ...previousEmployee,
+        [field]: event.target!.value,
+      };
+    });
+  };
 
-  const onEmployeeAddressChange =
-    (field: AddressFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
+  const onEmployeeAddressChange: OnChangeSelect<Address> =
+    (field) => (event) => {
       setIsFormChanged(true);
       setEmployeeAddress((previousAddress) => {
         return {
@@ -155,76 +147,54 @@ export const EditData = () => {
       });
     };
 
-  const onOfficeChange =
-    (field: OfficeFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setIsFormChanged(true);
-      setOffice((previousAddress) => {
-        return {
-          ...previousAddress,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onOfficeChange: OnChangeSelect<OfficeLabel> = (field) => (event) => {
+    setIsFormChanged(true);
+    setOffice((previousAddress) => {
+      return {
+        ...previousAddress,
+        [field]: event.target!.value,
+      };
+    });
+  };
 
-  const onDepartmentChange =
-    (field: DepartmentFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setIsFormChanged(true);
-      setDepartment((previousDepartment) => {
-        return {
-          ...previousDepartment,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onDepartmentChange: OnChangeSelect<Department> = (field) => (event) => {
+    setIsFormChanged(true);
+    setDepartment((previousDepartment) => {
+      return {
+        ...previousDepartment,
+        [field]: event.target!.value,
+      };
+    });
+  };
 
-  const onRoleChange =
-    (field: RoleFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setIsFormChanged(true);
-      setRole((previousRole) => {
-        return {
-          ...previousRole,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onRoleChange: OnChangeSelect<Role> = (field) => (event) => {
+    setIsFormChanged(true);
+    setRole((previousRole) => {
+      return {
+        ...previousRole,
+        [field]: event.target!.value,
+      };
+    });
+  };
 
-  const onProjectAdd =
-    (id: number) => (event: MouseEvent<HTMLInputElement>) => {
-      setIsFormChanged(true);
-      setOpen(false);
-      const projectToAdd = projectsList.find((project) => project.id === id)!;
-      setProjects((previousProjects) => {
-        return [...previousProjects, { ...projectToAdd }];
-      });
-    };
+  const onProjectAdd: OnMouseClick = (id) => (_) => {
+    setIsFormChanged(true);
+    setOpen(false);
+    const projectToAdd = projectsList.find((project) => project.id === id)!;
+    setProjects((previousProjects) => {
+      return [...previousProjects, { ...projectToAdd }];
+    });
+  };
 
-  const onProjectRemove =
-    (id: number) => (event: MouseEvent<HTMLInputElement>) => {
-      setIsFormChanged(true);
-      setProjects((previousProjects) => {
-        const index = previousProjects.findIndex(
-          (project) => project.id === id,
-        );
-        const prevProjects = previousProjects.splice(0, index);
-        const postProjects = previousProjects.splice(index + 1);
-        return [...prevProjects, ...postProjects];
-      });
-    };
+  const onProjectRemove: OnMouseClick = (id) => (_) => {
+    setIsFormChanged(true);
+    setProjects((previousProjects) => {
+      const index = previousProjects.findIndex((project) => project.id === id);
+      const prevProjects = previousProjects.splice(0, index);
+      const postProjects = previousProjects.splice(index + 1);
+      return [...prevProjects, ...postProjects];
+    });
+  };
 
   const saveChanges = () => {
     setIsFormChanged(false);

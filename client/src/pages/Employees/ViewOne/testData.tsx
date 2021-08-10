@@ -4,7 +4,7 @@ import {
   EmployeeType,
 } from '../../../generated/graphql';
 
-export const employeeData: EmployeeQuery = {
+export const employeeData = {
   __typename: 'Query',
   employee: {
     __typename: 'Employee',
@@ -15,7 +15,8 @@ export const employeeData: EmployeeQuery = {
     email: 'telu@gmail.com',
     type: EmployeeType.PartTime,
     department: {
-      title: DepartmentType.Sales,
+      __typename: 'Department',
+      name: DepartmentType.Sales,
       description: 'Helping me get work',
     },
     projects: [

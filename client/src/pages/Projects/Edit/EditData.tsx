@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { ProjectFieldType } from '../../../types/types';
+import { OnChangeField, Project } from '../../../types/types';
 import { EditPresentation } from '../../Projects/Edit/EditPresentation';
 
 export const EditData = () => {
@@ -15,13 +15,12 @@ export const EditData = () => {
     setProject(dataProject);
   }, []);
 
-  const onProjectChange =
-    (field: ProjectFieldType) => (event: ChangeEvent<HTMLInputElement>) => {
-      setIsFormChanged(true);
-      setProject((previousProject) => {
-        return { ...previousProject, [field]: event.target.value };
-      });
-    };
+  const onProjectChange: OnChangeField<Project> = (field) => (event) => {
+    setIsFormChanged(true);
+    setProject((previousProject) => {
+      return { ...previousProject, [field]: event.target.value };
+    });
+  };
 
   const saveChanges = () => {
     setIsFormChanged(false);

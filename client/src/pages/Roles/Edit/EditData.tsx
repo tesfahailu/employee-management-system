@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { RoleFieldType } from '../../../types/types';
+import { OnChangeField, Role } from '../../../types/types';
 import { EditPresentation } from './EditPresentation';
 
 export const EditData = () => {
@@ -8,29 +8,26 @@ export const EditData = () => {
     name: '',
     description: '',
   });
-  const [isFormComplete, setIsFormComplete] = useState(false);
+  const [isFormChanged, setIsFormChanged] = useState(false);
 
   const dataRole = { id: 1, name: 'limited', description: 'temporary access' };
   useEffect(() => {
     setRole(dataRole);
   }, []);
 
-  const onRoleChange =
-    (field: RoleFieldType) =>
-    (event: ChangeEvent<{ name?: string; value: unknown }>) => {
-      setRole((previousRole) => {
-        return { ...previousRole, [field]: event.target.value };
-      });
-    };
+  const onRoleChange: OnChangeField<Role> = (field) => (event) =>
+    setRole((previousRole) => {
+      return { ...previousRole, [field]: event.target.value };
+    });
 
   const saveChanges = () => {
-    setIsFormComplete(false);
+    setIsFormChanged(false);
   };
   return (
     <EditPresentation
       role={role}
       onRoleChange={onRoleChange}
-      isFormComplete={isFormComplete}
+      isFormChanged={isFormChanged}
       saveChanges={saveChanges}
     />
   );

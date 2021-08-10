@@ -3,12 +3,12 @@ import { ViewOnePresentation } from './ViewOnePresentation';
 
 export const ViewOneData = () => {
   const [department, setDepartment] = useState({
-    title: '',
+    name: '',
     description: '',
   });
   useEffect(() => {
     setDepartment({
-      title: 'Human Resources',
+      name: 'Human Resources',
       description: 'getting people fired',
     });
   }, []);

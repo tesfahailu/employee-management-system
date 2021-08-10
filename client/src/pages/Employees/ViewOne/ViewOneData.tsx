@@ -1,12 +1,7 @@
 import React from 'react';
 import { employeeData } from './testData';
 import { ViewOnePresentation } from './ViewOnePresentation';
-import {
-  AddressType,
-  DepartmentType,
-  ProjectType,
-  EmployeeType,
-} from '../../../types/types';
+import { Address, Department, Project, Employee } from '../../../types/types';
 
 export const ViewOneData = () => {
   const {
@@ -57,11 +52,11 @@ export const ViewOneData = () => {
 
   return (
     <ViewOnePresentation
-      employee={filteredEmployee as EmployeeType}
-      department={spreadDepartment as DepartmentType}
-      employeeAddress={adjustedEmployeeAddress as AddressType}
-      officeAddress={adjustedOfficeAddress as AddressType}
-      projects={adjustedProjects as Array<ProjectType>}
+      employee={filteredEmployee as Employee}
+      department={spreadDepartment as Department}
+      employeeAddress={adjustedEmployeeAddress as Address}
+      officeAddress={adjustedOfficeAddress as Address}
+      projects={adjustedProjects as Array<Project>}
     />
   );
 };

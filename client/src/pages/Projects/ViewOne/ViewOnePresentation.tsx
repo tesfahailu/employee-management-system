@@ -1,16 +1,12 @@
 import React, { Fragment } from 'react';
 import { ViewProjectPageText } from '../../../text';
-import { LimitedProjectType } from '../../../types/types';
+import { Project } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { CardFormatted } from '../../../modules/components/CardFormatted';
 
-interface ViewOnePresentationProps {
-  project: LimitedProjectType;
-}
-
-export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
-  project,
-}) => (
+export const ViewOnePresentation: React.FC<{
+  project: Omit<Project, 'id'>;
+}> = ({ project }) => (
   <Fragment>
     <Fragment>
       <PageHeader

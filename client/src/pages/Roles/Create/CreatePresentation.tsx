@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { CreateRolePageText } from '../../../text';
-import { CreateRoleType } from '../../../types/types';
+import { RolePageCreate } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { FormRole } from '../../../modules/components/FormRole';
 
@@ -10,7 +10,7 @@ export const CreatePresentation = ({
   onRoleChange,
   isFormComplete,
   saveChanges,
-}: CreateRoleType) => (
+}: RolePageCreate) => (
   <Fragment>
     <PageHeader
       title={CreateRolePageText.PageHeaderText}

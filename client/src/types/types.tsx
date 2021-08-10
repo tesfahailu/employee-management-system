@@ -1,22 +1,19 @@
 import { SelectChangeEvent } from '@material-ui/core';
 import { ChangeEvent, MouseEvent } from 'react';
 
-export interface EmployeeType {
-  id?: number;
+export interface Employee {
+  id: number;
   firstName: string;
   lastName: string;
   mobile: string;
   email: string;
-  type?: string;
+  type?: string | null;
+  role?: string | null;
+  office?: string | null;
+  department?: string | null;
 }
 
-export interface DepartmentType {
-  id?: number;
-  title: string;
-  description: string;
-}
-
-export interface AddressType {
+export interface Address {
   id: number;
   streetAddress1: string;
   streetAddress2: string | null;
@@ -26,115 +23,105 @@ export interface AddressType {
   zipCode: string;
 }
 
-export interface CreateAddressType {
-  streetAddress1: string;
-  streetAddress2: string | null;
-  city: string;
-  state: string;
-  country: string;
-  zipCode: string;
-}
-
-export interface ProjectType {
-  id: number;
-  name: string;
-  description: string;
-}
-
-export interface LimitedProjectType {
-  name: string;
-  description: string;
-}
-
-export interface RoleType {
+export interface Department {
   id: number;
   name: string;
   description: string | null;
 }
 
-export interface LimitedRoleType {
+export interface Role {
+  id: number;
   name: string;
   description: string | null;
 }
 
-export type EmployeeFieldType =
-  | 'firstName'
-  | 'lastName'
-  | 'mobile'
-  | 'email'
-  | 'type';
+export interface Project {
+  id: number;
+  name: string;
+  description: string | null;
+}
 
-export type DepartmentFieldType = 'title' | 'description';
+export interface OfficeLabel {
+  id: number;
+  name: string;
+  description: string | null;
+}
 
-export type AddressFieldType =
-  | 'streetAddress1'
-  | 'streetAddress2'
-  | 'city'
-  | 'state'
-  | 'country'
-  | 'zipCode';
+export type OnChangeIndex<Context> = (
+  index: number,
+  field: keyof Context,
+) => (event: ChangeEvent<HTMLInputElement>) => void;
 
-export type OfficeFieldType = 'name' | 'description';
-export type ProjectFieldType = 'name' | 'description';
-export type RoleFieldType = 'name' | 'description';
+export type OnChangeField<Context> = (
+  field: keyof Context,
+) => (event: ChangeEvent<HTMLInputElement>) => void;
 
-export interface EditEmployeeType {
-  employee: EmployeeType;
-  onEmployeeInfoChange: (
-    field: EmployeeFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
+export type OnChangeSelect<Context> = (
+  field: keyof Context,
+) => (
+  event:
+    | SelectChangeEvent
+    | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+) => void;
 
-  employeeAddress: AddressType;
-  onEmployeeAddressChange: (
-    field: AddressFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
+export type OnMouseClick = (
+  index: number,
+) => (event: MouseEvent<HTMLInputElement>) => void;
 
-  office: { id: number; name: string; description?: string };
-  onOfficeChange: (
-    field: OfficeFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  officesList: { id: number; name: string; description?: string }[];
+export interface EmployeeFormCreate {
+  employee: Omit<Employee, 'id'>;
+  onEmployeeInfoChange: OnChangeSelect<Employee>;
+}
 
-  department: DepartmentType;
-  onDepartmentChange: (
-    field: DepartmentFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  departmentsList: { id: number; name: string; description: string }[];
+export interface AddressFormCreate {
+  address: Omit<Address, 'id'>;
+  onAddressChange: OnChangeSelect<Address>;
+}
 
-  role: RoleType;
-  onRoleChange: (
-    field: RoleFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  rolesList: { id: number; name: string; description: string }[];
+export interface DepartmentFormCreate {
+  department: Omit<Department, 'id'>;
+  onDepartmentChange: OnChangeSelect<Department>;
+}
 
-  projects: Array<ProjectType>;
-  onProjectAdd: (
-    index: number,
-  ) => (event: MouseEvent<HTMLInputElement>) => void;
-  onProjectRemove: (
-    index: number,
-  ) => (event: MouseEvent<HTMLInputElement>) => void;
-  projectsList: { id: number; name: string; description?: string }[];
+export interface EmployeePageCreate
+  extends EmployeeFormCreate,
+    DepartmentFormCreate {
+  employeeAddress: Omit<Address, 'id'>;
+  onEmployeeAddressChange: OnChangeSelect<Address>;
+
+  officeAddress: Omit<Address, 'id'>;
+  onOfficeAddressChange: OnChangeSelect<Address>;
+
+  projects: Array<Project>;
+  onProjectChange: OnChangeIndex<Project>;
+
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface EmployeePageEdit {
+  employee: Employee;
+  onEmployeeInfoChange: OnChangeSelect<Employee>;
+
+  employeeAddress: Address;
+  onEmployeeAddressChange: OnChangeSelect<Address>;
+
+  office: OfficeLabel;
+  onOfficeChange: OnChangeSelect<OfficeLabel>;
+  officesList: OfficeLabel[];
+
+  department: Department;
+  onDepartmentChange: OnChangeSelect<Department>;
+  departmentsList: Department[];
+
+  role: Role;
+  onRoleChange: OnChangeSelect<Role>;
+  rolesList: Role[];
+
+  projects: Array<Project>;
+  onProjectAdd: OnMouseClick;
+  onProjectRemove: OnMouseClick;
+  projectsList: Project[];
 
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -142,45 +129,71 @@ export interface EditEmployeeType {
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface EditEmployeeInfoType {
-  employee: EmployeeType;
-  onEmployeeInfoChange: (
-    field: EmployeeFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
+export interface EmployeePageView {
+  employee: Employee;
+  department: Department;
+  employeeAddress: Address;
+  officeAddress: Address;
+  projects: Array<Project>;
 }
 
-export interface EditEmployeeDepartmentType {
-  department: DepartmentType;
-  onDepartmentChange: (
-    field: DepartmentFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
+export interface OfficePageCreate {
+  address: Omit<Address, 'id'>;
+  onAddressChange: OnChangeSelect<Address>;
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface EditAddressType {
-  address: CreateAddressType;
-  onAddressChange: (
-    field: AddressFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
+export interface OfficePageEdit {
+  address: Address;
+  onAddressChange: OnChangeSelect<Address>;
+  isFormChanged: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface EditProjectsType {
-  projects: Array<ProjectType> | ProjectType;
+export interface DepartmentPageCreate {
+  department: Omit<Department, 'id'>;
+  onDepartmentChange: OnChangeSelect<Department>;
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface DepartmentPageEdit {
+  department: Department;
+  onDepartmentChange: OnChangeSelect<Department>;
+  isFormChanged: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface RolePageCreate {
+  role: Omit<Role, 'id'>;
+  onRoleChange: OnChangeSelect<Role>;
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface RolePageEdit {
+  role: Role;
+  onRoleChange: OnChangeField<Role>;
+  isFormChanged: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface ProjectPageEdit {
+  project: Project;
+  onProjectChange: OnChangeField<Project>;
+  isFormChanged: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface ProjectPageCreate {
+  project: Project;
   onProjectChange: (
-    field: ProjectFieldType,
+    field: keyof Project,
     index?: number,
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  isFormComplete: boolean;
+  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface CardFormattedProp {
@@ -188,152 +201,4 @@ export interface CardFormattedProp {
   buttonText: string | null;
   onEditButtonClick: () => void;
   data: any;
-}
-
-export interface EmployeeViewPresentationProp {
-  employee: EmployeeType;
-  department: DepartmentType;
-  employeeAddress: AddressType;
-  officeAddress: AddressType;
-  projects: Array<ProjectType>;
-}
-
-export interface CreateEmployeeType {
-  employee: EmployeeType;
-  onEmployeeInfoChange: (
-    field: EmployeeFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-
-  employeeAddress: CreateAddressType;
-  onEmployeeAddressChange: (
-    field: AddressFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-
-  department: DepartmentType;
-  onDepartmentChange: (
-    field: DepartmentFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-
-  officeAddress: CreateAddressType;
-  onOfficeAddressChange: (
-    field: AddressFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-
-  projects: Array<ProjectType>;
-  onProjectChange: (
-    index: number,
-    field: ProjectFieldType,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface EditProjectType {
-  project: ProjectType;
-  onProjectChange: (
-    field: ProjectFieldType,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface CreateProjectType {
-  project: ProjectType;
-  onProjectChange: (
-    field: ProjectFieldType,
-    index?: number,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface EditOfficeAddressType {
-  address: AddressType;
-  onAddressChange: (
-    field: AddressFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface CreateOfficeAddressType {
-  address: CreateAddressType;
-  onAddressChange: (
-    field: AddressFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface EditDepartmentType {
-  department: DepartmentType;
-  onDepartmentChange: (
-    field: DepartmentFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface CreateDepartmentType {
-  department: DepartmentType;
-  onDepartmentChange: (
-    field: DepartmentFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface EditRoleType {
-  role: RoleType;
-  onRoleChange: (
-    field: RoleFieldType,
-  ) => (
-    event:
-      | SelectChangeEvent
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface CreateRoleType {
-  role: RoleType;
-  onRoleChange: (
-    field: RoleFieldType,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }

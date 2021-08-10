@@ -30,7 +30,7 @@ import { SettingsData as Settings } from '../pages/Settings/SettingsData';
 import { Register } from '../pages/Register/Register';
 import { Login } from '../pages/Login/Login';
 
-export const PageRoutes: React.FC = () => (
+export const PageRoutes = () => (
   <Switch>
     <Route exact path="/employees" component={EmployeesViewAll} />
     <Route

@@ -1,30 +1,24 @@
 import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useState } from 'react';
-import { DepartmentFieldType } from '../../../types/types';
+import { Department, OnChangeSelect } from '../../../types/types';
 import { CreatePresentation } from './CreatePresentation';
 
 export const CreateData = () => {
   const [department, setDepartment] = useState({
-    title: '',
+    name: '',
     description: '',
   });
 
   const [isFormComplete, setIsFormComplete] = useState(false);
   const saveChanges = () => console.log('save changes');
 
-  const onDepartmentChange = (field: DepartmentFieldType) => {
-    return (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setDepartment((previousDepartment) => {
-        return {
-          ...previousDepartment,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onDepartmentChange: OnChangeSelect<Department> = (field) => (event) => {
+    setDepartment((previousDepartment) => {
+      return {
+        ...previousDepartment,
+        [field]: event.target!.value,
+      };
+    });
   };
 
   return (

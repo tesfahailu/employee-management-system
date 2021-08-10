@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditAddressType } from '../../types/types';
+import { AddressFormCreate } from '../../types/types';
 import { EditEmployeePageText } from '../../text';
 
 const countries = [{ value: 'USA', text: 'USA' }];
@@ -21,7 +21,7 @@ const states = [
 export const FormEmployeeAddress = ({
   address,
   onAddressChange,
-}: EditAddressType) => (
+}: AddressFormCreate) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">

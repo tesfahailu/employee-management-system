@@ -1,7 +1,7 @@
 import { Box } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { ViewEmployeePageText } from '../../../text';
-import { EmployeeViewPresentationProp } from '../../../types/types';
+import { EmployeePageView } from '../../../types/types';
 import { CardFormatted } from '../../../modules/components/CardFormatted';
 import { useHistory, useLocation } from 'react-router-dom';
 import { PageHeader } from '../../../modules/components/PageHeader';
@@ -12,7 +12,7 @@ export const ViewOnePresentation = ({
   employeeAddress,
   officeAddress,
   projects,
-}: EmployeeViewPresentationProp) => (
+}: EmployeePageView) => (
   <Fragment>
     <PageHeader
       title={ViewEmployeePageText.PageHeaderText}

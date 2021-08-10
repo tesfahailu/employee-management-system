@@ -1,10 +1,12 @@
 import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useState } from 'react';
 import {
-  AddressFieldType,
-  DepartmentFieldType,
-  EmployeeFieldType,
-  ProjectFieldType,
+  Address,
+  Department,
+  Employee,
+  OnChangeIndex,
+  OnChangeSelect,
+  Project,
 } from '../../../types/types';
 import { CreatePresentation } from './CreatePresentation';
 
@@ -25,7 +27,7 @@ export const CreateData = () => {
     zipCode: '',
   });
   const [department, setDepartment] = useState({
-    title: '',
+    name: '',
     description: '',
   });
   const [officeAddress, setOfficeAddress] = useState({
@@ -43,77 +45,47 @@ export const CreateData = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
   const saveChanges = () => console.log('save changes');
 
-  const onEmployeeInfoChange =
-    (field: EmployeeFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setEmployee((previousEmployee) => {
-        return {
-          ...previousEmployee,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onEmployeeInfoChange: OnChangeSelect<Employee> = (field) => (event) =>
+    setEmployee((previousEmployee) => {
+      return {
+        ...previousEmployee,
+        [field]: event.target!.value,
+      };
+    });
 
-  const onEmployeeAddressChange =
-    (field: AddressFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setEmployeeAddress((previousAddress) => {
-        return {
-          ...previousAddress,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onEmployeeAddressChange: OnChangeSelect<Address> = (field) => (event) =>
+    setEmployeeAddress((previousAddress) => {
+      return {
+        ...previousAddress,
+        [field]: event.target!.value,
+      };
+    });
 
-  const onDepartmentChange =
-    (field: DepartmentFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setDepartment((previousDepartment) => {
-        return {
-          ...previousDepartment,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onDepartmentChange: OnChangeSelect<Department> = (field) => (event) =>
+    setDepartment((previousDepartment) => {
+      return {
+        ...previousDepartment,
+        [field]: event.target!.value,
+      };
+    });
 
-  const onOfficeAddressChange =
-    (field: AddressFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setOfficeAddress((previousAddress) => {
-        return {
-          ...previousAddress,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onOfficeAddressChange: OnChangeSelect<Address> = (field) => (event) =>
+    setOfficeAddress((previousAddress) => {
+      return {
+        ...previousAddress,
+        [field]: event.target!.value,
+      };
+    });
 
-  const onProjectChange =
-    (id: number, field: ProjectFieldType) =>
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setProjects((previousProjects) => {
-        const foundProject = previousProjects.find(
-          (project) => project.id === id,
-        )!;
-        foundProject[field] = event.target.value!;
-        return [...previousProjects];
-      });
-    };
+  const onProjectChange: OnChangeIndex<Project> = (id, field) => (event) =>
+    setProjects((previousProjects) => {
+      const foundProject = previousProjects.find(
+        (project) => project.id === id,
+      )!;
+      // foundProject[field] = event.target.value!;
+      return [...previousProjects];
+    });
+
   return (
     <CreatePresentation
       employee={employee}

@@ -7,7 +7,7 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from '@material-ui/icons';
-import { RoleType } from '../../../types/types';
+import { Role } from '../../../types/types';
 import { Rows } from './ViewAllData';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import Table from '../../../modules/components/Table';
@@ -36,10 +36,10 @@ const columns: HeadCell[] = [
 ];
 
 interface RolesProps {
-  rowsData: RoleType[];
+  rowsData: Role[];
 }
 export interface TableProps {
-  rowsData: Array<RoleType[]>;
+  rowsData: Array<Role[]>;
   headCells: readonly HeadCell[];
   ActionButtons: React.FC<ActionButtons>;
 }

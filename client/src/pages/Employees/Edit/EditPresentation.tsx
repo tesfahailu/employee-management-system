@@ -14,10 +14,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { EditEmployeePageText } from '../../../text';
-import { EditEmployeeType } from '../../../types/types';
+import { EmployeePageEdit } from '../../../types/types';
 import { FormEmployeeAddress } from '../../../modules/components/FormEmployeeAddress';
 import { FormEmployee } from '../../../modules/components/FormEmployee';
 import { DialogAddProject } from '../../../modules/components/DialogAddProjects';
@@ -44,7 +44,7 @@ export const EditPresentation = ({
   open,
   setOpen,
   saveChanges,
-}: EditEmployeeType) => {
+}: EmployeePageEdit) => {
   return (
     <Fragment>
       <PageHeader
@@ -79,7 +79,7 @@ export const EditPresentation = ({
                     id: 'outlined-office-native-simple',
                   }}
                 >
-                  {officesList.map(({ name, description }) => (
+                  {officesList.map(({ name }) => (
                     <option value={name}>{name}</option>
                   ))}
                 </Select>
@@ -92,8 +92,8 @@ export const EditPresentation = ({
                 </InputLabel>
                 <Select
                   native
-                  value={department.title}
-                  onChange={onDepartmentChange('title')}
+                  value={department.name}
+                  onChange={onDepartmentChange('name')}
                   label="Department"
                   inputProps={{
                     name: 'department',
@@ -144,7 +144,7 @@ export const EditPresentation = ({
                           edge="end"
                           aria-label="delete"
                           component="div"
-                          onClick={onProjectRemove(id)}
+                          onClick={onProjectRemove(id!)}
                         >
                           <DeleteIcon />
                         </IconButton>

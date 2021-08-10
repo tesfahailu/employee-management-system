@@ -13,6 +13,7 @@ import {
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Close as CloseIcon } from '@material-ui/icons';
+import { Project } from '../../types/types';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -29,7 +30,7 @@ export function DialogAddProject({
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  projectsList: { id: number; name: string; description?: string }[];
+  projectsList: Project[];
   onProjectAdd: (
     index: number,
   ) => (event: MouseEvent<HTMLInputElement>) => void;
