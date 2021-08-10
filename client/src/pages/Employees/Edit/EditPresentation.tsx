@@ -2,7 +2,7 @@ import { Box, Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { EditEmployeePageText } from '../../../text';
-import { EmployeePageEdit } from '../../../types/types';
+import { Employee, EmployeePageEdit } from '../../../types/types';
 import { FormEmployeeAddress } from '../../../modules/components/FormEmployeeAddress';
 import { FormEmployee } from '../../../modules/components/FormEmployee';
 import { FormCompany } from '../../../modules/components/FormCompany';
@@ -11,8 +11,8 @@ import { FormProjectsList } from '../../../modules/components/FormProjectsList';
 export const EditPresentation = ({
   employee,
   onEmployeeInfoChange,
-  employeeAddress,
-  onEmployeeAddressChange,
+  address,
+  onAddressChange,
   office,
   onOfficeChange,
   officesList,
@@ -39,13 +39,13 @@ export const EditPresentation = ({
         isButton={false}
       />
       <Box sx={{ mt: 1 }}>
-        <FormEmployee
+        <FormEmployee<Employee>
           employee={employee}
           onEmployeeInfoChange={onEmployeeInfoChange}
         />
         <FormEmployeeAddress
-          address={employeeAddress}
-          onAddressChange={onEmployeeAddressChange}
+          address={address}
+          onAddressChange={onAddressChange}
         />
         <FormCompany
           office={office}

@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { FormDepartmentText } from '../../text';
-import { DepartmentFormCreate } from '../../types/types';
+import { Department, DepartmentForm } from '../../types/types';
 
 const departmentName = [
   { name: 'marketing', label: 'Marketing' },
@@ -24,7 +24,7 @@ const departmentName = [
 export const FormDepartment = ({
   department,
   onDepartmentChange,
-}: DepartmentFormCreate) => (
+}: DepartmentForm<Omit<Department, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">{FormDepartmentText.HeaderText}</Typography>

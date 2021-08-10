@@ -204,8 +204,8 @@ export const EditData = () => {
     <EditPresentation
       employee={employee}
       onEmployeeInfoChange={onEmployeeInfoChange}
-      employeeAddress={employeeAddress}
-      onEmployeeAddressChange={onEmployeeAddressChange}
+      address={employeeAddress}
+      onAddressChange={onEmployeeAddressChange}
       office={office}
       onOfficeChange={onOfficeChange}
       officesList={officesList}

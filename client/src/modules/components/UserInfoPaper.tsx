@@ -1,10 +1,10 @@
-import { SelectChangeEvent } from '@material-ui/core/Select';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { Employee, OnChangeSelect } from '../../types/types';
 import { FormEmployee } from './FormEmployee';
 
 export const UserInfoPaper = () => {
   const [employee, setEmployee] = useState({
+    id: 10,
     firstName: 'Tesfa',
     lastName: 'Hailu',
     email: 'th@gmail.com',
@@ -22,7 +22,7 @@ export const UserInfoPaper = () => {
   };
 
   return (
-    <FormEmployee
+    <FormEmployee<Employee>
       employee={employee}
       onEmployeeInfoChange={onEmployeeInfoChange}
     />

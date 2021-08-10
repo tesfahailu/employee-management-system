@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { FormCompanyText } from '../../text';
-import { CompanyFormCreate } from '../../types/types';
+import { CompanyForm } from '../../types/types';
 
 export const FormCompany = ({
   office,
@@ -20,7 +20,7 @@ export const FormCompany = ({
   role,
   onRoleChange,
   rolesList,
-}: CompanyFormCreate) => (
+}: CompanyForm) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6" sx={{ mb: 2 }}>

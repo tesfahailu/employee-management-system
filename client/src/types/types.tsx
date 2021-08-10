@@ -73,17 +73,17 @@ export type OnMouseClick = (
 //#endregion
 
 //#region Forms
-export interface EmployeeFormCreate {
-  employee: Omit<Employee, 'id'>;
-  onEmployeeInfoChange: OnChangeSelect<Employee>;
+export interface EmployeeForm<R> {
+  employee: R;
+  onEmployeeInfoChange: OnChangeSelect<R>;
 }
 
-export interface AddressFormCreate {
-  address: Omit<Address, 'id'>;
-  onAddressChange: OnChangeSelect<Address>;
+export interface AddressForm<R> {
+  address: R;
+  onAddressChange: OnChangeSelect<R>;
 }
 
-export interface CompanyFormCreate {
+export interface CompanyForm {
   office: OfficeLabel;
   onOfficeChange: OnChangeSelect<OfficeLabel>;
   officesList: OfficeLabel[];
@@ -97,7 +97,7 @@ export interface CompanyFormCreate {
   rolesList: Role[];
 }
 
-export interface ProjectsListFormCreate {
+export interface ProjectsListForm {
   projects: Array<Project>;
   onProjectAdd: OnMouseClick;
   onProjectRemove: OnMouseClick;
@@ -107,38 +107,37 @@ export interface ProjectsListFormCreate {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface DepartmentFormCreate {
-  department: Omit<Department, 'id'>;
+export interface ProjectForm {
+  project: Project;
+  onProjectChange: OnChangeField<Project>;
+}
+
+export interface DepartmentForm<R> {
+  department: R;
   onDepartmentChange: OnChangeSelect<Department>;
+}
+
+export interface RoleForm<R> {
+  role: R;
+  onRoleChange: OnChangeField<Role>;
 }
 //#endregion
 
 //#region Employee Pages
 export interface EmployeePageCreate
-  extends EmployeeFormCreate,
-    DepartmentFormCreate {
-  employeeAddress: Omit<Address, 'id'>;
-  onEmployeeAddressChange: OnChangeSelect<Address>;
-
-  officeAddress: Omit<Address, 'id'>;
-  onOfficeAddressChange: OnChangeSelect<Address>;
-
-  projects: Array<Project>;
-  onProjectChange: OnChangeIndex<Project>;
-
+  extends EmployeeForm<Omit<Employee, 'id'>>,
+    AddressForm<Omit<Address, 'id'>>,
+    CompanyForm,
+    ProjectsListForm {
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface EmployeePageEdit
-  extends CompanyFormCreate,
-    ProjectsListFormCreate {
-  employee: Employee;
-  onEmployeeInfoChange: OnChangeSelect<Employee>;
-
-  employeeAddress: Address;
-  onEmployeeAddressChange: OnChangeSelect<Address>;
-
+  extends EmployeeForm<Employee>,
+    AddressForm<Address>,
+    CompanyForm,
+    ProjectsListForm {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -169,51 +168,37 @@ export interface OfficePageEdit {
 //#endregion
 
 //#region Department Pages
-export interface DepartmentPageCreate {
-  department: Omit<Department, 'id'>;
-  onDepartmentChange: OnChangeSelect<Department>;
+export interface DepartmentPageCreate
+  extends DepartmentForm<Omit<Department, 'id'>> {
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface DepartmentPageEdit {
-  department: Department;
-  onDepartmentChange: OnChangeSelect<Department>;
+export interface DepartmentPageEdit extends DepartmentForm<Department> {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 //#endregion
 
 //#region Role Pages
-export interface RolePageCreate {
-  role: Omit<Role, 'id'>;
-  onRoleChange: OnChangeSelect<Role>;
+export interface RolePageCreate extends RoleForm<Omit<Role, 'id'>> {
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface RolePageEdit {
-  role: Role;
-  onRoleChange: OnChangeField<Role>;
+export interface RolePageEdit extends RoleForm<Role> {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 //#endregion
 
 //#region Project Pages
-export interface ProjectPageEdit {
-  project: Project;
-  onProjectChange: OnChangeField<Project>;
+export interface ProjectPageEdit extends ProjectForm {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface ProjectPageCreate {
-  project: Project;
-  onProjectChange: (
-    field: keyof Project,
-    index?: number,
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+export interface ProjectPageCreate extends ProjectForm {
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
