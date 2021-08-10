@@ -8,12 +8,12 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EditEmployeePageText } from '../../text';
-import { RolePageCreate, RolePageEdit } from '../../types/types';
+import { Role, RoleForm } from '../../types/types';
 
 export const FormRole = ({
   role,
   onRoleChange,
-}: Partial<RolePageEdit | RolePageCreate>) => {
+}: RoleForm<Omit<Role, 'id'>>) => {
   const { name, description } = role!;
   return (
     <Card sx={{ mb: 1 }}>
