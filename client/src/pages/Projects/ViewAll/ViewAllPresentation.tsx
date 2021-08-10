@@ -7,7 +7,7 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from '@material-ui/icons';
-import { ProjectType } from '../../../types/types';
+import { Project } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import Table from '../../../modules/components/Table';
 import { Rows } from './ViewAllData';
@@ -36,11 +36,11 @@ const columns: HeadCell[] = [
 ];
 
 interface ProjectsProps {
-  rowsData: ProjectType[];
+  rowsData: Project[];
 }
 
 export interface TableProps {
-  rowsData: Array<ProjectType[]>;
+  rowsData: Array<Project[]>;
   headCells: readonly HeadCell[];
   ActionButtons: React.FC<ActionButtons>;
 }

@@ -8,9 +8,13 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EditEmployeePageText } from '../../text';
-import { CreateRoleType } from '../../types/types';
+import { RolePageCreate, RolePageEdit } from '../../types/types';
 
-export const FormRole = ({ role, onRoleChange }: Partial<CreateRoleType>) => {
+export const FormRole = ({
+  role,
+  onRoleChange,
+}: Partial<RolePageEdit | RolePageCreate>) => {
+  const { name, description } = role!;
   return (
     <Card sx={{ mb: 1 }}>
       <CardContent>
@@ -18,37 +22,30 @@ export const FormRole = ({ role, onRoleChange }: Partial<CreateRoleType>) => {
           {EditEmployeePageText.ProjectsText}
         </Typography>
         <Box sx={{ mt: 2 }}>
-          <Role role={role} onRoleChange={onRoleChange} />
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <TextField
+                margin="normal"
+                fullWidth
+                key={'name'}
+                label="Name:"
+                value={name}
+                onChange={onRoleChange!('name')}
+              />
+            </Grid>
+            <Grid item xs>
+              <TextField
+                margin="normal"
+                fullWidth
+                key={'description'}
+                label="Description:"
+                value={description}
+                onChange={onRoleChange!('description')}
+              />
+            </Grid>
+          </Grid>
         </Box>
       </CardContent>
     </Card>
-  );
-};
-
-const Role: React.FC<Partial<CreateRoleType>> = ({ role, onRoleChange }) => {
-  const { name, description } = role!;
-  return (
-    <Grid container spacing={2}>
-      <Grid item xs={4}>
-        <TextField
-          margin="normal"
-          fullWidth
-          key={'name'}
-          label="Name:"
-          value={name}
-          onChange={onRoleChange!('name')}
-        />
-      </Grid>
-      <Grid item xs>
-        <TextField
-          margin="normal"
-          fullWidth
-          key={'description'}
-          label="Description:"
-          value={description}
-          onChange={onRoleChange!('description')}
-        />
-      </Grid>
-    </Grid>
   );
 };

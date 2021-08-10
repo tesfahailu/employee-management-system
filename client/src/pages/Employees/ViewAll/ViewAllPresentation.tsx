@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { IconButton, Stack } from '@material-ui/core';
-import { Rows } from './testData';
 import { ViewEmployeesPageText } from '../../../text';
 import { useHistory } from 'react-router';
 import Table from '../../../modules/components/Table';
@@ -10,6 +9,7 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from '@material-ui/icons';
+import { Employee } from '../../../types/types';
 
 export interface HeadCell<R> {
   id: Omit<keyof R, 'id'> | 'action';
@@ -18,7 +18,7 @@ export interface HeadCell<R> {
   label: string;
 }
 
-const headCells: Array<HeadCell<Rows>> = [
+const headCells: Array<HeadCell<Employee>> = [
   {
     id: 'lastName',
     numeric: false,
@@ -98,7 +98,7 @@ const ActionButtons: React.FC<ActionButton> = ({ rowId }) => {
 };
 
 interface ViewAllPresentationProp {
-  rowsData: Rows[];
+  rowsData: Employee[];
 }
 
 export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
@@ -112,7 +112,7 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
       buttonText={ViewEmployeesPageText.CreateButtonText}
       buttonHref="/employees/create"
     />
-    <Table<Rows>
+    <Table<Employee>
       title={ViewEmployeesPageText.TableHeaderText}
       rowsData={rowsData}
       headCells={headCells}

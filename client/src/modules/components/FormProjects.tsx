@@ -8,12 +8,12 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EditEmployeePageText } from '../../text';
-import { CreateProjectType, ProjectType } from '../../types/types';
+import { ProjectPageCreate, Project } from '../../types/types';
 
 export const FormProjects = ({
   project,
   onProjectChange,
-}: Partial<CreateProjectType>) => {
+}: Partial<ProjectPageCreate>) => {
   return (
     <Card sx={{ mb: 1 }}>
       <CardContent>
@@ -28,7 +28,7 @@ export const FormProjects = ({
   );
 };
 
-const Project: React.FC<Partial<CreateProjectType>> = ({
+const Project: React.FC<Partial<ProjectPageCreate>> = ({
   project,
   onProjectChange,
 }) => {

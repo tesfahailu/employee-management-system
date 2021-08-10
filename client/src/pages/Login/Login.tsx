@@ -11,34 +11,11 @@ import {
   Snackbar,
   Alert,
 } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
 import { MeDocument, MeQuery, useLoginMutation } from '../../generated/graphql';
 import { setAccessToken } from '../../services/session/accessToken';
 import { RouteComponentProps } from 'react-router';
 import { CopyRight } from '../../modules/components/CopyRight';
 import Logo from '../../modules/components/Logo';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      marginTop: 100,
-    },
-    card: {
-      padding: theme.spacing(3),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    form: {
-      width: '100%',
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }),
-);
 
 enum ErrorMessage {
   UsernameEmpty = 'username required.',
@@ -46,7 +23,6 @@ enum ErrorMessage {
 }
 
 export const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  const classes = useStyles();
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -96,14 +72,22 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
   return (
     <Container component="main" maxWidth="xs" sx={{ mt: 10 }}>
-      <Card className={classes.card}>
+      <Card
+        sx={{
+          padding: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <Logo />
         <Typography component="h1" variant="h6">
           Sign In
         </Typography>
-        <form
-          className={classes.form}
-          onSubmit={async (e) => {
+        <Box
+          component="form"
+          sx={{ width: '100%', marginTop: 1 }}
+          onSubmit={async (e: any) => {
             e.preventDefault();
             try {
               const response = await login({
@@ -160,7 +144,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
           <Button
             type="submit"
             fullWidth
-            className={classes.submit}
+            sx={{ mt: 3, mr: 0, mb: 2 }}
             disabled={isButtonDisabled}
           >
             Sign In
@@ -177,7 +161,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </Box>
       </Card>
       <Snackbar
         anchorOrigin={{

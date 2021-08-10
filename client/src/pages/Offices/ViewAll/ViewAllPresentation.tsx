@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import Table from '../../../modules/components/Table';
 import { ViewOfficesPageText } from '../../../text';
-import { AddressType } from '../../../types/types';
+import { Address } from '../../../types/types';
 import {
   Pageview as PageViewIcon,
   Edit as EditIcon,
@@ -18,7 +18,7 @@ export interface HeadCell<R> {
   label: string;
 }
 
-const headCells: Array<HeadCell<AddressType>> = [
+const headCells: Array<HeadCell<Address>> = [
   {
     id: 'streetAddress1',
     numeric: false,
@@ -92,7 +92,7 @@ const ActionButtons: React.FC<ActionButton> = ({ rowId }) => {
 };
 
 interface AddressProps {
-  rowsData: AddressType[];
+  rowsData: Address[];
 }
 
 export const ViewAllPresentation: React.FC<AddressProps> = ({ rowsData }) => (
@@ -104,7 +104,7 @@ export const ViewAllPresentation: React.FC<AddressProps> = ({ rowsData }) => (
       buttonText={ViewOfficesPageText.CreateButtonText}
       buttonHref="/offices/create"
     />
-    <Table<AddressType>
+    <Table<Address>
       title={ViewOfficesPageText.TableHeaderText}
       rowsData={rowsData}
       headCells={headCells}

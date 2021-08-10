@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EditEmployeePageText } from '../../text';
-import { EditAddressType } from '../../types/types';
+import { AddressFormCreate } from '../../types/types';
 
 const countries = [{ value: 'USA', text: 'USA' }];
 const states = [
@@ -18,7 +18,7 @@ const states = [
   { value: 'NY', text: 'New York' },
 ];
 
-export const FormOffice = ({ address, onAddressChange }: EditAddressType) => (
+export const FormOffice = ({ address, onAddressChange }: AddressFormCreate) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">

@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EditEmployeePageText } from '../../text';
-import { EditEmployeeInfoType } from '../../types/types';
+import { EmployeeFormCreate } from '../../types/types';
 
 const types = [
   { value: 'Permenant', text: 'Permenant' },
@@ -22,7 +22,7 @@ const types = [
 export const FormEmployee = ({
   employee,
   onEmployeeInfoChange,
-}: EditEmployeeInfoType) => (
+}: EmployeeFormCreate) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">

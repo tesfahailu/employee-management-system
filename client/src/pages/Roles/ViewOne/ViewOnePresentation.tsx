@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { ViewRolePageText } from '../../../text';
-import { LimitedRoleType } from '../../../types/types';
+import { Role } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { CardFormatted } from '../../../modules/components/CardFormatted';
 
 interface ViewOnePresentationProps {
-  role: LimitedRoleType;
+  role: Omit<Role, 'id'>;
 }
 
 export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({

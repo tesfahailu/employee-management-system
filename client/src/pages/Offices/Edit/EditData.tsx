@@ -1,6 +1,6 @@
 import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { AddressFieldType } from '../../../types/types';
+import { Address, OnChangeSelect } from '../../../types/types';
 import { EditPresentation } from './EditPresentation';
 
 export const EditData = () => {
@@ -28,20 +28,13 @@ export const EditData = () => {
 
   const [isFormChanged, setIsFormChanged] = useState(false);
 
-  const onAddressChange =
-    (field: AddressFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setAddress((previousAddress) => {
-        return {
-          ...previousAddress,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onAddressChange: OnChangeSelect<Address> = (field) => (event) =>
+    setAddress((previousAddress) => {
+      return {
+        ...previousAddress,
+        [field]: event.target!.value,
+      };
+    });
 
   const saveChanges = () => {
     console.log('Saved changes');

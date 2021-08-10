@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { ProjectFieldType } from '../../../types/types';
+import { OnChangeField, Project } from '../../../types/types';
 import { CreatePresentation } from '../../Projects/Create/CreatePresentation';
 
 export const CreateData = () => {
@@ -10,8 +10,8 @@ export const CreateData = () => {
   });
   const [isFormComplete, setIsFormComplete] = useState(false);
 
-  const onProjectChange =
-    (field: ProjectFieldType) => (event: ChangeEvent<HTMLInputElement>) => {
+  const onProjectChange: OnChangeField<Project> =
+    (field) => (event: ChangeEvent<HTMLInputElement>) => {
       setProject((previousProject) => {
         return { ...previousProject, [field]: event.target.value };
       });

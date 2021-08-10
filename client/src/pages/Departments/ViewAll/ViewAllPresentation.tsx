@@ -9,10 +9,10 @@ import {
 } from '@material-ui/icons';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { HeadCell } from '../../Employees/ViewAll/ViewAllPresentation';
-import { Rows } from './testData';
 import Table from '../../../modules/components/Table';
+import { Role } from '../../../types/types';
 
-const headCells: Array<HeadCell<Rows>> = [
+const headCells: Array<HeadCell<Role>> = [
   {
     id: 'title',
     numeric: false,
@@ -62,7 +62,7 @@ const ActionButtons: React.FC<ActionButton> = ({ rowId }) => {
 };
 
 interface DepartmentProps {
-  rowsData: Rows[];
+  rowsData: Role[];
 }
 
 export const ViewAllPresentation: React.FC<DepartmentProps> = ({
@@ -76,7 +76,7 @@ export const ViewAllPresentation: React.FC<DepartmentProps> = ({
       buttonText={ViewDepartmentsPageText.CreateButtonText}
       buttonHref="/departments/create"
     />
-    <Table<Rows>
+    <Table<Role>
       title={ViewDepartmentsPageText.TableHeaderText}
       rowsData={rowsData}
       headCells={headCells}

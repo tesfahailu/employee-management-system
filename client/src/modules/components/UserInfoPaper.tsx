@@ -1,6 +1,6 @@
 import { SelectChangeEvent } from '@material-ui/core/Select';
 import React, { ChangeEvent, useState } from 'react';
-import { EmployeeFieldType } from '../../types/types';
+import { Employee, OnChangeSelect } from '../../types/types';
 import { FormEmployee } from './FormEmployee';
 
 export const UserInfoPaper = () => {
@@ -9,22 +9,17 @@ export const UserInfoPaper = () => {
     lastName: 'Hailu',
     email: 'th@gmail.com',
     mobile: '6666666666',
+    type: null,
   });
 
-  const onEmployeeInfoChange =
-    (field: EmployeeFieldType) =>
-    (
-      event: Partial<
-        SelectChangeEvent | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      >,
-    ) => {
-      setEmployee((previousEmployee) => {
-        return {
-          ...previousEmployee,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onEmployeeInfoChange: OnChangeSelect<Employee> = (field) => (event) => {
+    setEmployee((previousEmployee) => {
+      return {
+        ...previousEmployee,
+        [field]: event.target!.value,
+      };
+    });
+  };
 
   return (
     <FormEmployee

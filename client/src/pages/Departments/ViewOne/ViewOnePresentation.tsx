@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { ViewDepartmentPageText } from '../../../text';
-import { DepartmentType } from '../../../types/types';
+import { Department } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { CardFormatted } from '../../../modules/components/CardFormatted';
 
 interface ViewOnePresentationProps {
-  department: DepartmentType;
+  department: Omit<Department, 'id'>;
 }
 
 export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
