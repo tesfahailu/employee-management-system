@@ -14,6 +14,7 @@ import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { Project } from '../../types/types';
+import { DialogAddProjectText } from '../../text';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -51,9 +52,11 @@ export function DialogAddProject({
         id="customized-dialog-title"
         sx={{ m: 0, padding: 2, minWidth: 400 }}
       >
-        <Typography variant="h6">Add Project</Typography>
+        <Typography variant="h6">
+          {DialogAddProjectText.PrimaryTitleText}
+        </Typography>
         <Typography variant="subtitle2">
-          {`Select a project to add ${'Michael'}.`}
+          {`${DialogAddProjectText.SubTitleText} ${`Michael`}.`}
         </Typography>
         <IconButton
           aria-label="close"
@@ -80,7 +83,7 @@ export function DialogAddProject({
       </DialogContent>
       <DialogActions sx={{ m: 0, p: 1 }}>
         <Button onClick={handleClose} color="secondary">
-          Cancel
+          {DialogAddProjectText.CancelButtonText}
         </Button>
       </DialogActions>
     </Dialog>

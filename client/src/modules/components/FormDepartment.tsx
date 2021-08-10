@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditEmployeePageText } from '../../text';
+import { FormDepartmentText } from '../../text';
 import { DepartmentFormCreate } from '../../types/types';
 
 const departmentName = [
@@ -27,17 +27,17 @@ export const FormDepartment = ({
 }: DepartmentFormCreate) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
-      <Typography variant="h6">
-        {EditEmployeePageText.DepartmentText}
-      </Typography>
+      <Typography variant="h6">{FormDepartmentText.HeaderText}</Typography>
       <Box sx={{ mt: 2 }}>
         <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
-          <InputLabel htmlFor="outlined-title-native-simple">Title:</InputLabel>
+          <InputLabel htmlFor="outlined-title-native-simple">
+            {FormDepartmentText.NameLabel}
+          </InputLabel>
           <Select
             native
             value={department.name}
             onChange={onDepartmentChange('name')}
-            label="Name:"
+            label={FormDepartmentText.NameLabel}
             inputProps={{
               name: 'type',
               id: 'outlined-name-native-simple',
@@ -52,7 +52,7 @@ export const FormDepartment = ({
           margin="normal"
           fullWidth
           id="description"
-          label="Description:"
+          label={FormDepartmentText.DescriptionLabel}
           value={department.description}
           onChange={onDepartmentChange('description')}
         />
