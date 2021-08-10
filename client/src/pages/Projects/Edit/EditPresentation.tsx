@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { EditProjectPageText } from '../../../text';
 import { ProjectPageEdit } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { FormProjects } from '../../../modules/components/FormProjects';
+import { FormProject } from '../../../modules/components/FormProject';
 
 export const EditPresentation = ({
   project,
@@ -17,7 +17,7 @@ export const EditPresentation = ({
       subtitle={EditProjectPageText.PageSubHeaderText}
       isButton={false}
     />
-    <FormProjects project={project} onProjectChange={onProjectChange} />
+    <FormProject project={project} onProjectChange={onProjectChange} />
     <Button
       sx={{ mr: 1, mb: 1 }}
       disabled={!isFormChanged}

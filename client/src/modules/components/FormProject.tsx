@@ -10,7 +10,7 @@ import React from 'react';
 import { EditEmployeePageText } from '../../text';
 import { ProjectPageCreate, Project } from '../../types/types';
 
-export const FormProjects = ({
+export const FormProject = ({
   project,
   onProjectChange,
 }: Partial<ProjectPageCreate>) => {

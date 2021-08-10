@@ -21,11 +21,36 @@ export enum EditEmployeePageText {
   PageHeaderText = 'Edit Employee:',
   PageSubHeaderText = "Edit employee / employee address or assign to a department, office, or projects. Don't forget to save",
   EmployeeInfoText = 'Employee Info:',
-  DepartmentText = 'Department:',
   EmployeeAddressText = 'Employee Address:',
+  CompanyText = 'Company:',
   OfficeeAddressText = 'Office Address:',
   ProjectsText = 'Projects:',
   SaveButtonText = 'Save',
+}
+
+export enum FormCompanyText {
+  HeaderText = 'Company:',
+  OfficeLabel = 'Office Location:',
+  DepartmentLabel = 'Department:',
+  RoleLabel = 'Role:',
+}
+
+export enum FormDepartmentText {
+  HeaderText = 'Department:',
+  NameLabel = 'Name',
+  DescriptionLabel = 'Description',
+}
+
+export enum FormProjectsListText {
+  HeaderText = 'Projects:',
+  AddButtonText = 'Add Project',
+  EmptyListText = 'You are not involved with any projects.',
+}
+
+export enum DialogAddProjectText {
+  PrimaryTitleText = 'Add Project',
+  SubTitleText = 'Select a project to add',
+  CancelButtonText = 'Cancel',
 }
 
 export enum CreateEmployeePageText {

@@ -1,6 +1,7 @@
 import { SelectChangeEvent } from '@material-ui/core';
 import { ChangeEvent, MouseEvent } from 'react';
 
+//#region General Categories
 export interface Employee {
   id: number;
   firstName: string;
@@ -46,7 +47,9 @@ export interface OfficeLabel {
   name: string;
   description: string | null;
 }
+//#endregion
 
+//#region EventHandlers
 export type OnChangeIndex<Context> = (
   index: number,
   field: keyof Context,
@@ -67,7 +70,9 @@ export type OnChangeSelect<Context> = (
 export type OnMouseClick = (
   index: number,
 ) => (event: MouseEvent<HTMLInputElement>) => void;
+//#endregion
 
+//#region Forms
 export interface EmployeeFormCreate {
   employee: Omit<Employee, 'id'>;
   onEmployeeInfoChange: OnChangeSelect<Employee>;
@@ -78,11 +83,37 @@ export interface AddressFormCreate {
   onAddressChange: OnChangeSelect<Address>;
 }
 
+export interface CompanyFormCreate {
+  office: OfficeLabel;
+  onOfficeChange: OnChangeSelect<OfficeLabel>;
+  officesList: OfficeLabel[];
+
+  department: Department;
+  onDepartmentChange: OnChangeSelect<Department>;
+  departmentsList: Department[];
+
+  role: Role;
+  onRoleChange: OnChangeSelect<Role>;
+  rolesList: Role[];
+}
+
+export interface ProjectsListFormCreate {
+  projects: Array<Project>;
+  onProjectAdd: OnMouseClick;
+  onProjectRemove: OnMouseClick;
+  projectsList: Project[];
+
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface DepartmentFormCreate {
   department: Omit<Department, 'id'>;
   onDepartmentChange: OnChangeSelect<Department>;
 }
+//#endregion
 
+//#region Employee Pages
 export interface EmployeePageCreate
   extends EmployeeFormCreate,
     DepartmentFormCreate {
@@ -99,32 +130,15 @@ export interface EmployeePageCreate
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface EmployeePageEdit {
+export interface EmployeePageEdit
+  extends CompanyFormCreate,
+    ProjectsListFormCreate {
   employee: Employee;
   onEmployeeInfoChange: OnChangeSelect<Employee>;
 
   employeeAddress: Address;
   onEmployeeAddressChange: OnChangeSelect<Address>;
 
-  office: OfficeLabel;
-  onOfficeChange: OnChangeSelect<OfficeLabel>;
-  officesList: OfficeLabel[];
-
-  department: Department;
-  onDepartmentChange: OnChangeSelect<Department>;
-  departmentsList: Department[];
-
-  role: Role;
-  onRoleChange: OnChangeSelect<Role>;
-  rolesList: Role[];
-
-  projects: Array<Project>;
-  onProjectAdd: OnMouseClick;
-  onProjectRemove: OnMouseClick;
-  projectsList: Project[];
-
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -136,7 +150,9 @@ export interface EmployeePageView {
   officeAddress: Address;
   projects: Array<Project>;
 }
+//#endregion
 
+//#region Office Pages
 export interface OfficePageCreate {
   address: Omit<Address, 'id'>;
   onAddressChange: OnChangeSelect<Address>;
@@ -150,7 +166,9 @@ export interface OfficePageEdit {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
+//#endregion
 
+//#region Department Pages
 export interface DepartmentPageCreate {
   department: Omit<Department, 'id'>;
   onDepartmentChange: OnChangeSelect<Department>;
@@ -164,7 +182,9 @@ export interface DepartmentPageEdit {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
+//#endregion
 
+//#region Role Pages
 export interface RolePageCreate {
   role: Omit<Role, 'id'>;
   onRoleChange: OnChangeSelect<Role>;
@@ -178,7 +198,9 @@ export interface RolePageEdit {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
+//#endregion
 
+//#region Project Pages
 export interface ProjectPageEdit {
   project: Project;
   onProjectChange: OnChangeField<Project>;
@@ -195,6 +217,7 @@ export interface ProjectPageCreate {
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
+//#endregion
 
 export interface CardFormattedProp {
   headerText: string;

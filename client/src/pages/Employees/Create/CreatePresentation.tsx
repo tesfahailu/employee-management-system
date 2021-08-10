@@ -44,7 +44,7 @@ export const CreatePresentation: React.FC<EmployeePageCreate> = ({
       address={officeAddress}
       onAddressChange={onOfficeAddressChange}
     />
-    {/* <FormProjects projects={projects} onProjectChange={onProjectChange} /> */}
+    {/* <FormProject projects={projects} onProjectChange={onProjectChange} /> */}
     <Button
       sx={{ mb: 1, mr: 1 }}
       disabled={!isFormComplete}
