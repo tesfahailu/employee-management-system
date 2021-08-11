@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { ViewRolePageText } from '../../../text';
+import { RoleViewPageText } from '../../../text';
 import { Role } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardFormatted } from '../../../modules/components/CardFormatted';
+import { CardStyledDisplay } from '../../../modules/components/CardStyledDisplay';
 
 interface ViewOnePresentationProps {
   role: Omit<Role, 'id'>;
@@ -13,13 +13,13 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
 }) => (
   <Fragment>
     <PageHeader
-      title={ViewRolePageText.PageHeaderText}
-      subtitle={ViewRolePageText.PageSubHeaderText}
+      title={RoleViewPageText.PageHeader}
+      subtitle={RoleViewPageText.PageSubHeader}
       isButton={false}
     />
-    <CardFormatted
-      headerText={ViewRolePageText.RoleText}
-      buttonText={ViewRolePageText.EditButtonText}
+    <CardStyledDisplay
+      headerText={RoleViewPageText.Role}
+      buttonText={RoleViewPageText.ButtonEdit}
       onEditButtonClick={() => {}}
       data={role}
     />

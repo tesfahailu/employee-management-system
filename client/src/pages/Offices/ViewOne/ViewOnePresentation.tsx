@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { ViewOfficePageText } from '../../../text';
+import { OfficeViewPageText } from '../../../text';
 import { Address } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardFormatted } from '../../../modules/components/CardFormatted';
+import { CardStyledDisplay } from '../../../modules/components/CardStyledDisplay';
 
 interface ViewOnePresentationProps {
   address: Omit<Address, 'id'>;
@@ -13,13 +13,13 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
 }) => (
   <Fragment>
     <PageHeader
-      title={ViewOfficePageText.PageHeaderText}
-      subtitle={ViewOfficePageText.PageSubHeaderText}
+      title={OfficeViewPageText.PageHeader}
+      subtitle={OfficeViewPageText.PageSubHeader}
       isButton={false}
     />
-    <CardFormatted
-      headerText={ViewOfficePageText.OfficeAddressText}
-      buttonText={ViewOfficePageText.EditButtonText}
+    <CardStyledDisplay
+      headerText={OfficeViewPageText.OfficeAddress}
+      buttonText={OfficeViewPageText.ButtonEdit}
       onEditButtonClick={() => {}}
       data={address}
     />

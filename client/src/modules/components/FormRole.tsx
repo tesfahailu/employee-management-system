@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditEmployeePageText } from '../../text';
+import { EmployeeEditPageText } from '../../text';
 import { Role, RoleForm } from '../../types/types';
 
 export const FormRole = ({
@@ -16,11 +16,9 @@ export const FormRole = ({
 }: RoleForm<Omit<Role, 'id'>>) => {
   const { name, description } = role!;
   return (
-    <Card sx={{ mb: 1 }}>
+    <Card sx={{ mb: 2 }}>
       <CardContent>
-        <Typography variant="subtitle1">
-          {EditEmployeePageText.ProjectsText}
-        </Typography>
+        <Typography variant="h6">{EmployeeEditPageText.Projects}</Typography>
         <Box sx={{ mt: 2 }}>
           <Grid container spacing={2}>
             <Grid item xs={4}>

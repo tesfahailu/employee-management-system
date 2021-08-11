@@ -1,7 +1,7 @@
 import { IconButton, Stack } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ViewRolesPageText } from '../../../text';
+import { RolesViewPageText } from '../../../text';
 import {
   Pageview as PageViewIcon,
   Edit as EditIcon,
@@ -75,14 +75,14 @@ const ActionButtons: React.FC<ActionButtons> = ({ rowId }) => {
 export const ViewAllPresentation: React.FC<RolesProps> = ({ rowsData }) => (
   <Fragment>
     <PageHeader
-      title={ViewRolesPageText.PageHeaderText}
-      subtitle={ViewRolesPageText.PageSubHeaderText}
+      title={RolesViewPageText.PageHeader}
+      subtitle={RolesViewPageText.PageSubHeader}
       isButton={true}
-      buttonText={ViewRolesPageText.CreateButtonText}
+      buttonText={RolesViewPageText.ButtonCreate}
       buttonHref="/roles/create"
     />
     <Table<Rows>
-      title={ViewRolesPageText.TableHeaderText}
+      title={RolesViewPageText.TableHeader}
       rowsData={rowsData}
       headCells={columns}
       ActionButtons={ActionButtons}

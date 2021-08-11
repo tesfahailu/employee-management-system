@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { IconButton, Stack } from '@material-ui/core';
-import { ViewEmployeesPageText } from '../../../text';
+import { EmployeesViewPageText } from '../../../text';
 import { useHistory } from 'react-router';
 import Table from '../../../modules/components/Table';
 import { PageHeader } from '../../../modules/components/PageHeader';
@@ -106,14 +106,14 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
 }) => (
   <Fragment>
     <PageHeader
-      title={ViewEmployeesPageText.PageHeaderText}
-      subtitle={ViewEmployeesPageText.PageSubHeaderText}
+      title={EmployeesViewPageText.PageHeader}
+      subtitle={EmployeesViewPageText.PageSubHeader}
       isButton={true}
-      buttonText={ViewEmployeesPageText.CreateButtonText}
+      buttonText={EmployeesViewPageText.ButtonCreate}
       buttonHref="/employees/create"
     />
     <Table<Employee>
-      title={ViewEmployeesPageText.TableHeaderText}
+      title={EmployeesViewPageText.TableHeader}
       rowsData={rowsData}
       headCells={headCells}
       ActionButtons={ActionButtons}

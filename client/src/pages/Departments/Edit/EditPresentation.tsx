@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { EditDepartmentPageText } from '../../../text';
+import { DepartmentEditPageText } from '../../../text';
 import { DepartmentPageEdit } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { FormDepartment } from '../../../modules/components/FormDepartment';
@@ -13,8 +13,8 @@ export const EditPresentation: React.FC<DepartmentPageEdit> = ({
 }) => (
   <Fragment>
     <PageHeader
-      title={EditDepartmentPageText.PageHeaderText}
-      subtitle={EditDepartmentPageText.PageSubHeaderText}
+      title={DepartmentEditPageText.PageHeader}
+      subtitle={DepartmentEditPageText.PageSubHeader}
       isButton={false}
     />
     <FormDepartment
@@ -22,7 +22,7 @@ export const EditPresentation: React.FC<DepartmentPageEdit> = ({
       onDepartmentChange={onDepartmentChange}
     />
     <Button sx={{ mt: 1 }} disabled={!isFormChanged} onClick={saveChanges}>
-      {EditDepartmentPageText.SaveButtonText}
+      {DepartmentEditPageText.ButtonSave}
     </Button>
   </Fragment>
 );

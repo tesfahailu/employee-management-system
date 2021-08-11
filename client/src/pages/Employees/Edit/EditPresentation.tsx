@@ -1,7 +1,7 @@
 import { Box, Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { EditEmployeePageText } from '../../../text';
+import { EmployeeEditPageText } from '../../../text';
 import { Employee, EmployeePageEdit } from '../../../types/types';
 import { FormEmployeeAddress } from '../../../modules/components/FormEmployeeAddress';
 import { FormEmployee } from '../../../modules/components/FormEmployee';
@@ -34,8 +34,8 @@ export const EditPresentation = ({
   return (
     <Fragment>
       <PageHeader
-        title={EditEmployeePageText.PageHeaderText}
-        subtitle={EditEmployeePageText.PageSubHeaderText}
+        title={EmployeeEditPageText.PageHeader}
+        subtitle={EmployeeEditPageText.PageSubHeader}
         isButton={false}
       />
       <Box sx={{ mt: 1 }}>
@@ -72,7 +72,7 @@ export const EditPresentation = ({
         disabled={!isFormChanged}
         onClick={saveChanges}
       >
-        {EditEmployeePageText.SaveButtonText}
+        {EmployeeEditPageText.ButtonSave}
       </Button>
     </Fragment>
   );

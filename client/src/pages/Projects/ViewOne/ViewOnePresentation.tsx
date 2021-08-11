@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { ViewProjectPageText } from '../../../text';
+import { ProjectViewPageText } from '../../../text';
 import { Project } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { CardFormatted } from '../../../modules/components/CardFormatted';
+import { CardStyledDisplay } from '../../../modules/components/CardStyledDisplay';
 
 export const ViewOnePresentation: React.FC<{
   project: Omit<Project, 'id'>;
@@ -10,13 +10,13 @@ export const ViewOnePresentation: React.FC<{
   <Fragment>
     <Fragment>
       <PageHeader
-        title={ViewProjectPageText.PageHeaderText}
-        subtitle={ViewProjectPageText.PageSubHeaderText}
+        title={ProjectViewPageText.PageHeader}
+        subtitle={ProjectViewPageText.PageSubHeader}
         isButton={false}
       />
-      <CardFormatted
-        headerText={ViewProjectPageText.ProjectText}
-        buttonText={ViewProjectPageText.EditButtonText}
+      <CardStyledDisplay
+        headerText={ProjectViewPageText.Project}
+        buttonText={ProjectViewPageText.ButtonEdit}
         onEditButtonClick={() => {}}
         data={project}
       />

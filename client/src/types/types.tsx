@@ -50,11 +50,6 @@ export interface OfficeLabel {
 //#endregion
 
 //#region EventHandlers
-export type OnChangeIndex<Context> = (
-  index: number,
-  field: keyof Context,
-) => (event: ChangeEvent<HTMLInputElement>) => void;
-
 export type OnChangeField<Context> = (
   field: keyof Context,
 ) => (event: ChangeEvent<HTMLInputElement>) => void;
@@ -203,10 +198,3 @@ export interface ProjectPageCreate extends ProjectForm {
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 //#endregion
-
-export interface CardFormattedProp {
-  headerText: string;
-  buttonText: string | null;
-  onEditButtonClick: () => void;
-  data: any;
-}

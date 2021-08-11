@@ -2,7 +2,7 @@ import { IconButton, Stack } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import Table from '../../../modules/components/Table';
-import { ViewOfficesPageText } from '../../../text';
+import { OfficesViewPageText } from '../../../text';
 import { Address } from '../../../types/types';
 import {
   Pageview as PageViewIcon,
@@ -98,14 +98,14 @@ interface AddressProps {
 export const ViewAllPresentation: React.FC<AddressProps> = ({ rowsData }) => (
   <Fragment>
     <PageHeader
-      title={ViewOfficesPageText.PageHeaderText}
-      subtitle={ViewOfficesPageText.PageSubHeaderText}
+      title={OfficesViewPageText.PageHeader}
+      subtitle={OfficesViewPageText.PageSubHeader}
       isButton={true}
-      buttonText={ViewOfficesPageText.CreateButtonText}
+      buttonText={OfficesViewPageText.ButtonCreate}
       buttonHref="/offices/create"
     />
     <Table<Address>
-      title={ViewOfficesPageText.TableHeaderText}
+      title={OfficesViewPageText.TableHeader}
       rowsData={rowsData}
       headCells={headCells}
       ActionButtons={ActionButtons}

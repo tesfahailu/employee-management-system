@@ -30,10 +30,10 @@ import { DialogLogout } from './DialogLogout';
 const routesArray: Array<{ label: string; icon: JSX.Element; url: string }> = [
   { label: 'SmartyPants', icon: <Avatar>A</Avatar>, url: '/settings' },
   { label: 'Employees', icon: <EmployeesIcon />, url: '/employees' },
-  { label: 'Projects', icon: <ProjectIcon />, url: '/projects' },
   { label: 'Offices', icon: <OfficesIcon />, url: '/offices' },
   { label: 'Departments', icon: <DepartmentIcon />, url: '/departments' },
   { label: 'Roles', icon: <RolesIcon />, url: '/roles' },
+  { label: 'Projects', icon: <ProjectIcon />, url: '/projects' },
   { label: 'Logout', icon: <LogoutIcon />, url: '' },
 ];
 

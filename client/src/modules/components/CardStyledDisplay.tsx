@@ -8,8 +8,14 @@ import {
   Grid,
   Typography,
 } from '@material-ui/core';
-import { CardFormattedProp } from '../../types/types';
 import { addSpaceAndUpperCaseText } from '../utils/textRegex';
+
+interface CardStyledDisplay {
+  headerText: string;
+  buttonText: string | null;
+  onEditButtonClick: () => void;
+  data: any;
+}
 
 const CardRow = ({ index: key, value }: { index: string; value: string }) => (
   <Fragment>
@@ -23,12 +29,12 @@ const CardRow = ({ index: key, value }: { index: string; value: string }) => (
   </Fragment>
 );
 
-export const CardFormatted = ({
+export const CardStyledDisplay = ({
   headerText,
   buttonText,
   onEditButtonClick,
   data,
-}: CardFormattedProp) => (
+}: CardStyledDisplay) => (
   <Card sx={{ mb: 3, p: 1 }}>
     <CardContent>
       <Grid container justifyContent="space-between">

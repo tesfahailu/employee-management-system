@@ -1,9 +1,8 @@
 import { Box } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { ViewEmployeePageText } from '../../../text';
+import { EmployeeViewPageText } from '../../../text';
 import { EmployeePageView } from '../../../types/types';
-import { CardFormatted } from '../../../modules/components/CardFormatted';
-import { useHistory, useLocation } from 'react-router-dom';
+import { CardStyledDisplay } from '../../../modules/components/CardStyledDisplay';
 import { PageHeader } from '../../../modules/components/PageHeader';
 
 export const ViewOnePresentation = ({
@@ -15,38 +14,38 @@ export const ViewOnePresentation = ({
 }: EmployeePageView) => (
   <Fragment>
     <PageHeader
-      title={ViewEmployeePageText.PageHeaderText}
-      subtitle={ViewEmployeePageText.PageSubHeaderText}
+      title={EmployeeViewPageText.PageHeader}
+      subtitle={EmployeeViewPageText.PageSubHeader}
       isButton={false}
     />
     <Box sx={{ mt: 2 }}>
-      <CardFormatted
-        headerText={ViewEmployeePageText.EmployeeInfoText}
-        buttonText={ViewEmployeePageText.EditButtonText}
+      <CardStyledDisplay
+        headerText={EmployeeViewPageText.EmployeeInfo}
+        buttonText={EmployeeViewPageText.ButtonEdit}
         onEditButtonClick={() => {}}
         data={employee}
       />
-      <CardFormatted
-        headerText={ViewEmployeePageText.DepartmentText}
-        buttonText={ViewEmployeePageText.EditButtonText}
+      <CardStyledDisplay
+        headerText={EmployeeViewPageText.Department}
+        buttonText={EmployeeViewPageText.ButtonEdit}
         onEditButtonClick={() => {}}
         data={department}
       />
-      <CardFormatted
-        headerText={ViewEmployeePageText.EmployeeAddressText}
-        buttonText={ViewEmployeePageText.EditButtonText}
+      <CardStyledDisplay
+        headerText={EmployeeViewPageText.EmployeeAddress}
+        buttonText={EmployeeViewPageText.ButtonEdit}
         onEditButtonClick={() => {}}
         data={employeeAddress}
       />
-      <CardFormatted
-        headerText={ViewEmployeePageText.OfficeeAddressText}
-        buttonText={ViewEmployeePageText.EditButtonText}
+      <CardStyledDisplay
+        headerText={EmployeeViewPageText.OfficeeAddress}
+        buttonText={EmployeeViewPageText.ButtonEdit}
         onEditButtonClick={() => {}}
         data={officeAddress}
       />
-      <CardFormatted
-        headerText={ViewEmployeePageText.CurrrentProjectsText}
-        buttonText={ViewEmployeePageText.EditButtonText}
+      <CardStyledDisplay
+        headerText={EmployeeViewPageText.CurrentProjects}
+        buttonText={EmployeeViewPageText.ButtonEdit}
         onEditButtonClick={() => {}}
         data={projects}
       />
