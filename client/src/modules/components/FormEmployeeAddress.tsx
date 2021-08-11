@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { Address, AddressForm } from '../../types/types';
-import { EditEmployeePageText } from '../../text';
+import { EmployeeEditPageText } from '../../text';
 
 const countries = [{ value: 'USA', text: 'USA' }];
 const states = [
@@ -25,7 +25,7 @@ export const FormEmployeeAddress = ({
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">
-        {EditEmployeePageText.EmployeeAddressText}
+        {EmployeeEditPageText.EmployeeAddress}
       </Typography>
       <Box sx={{ mt: 2 }}>
         <TextField

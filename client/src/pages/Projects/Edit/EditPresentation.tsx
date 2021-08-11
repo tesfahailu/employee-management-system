@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { EditProjectPageText } from '../../../text';
+import { ProjectEditPageText } from '../../../text';
 import { ProjectPageEdit } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { FormProject } from '../../../modules/components/FormProject';
@@ -13,8 +13,8 @@ export const EditPresentation = ({
 }: ProjectPageEdit) => (
   <Fragment>
     <PageHeader
-      title={EditProjectPageText.PageHeaderText}
-      subtitle={EditProjectPageText.PageSubHeaderText}
+      title={ProjectEditPageText.PageHeader}
+      subtitle={ProjectEditPageText.PageSubHeader}
       isButton={false}
     />
     <FormProject project={project} onProjectChange={onProjectChange} />
@@ -23,7 +23,7 @@ export const EditPresentation = ({
       disabled={!isFormChanged}
       onClick={saveChanges}
     >
-      {EditProjectPageText.SaveButtonText}
+      {ProjectEditPageText.ButtonSave}
     </Button>
   </Fragment>
 );

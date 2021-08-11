@@ -26,7 +26,7 @@ export const FormProjectsList = ({
   <Fragment>
     <Card>
       <CardContent>
-        <Typography variant="h6"> {FormProjectsListText.HeaderText}</Typography>
+        <Typography variant="h6"> {FormProjectsListText.Header}</Typography>
         <List dense={true}>
           {projects.length > 0 ? (
             projects.map(({ id, name, description }) => (
@@ -55,7 +55,7 @@ export const FormProjectsList = ({
             ))
           ) : (
             <Typography variant="body1" sx={{ mt: 1, mb: 1 }}>
-              {FormProjectsListText.EmptyListText}
+              {FormProjectsListText.ListEmpty}
             </Typography>
           )}
         </List>
@@ -64,7 +64,7 @@ export const FormProjectsList = ({
           startIcon={<AddIcon />}
           onClick={() => setOpen(true)}
         >
-          {FormProjectsListText.AddButtonText}
+          {FormProjectsListText.ButtonAdd}
         </Button>
       </CardContent>
     </Card>

@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditEmployeePageText } from '../../text';
+import { EmployeeEditPageText } from '../../text';
 import { Address, AddressForm } from '../../types/types';
 
 const countries = [{ value: 'USA', text: 'USA' }];
@@ -25,7 +25,7 @@ export const FormOffice = ({
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">
-        {EditEmployeePageText.OfficeeAddressText}
+        {EmployeeEditPageText.OfficeeAddress}
       </Typography>
       <Box sx={{ mt: 2 }}>
         <TextField

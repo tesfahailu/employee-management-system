@@ -24,7 +24,7 @@ export const FormCompany = ({
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6" sx={{ mb: 2 }}>
-        {FormCompanyText.HeaderText}
+        {FormCompanyText.Header}
       </Typography>
       <FormControl fullWidth sx={{ mt: 2, mb: 1 }}>
         <InputLabel htmlFor="outlined-office-native-simple">

@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EditEmployeePageText } from '../../text';
+import { EmployeeEditPageText } from '../../text';
 import { Employee, EmployeeForm } from '../../types/types';
 
 const types = [
@@ -27,7 +27,7 @@ export function FormEmployee<R extends Omit<Employee, 'id'>>({
     <Card sx={{ mb: 2 }}>
       <CardContent>
         <Typography variant="h6">
-          {EditEmployeePageText.EmployeeInfoText}
+          {EmployeeEditPageText.EmployeeInfo}
         </Typography>
         <Box sx={{ mt: 2 }}>
           <TextField

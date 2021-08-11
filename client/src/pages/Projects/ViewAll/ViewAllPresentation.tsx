@@ -1,7 +1,7 @@
 import { IconButton, Stack } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
-import { ViewProjectsPageText } from '../../../text';
+import { ProjectsViewPageText } from '../../../text';
 import {
   Pageview as PageViewIcon,
   Edit as EditIcon,
@@ -76,14 +76,14 @@ const ActionButtons: React.FC<ActionButtons> = ({ rowId }) => {
 export const ViewAllPresentation: React.FC<ProjectsProps> = ({ rowsData }) => (
   <Fragment>
     <PageHeader
-      title={ViewProjectsPageText.PageHeaderText}
-      subtitle={ViewProjectsPageText.PageSubHeaderText}
+      title={ProjectsViewPageText.PageHeader}
+      subtitle={ProjectsViewPageText.PageSubHeader}
       isButton={true}
-      buttonText={ViewProjectsPageText.CreateButtonText}
+      buttonText={ProjectsViewPageText.ButtonCreate}
       buttonHref="/projects/create"
     />
     <Table<Rows>
-      title={ViewProjectsPageText.TableHeaderText}
+      title={ProjectsViewPageText.TableHeader}
       rowsData={rowsData}
       headCells={columns}
       ActionButtons={ActionButtons}

@@ -1,7 +1,7 @@
 import { IconButton, Stack } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router';
-import { ViewDepartmentsPageText } from '../../../text';
+import { DepartmentsViewPageText } from '../../../text';
 import {
   Pageview as PageViewIcon,
   Edit as EditIcon,
@@ -70,14 +70,14 @@ export const ViewAllPresentation: React.FC<DepartmentProps> = ({
 }) => (
   <Fragment>
     <PageHeader
-      title={ViewDepartmentsPageText.PageHeaderText}
-      subtitle={ViewDepartmentsPageText.PageSubHeaderText}
+      title={DepartmentsViewPageText.PageHeader}
+      subtitle={DepartmentsViewPageText.PageSubHeader}
       isButton={true}
-      buttonText={ViewDepartmentsPageText.CreateButtonText}
+      buttonText={DepartmentsViewPageText.ButtonCreate}
       buttonHref="/departments/create"
     />
     <Table<Role>
-      title={ViewDepartmentsPageText.TableHeaderText}
+      title={DepartmentsViewPageText.TableHeader}
       rowsData={rowsData}
       headCells={headCells}
       ActionButtons={ActionButtons}

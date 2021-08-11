@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { CreateEmployeePageText } from '../../../text';
+import { EmployeeCreatePageText } from '../../../text';
 import { Employee, EmployeePageCreate } from '../../../types/types';
 import { FormEmployeeAddress } from '../../../modules/components/FormEmployeeAddress';
 import { FormEmployee } from '../../../modules/components/FormEmployee';
@@ -33,8 +33,8 @@ export const CreatePresentation = ({
 }: EmployeePageCreate) => (
   <Fragment>
     <PageHeader
-      title={CreateEmployeePageText.PageHeaderText}
-      subtitle={CreateEmployeePageText.PageSubHeaderText}
+      title={EmployeeCreatePageText.PageHeader}
+      subtitle={EmployeeCreatePageText.PageSubHeader}
       isButton={false}
     />
     <FormEmployee<Omit<Employee, 'id'>>
@@ -66,7 +66,7 @@ export const CreatePresentation = ({
       disabled={!isFormComplete}
       onClick={saveChanges}
     >
-      {CreateEmployeePageText.SaveButtonText}
+      {EmployeeCreatePageText.ButtonSave}
     </Button>
   </Fragment>
 );

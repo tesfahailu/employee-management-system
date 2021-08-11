@@ -10,8 +10,8 @@ import { Box } from '@material-ui/system';
 export const SettingsPresentation = () => (
   <Fragment>
     <PageHeader
-      title={SettingsPageText.PageHeaderText}
-      subtitle={SettingsPageText.PageSubHeaderText}
+      title={SettingsPageText.PageHeader}
+      subtitle={SettingsPageText.PageSubHeader}
       isBreadCrumb={false}
     />
     <Box sx={{ mt: 2 }} />

@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { CreateOfficePageText } from '../../../text';
+import { OfficeCreatePageText } from '../../../text';
 import { OfficePageCreate } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { FormOffice } from '../../../modules/components/FormOffice';
@@ -19,8 +19,8 @@ export const CreatePresentation = ({
 }: OfficePageCreate) => (
   <Fragment>
     <PageHeader
-      title={CreateOfficePageText.PageHeaderText}
-      subtitle={CreateOfficePageText.PageSubHeaderText}
+      title={OfficeCreatePageText.PageHeader}
+      subtitle={OfficeCreatePageText.PageSubHeader}
       isButton={false}
     />
     <FormOffice address={address} onAddressChange={onAddressChange} />
@@ -29,7 +29,7 @@ export const CreatePresentation = ({
       disabled={!isFormComplete}
       onClick={saveChanges}
     >
-      {CreateOfficePageText.SaveButtonText}
+      {OfficeCreatePageText.ButtonSave}
     </Button>
   </Fragment>
 );

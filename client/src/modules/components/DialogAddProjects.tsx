@@ -53,10 +53,10 @@ export function DialogAddProject({
         sx={{ m: 0, padding: 2, minWidth: 400 }}
       >
         <Typography variant="h6">
-          {DialogAddProjectText.PrimaryTitleText}
+          {DialogAddProjectText.PrimaryTitle}
         </Typography>
         <Typography variant="subtitle2">
-          {`${DialogAddProjectText.SubTitleText} ${`Michael`}.`}
+          {`${DialogAddProjectText.Subtitle} ${`Michael`}.`}
         </Typography>
         <IconButton
           aria-label="close"
@@ -83,7 +83,7 @@ export function DialogAddProject({
       </DialogContent>
       <DialogActions sx={{ m: 0, p: 1 }}>
         <Button onClick={handleClose} color="secondary">
-          {DialogAddProjectText.CancelButtonText}
+          {DialogAddProjectText.ButtonCancel}
         </Button>
       </DialogActions>
     </Dialog>
