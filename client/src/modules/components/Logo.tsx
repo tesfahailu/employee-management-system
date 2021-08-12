@@ -5,11 +5,11 @@ import { Share } from '@material-ui/icons';
 export default function Logo() {
   return (
     <Fragment>
-      <Typography variant="h6" display="block">
+      <Typography variant="h5" display="block">
         <Share color="primary" sx={{ mr: 0.5 }} />
         Employee
       </Typography>
-      <Typography variant="h6" color="primary" sx={{ ml: 1 }}>
+      <Typography variant="h5" color="primary" sx={{ ml: 1 }}>
         Management
       </Typography>
     </Fragment>

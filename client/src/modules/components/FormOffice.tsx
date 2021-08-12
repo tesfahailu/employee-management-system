@@ -64,8 +64,10 @@ export const FormOffice = ({
               id: 'outlined-state-native-simple',
             }}
           >
-            {states.map(({ value, text }) => (
-              <option value={value}>{text}</option>
+            {states.map(({ value, text }, index) => (
+              <option value={value} key={`${value}-${index}`}>
+                {text}
+              </option>
             ))}
           </Select>
         </FormControl>
@@ -83,8 +85,10 @@ export const FormOffice = ({
               id: 'outlined-country-native-simple',
             }}
           >
-            {countries.map(({ value, text }) => (
-              <option value={value}>{text}</option>
+            {countries.map(({ value, text }, index) => (
+              <option value={value} key={`${value}-${index}`}>
+                {text}
+              </option>
             ))}
           </Select>
         </FormControl>

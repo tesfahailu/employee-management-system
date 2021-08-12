@@ -305,7 +305,7 @@ export default function ColorTool() {
         <Typography variant="h6" sx={{ mb: 2 }}>
           Palette:
         </Typography>
-        <Grid container xs={12} spacing={4}>
+        <Grid container spacing={4}>
           <Grid item>{colorPicker('primary')}</Grid>
           <Grid item>{colorPicker('secondary')}</Grid>
         </Grid>

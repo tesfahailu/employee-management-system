@@ -8,6 +8,7 @@ import {
   IconButton,
   ListItemText,
   Button,
+  Box,
 } from '@material-ui/core';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import React, { Fragment } from 'react';
@@ -30,10 +31,9 @@ export const FormProjectsList = ({
         <List dense={true}>
           {projects.length > 0 ? (
             projects.map(({ id, name, description }) => (
-              <Fragment>
+              <Box key={`${name}-${id}`} component="div">
                 <Divider />
                 <ListItem
-                  key={`${name}-${id}`}
                   secondaryAction={
                     <IconButton
                       edge="end"
@@ -51,7 +51,7 @@ export const FormProjectsList = ({
                   />
                 </ListItem>
                 <Divider />
-              </Fragment>
+              </Box>
             ))
           ) : (
             <Typography variant="body1" sx={{ mt: 1, mb: 1 }}>

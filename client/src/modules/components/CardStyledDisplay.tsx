@@ -47,17 +47,19 @@ export const CardStyledDisplay = ({
       </Grid>
       <Box sx={{ mt: 3 }}>
         {!Array.isArray(data)
-          ? Object.keys(data).map((key) => (
+          ? Object.keys(data).map((key, index) => (
               <CardRow
                 index={addSpaceAndUpperCaseText(key)}
                 value={data[key]}
+                key={`${key}-${index}`}
               />
             ))
           : data.map((object) =>
-              Object.keys(object).map((key) => (
+              Object.keys(object).map((key, index) => (
                 <CardRow
                   index={addSpaceAndUpperCaseText(key)}
                   value={object[key]}
+                  key={`${key}-${index}`}
                 />
               )),
             )}
