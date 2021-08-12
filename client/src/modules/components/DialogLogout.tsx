@@ -56,7 +56,7 @@ export function DialogLogout({
         id="customized-dialog-title"
         sx={{ m: 0, padding: 2, minWidth: 400 }}
       >
-        <Typography variant="h6">Logout</Typography>
+        Logout
         <IconButton
           aria-label="close"
           sx={{

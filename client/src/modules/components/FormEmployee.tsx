@@ -77,8 +77,10 @@ export function FormEmployee<R extends Omit<Employee, 'id'>>({
                   id: 'outlined-type-native-simple',
                 }}
               >
-                {types.map(({ value, text }) => (
-                  <option value={value}>{text}</option>
+                {types.map(({ value, text }, index) => (
+                  <option value={value} key={`${value}-${index}`}>
+                    {text}
+                  </option>
                 ))}
               </Select>
             </FormControl>

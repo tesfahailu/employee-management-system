@@ -52,10 +52,8 @@ export function DialogAddProject({
         id="customized-dialog-title"
         sx={{ m: 0, padding: 2, minWidth: 400 }}
       >
-        <Typography variant="h6">
-          {DialogAddProjectText.PrimaryTitle}
-        </Typography>
-        <Typography variant="subtitle2">
+        {DialogAddProjectText.PrimaryTitle}
+        <Typography variant="subtitle2" component="div">
           {`${DialogAddProjectText.Subtitle} ${`Michael`}.`}
         </Typography>
         <IconButton

@@ -40,8 +40,10 @@ export const FormCompany = ({
             id: 'outlined-office-native-simple',
           }}
         >
-          {officesList.map(({ name }) => (
-            <option value={name}>{name}</option>
+          {officesList.map(({ name }, index) => (
+            <option value={name} key={`${name}-${index}`}>
+              {name}
+            </option>
           ))}
         </Select>
       </FormControl>
@@ -59,8 +61,10 @@ export const FormCompany = ({
             id: 'outlined-department-native-simple',
           }}
         >
-          {departmentsList.map(({ name }) => (
-            <option value={name}>{name}</option>
+          {departmentsList.map(({ name }, index) => (
+            <option value={name} key={`${name}-${index}`}>
+              {name}
+            </option>
           ))}
         </Select>
       </FormControl>
@@ -78,8 +82,10 @@ export const FormCompany = ({
             id: 'outlined-role-native-simple',
           }}
         >
-          {rolesList.map(({ name }) => (
-            <option value={name}>{name}</option>
+          {rolesList.map(({ name }, index) => (
+            <option value={name} key={`${name}-${index}`}>
+              {name}
+            </option>
           ))}
         </Select>
       </FormControl>
