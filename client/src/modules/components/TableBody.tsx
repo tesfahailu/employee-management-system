@@ -57,7 +57,7 @@ export const TableBody = <R extends { id: number }>({
               key={row.id}
               selected={isItemSelected}
             >
-              <TableCell padding="checkbox">
+              <TableCell padding="checkbox" key="checkbox">
                 <Checkbox
                   color="primary"
                   checked={isItemSelected}
@@ -74,6 +74,7 @@ export const TableBody = <R extends { id: number }>({
                       id={labelId}
                       scope="row"
                       padding="none"
+                      key="head-first"
                     >
                       {row[headCell['id'] as keyof R]}
                     </TableCell>
@@ -86,13 +87,14 @@ export const TableBody = <R extends { id: number }>({
                       sx={{
                         pl: 0,
                       }}
+                      key={`action-last`}
                     >
                       <ActionButtons rowId={row.id} />
                     </TableCell>
                   );
                 }
                 return (
-                  <TableCell align="left">
+                  <TableCell align="left" key={`${headCell['id']}-${index}`}>
                     {row[headCell['id'] as keyof R]}
                   </TableCell>
                 );

@@ -129,8 +129,8 @@ export const TableToolBar = <R extends { id: number }>(
             <SearchBox toggleSearchBox={toggleSearchBox} />
           ) : (
             <Tooltip title="Search">
-              <IconButton>
-                <SearchIcon onClick={toggleSearchBox} />
+              <IconButton onClick={toggleSearchBox}>
+                <SearchIcon />
               </IconButton>
             </Tooltip>
           )}

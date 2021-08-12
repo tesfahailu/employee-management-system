@@ -97,7 +97,11 @@ export default function BasicBreadcrumbs() {
       {fragArray.map((obj, index, arr) => {
         const isLastEl = index === arr.length - 1;
         return (
-          <StyledLink obj={obj} isLastEl={isLastEl}>
+          <StyledLink
+            obj={obj}
+            isLastEl={isLastEl}
+            key={`${obj.label}-${index}`}
+          >
             {obj.label}
           </StyledLink>
         );
