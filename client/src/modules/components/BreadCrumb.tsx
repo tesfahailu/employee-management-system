@@ -5,23 +5,22 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 
 interface UrlFragment {
-  name: string;
   label: string;
   url: string;
 }
 
 const StyledLink = ({
   children,
-  fragmentObj,
-  isLast,
+  obj,
+  isLastEl,
 }: {
   children: string;
-  fragmentObj: UrlFragment;
-  isLast: boolean;
+  obj: UrlFragment;
+  isLastEl: boolean;
 }) => {
   const history = useHistory();
 
-  return !isLast ? (
+  return !isLastEl ? (
     <Link
       underline={'hover'}
       color="inherit"
@@ -32,7 +31,7 @@ const StyledLink = ({
           cursor: 'pointer',
         },
       }}
-      onClick={() => history.push(fragmentObj.url)}
+      onClick={() => history.push(obj.url)}
     >
       <Typography variant="body2">{children}</Typography>
     </Link>
@@ -43,73 +42,63 @@ const StyledLink = ({
 
 export default function BasicBreadcrumbs() {
   const location = useLocation();
-  const splitPath = location.pathname.split('/').filter((e) => e);
-  const pathArray: UrlFragment[] = [];
+  const splitPathArr = location.pathname.split('/').filter((e) => e);
+  const fragArray: UrlFragment[] = [];
 
-  splitPath.forEach((fragment, index, array) => {
-    const parsedFragment = parseInt(fragment);
-    const isNumber = !isNaN(parsedFragment);
-    if (isNumber) return;
+  splitPathArr.forEach((frag, index, arr) => {
+    const parsedFrag = parseInt(frag);
+    const isParsedFragNumber = !isNaN(parsedFrag);
+    if (isParsedFragNumber) return;
 
-    if (
-      (fragment === 'create' ||
-        fragment === 'edit' ||
-        fragment === 'viewOne') &&
-      index < array.length - 1
-    ) {
-      const nextValueParsed = parseInt(array[index + 1]);
-      const prevValue = array[index - 1];
+    const isBeforeLastEl = index < arr.length - 1;
+    if (['create', 'edit', 'viewOne'].includes(frag) && isBeforeLastEl) {
+      const nextVal = arr[index + 1];
+      const parsedNextVal = parseInt(nextVal);
+      const isNextValNum = !isNaN(parsedNextVal);
+
+      const previousVal = arr[index - 1];
+      const isBeforeSecondToLastEl = index < arr.length - 2;
+
       if (
-        !isNaN(nextValueParsed) &&
-        prevValue !== 'viewOne' &&
-        prevValue !== 'edit' &&
-        prevValue !== 'create'
+        isNextValNum &&
+        !['create', 'edit', 'viewOne'].includes(previousVal)
       ) {
-        return pathArray.push({
-          name: fragment,
-          label: fragment + '-' + nextValueParsed,
-          url: pathArray[index - 1]['url'] + `/${fragment}/${nextValueParsed}`,
+        return fragArray.push({
+          label: frag + '-' + parsedNextVal,
+          url: fragArray[index - 1]['url'] + `/${frag}/${parsedNextVal}`,
         });
       } else if (
-        !isNaN(nextValueParsed) &&
-        (prevValue === 'create' ||
-          prevValue === 'edit' ||
-          prevValue === 'viewOne')
+        isNextValNum &&
+        ['create', 'edit', 'viewOne'].includes(previousVal)
       ) {
-        return pathArray.push({
-          name: fragment,
-          label: fragment + '-' + nextValueParsed,
-          url: pathArray[index - 2]['url'],
+        return fragArray.push({
+          label: frag + '-' + parsedNextVal,
+          url: fragArray[index - 2]['url'],
         });
-      } else if (index < array.length - 2) {
-        const parsed = parseInt(array[index + 2]);
+      } else if (!isNextValNum && isBeforeSecondToLastEl) {
+        const parsed = parseInt(arr[index + 2]);
         if (!isNaN(parsed)) {
-          return pathArray.push({
-            name: fragment,
-            label: fragment,
-            url: pathArray[index - 1]['url'] + `/${fragment}/${parsed}`,
+          return fragArray.push({
+            label: frag,
+            url: fragArray[index - 1]['url'] + `/${frag}/${parsed}`,
           });
         }
       }
     }
 
-    return pathArray.push({
-      name: fragment,
-      label: fragment,
-      url:
-        index === 0
-          ? `/${fragment}`
-          : pathArray[index - 1]['url'] + `/${fragment}`,
+    return fragArray.push({
+      label: frag,
+      url: index === 0 ? `/${frag}` : fragArray[index - 1]['url'] + `/${frag}`,
     });
   });
 
   return (
     <Breadcrumbs aria-label="breadcrumb" sx={{ mt: 2, mb: 2 }}>
-      {pathArray.map((pathObj, index, pathArray) => {
-        const isLast = index === pathArray.length - 1;
+      {fragArray.map((obj, index, arr) => {
+        const isLastEl = index === arr.length - 1;
         return (
-          <StyledLink fragmentObj={pathObj} isLast={isLast}>
-            {pathObj.label}
+          <StyledLink obj={obj} isLastEl={isLastEl}>
+            {obj.label}
           </StyledLink>
         );
       })}
