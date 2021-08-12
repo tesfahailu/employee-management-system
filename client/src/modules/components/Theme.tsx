@@ -3,15 +3,9 @@ import darkScrollbar from '@material-ui/core/darkScrollbar';
 import React from 'react';
 import {
   ThemeProvider as MuiThemeProvider,
-  Theme,
   createTheme,
 } from '@material-ui/core/styles';
 import { getCookie } from '../utils/getCookie';
-
-declare module '@material-ui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
 
 export const DispatchContext = React.createContext<React.Dispatch<Action>>(
   () => {
