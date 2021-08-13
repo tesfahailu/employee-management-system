@@ -8,10 +8,13 @@ import {
   ActionButton,
   HeadCell,
 } from '../../pages/Employees/ViewAll/ViewAllPresentation';
+import { Typography } from '@material-ui/core';
+import Highlighter from 'react-highlight-words';
 
 interface TableBody<R> {
-  headCells: HeadCell<R>[];
+  searchText: string;
   rowsData: Array<R>;
+  headCells: HeadCell<R>[];
   order: Order;
   orderBy: HeadCell<R>['id'];
   page: number;
@@ -22,6 +25,7 @@ interface TableBody<R> {
 }
 
 export const TableBody = <R extends { id: number }>({
+  searchText,
   rowsData,
   headCells,
   order,
@@ -37,6 +41,7 @@ export const TableBody = <R extends { id: number }>({
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowsData.length) : 0;
+  console.log(emptyRows);
   return (
     <MaterialTableBody>
       {rowsData
@@ -76,7 +81,11 @@ export const TableBody = <R extends { id: number }>({
                       padding="none"
                       key="head-first"
                     >
-                      {row[headCell['id'] as keyof R]}
+                      <Highlighter
+                        searchWords={[searchText]}
+                        autoEscape={true}
+                        textToHighlight={row[headCell['id'] as keyof R] as any}
+                      />
                     </TableCell>
                   );
                 }
@@ -86,29 +95,46 @@ export const TableBody = <R extends { id: number }>({
                       align="left"
                       sx={{
                         pl: 0,
+                        pr: 1,
                       }}
                       key={`action-last`}
                     >
                       <ActionButtons rowId={row.id} />
                     </TableCell>
                   );
+                } else {
+                  return (
+                    <TableCell align="left" key={`${headCell['id']}-${index}`}>
+                      <Highlighter
+                        searchWords={[searchText]}
+                        autoEscape={true}
+                        textToHighlight={row[headCell['id'] as keyof R] as any}
+                      />
+                    </TableCell>
+                  );
                 }
-                return (
-                  <TableCell align="left" key={`${headCell['id']}-${index}`}>
-                    {row[headCell['id'] as keyof R]}
-                  </TableCell>
-                );
               })}
             </TableRow>
           );
         })}
       {emptyRows > 0 && (
         <TableRow
-          style={{
-            height: 53 * emptyRows,
+          sx={{
+            height: 81 * emptyRows,
           }}
         >
           <TableCell colSpan={6} />
+        </TableRow>
+      )}
+      {rowsData.length === 0 && (
+        <TableRow
+          sx={{
+            height: 81,
+          }}
+        >
+          <TableCell colSpan={headCells.length + 1}>
+            <Typography>No results found.</Typography>
+          </TableCell>
         </TableRow>
       )}
     </MaterialTableBody>
