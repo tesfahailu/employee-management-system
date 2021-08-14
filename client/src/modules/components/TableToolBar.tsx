@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, useState } from 'react';
 import { IconButton, InputBase, Stack } from '@material-ui/core';
 import { alpha, styled } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
@@ -51,7 +51,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function SearchBox({ toggleSearchBox }: { toggleSearchBox: () => void }) {
+function SearchBox({
+  toggleSearchBox,
+  searchText,
+  handleSearch,
+}: {
+  toggleSearchBox: () => void;
+  searchText: string;
+  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
   return (
     <Search onBlur={toggleSearchBox}>
       <SearchIconWrapper>
@@ -61,6 +69,8 @@ function SearchBox({ toggleSearchBox }: { toggleSearchBox: () => void }) {
         placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
         autoFocus
+        value={searchText}
+        onChange={handleSearch}
       />
     </Search>
   );
@@ -69,13 +79,15 @@ function SearchBox({ toggleSearchBox }: { toggleSearchBox: () => void }) {
 interface TableToolBar<R> {
   numSelected: number;
   title: string;
+  searchText: string;
+  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
   rowsData: R[];
 }
 
 export const TableToolBar = <R extends { id: number }>(
   props: TableToolBar<R>,
 ) => {
-  const { numSelected, title, rowsData } = props;
+  const { numSelected, title, searchText, handleSearch, rowsData } = props;
   const [isSearch, setIsSearch] = useState(false);
 
   const toggleSearchBox = () => {
@@ -125,14 +137,18 @@ export const TableToolBar = <R extends { id: number }>(
         </Tooltip>
       ) : (
         <Stack direction="row" spacing={0.8} justifyContent="flex-start">
-          {isSearch ? (
-            <SearchBox toggleSearchBox={toggleSearchBox} />
-          ) : (
+          {!isSearch && !searchText ? (
             <Tooltip title="Search">
               <IconButton onClick={toggleSearchBox}>
                 <SearchIcon />
               </IconButton>
             </Tooltip>
+          ) : (
+            <SearchBox
+              toggleSearchBox={toggleSearchBox}
+              searchText={searchText}
+              handleSearch={handleSearch}
+            />
           )}
           <CSVLink
             data={rowsData.map(({ id, ...rest }) => rest)}

@@ -11,6 +11,7 @@ import {
   ActionButton,
   HeadCell,
 } from '../../pages/Employees/ViewAll/ViewAllPresentation';
+import { useEffect } from 'react';
 
 export interface Props<R> {
   title: string;
@@ -32,6 +33,27 @@ export default function Table<R extends { id: number }>({
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [searchText, setSearchText] = React.useState('');
+  const [filteredData, setFilteredData] = React.useState(rowsData);
+
+  useEffect(() => {
+    setFilteredData(
+      rowsData.filter((el: any) => {
+        for (const key of Object.keys(el)) {
+          if (typeof el[key] === 'number' || el[key] === null) continue;
+          if (
+            (el[key] as string).toLowerCase().includes(searchText.toLowerCase())
+          )
+            return true;
+        }
+        return false;
+      }),
+    );
+  }, [searchText]);
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target!.value);
+  };
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -88,6 +110,8 @@ export default function Table<R extends { id: number }>({
       <TableToolBar<R>
         numSelected={selected.length}
         title={title}
+        searchText={searchText}
+        handleSearch={handleSearch}
         rowsData={rowsData}
       />
       <TableContainer>
@@ -101,12 +125,13 @@ export default function Table<R extends { id: number }>({
             orderBy={orderBy}
             onSelectAllClick={handleSelectAllClick}
             onRequestSort={handleRequestSort}
-            rowCount={rowsData.length}
+            rowCount={filteredData.length}
             headCells={headCells}
           />
           <TableBody<R>
+            searchText={searchText}
+            rowsData={filteredData}
             headCells={headCells}
-            rowsData={rowsData}
             order={order}
             orderBy={orderBy}
             page={page}
@@ -120,7 +145,7 @@ export default function Table<R extends { id: number }>({
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={rowsData.length}
+        count={filteredData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
