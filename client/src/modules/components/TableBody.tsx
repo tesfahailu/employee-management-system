@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import MaterialTableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -14,6 +14,7 @@ import Highlighter from 'react-highlight-words';
 interface TableBody<R> {
   searchText: string;
   rowsData: Array<R>;
+
   headCells: HeadCell<R>[];
   order: Order;
   orderBy: HeadCell<R>['id'];
@@ -21,12 +22,14 @@ interface TableBody<R> {
   rowsPerPage: number;
   selected: readonly number[];
   handleClick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
-  ActionButtons: React.FC<ActionButton>;
+  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  ActionButtons: React.FC<ActionButton<R>>;
 }
 
 export const TableBody = <R extends { id: number }>({
   searchText,
   rowsData,
+
   headCells,
   order,
   orderBy,
@@ -34,6 +37,7 @@ export const TableBody = <R extends { id: number }>({
   rowsPerPage,
   selected,
   handleClick,
+  handleRemoveRow,
   ActionButtons,
 }: TableBody<R>) => {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
@@ -41,16 +45,15 @@ export const TableBody = <R extends { id: number }>({
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowsData.length) : 0;
-  console.log(emptyRows);
   return (
     <MaterialTableBody>
       {rowsData
         .slice()
         .sort(getComparator(order, orderBy as string))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-        .map((row, index) => {
+        .map((row, rowIndex) => {
           const isItemSelected = isSelected(row.id);
-          const labelId = `enhanced-table-checkbox-${index}`;
+          const labelId = `enhanced-table-checkbox-${rowIndex}`;
 
           return (
             <TableRow
@@ -71,8 +74,8 @@ export const TableBody = <R extends { id: number }>({
                   }}
                 />
               </TableCell>
-              {headCells.map((headCell, index) => {
-                if (index === 0) {
+              {headCells.map((headCell, columnIndex) => {
+                if (columnIndex === 0) {
                   return (
                     <TableCell
                       component="th"
@@ -99,12 +102,19 @@ export const TableBody = <R extends { id: number }>({
                       }}
                       key={`action-last`}
                     >
-                      <ActionButtons rowId={row.id} />
+                      <ActionButtons
+                        rowId={row.id}
+                        handleRemoveRow={handleRemoveRow}
+                        index={rowIndex}
+                      />
                     </TableCell>
                   );
                 } else {
                   return (
-                    <TableCell align="left" key={`${headCell['id']}-${index}`}>
+                    <TableCell
+                      align="left"
+                      key={`${headCell['id']}-${columnIndex}`}
+                    >
                       <Highlighter
                         searchWords={[searchText]}
                         autoEscape={true}
