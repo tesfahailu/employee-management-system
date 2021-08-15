@@ -35,40 +35,6 @@ const columns: HeadCell[] = [
   },
 ];
 
-export interface ActionButton<R> {
-  rowId: number;
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
-  index: number;
-}
-
-const ActionButtons = <R,>({
-  rowId,
-  handleRemoveRow,
-  index,
-}: ActionButton<R>) => {
-  const history = useHistory();
-  return (
-    <Stack direction="row" spacing={0.8} justifyContent="flex-start">
-      <IconButton
-        onClick={() => history.push(`/roles/viewOne/${rowId}`)}
-        size="large"
-        sx={{ ml: -1.5 }}
-      >
-        <PageViewIcon />
-      </IconButton>
-      <IconButton
-        onClick={() => history.push(`/roles/edit/${rowId}`)}
-        size="large"
-      >
-        <EditIcon />
-      </IconButton>
-      <IconButton size="large" onClick={handleRemoveRow(rowId)}>
-        <DeleteIcon />
-      </IconButton>
-    </Stack>
-  );
-};
-
 interface RolesProps {
   rowsData: Role[];
   handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
@@ -77,22 +43,28 @@ interface RolesProps {
 export const ViewAllPresentation: React.FC<RolesProps> = ({
   rowsData,
   handleRemoveRow,
-}) => (
-  <Fragment>
-    <PageHeader
-      title={RolesViewPageText.PageHeader}
-      subtitle={RolesViewPageText.PageSubHeader}
-      isButton={true}
-      buttonText={RolesViewPageText.ButtonCreate}
-      buttonHref="/roles/create"
-    />
-    <Table<Rows>
-      title={RolesViewPageText.TableHeader}
-      rowsData={rowsData}
-      headCells={columns}
-      handleRemoveRow={handleRemoveRow}
-      ActionButtons={ActionButtons}
-      minWidth="500px"
-    />
-  </Fragment>
-);
+}) => {
+  const actionButtonLinks = {
+    view: `/roles/viewOne`,
+    edit: `/roles/edit`,
+  };
+  return (
+    <Fragment>
+      <PageHeader
+        title={RolesViewPageText.PageHeader}
+        subtitle={RolesViewPageText.PageSubHeader}
+        isButton={true}
+        buttonText={RolesViewPageText.ButtonCreate}
+        buttonHref="/roles/create"
+      />
+      <Table<Rows>
+        actionButtonLinks={actionButtonLinks}
+        title={RolesViewPageText.TableHeader}
+        rowsData={rowsData}
+        headCells={columns}
+        handleRemoveRow={handleRemoveRow}
+        minWidth="500px"
+      />
+    </Fragment>
+  );
+};

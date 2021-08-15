@@ -1,14 +1,7 @@
 import React, { Fragment, MouseEventHandler } from 'react';
-import { IconButton, Stack } from '@material-ui/core';
 import { EmployeesViewPageText } from '../../../text';
-import { useHistory } from 'react-router';
 import Table from '../../../modules/components/Table';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import {
-  Pageview as PageViewIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-} from '@material-ui/icons';
 import { Employee } from '../../../types/types';
 
 export interface HeadCell<R> {
@@ -69,40 +62,6 @@ const headCells: Array<HeadCell<Employee>> = [
   },
 ];
 
-export interface ActionButton<R> {
-  rowId: number;
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
-  index: number;
-}
-
-const ActionButtons = <R,>({
-  rowId,
-  handleRemoveRow,
-  index,
-}: ActionButton<R>) => {
-  const history = useHistory();
-  return (
-    <Stack direction="row" spacing={0.8} justifyContent="flex-start">
-      <IconButton
-        onClick={() => history.push(`/employees/viewOne/${rowId}`)}
-        size="large"
-        sx={{ ml: -1.5 }}
-      >
-        <PageViewIcon />
-      </IconButton>
-      <IconButton
-        onClick={() => history.push(`/employees/edit/${rowId}`)}
-        size="large"
-      >
-        <EditIcon />
-      </IconButton>
-      <IconButton size="large" onClick={handleRemoveRow(rowId)}>
-        <DeleteIcon />
-      </IconButton>
-    </Stack>
-  );
-};
-
 interface ViewAllPresentationProp {
   rowsData: Employee[];
   handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
@@ -111,22 +70,28 @@ interface ViewAllPresentationProp {
 export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
   rowsData,
   handleRemoveRow,
-}) => (
-  <Fragment>
-    <PageHeader
-      title={EmployeesViewPageText.PageHeader}
-      subtitle={EmployeesViewPageText.PageSubHeader}
-      isButton={true}
-      buttonText={EmployeesViewPageText.ButtonCreate}
-      buttonHref="/employees/create"
-    />
-    <Table<Employee>
-      title={EmployeesViewPageText.TableHeader}
-      rowsData={rowsData}
-      headCells={headCells}
-      handleRemoveRow={handleRemoveRow}
-      ActionButtons={ActionButtons}
-      minWidth="850px"
-    />
-  </Fragment>
-);
+}) => {
+  const actionButtonLinks = {
+    view: `/employees/viewOne`,
+    edit: `/employees/edit`,
+  };
+  return (
+    <Fragment>
+      <PageHeader
+        title={EmployeesViewPageText.PageHeader}
+        subtitle={EmployeesViewPageText.PageSubHeader}
+        isButton={true}
+        buttonText={EmployeesViewPageText.ButtonCreate}
+        buttonHref="/employees/create"
+      />
+      <Table<Employee>
+        actionButtonLinks={actionButtonLinks}
+        title={EmployeesViewPageText.TableHeader}
+        rowsData={rowsData}
+        headCells={headCells}
+        handleRemoveRow={handleRemoveRow}
+        minWidth="850px"
+      />
+    </Fragment>
+  );
+};

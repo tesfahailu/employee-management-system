@@ -7,29 +7,26 @@ import { TableToolBar } from './TableToolBar';
 import { TableHead } from './TableHead';
 import { Order } from './TableUtils';
 import { TableBody } from './TableBody';
-import {
-  ActionButton,
-  HeadCell,
-} from '../../pages/Employees/ViewAll/ViewAllPresentation';
+import { HeadCell } from '../../pages/Employees/ViewAll/ViewAllPresentation';
 import { useEffect } from 'react';
 
 export interface Props<R> {
+  actionButtonLinks: { view: string; edit: string };
   title: string;
   rowsData: R[];
   headCells: HeadCell<R>[];
   handleRemoveRow: (
     rowId: number,
   ) => React.MouseEventHandler<HTMLButtonElement>;
-  ActionButtons: React.FC<ActionButton<R>>;
   minWidth: string;
 }
 
 export default function Table<R extends { id: number }>({
+  actionButtonLinks,
   title,
   rowsData,
   headCells,
   handleRemoveRow,
-  ActionButtons,
   minWidth,
 }: Props<R>) {
   const [order, setOrder] = React.useState<Order>('asc');
@@ -133,6 +130,7 @@ export default function Table<R extends { id: number }>({
             headCells={headCells}
           />
           <TableBody<R>
+            actionButtonLinks={actionButtonLinks}
             searchText={searchText}
             rowsData={filteredData}
             headCells={headCells}
@@ -143,7 +141,6 @@ export default function Table<R extends { id: number }>({
             selected={selected}
             handleClick={handleClick}
             handleRemoveRow={handleRemoveRow}
-            ActionButtons={ActionButtons}
           />
         </MaterialTable>
       </TableContainer>
