@@ -4,17 +4,55 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import { getComparator, Order } from './TableUtils';
-import {
-  ActionButton,
-  HeadCell,
-} from '../../pages/Employees/ViewAll/ViewAllPresentation';
+import { HeadCell } from '../../pages/Employees/ViewAll/ViewAllPresentation';
 import { Typography } from '@material-ui/core';
 import Highlighter from 'react-highlight-words';
+import { IconButton, Stack } from '@material-ui/core';
+import { useHistory } from 'react-router';
+import {
+  Pageview as PageViewIcon,
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+} from '@material-ui/icons';
+
+interface ActionButton {
+  rowId: number;
+  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  actionButtonLinks: { view: string; edit: string };
+}
+
+const ActionButtons = ({
+  rowId,
+  handleRemoveRow,
+  actionButtonLinks,
+}: ActionButton) => {
+  const history = useHistory();
+  return (
+    <Stack direction="row" spacing={0.8} justifyContent="flex-start">
+      <IconButton
+        onClick={() => history.push(`${actionButtonLinks.view}/${rowId}`)}
+        size="large"
+        sx={{ ml: -1.5 }}
+      >
+        <PageViewIcon />
+      </IconButton>
+      <IconButton
+        onClick={() => history.push(`${actionButtonLinks.edit}/${rowId}`)}
+        size="large"
+      >
+        <EditIcon />
+      </IconButton>
+      <IconButton size="large" onClick={handleRemoveRow(rowId)}>
+        <DeleteIcon />
+      </IconButton>
+    </Stack>
+  );
+};
 
 interface TableBody<R> {
+  actionButtonLinks: { view: string; edit: string };
   searchText: string;
   rowsData: Array<R>;
-
   headCells: HeadCell<R>[];
   order: Order;
   orderBy: HeadCell<R>['id'];
@@ -23,13 +61,12 @@ interface TableBody<R> {
   selected: readonly number[];
   handleClick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
   handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
-  ActionButtons: React.FC<ActionButton<R>>;
 }
 
 export const TableBody = <R extends { id: number }>({
+  actionButtonLinks,
   searchText,
   rowsData,
-
   headCells,
   order,
   orderBy,
@@ -38,7 +75,6 @@ export const TableBody = <R extends { id: number }>({
   selected,
   handleClick,
   handleRemoveRow,
-  ActionButtons,
 }: TableBody<R>) => {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -105,7 +141,7 @@ export const TableBody = <R extends { id: number }>({
                       <ActionButtons
                         rowId={row.id}
                         handleRemoveRow={handleRemoveRow}
-                        index={rowIndex}
+                        actionButtonLinks={actionButtonLinks}
                       />
                     </TableCell>
                   );
