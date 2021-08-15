@@ -37,12 +37,17 @@ const columns: HeadCell[] = [
 
 interface RolesProps {
   rowsData: Role[];
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRows: (
+    selected: readonly number[],
+    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+  ) => MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ViewAllPresentation: React.FC<RolesProps> = ({
   rowsData,
-  handleRemoveRow,
+  handleDeleteRow,
+  handleDeleteRows,
 }) => {
   const actionButtonLinks = {
     view: `/roles/viewOne`,
@@ -62,7 +67,8 @@ export const ViewAllPresentation: React.FC<RolesProps> = ({
         title={RolesViewPageText.TableHeader}
         rowsData={rowsData}
         headCells={columns}
-        handleRemoveRow={handleRemoveRow}
+        handleDeleteRow={handleDeleteRow}
+        handleDeleteRows={handleDeleteRows}
         minWidth="500px"
       />
     </Fragment>

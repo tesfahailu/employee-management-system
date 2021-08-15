@@ -64,12 +64,17 @@ const headCells: Array<HeadCell<Employee>> = [
 
 interface ViewAllPresentationProp {
   rowsData: Employee[];
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRows: (
+    selected: readonly number[],
+    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+  ) => MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
   rowsData,
-  handleRemoveRow,
+  handleDeleteRow,
+  handleDeleteRows,
 }) => {
   const actionButtonLinks = {
     view: `/employees/viewOne`,
@@ -89,7 +94,8 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
         title={EmployeesViewPageText.TableHeader}
         rowsData={rowsData}
         headCells={headCells}
-        handleRemoveRow={handleRemoveRow}
+        handleDeleteRow={handleDeleteRow}
+        handleDeleteRows={handleDeleteRows}
         minWidth="850px"
       />
     </Fragment>
