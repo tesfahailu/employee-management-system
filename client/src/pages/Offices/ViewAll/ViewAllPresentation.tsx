@@ -58,7 +58,10 @@ const headCells: Array<HeadCell<Address>> = [
 
 interface AddressProps {
   rowsData: Address[];
-  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (
+    rowId: number,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => MouseEventHandler<HTMLButtonElement>;
   handleDeleteRows: (
     selected: readonly number[],
     setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,

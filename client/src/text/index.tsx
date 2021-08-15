@@ -29,6 +29,12 @@ export enum DialogAddProjectText {
   Subtitle = 'Select a project to add',
   ButtonCancel = 'Cancel',
 }
+
+export enum DialogDeleteRowText {
+  Body = 'Are you sure you want to delete row?',
+  Accept = 'Yes',
+  Decline = 'Cancel',
+}
 //#endregion
 //#region Setting Page
 export enum SettingsPageText {

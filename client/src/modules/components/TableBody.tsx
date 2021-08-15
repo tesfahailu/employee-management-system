@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import MaterialTableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -14,17 +14,18 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from '@material-ui/icons';
+import { DialogDeleteRow } from './DialogDeleteRow';
 
 interface ActionButton {
   rowId: number;
-  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
   actionButtonLinks: { view: string; edit: string };
+  toggleIsDelete: (id: number) => void;
 }
 
 const ActionButtons = ({
   rowId,
-  handleDeleteRow,
   actionButtonLinks,
+  toggleIsDelete,
 }: ActionButton) => {
   const history = useHistory();
   return (
@@ -42,7 +43,7 @@ const ActionButtons = ({
       >
         <EditIcon />
       </IconButton>
-      <IconButton size="large" onClick={handleDeleteRow(rowId)}>
+      <IconButton size="large" onClick={() => toggleIsDelete(rowId)}>
         <DeleteIcon />
       </IconButton>
     </Stack>
@@ -60,7 +61,10 @@ interface TableBody<R> {
   rowsPerPage: number;
   selected: readonly number[];
   handleClick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
-  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (
+    rowId: number,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => MouseEventHandler<HTMLButtonElement>;
 }
 
 export const TableBody = <R extends { id: number }>({
@@ -78,111 +82,130 @@ export const TableBody = <R extends { id: number }>({
 }: TableBody<R>) => {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
+  const [isDeleteSelected, setIsDeleteSelected] = useState(false);
+  const [deleteRowId, setDeleteRowId] = useState<number | null>(null);
+
+  const toggleIsDelete = (id: number) => {
+    setIsDeleteSelected((prev) => !prev);
+    setDeleteRowId(id);
+  };
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowsData.length) : 0;
   return (
-    <MaterialTableBody>
-      {rowsData
-        .slice()
-        .sort(getComparator(order, orderBy as string))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-        .map((row, rowIndex) => {
-          const isItemSelected = isSelected(row.id);
-          const labelId = `enhanced-table-checkbox-${rowIndex}`;
+    <>
+      <MaterialTableBody>
+        {rowsData
+          .slice()
+          .sort(getComparator(order, orderBy as string))
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row, rowIndex) => {
+            const isItemSelected = isSelected(row.id);
+            const labelId = `enhanced-table-checkbox-${rowIndex}`;
 
-          return (
-            <TableRow
-              hover
-              onClick={(event) => handleClick(event, row.id)}
-              role="checkbox"
-              aria-checked={isItemSelected}
-              tabIndex={-1}
-              key={row.id}
-              selected={isItemSelected}
-            >
-              <TableCell padding="checkbox" key="checkbox">
-                <Checkbox
-                  color="primary"
-                  checked={isItemSelected}
-                  inputProps={{
-                    'aria-labelledby': labelId,
-                  }}
-                />
-              </TableCell>
-              {headCells.map((headCell, columnIndex) => {
-                if (columnIndex === 0) {
-                  return (
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                      key="head-first"
-                    >
-                      <Highlighter
-                        searchWords={[searchText]}
-                        autoEscape={true}
-                        textToHighlight={row[headCell['id'] as keyof R] as any}
-                      />
-                    </TableCell>
-                  );
-                }
-                if (headCell['id'] === 'action') {
-                  return (
-                    <TableCell
-                      align="left"
-                      sx={{
-                        pl: 0,
-                        pr: 1,
-                      }}
-                      key={`action-last`}
-                    >
-                      <ActionButtons
-                        rowId={row.id}
-                        handleDeleteRow={handleDeleteRow}
-                        actionButtonLinks={actionButtonLinks}
-                      />
-                    </TableCell>
-                  );
-                } else {
-                  return (
-                    <TableCell
-                      align="left"
-                      key={`${headCell['id']}-${columnIndex}`}
-                    >
-                      <Highlighter
-                        searchWords={[searchText]}
-                        autoEscape={true}
-                        textToHighlight={row[headCell['id'] as keyof R] as any}
-                      />
-                    </TableCell>
-                  );
-                }
-              })}
-            </TableRow>
-          );
-        })}
-      {emptyRows > 0 && (
-        <TableRow
-          sx={{
-            height: 81 * emptyRows,
-          }}
-        >
-          <TableCell colSpan={6} />
-        </TableRow>
-      )}
-      {rowsData.length === 0 && (
-        <TableRow
-          sx={{
-            height: 81,
-          }}
-        >
-          <TableCell colSpan={headCells.length + 1}>
-            <Typography>No results found.</Typography>
-          </TableCell>
-        </TableRow>
-      )}
-    </MaterialTableBody>
+            return (
+              <TableRow
+                hover
+                onClick={(event) => handleClick(event, row.id)}
+                role="checkbox"
+                aria-checked={isItemSelected}
+                tabIndex={-1}
+                key={row.id}
+                selected={isItemSelected}
+              >
+                <TableCell padding="checkbox" key="checkbox">
+                  <Checkbox
+                    color="primary"
+                    checked={isItemSelected}
+                    inputProps={{
+                      'aria-labelledby': labelId,
+                    }}
+                  />
+                </TableCell>
+                {headCells.map((headCell, columnIndex) => {
+                  if (columnIndex === 0) {
+                    return (
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                        key="head-first"
+                      >
+                        <Highlighter
+                          searchWords={[searchText]}
+                          autoEscape={true}
+                          textToHighlight={
+                            row[headCell['id'] as keyof R] as any
+                          }
+                        />
+                      </TableCell>
+                    );
+                  }
+                  if (headCell['id'] === 'action') {
+                    return (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          pl: 0,
+                          pr: 1,
+                        }}
+                        key={`action-last`}
+                      >
+                        <ActionButtons
+                          rowId={row.id}
+                          actionButtonLinks={actionButtonLinks}
+                          toggleIsDelete={toggleIsDelete}
+                        />
+                      </TableCell>
+                    );
+                  } else {
+                    return (
+                      <TableCell
+                        align="left"
+                        key={`${headCell['id']}-${columnIndex}`}
+                      >
+                        <Highlighter
+                          searchWords={[searchText]}
+                          autoEscape={true}
+                          textToHighlight={
+                            row[headCell['id'] as keyof R] as any
+                          }
+                        />
+                      </TableCell>
+                    );
+                  }
+                })}
+              </TableRow>
+            );
+          })}
+        {emptyRows > 0 && (
+          <TableRow
+            sx={{
+              height: 81 * emptyRows,
+            }}
+          >
+            <TableCell colSpan={6} />
+          </TableRow>
+        )}
+        {rowsData.length === 0 && (
+          <TableRow
+            sx={{
+              height: 81,
+            }}
+          >
+            <TableCell colSpan={headCells.length + 1}>
+              <Typography>No results found.</Typography>
+            </TableCell>
+          </TableRow>
+        )}
+      </MaterialTableBody>
+      <DialogDeleteRow
+        open={isDeleteSelected}
+        setOpen={setIsDeleteSelected}
+        rowId={deleteRowId}
+        handleDeleteRow={handleDeleteRow}
+      />
+    </>
   );
 };
