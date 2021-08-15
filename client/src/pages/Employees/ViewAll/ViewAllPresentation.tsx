@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, MouseEventHandler } from 'react';
 import { IconButton, Stack } from '@material-ui/core';
 import { EmployeesViewPageText } from '../../../text';
 import { useHistory } from 'react-router';
@@ -69,11 +69,17 @@ const headCells: Array<HeadCell<Employee>> = [
   },
 ];
 
-export interface ActionButton {
+export interface ActionButton<R> {
   rowId: number;
+  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  index: number;
 }
 
-const ActionButtons: React.FC<ActionButton> = ({ rowId }) => {
+const ActionButtons = <R,>({
+  rowId,
+  handleRemoveRow,
+  index,
+}: ActionButton<R>) => {
   const history = useHistory();
   return (
     <Stack direction="row" spacing={0.8} justifyContent="flex-start">
@@ -90,7 +96,7 @@ const ActionButtons: React.FC<ActionButton> = ({ rowId }) => {
       >
         <EditIcon />
       </IconButton>
-      <IconButton size="large">
+      <IconButton size="large" onClick={handleRemoveRow(rowId)}>
         <DeleteIcon />
       </IconButton>
     </Stack>
@@ -99,10 +105,12 @@ const ActionButtons: React.FC<ActionButton> = ({ rowId }) => {
 
 interface ViewAllPresentationProp {
   rowsData: Employee[];
+  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
   rowsData,
+  handleRemoveRow,
 }) => (
   <Fragment>
     <PageHeader
@@ -116,6 +124,7 @@ export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
       title={EmployeesViewPageText.TableHeader}
       rowsData={rowsData}
       headCells={headCells}
+      handleRemoveRow={handleRemoveRow}
       ActionButtons={ActionButtons}
       minWidth="850px"
     />

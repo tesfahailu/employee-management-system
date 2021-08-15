@@ -17,7 +17,10 @@ export interface Props<R> {
   title: string;
   rowsData: R[];
   headCells: HeadCell<R>[];
-  ActionButtons: React.FC<ActionButton>;
+  handleRemoveRow: (
+    rowId: number,
+  ) => React.MouseEventHandler<HTMLButtonElement>;
+  ActionButtons: React.FC<ActionButton<R>>;
   minWidth: string;
 }
 
@@ -25,6 +28,7 @@ export default function Table<R extends { id: number }>({
   title,
   rowsData,
   headCells,
+  handleRemoveRow,
   ActionButtons,
   minWidth,
 }: Props<R>) {
@@ -49,7 +53,7 @@ export default function Table<R extends { id: number }>({
         return false;
       }),
     );
-  }, [searchText]);
+  }, [searchText, rowsData]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target!.value);
@@ -138,6 +142,7 @@ export default function Table<R extends { id: number }>({
             rowsPerPage={rowsPerPage}
             selected={selected}
             handleClick={handleClick}
+            handleRemoveRow={handleRemoveRow}
             ActionButtons={ActionButtons}
           />
         </MaterialTable>

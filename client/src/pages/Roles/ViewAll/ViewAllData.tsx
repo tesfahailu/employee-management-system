@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
+import { useState } from 'react';
 import { ViewAllPresentation } from './ViewAllPresentation';
 
 export interface Rows {
@@ -7,7 +8,7 @@ export interface Rows {
   description: string | null;
 }
 
-const rowsData: Array<Rows> = [
+const rows: Array<Rows> = [
   {
     id: 1,
     name: 'admin',
@@ -22,5 +23,25 @@ const rowsData: Array<Rows> = [
 ];
 
 export const ViewAllData = () => {
-  return <ViewAllPresentation rowsData={rowsData} />;
+  const [rowsData, setRowsData] = useState(rows);
+
+  const handleRemoveRow =
+    (rowId: number): MouseEventHandler<HTMLButtonElement> =>
+    (event) => {
+      event.stopPropagation();
+      setRowsData((previousRowsData) => {
+        const findIndex = previousRowsData.findIndex((row) => row.id === rowId);
+        if (previousRowsData.length === 1) return [];
+        const beforeSplit = previousRowsData.slice(0, findIndex);
+        const afterSplit = previousRowsData.slice(findIndex + 1);
+        return [...beforeSplit, ...afterSplit];
+      });
+    };
+
+  return (
+    <ViewAllPresentation
+      rowsData={rowsData}
+      handleRemoveRow={handleRemoveRow}
+    />
+  );
 };

@@ -1,12 +1,27 @@
-import React from 'react';
-import { useUsersQuery } from '../../../generated/graphql';
+import React, { MouseEventHandler, useState } from 'react';
 import { ViewAllPresentation } from './ViewAllPresentation';
 import { rows } from './testData';
 
 export const ViewAllData = () => {
-  const { data } = useUsersQuery({ fetchPolicy: 'network-only' });
-  if (!data) return <div>...loading</div>;
-  const rowsData = rows;
+  const [rowsData, setRowsData] = useState(rows);
 
-  return <ViewAllPresentation rowsData={rowsData} />;
+  const handleRemoveRow =
+    (rowId: number): MouseEventHandler<HTMLButtonElement> =>
+    (event) => {
+      event.stopPropagation();
+      setRowsData((previousRowsData) => {
+        const findIndex = previousRowsData.findIndex((row) => row.id === rowId);
+        if (previousRowsData.length === 1) return [];
+        const beforeSplit = previousRowsData.slice(0, findIndex);
+        const afterSplit = previousRowsData.slice(findIndex + 1);
+        return [...beforeSplit, ...afterSplit];
+      });
+    };
+
+  return (
+    <ViewAllPresentation
+      rowsData={rowsData}
+      handleRemoveRow={handleRemoveRow}
+    />
+  );
 };
