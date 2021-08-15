@@ -26,11 +26,16 @@ export const ViewAllData = () => {
   const [rowsData, setRowsData] = useState(rows);
 
   const handleDeleteRow =
-    (rowId: number): MouseEventHandler<HTMLButtonElement> =>
+    (
+      rowId: number,
+      setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    ): MouseEventHandler<HTMLButtonElement> =>
     (event) => {
       event.stopPropagation();
+      setOpen(false);
       setRowsData((previousRowsData) => {
         const findIndex = previousRowsData.findIndex((row) => row.id === rowId);
+        if (findIndex === -1) return previousRowsData;
         if (previousRowsData.length === 1) return [];
         const beforeSplit = previousRowsData.slice(0, findIndex);
         const afterSplit = previousRowsData.slice(findIndex + 1);

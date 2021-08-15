@@ -17,6 +17,7 @@ export interface Props<R> {
   headCells: HeadCell<R>[];
   handleDeleteRow: (
     rowId: number,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
   ) => React.MouseEventHandler<HTMLButtonElement>;
   handleDeleteRows: (
     selected: readonly number[],
