@@ -15,8 +15,12 @@ export interface Props<R> {
   title: string;
   rowsData: R[];
   headCells: HeadCell<R>[];
-  handleRemoveRow: (
+  handleDeleteRow: (
     rowId: number,
+  ) => React.MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRows: (
+    selected: readonly number[],
+    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
   ) => React.MouseEventHandler<HTMLButtonElement>;
   minWidth: string;
 }
@@ -26,7 +30,8 @@ export default function Table<R extends { id: number }>({
   title,
   rowsData,
   headCells,
-  handleRemoveRow,
+  handleDeleteRow,
+  handleDeleteRows,
   minWidth,
 }: Props<R>) {
   const [order, setOrder] = React.useState<Order>('asc');
@@ -109,11 +114,13 @@ export default function Table<R extends { id: number }>({
   return (
     <Paper sx={{ mb: 2 }}>
       <TableToolBar<R>
-        numSelected={selected.length}
+        selected={selected}
+        setSelected={setSelected}
         title={title}
         searchText={searchText}
         handleSearch={handleSearch}
         rowsData={rowsData}
+        handleDeleteRows={handleDeleteRows}
       />
       <TableContainer>
         <MaterialTable
@@ -140,7 +147,7 @@ export default function Table<R extends { id: number }>({
             rowsPerPage={rowsPerPage}
             selected={selected}
             handleClick={handleClick}
-            handleRemoveRow={handleRemoveRow}
+            handleDeleteRow={handleDeleteRow}
           />
         </MaterialTable>
       </TableContainer>

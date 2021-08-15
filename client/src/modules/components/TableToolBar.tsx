@@ -77,17 +77,31 @@ function SearchBox({
 }
 
 interface TableToolBar<R> {
-  numSelected: number;
+  selected: readonly number[];
+  setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>;
   title: string;
   searchText: string;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
   rowsData: R[];
+  handleDeleteRows: (
+    selected: readonly number[],
+    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+  ) => React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const TableToolBar = <R extends { id: number }>(
   props: TableToolBar<R>,
 ) => {
-  const { numSelected, title, searchText, handleSearch, rowsData } = props;
+  const {
+    selected,
+    setSelected,
+    title,
+    searchText,
+    handleSearch,
+    rowsData,
+    handleDeleteRows,
+  } = props;
+  const numSelected = selected.length;
   const [isSearch, setIsSearch] = useState(false);
 
   const toggleSearchBox = () => {
@@ -131,7 +145,7 @@ export const TableToolBar = <R extends { id: number }>(
       )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={handleDeleteRows(selected, setSelected)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>

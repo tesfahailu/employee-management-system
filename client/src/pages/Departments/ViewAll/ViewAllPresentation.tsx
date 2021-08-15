@@ -28,12 +28,17 @@ const headCells: Array<HeadCell<Role>> = [
 
 interface DepartmentProps {
   rowsData: Role[];
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRows: (
+    selected: readonly number[],
+    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+  ) => MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ViewAllPresentation: React.FC<DepartmentProps> = ({
   rowsData,
-  handleRemoveRow,
+  handleDeleteRow,
+  handleDeleteRows,
 }) => {
   const actionButtonLinks = {
     view: `/departments/viewOne`,
@@ -52,7 +57,8 @@ export const ViewAllPresentation: React.FC<DepartmentProps> = ({
         actionButtonLinks={actionButtonLinks}
         title={DepartmentsViewPageText.TableHeader}
         rowsData={rowsData}
-        handleRemoveRow={handleRemoveRow}
+        handleDeleteRow={handleDeleteRow}
+        handleDeleteRows={handleDeleteRows}
         headCells={headCells}
         minWidth="850px"
       />

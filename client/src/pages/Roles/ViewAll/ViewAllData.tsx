@@ -25,7 +25,7 @@ const rows: Array<Rows> = [
 export const ViewAllData = () => {
   const [rowsData, setRowsData] = useState(rows);
 
-  const handleRemoveRow =
+  const handleDeleteRow =
     (rowId: number): MouseEventHandler<HTMLButtonElement> =>
     (event) => {
       event.stopPropagation();
@@ -38,10 +38,22 @@ export const ViewAllData = () => {
       });
     };
 
+  const handleDeleteRows =
+    (
+      selected: readonly number[],
+      setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+    ): MouseEventHandler<HTMLButtonElement> =>
+    (event) => {
+      event.stopPropagation();
+      setSelected([]);
+      setRowsData([]);
+    };
+
   return (
     <ViewAllPresentation
       rowsData={rowsData}
-      handleRemoveRow={handleRemoveRow}
+      handleDeleteRow={handleDeleteRow}
+      handleDeleteRows={handleDeleteRows}
     />
   );
 };

@@ -30,12 +30,17 @@ const columns: HeadCell[] = [
 
 interface ProjectsProps {
   rowsData: Project[];
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRows: (
+    selected: readonly number[],
+    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+  ) => MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ViewAllPresentation: React.FC<ProjectsProps> = ({
   rowsData,
-  handleRemoveRow,
+  handleDeleteRow,
+  handleDeleteRows,
 }) => {
   const actionButtonLinks = {
     view: `/projects/viewOne`,
@@ -54,7 +59,8 @@ export const ViewAllPresentation: React.FC<ProjectsProps> = ({
         actionButtonLinks={actionButtonLinks}
         title={ProjectsViewPageText.TableHeader}
         rowsData={rowsData}
-        handleRemoveRow={handleRemoveRow}
+        handleDeleteRow={handleDeleteRow}
+        handleDeleteRows={handleDeleteRows}
         headCells={columns}
         minWidth="500px"
       />

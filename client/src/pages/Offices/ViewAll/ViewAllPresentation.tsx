@@ -58,12 +58,17 @@ const headCells: Array<HeadCell<Address>> = [
 
 interface AddressProps {
   rowsData: Address[];
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRows: (
+    selected: readonly number[],
+    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+  ) => MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ViewAllPresentation: React.FC<AddressProps> = ({
   rowsData,
-  handleRemoveRow,
+  handleDeleteRow,
+  handleDeleteRows,
 }) => {
   const actionButtonLinks = {
     view: `/offices/viewOne`,
@@ -82,7 +87,8 @@ export const ViewAllPresentation: React.FC<AddressProps> = ({
         actionButtonLinks={actionButtonLinks}
         title={OfficesViewPageText.TableHeader}
         rowsData={rowsData}
-        handleRemoveRow={handleRemoveRow}
+        handleDeleteRow={handleDeleteRow}
+        handleDeleteRows={handleDeleteRows}
         headCells={headCells}
         minWidth="1400px"
       />

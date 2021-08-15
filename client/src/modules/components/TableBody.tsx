@@ -17,13 +17,13 @@ import {
 
 interface ActionButton {
   rowId: number;
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
   actionButtonLinks: { view: string; edit: string };
 }
 
 const ActionButtons = ({
   rowId,
-  handleRemoveRow,
+  handleDeleteRow,
   actionButtonLinks,
 }: ActionButton) => {
   const history = useHistory();
@@ -42,7 +42,7 @@ const ActionButtons = ({
       >
         <EditIcon />
       </IconButton>
-      <IconButton size="large" onClick={handleRemoveRow(rowId)}>
+      <IconButton size="large" onClick={handleDeleteRow(rowId)}>
         <DeleteIcon />
       </IconButton>
     </Stack>
@@ -60,7 +60,7 @@ interface TableBody<R> {
   rowsPerPage: number;
   selected: readonly number[];
   handleClick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
-  handleRemoveRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: (rowId: number) => MouseEventHandler<HTMLButtonElement>;
 }
 
 export const TableBody = <R extends { id: number }>({
@@ -74,7 +74,7 @@ export const TableBody = <R extends { id: number }>({
   rowsPerPage,
   selected,
   handleClick,
-  handleRemoveRow,
+  handleDeleteRow,
 }: TableBody<R>) => {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -140,7 +140,7 @@ export const TableBody = <R extends { id: number }>({
                     >
                       <ActionButtons
                         rowId={row.id}
-                        handleRemoveRow={handleRemoveRow}
+                        handleDeleteRow={handleDeleteRow}
                         actionButtonLinks={actionButtonLinks}
                       />
                     </TableCell>
