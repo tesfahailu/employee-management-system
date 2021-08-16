@@ -83,7 +83,7 @@ export function TableHead<R extends object>(props: TableHead<R>) {
               align="left"
               padding="none"
               sortDirection={false}
-              sx={{ width: '150px' }}
+              sx={{ minWidth: 80, px: 2 }}
             >
               {headCell.label}
             </TableCell>
