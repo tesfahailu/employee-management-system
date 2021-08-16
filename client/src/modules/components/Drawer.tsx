@@ -37,7 +37,13 @@ const routesArray: Array<{ label: string; icon: JSX.Element; url: string }> = [
   { label: 'Logout', icon: <LogoutIcon />, url: '' },
 ];
 
-const DrawerContent = ({ selectedRoute }: { selectedRoute: string }) => {
+const DrawerContent = ({
+  selectedRoute,
+  handleDrawerToggle,
+}: {
+  selectedRoute: string;
+  handleDrawerToggle: () => void;
+}) => {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
 
@@ -53,6 +59,7 @@ const DrawerContent = ({ selectedRoute }: { selectedRoute: string }) => {
               to={url}
               style={{ textDecoration: 'none', color: 'inherit' }}
               key={`label-${index}`}
+              onClick={handleDrawerToggle}
             >
               <ListItem
                 button
@@ -164,7 +171,10 @@ export const Drawer = ({
             keepMounted: true,
           }}
         >
-          <DrawerContent selectedRoute={selectedRoute} />
+          <DrawerContent
+            selectedRoute={selectedRoute}
+            handleDrawerToggle={handleDrawerToggle}
+          />
         </MaterialDrawer>
         <MaterialDrawer
           sx={{
@@ -177,7 +187,10 @@ export const Drawer = ({
           variant="permanent"
           open
         >
-          <DrawerContent selectedRoute={selectedRoute} />
+          <DrawerContent
+            selectedRoute={selectedRoute}
+            handleDrawerToggle={handleDrawerToggle}
+          />
         </MaterialDrawer>
       </Box>
     </Fragment>
