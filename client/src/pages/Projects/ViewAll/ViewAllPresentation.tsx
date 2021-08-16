@@ -1,6 +1,6 @@
 import React, { Fragment, MouseEventHandler } from 'react';
 import { ProjectsViewPageText } from '../../../text';
-import { Project } from '../../../types/types';
+import { Project, ProjectPageViewAll } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import Table from '../../../modules/components/Table';
 import { Rows } from './ViewAllData';
@@ -41,11 +41,11 @@ interface ProjectsProps {
   ) => MouseEventHandler<HTMLButtonElement>;
 }
 
-export const ViewAllPresentation: React.FC<ProjectsProps> = ({
+export const ViewAllPresentation = ({
   rowsData,
   handleDeleteRow,
   handleDeleteRows,
-}) => {
+}: ProjectPageViewAll) => {
   const actionButtonLinks = {
     view: `/projects/viewOne`,
     edit: `/projects/edit`,

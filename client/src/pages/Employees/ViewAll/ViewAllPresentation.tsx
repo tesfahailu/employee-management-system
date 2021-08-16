@@ -2,7 +2,7 @@ import React, { Fragment, MouseEventHandler } from 'react';
 import { EmployeesViewPageText } from '../../../text';
 import Table from '../../../modules/components/Table';
 import { PageHeader } from '../../../modules/components/PageHeader';
-import { Employee } from '../../../types/types';
+import { Employee, EmployeePageViewAll } from '../../../types/types';
 
 export interface HeadCell<R> {
   id: Omit<keyof R, 'id'> | 'action';
@@ -62,24 +62,11 @@ const headCells: Array<HeadCell<Employee>> = [
   },
 ];
 
-interface ViewAllPresentationProp {
-  rowsData: Employee[];
-  handleDeleteRow: (
-    rowId: number,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
-  handleDeleteRows: (
-    selected: readonly number[],
-    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
-}
-
-export const ViewAllPresentation: React.FC<ViewAllPresentationProp> = ({
+export const ViewAllPresentation = ({
   rowsData,
   handleDeleteRow,
   handleDeleteRows,
-}) => {
+}: EmployeePageViewAll) => {
   const actionButtonLinks = {
     view: `/employees/viewOne`,
     edit: `/employees/edit`,

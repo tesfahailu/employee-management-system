@@ -5,7 +5,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import { getComparator, Order } from './TableUtils';
 import { HeadCell } from '../../pages/Employees/ViewAll/ViewAllPresentation';
-import { Typography } from '@material-ui/core';
+import { Alert, Snackbar, Typography } from '@material-ui/core';
 import Highlighter from 'react-highlight-words';
 import { IconButton, Stack } from '@material-ui/core';
 import { useHistory } from 'react-router';
@@ -16,7 +16,9 @@ import {
 } from '@material-ui/icons';
 import { DialogDeleteRow } from './DialogDeleteRow';
 import { Tooltip } from '@material-ui/core';
-import { TableBodyText } from '../../text';
+import { DialogDeleteRowText, TableBodyText } from '../../text';
+import { SyntheticEvent } from 'react';
+import { HandleDeleteRow } from '../../types/types';
 
 interface ActionButton {
   rowId: number;
@@ -69,10 +71,7 @@ interface TableBody<R> {
   rowsPerPage: number;
   selected: readonly number[];
   handleClick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
-  handleDeleteRow: (
-    rowId: number,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: HandleDeleteRow;
 }
 
 export const TableBody = <R extends { id: number }>({
@@ -90,11 +89,22 @@ export const TableBody = <R extends { id: number }>({
 }: TableBody<R>) => {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
-  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const [deleteRowId, setDeleteRowId] = useState<number | null>(null);
+  const [openSnackBar, setOpenSnackBar] = useState<{
+    open: boolean;
+    success: boolean;
+  }>({ open: false, success: false });
+
+  const handleClose = (event: SyntheticEvent<Element>, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackBar((prevData) => ({ open: false, success: prevData.success }));
+  };
 
   const toggleIsDelete = (id: number) => {
-    setOpen((prev) => !prev);
+    setOpenDialog((prev) => !prev);
     setDeleteRowId(id);
   };
 
@@ -155,8 +165,7 @@ export const TableBody = <R extends { id: number }>({
                       <TableCell
                         align="left"
                         sx={{
-                          pl: 0,
-                          pr: 1,
+                          px: 2,
                         }}
                         key={`action-last`}
                       >
@@ -209,11 +218,31 @@ export const TableBody = <R extends { id: number }>({
         )}
       </MaterialTableBody>
       <DialogDeleteRow
-        open={open}
-        setOpen={setOpen}
+        open={openDialog}
+        setOpen={setOpenDialog}
+        setOpenSnackBar={setOpenSnackBar}
         rowId={deleteRowId}
         handleDeleteRow={handleDeleteRow}
       />
+      <Snackbar
+        open={openSnackBar.open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        {openSnackBar.success ? (
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: '100%' }}
+          >
+            {DialogDeleteRowText.Success}
+          </Alert>
+        ) : (
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            {DialogDeleteRowText.Error}
+          </Alert>
+        )}
+      </Snackbar>
     </>
   );
 };

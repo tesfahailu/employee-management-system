@@ -1,7 +1,7 @@
 import React, { Fragment, MouseEventHandler } from 'react';
 import Table from '../../../modules/components/Table';
 import { OfficesViewPageText } from '../../../text';
-import { Address } from '../../../types/types';
+import { Address, OfficePageViewAll } from '../../../types/types';
 import { PageHeader } from '../../../modules/components/PageHeader';
 
 export interface HeadCell<R> {
@@ -56,24 +56,11 @@ const headCells: Array<HeadCell<Address>> = [
   },
 ];
 
-interface AddressProps {
-  rowsData: Address[];
-  handleDeleteRow: (
-    rowId: number,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
-  handleDeleteRows: (
-    selected: readonly number[],
-    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
-}
-
-export const ViewAllPresentation: React.FC<AddressProps> = ({
+export const ViewAllPresentation = ({
   rowsData,
   handleDeleteRow,
   handleDeleteRows,
-}) => {
+}: OfficePageViewAll) => {
   const actionButtonLinks = {
     view: `/offices/viewOne`,
     edit: `/offices/edit`,

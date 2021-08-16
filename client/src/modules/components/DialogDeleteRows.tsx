@@ -12,6 +12,7 @@ import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { DialogDeleteRowsText } from '../../text';
+import { HandleDeleteRows } from '../../types/types';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -20,23 +21,25 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export function DialogDeleteRows({
-  open,
-  setOpen,
-  handleDeleteRows,
-  selected,
-  setSelected,
-}: {
+interface DialogProp {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selected: readonly number[];
+  setOpenSnackBar: React.Dispatch<
+    React.SetStateAction<{ open: boolean; success: boolean }>
+  >;
   setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>;
-  handleDeleteRows: (
-    selected: readonly number[],
-    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => React.MouseEventHandler<HTMLButtonElement>;
-}) {
+  handleDeleteRows: HandleDeleteRows;
+}
+
+export function DialogDeleteRows({
+  open,
+  setOpen,
+  setOpenSnackBar,
+  handleDeleteRows,
+  selected,
+  setSelected,
+}: DialogProp) {
   const handleClose = () => {
     setOpen(false);
   };
@@ -72,7 +75,12 @@ export function DialogDeleteRows({
       </DialogContent>
       <DialogActions sx={{ m: 0, p: 1 }}>
         <Button
-          onClick={handleDeleteRows(selected, setSelected, setOpen)}
+          onClick={handleDeleteRows(
+            selected,
+            setSelected,
+            setOpen,
+            setOpenSnackBar,
+          )}
           color="primary"
           variant="text"
         >

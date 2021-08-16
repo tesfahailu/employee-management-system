@@ -1,5 +1,11 @@
-import React, { Dispatch, useState } from 'react';
-import { IconButton, InputBase, Stack } from '@material-ui/core';
+import React, { Dispatch, SyntheticEvent, useState } from 'react';
+import {
+  Alert,
+  IconButton,
+  InputBase,
+  Snackbar,
+  Stack,
+} from '@material-ui/core';
 import { alpha, styled } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,7 +15,8 @@ import { Delete as DeleteIcon } from '@material-ui/icons';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { CSVLink } from 'react-csv';
 import { DialogDeleteRows } from './DialogDeleteRows';
-import { TableToolBarText } from '../../text';
+import { DialogDeleteRowsText, TableToolBarText } from '../../text';
+import { HandleDeleteRows } from '../../types/types';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -85,11 +92,7 @@ interface TableToolBar<R> {
   searchText: string;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
   rowsData: R[];
-  handleDeleteRows: (
-    selected: readonly number[],
-    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => React.MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRows: HandleDeleteRows;
 }
 
 export const TableToolBar = <R extends { id: number }>(
@@ -115,6 +118,21 @@ export const TableToolBar = <R extends { id: number }>(
   const [open, setOpen] = useState(false);
   const toggleIsDeleteAll = () => {
     setOpen((prev) => !prev);
+  };
+
+  const [openSnackBar, setOpenSnackBar] = useState<{
+    open: boolean;
+    success: boolean;
+  }>({ open: false, success: false });
+
+  const handleClose = (event: SyntheticEvent<Element>, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackBar((prevData) => ({
+      open: false,
+      success: prevData.success,
+    }));
   };
 
   return (
@@ -189,10 +207,30 @@ export const TableToolBar = <R extends { id: number }>(
       <DialogDeleteRows
         open={open}
         setOpen={setOpen}
+        setOpenSnackBar={setOpenSnackBar}
         handleDeleteRows={handleDeleteRows}
         selected={selected}
         setSelected={setSelected}
       />
+      <Snackbar
+        open={openSnackBar.open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        {openSnackBar.success ? (
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: '100%' }}
+          >
+            {DialogDeleteRowsText.Success}
+          </Alert>
+        ) : (
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            {DialogDeleteRowsText.Error}
+          </Alert>
+        )}
+      </Snackbar>
     </>
   );
 };

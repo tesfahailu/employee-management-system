@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from '@material-ui/core';
-import { ChangeEvent, MouseEvent } from 'react';
+import { ChangeEvent, MouseEvent, MouseEventHandler } from 'react';
 
 //#region General Categories
 export interface Employee {
@@ -65,6 +65,23 @@ export type OnChangeSelect<Context> = (
 export type OnMouseClick = (
   index: number,
 ) => (event: MouseEvent<HTMLInputElement>) => void;
+
+export type HandleDeleteRow = (
+  rowId: number,
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  setOpenSnackBar: React.Dispatch<
+    React.SetStateAction<{ open: boolean; success: boolean }>
+  >,
+) => MouseEventHandler<HTMLButtonElement>;
+
+export type HandleDeleteRows = (
+  selected: readonly number[],
+  setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  setOpenSnackBar: React.Dispatch<
+    React.SetStateAction<{ open: boolean; success: boolean }>
+  >,
+) => React.MouseEventHandler<HTMLButtonElement>;
 //#endregion
 
 //#region Forms
@@ -144,6 +161,12 @@ export interface EmployeePageView {
   officeAddress: Address;
   projects: Array<Project>;
 }
+
+export interface EmployeePageViewAll {
+  rowsData: Employee[];
+  handleDeleteRow: HandleDeleteRow;
+  handleDeleteRows: HandleDeleteRows;
+}
 //#endregion
 
 //#region Office Pages
@@ -160,6 +183,12 @@ export interface OfficePageEdit {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+export interface OfficePageViewAll {
+  rowsData: Address[];
+  handleDeleteRow: HandleDeleteRow;
+  handleDeleteRows: HandleDeleteRows;
+}
 //#endregion
 
 //#region Department Pages
@@ -173,6 +202,12 @@ export interface DepartmentPageEdit extends DepartmentForm<Department> {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+export interface DepartmentPageViewAll {
+  rowsData: Department[];
+  handleDeleteRow: HandleDeleteRow;
+  handleDeleteRows: HandleDeleteRows;
+}
 //#endregion
 
 //#region Role Pages
@@ -185,6 +220,12 @@ export interface RolePageEdit extends RoleForm<Role> {
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+export interface RolePageViewAll {
+  rowsData: Role[];
+  handleDeleteRow: HandleDeleteRow;
+  handleDeleteRows: HandleDeleteRows;
+}
 //#endregion
 
 //#region Project Pages
@@ -196,5 +237,11 @@ export interface ProjectPageEdit extends ProjectForm {
 export interface ProjectPageCreate extends ProjectForm {
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface ProjectPageViewAll {
+  rowsData: Project[];
+  handleDeleteRow: HandleDeleteRow;
+  handleDeleteRows: HandleDeleteRows;
 }
 //#endregion
