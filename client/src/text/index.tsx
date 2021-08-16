@@ -34,12 +34,16 @@ export enum DialogDeleteRowText {
   Body = 'Are you sure you want to delete row?',
   Accept = 'Yes',
   Decline = 'Cancel',
+  Success = 'Row deleted successfully',
+  Error = "Row wasn't deleted",
 }
 
 export enum DialogDeleteRowsText {
   Body = 'Are you sure you want to delete all rows?',
   Accept = 'Yes',
   Decline = 'Cancel',
+  Success = 'Rows deleted successfully',
+  Error = "Rows weren't deleted",
 }
 
 export enum TableToolBarText {

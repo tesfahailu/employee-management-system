@@ -7,7 +7,7 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from '@material-ui/icons';
-import { Role } from '../../../types/types';
+import { Role, RolePageViewAll } from '../../../types/types';
 import { Rows } from './ViewAllData';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import Table from '../../../modules/components/Table';
@@ -35,24 +35,11 @@ const columns: HeadCell[] = [
   },
 ];
 
-interface RolesProps {
-  rowsData: Role[];
-  handleDeleteRow: (
-    rowId: number,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
-  handleDeleteRows: (
-    selected: readonly number[],
-    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
-}
-
-export const ViewAllPresentation: React.FC<RolesProps> = ({
+export const ViewAllPresentation = ({
   rowsData,
   handleDeleteRow,
   handleDeleteRows,
-}) => {
+}: RolePageViewAll) => {
   const actionButtonLinks = {
     view: `/roles/viewOne`,
     edit: `/roles/edit`,

@@ -3,7 +3,7 @@ import { DepartmentsViewPageText } from '../../../text';
 import { PageHeader } from '../../../modules/components/PageHeader';
 import { HeadCell } from '../../Employees/ViewAll/ViewAllPresentation';
 import Table from '../../../modules/components/Table';
-import { Role } from '../../../types/types';
+import { DepartmentPageViewAll, Role } from '../../../types/types';
 
 const headCells: Array<HeadCell<Role>> = [
   {
@@ -26,24 +26,11 @@ const headCells: Array<HeadCell<Role>> = [
   },
 ];
 
-interface DepartmentProps {
-  rowsData: Role[];
-  handleDeleteRow: (
-    rowId: number,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
-  handleDeleteRows: (
-    selected: readonly number[],
-    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => MouseEventHandler<HTMLButtonElement>;
-}
-
-export const ViewAllPresentation: React.FC<DepartmentProps> = ({
+export const ViewAllPresentation = ({
   rowsData,
   handleDeleteRow,
   handleDeleteRows,
-}) => {
+}: DepartmentPageViewAll) => {
   const actionButtonLinks = {
     view: `/departments/viewOne`,
     edit: `/departments/edit`,

@@ -9,21 +9,15 @@ import { Order } from './TableUtils';
 import { TableBody } from './TableBody';
 import { HeadCell } from '../../pages/Employees/ViewAll/ViewAllPresentation';
 import { useEffect } from 'react';
+import { HandleDeleteRow, HandleDeleteRows } from '../../types/types';
 
 export interface Props<R> {
   actionButtonLinks: { view: string; edit: string };
   title: string;
   rowsData: R[];
   headCells: HeadCell<R>[];
-  handleDeleteRow: (
-    rowId: number,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => React.MouseEventHandler<HTMLButtonElement>;
-  handleDeleteRows: (
-    selected: readonly number[],
-    setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => React.MouseEventHandler<HTMLButtonElement>;
+  handleDeleteRow: HandleDeleteRow;
+  handleDeleteRows: HandleDeleteRows;
   minWidth: string;
 }
 
