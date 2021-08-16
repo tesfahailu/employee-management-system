@@ -47,11 +47,15 @@ export const ViewAllData = () => {
     (
       selected: readonly number[],
       setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+      setOpen: React.Dispatch<React.SetStateAction<boolean>>,
     ): MouseEventHandler<HTMLButtonElement> =>
     (event) => {
+      setOpen(false);
       event.stopPropagation();
       setSelected([]);
-      setRowsData([]);
+      setRowsData((prevData) => {
+        return prevData.filter((val) => selected.indexOf(val.id) === -1);
+      });
     };
 
   return (

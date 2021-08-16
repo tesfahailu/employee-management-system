@@ -8,6 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { CSVLink } from 'react-csv';
+import { DialogDeleteRows } from './DialogDeleteRows';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -86,6 +87,7 @@ interface TableToolBar<R> {
   handleDeleteRows: (
     selected: readonly number[],
     setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
   ) => React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -109,74 +111,87 @@ export const TableToolBar = <R extends { id: number }>(
       return !prevValue;
     });
   };
+  const [open, setOpen] = useState(false);
+  const toggleIsDeleteAll = () => {
+    setOpen((prev) => !prev);
+  };
 
   return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(
-              theme.palette.primary.main,
-              theme.palette.action.activatedOpacity,
-            ),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          {title}
-        </Typography>
-      )}
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton onClick={handleDeleteRows(selected, setSelected)}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Stack direction="row" spacing={0.8} justifyContent="flex-start">
-          {!isSearch && !searchText ? (
-            <Tooltip title="Search">
-              <IconButton onClick={toggleSearchBox}>
-                <SearchIcon />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <SearchBox
-              toggleSearchBox={toggleSearchBox}
-              searchText={searchText}
-              handleSearch={handleSearch}
-            />
-          )}
-          <CSVLink
-            data={rowsData.map(({ id, ...rest }) => rest)}
-            id="contained-button-csv"
-            filename={`${title}.csv`}
+    <>
+      <Toolbar
+        sx={{
+          pl: { sm: 2 },
+          pr: { xs: 1, sm: 1 },
+          ...(numSelected > 0 && {
+            bgcolor: (theme) =>
+              alpha(
+                theme.palette.primary.main,
+                theme.palette.action.activatedOpacity,
+              ),
+          }),
+        }}
+      >
+        {numSelected > 0 ? (
+          <Typography
+            sx={{ flex: '1 1 100%' }}
+            color="inherit"
+            variant="subtitle1"
+            component="div"
           >
-            <Tooltip title="Download CSV">
-              <IconButton>
-                <CloudDownloadIcon />
-              </IconButton>
-            </Tooltip>
-          </CSVLink>
-        </Stack>
-      )}
-    </Toolbar>
+            {numSelected} selected
+          </Typography>
+        ) : (
+          <Typography
+            sx={{ flex: '1 1 100%' }}
+            variant="h6"
+            id="tableTitle"
+            component="div"
+          >
+            {title}
+          </Typography>
+        )}
+        {numSelected > 0 ? (
+          <Tooltip title="Delete">
+            <IconButton onClick={toggleIsDeleteAll}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <Stack direction="row" spacing={0.8} justifyContent="flex-start">
+            {!isSearch && !searchText ? (
+              <Tooltip title="Search">
+                <IconButton onClick={toggleSearchBox}>
+                  <SearchIcon />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <SearchBox
+                toggleSearchBox={toggleSearchBox}
+                searchText={searchText}
+                handleSearch={handleSearch}
+              />
+            )}
+            <CSVLink
+              data={rowsData.map(({ id, ...rest }) => rest)}
+              id="contained-button-csv"
+              filename={`${title}.csv`}
+            >
+              <Tooltip title="Download CSV">
+                <IconButton>
+                  <CloudDownloadIcon />
+                </IconButton>
+              </Tooltip>
+            </CSVLink>
+          </Stack>
+        )}
+      </Toolbar>
+      <DialogDeleteRows
+        open={open}
+        setOpen={setOpen}
+        handleDeleteRows={handleDeleteRows}
+        selected={selected}
+        setSelected={setSelected}
+      />
+    </>
   );
 };

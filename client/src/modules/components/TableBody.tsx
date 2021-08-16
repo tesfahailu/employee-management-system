@@ -82,11 +82,11 @@ export const TableBody = <R extends { id: number }>({
 }: TableBody<R>) => {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
-  const [isDeleteSelected, setIsDeleteSelected] = useState(false);
+  const [open, setOpen] = useState(false);
   const [deleteRowId, setDeleteRowId] = useState<number | null>(null);
 
   const toggleIsDelete = (id: number) => {
-    setIsDeleteSelected((prev) => !prev);
+    setOpen((prev) => !prev);
     setDeleteRowId(id);
   };
 
@@ -201,8 +201,8 @@ export const TableBody = <R extends { id: number }>({
         )}
       </MaterialTableBody>
       <DialogDeleteRow
-        open={isDeleteSelected}
-        setOpen={setIsDeleteSelected}
+        open={open}
+        setOpen={setOpen}
         rowId={deleteRowId}
         handleDeleteRow={handleDeleteRow}
       />

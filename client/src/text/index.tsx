@@ -35,6 +35,12 @@ export enum DialogDeleteRowText {
   Accept = 'Yes',
   Decline = 'Cancel',
 }
+
+export enum DialogDeleteRowsText {
+  Body = 'Are you sure you want to delete all rows?',
+  Accept = 'Yes',
+  Decline = 'Cancel',
+}
 //#endregion
 //#region Setting Page
 export enum SettingsPageText {
