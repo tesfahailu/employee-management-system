@@ -9,6 +9,7 @@ import { Delete as DeleteIcon } from '@material-ui/icons';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { CSVLink } from 'react-csv';
 import { DialogDeleteRows } from './DialogDeleteRows';
+import { TableToolBarText } from '../../text';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -138,7 +139,7 @@ export const TableToolBar = <R extends { id: number }>(
             variant="subtitle1"
             component="div"
           >
-            {numSelected} selected
+            {numSelected} {TableToolBarText.Selected}
           </Typography>
         ) : (
           <Typography
@@ -159,7 +160,7 @@ export const TableToolBar = <R extends { id: number }>(
         ) : (
           <Stack direction="row" spacing={0.8} justifyContent="flex-start">
             {!isSearch && !searchText ? (
-              <Tooltip title="Search">
+              <Tooltip title={TableToolBarText.SearchIcon}>
                 <IconButton onClick={toggleSearchBox}>
                   <SearchIcon />
                 </IconButton>
@@ -176,7 +177,7 @@ export const TableToolBar = <R extends { id: number }>(
               id="contained-button-csv"
               filename={`${title}.csv`}
             >
-              <Tooltip title="Download CSV">
+              <Tooltip title={TableToolBarText.CSVLink}>
                 <IconButton>
                   <CloudDownloadIcon />
                 </IconButton>

@@ -1,4 +1,4 @@
-//#region Forms & Dialog
+//#region Forms, Dialog, Table
 export enum FormCompanyText {
   Header = 'Company:',
   OfficeLabel = 'Office Location:',
@@ -40,6 +40,19 @@ export enum DialogDeleteRowsText {
   Body = 'Are you sure you want to delete all rows?',
   Accept = 'Yes',
   Decline = 'Cancel',
+}
+
+export enum TableToolBarText {
+  SearchIcon = 'Search',
+  CSVLink = 'Download CSV',
+  Selected = 'Selected',
+}
+
+export enum TableBodyText {
+  NoData = 'No results found.',
+  ViewIcon = 'View',
+  EditIcon = 'Edit',
+  DeleteIcon = 'Delete',
 }
 //#endregion
 //#region Setting Page

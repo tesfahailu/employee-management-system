@@ -15,6 +15,8 @@ import {
   Delete as DeleteIcon,
 } from '@material-ui/icons';
 import { DialogDeleteRow } from './DialogDeleteRow';
+import { Tooltip } from '@material-ui/core';
+import { TableBodyText } from '../../text';
 
 interface ActionButton {
   rowId: number;
@@ -30,22 +32,28 @@ const ActionButtons = ({
   const history = useHistory();
   return (
     <Stack direction="row" spacing={0.8} justifyContent="flex-start">
-      <IconButton
-        onClick={() => history.push(`${actionButtonLinks.view}/${rowId}`)}
-        size="large"
-        sx={{ ml: -1.5 }}
-      >
-        <PageViewIcon />
-      </IconButton>
-      <IconButton
-        onClick={() => history.push(`${actionButtonLinks.edit}/${rowId}`)}
-        size="large"
-      >
-        <EditIcon />
-      </IconButton>
-      <IconButton size="large" onClick={() => toggleIsDelete(rowId)}>
-        <DeleteIcon />
-      </IconButton>
+      <Tooltip title={TableBodyText.ViewIcon}>
+        <IconButton
+          onClick={() => history.push(`${actionButtonLinks.view}/${rowId}`)}
+          size="large"
+          sx={{ ml: -1.5 }}
+        >
+          <PageViewIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={TableBodyText.EditIcon}>
+        <IconButton
+          onClick={() => history.push(`${actionButtonLinks.edit}/${rowId}`)}
+          size="large"
+        >
+          <EditIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={TableBodyText.DeleteIcon}>
+        <IconButton size="large" onClick={() => toggleIsDelete(rowId)}>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
     </Stack>
   );
 };
@@ -195,7 +203,7 @@ export const TableBody = <R extends { id: number }>({
             }}
           >
             <TableCell colSpan={headCells.length + 1}>
-              <Typography>No results found.</Typography>
+              <Typography>{TableBodyText.NoData}</Typography>
             </TableCell>
           </TableRow>
         )}
