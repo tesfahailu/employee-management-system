@@ -65,6 +65,7 @@ interface AddressProps {
   handleDeleteRows: (
     selected: readonly number[],
     setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
   ) => MouseEventHandler<HTMLButtonElement>;
 }
 
