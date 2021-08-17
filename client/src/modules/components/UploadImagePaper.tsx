@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  useState,
-  useRef,
-  useCallback,
-  Fragment,
-} from 'react';
+import React, { ChangeEvent, useState, Fragment } from 'react';
 import {
   Avatar,
   Button,
@@ -96,31 +90,85 @@ const CancelButton = ({
 };
 
 export const UploadImagePaper = () => {
-  const [upImg, setUpImg] = useState<string>();
-  const imgRef = useRef(null);
+  const [src, setSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState<ReactCrop.Crop>({
     unit: '%',
     width: 30,
     aspect: 1,
   });
-  const [completedCrop, setCompletedCrop] = useState<ReactCrop.Crop>();
+  const [croppedImageUrl, setCroppedImageUrl] = useState<string>();
+
+  const [isSelected, setIsSelected] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File>();
-  const [isSelected, setIsSelected] = useState<boolean>(false);
-  const [url, setUrl] = useState('');
+  const [imgRef, setImgRef] = useState<HTMLImageElement | null>(null);
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
-      reader.addEventListener('load', () => setUpImg(reader.result as string));
+      reader.addEventListener('load', () =>
+        setSrc(reader.result as string | null),
+      );
       reader.readAsDataURL(e.target.files[0]);
       setIsSelected(true);
       setSelectedFile(e.target.files[0]);
     }
   };
 
-  const onLoad = useCallback((img) => {
-    imgRef.current = img;
-  }, []);
+  const makeClientCrop = async (crop: ReactCrop.Crop) => {
+    if (imgRef && crop.width && crop.height) {
+      const croppedImageUrl: string = await getCroppedImg(
+        imgRef,
+        crop,
+        'newFile.jpeg',
+      );
+      setCroppedImageUrl(croppedImageUrl);
+    }
+  };
+
+  const getCroppedImg = (
+    image: HTMLImageElement,
+    crop: ReactCrop.Crop,
+    fileName: string,
+  ): Promise<string> => {
+    const canvas = document.createElement('canvas');
+    const pixelRatio = window.devicePixelRatio;
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = crop.width! * pixelRatio * scaleX;
+    canvas.height = crop.height! * pixelRatio * scaleY;
+
+    ctx!.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    ctx!.imageSmoothingQuality = 'high';
+
+    ctx!.drawImage(
+      image,
+      crop.x! * scaleX,
+      crop.y! * scaleY,
+      crop.width! * scaleX,
+      crop.height! * scaleY,
+      0,
+      0,
+      crop.width! * scaleX,
+      crop.height! * scaleY,
+    );
+
+    return new Promise((resolve, _reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            console.error('Canvas is empty');
+            return;
+          }
+          const url = window.URL.createObjectURL(blob);
+          resolve(url);
+        },
+        'image/jpeg',
+        1,
+      );
+    });
+  };
 
   return (
     <Paper sx={{ padding: 2, mb: 2 }}>
@@ -132,7 +180,10 @@ export const UploadImagePaper = () => {
         spacing={1}
         alignItems={!isSelected ? 'flex-start' : 'center'}
       >
-        <UploadImage url={url} onSelectFile={onSelectFile} />
+        <UploadImage
+          url={croppedImageUrl ? croppedImageUrl : ''}
+          onSelectFile={onSelectFile}
+        />
         <FileAttributes isSelected={isSelected} selectedFile={selectedFile!} />
       </Grid>
       {isSelected && (
@@ -142,11 +193,12 @@ export const UploadImagePaper = () => {
             avatar.
           </Typography>
           <ReactCrop
-            src={upImg!}
-            onImageLoaded={onLoad}
+            src={src!}
             crop={crop}
-            onChange={(c) => setCrop(c)}
-            onComplete={(c) => setCompletedCrop(c)}
+            ruleOfThirds
+            onImageLoaded={(img) => setImgRef(img)}
+            onComplete={(crop) => makeClientCrop(crop)}
+            onChange={(crop) => setCrop(crop)}
             maxWidth={250}
             maxHeight={250}
             style={{
