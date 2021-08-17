@@ -79,7 +79,7 @@ const DrawerContent = ({
             <ListItem
               button
               key="logout"
-              sx={{ borderRadius: 3, mx: 'auto', width: '97%' }}
+              sx={{ borderRadius: 1, mx: 'auto', width: '97%' }}
             >
               <ListItemIcon>{icon}</ListItemIcon>
               <ListItemText primary={label} onClick={handleClickOpen} />
