@@ -5,6 +5,7 @@ import { setAccessToken } from './services/session/accessToken';
 import { Routes } from './routes/Routes';
 import './App.css';
 import { CssBaseline } from '@material-ui/core';
+import { GlobalProvider } from './modules/components/Global';
 
 export const App: React.FC = ({}) => {
   const [loading, setLoading] = useState(true);
@@ -24,8 +25,10 @@ export const App: React.FC = ({}) => {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider>
-        <CssBaseline />
-        <Routes />
+        <GlobalProvider>
+          <CssBaseline />
+          <Routes />
+        </GlobalProvider>
       </ThemeProvider>
     </StyledEngineProvider>
   );
