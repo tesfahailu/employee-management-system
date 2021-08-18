@@ -26,23 +26,16 @@ import {
   ExitToApp as LogoutIcon,
 } from '@material-ui/icons';
 import { DialogLogout } from './DialogLogout';
-
-const routesArray: Array<{ label: string; icon: JSX.Element; url: string }> = [
-  { label: 'SmartyPants', icon: <Avatar>A</Avatar>, url: '/settings' },
-  { label: 'Employees', icon: <EmployeesIcon />, url: '/employees' },
-  { label: 'Offices', icon: <OfficesIcon />, url: '/offices' },
-  { label: 'Departments', icon: <DepartmentIcon />, url: '/departments' },
-  { label: 'Roles', icon: <RolesIcon />, url: '/roles' },
-  { label: 'Projects', icon: <ProjectIcon />, url: '/projects' },
-  { label: 'Logout', icon: <LogoutIcon />, url: '' },
-];
+import { GlobalContext } from './Global';
 
 const DrawerContent = ({
   selectedRoute,
   handleDrawerToggle,
+  routesArray,
 }: {
   selectedRoute: string;
   handleDrawerToggle: () => void;
+  routesArray: RoutesArray[];
 }) => {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
@@ -72,7 +65,10 @@ const DrawerContent = ({
                 }}
               >
                 <ListItemIcon>{icon}</ListItemIcon>
-                <ListItemText primary={label} />
+                <ListItemText
+                  primary={label}
+                  primaryTypographyProps={{ noWrap: true }}
+                />
               </ListItem>
             </Link>
           ) : (
@@ -98,6 +94,12 @@ interface DrawerProp {
   drawerWidth: number;
 }
 
+interface RoutesArray {
+  label: string;
+  icon: JSX.Element;
+  url: string;
+}
+
 export const Drawer = ({
   handleDrawerToggle,
   mobileOpen,
@@ -111,6 +113,29 @@ export const Drawer = ({
     const route = pathname.split('/');
     setSelectedRoute(`/${route[1]}`);
   }, [location]);
+
+  const [state, _] = React.useContext(GlobalContext);
+
+  const routesArray: RoutesArray[] = [
+    {
+      label: 'SmartyPansfdsfsfsfsdfsfsdfsfsfsfsdfsdfsdfsfdsdfsdfsdfdsfsdsts',
+      icon: (
+        <Avatar
+          src={state.avatarUrl}
+          sx={{ width: 55, height: 55, ml: -1, mr: 2 }}
+        >
+          A
+        </Avatar>
+      ),
+      url: '/settings',
+    },
+    { label: 'Employees', icon: <EmployeesIcon />, url: '/employees' },
+    { label: 'Offices', icon: <OfficesIcon />, url: '/offices' },
+    { label: 'Departments', icon: <DepartmentIcon />, url: '/departments' },
+    { label: 'Roles', icon: <RolesIcon />, url: '/roles' },
+    { label: 'Projects', icon: <ProjectIcon />, url: '/projects' },
+    { label: 'Logout', icon: <LogoutIcon />, url: '' },
+  ];
 
   return (
     <Fragment>
@@ -132,7 +157,7 @@ export const Drawer = ({
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5">
+          <Typography variant="h5" sx={{ width: 500 }} noWrap={true}>
             {routesArray.find(({ url }) => selectedRoute === url)?.label}
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
@@ -174,6 +199,7 @@ export const Drawer = ({
           <DrawerContent
             selectedRoute={selectedRoute}
             handleDrawerToggle={handleDrawerToggle}
+            routesArray={routesArray}
           />
         </MaterialDrawer>
         <MaterialDrawer
@@ -190,6 +216,7 @@ export const Drawer = ({
           <DrawerContent
             selectedRoute={selectedRoute}
             handleDrawerToggle={handleDrawerToggle}
+            routesArray={routesArray}
           />
         </MaterialDrawer>
       </Box>

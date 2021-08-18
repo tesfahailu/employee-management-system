@@ -10,6 +10,7 @@ import {
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import UploadButton from './UploadButton';
+import { GlobalContext } from './Global';
 
 const UploadImage = ({
   url,
@@ -68,14 +69,17 @@ const FileAttributes = ({
 );
 
 const SaveImageButton = ({
-  setIsSelected,
+  handleSaveChange,
 }: {
-  setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
-}) => (
-  <Button onClick={() => setIsSelected(false)} sx={{ mr: 1 }}>
-    Save Cropped Image
-  </Button>
-);
+  handleSaveChange: () => void;
+}) => {
+  const [state, dispatch] = React.useContext(GlobalContext);
+  return (
+    <Button onClick={handleSaveChange} sx={{ mr: 1 }}>
+      Save Cropped Image
+    </Button>
+  );
+};
 
 const CancelButton = ({
   setIsSelected,
@@ -101,6 +105,8 @@ export const UploadImagePaper = () => {
   const [isSelected, setIsSelected] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File>();
   const [imgRef, setImgRef] = useState<HTMLImageElement | null>(null);
+
+  const [_, dispatch] = React.useContext(GlobalContext);
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -170,6 +176,11 @@ export const UploadImagePaper = () => {
     });
   };
 
+  const handleSaveChange = () => {
+    dispatch({ type: 'UPDATE_AVATAR', payload: croppedImageUrl });
+    setIsSelected(false);
+  };
+
   return (
     <Paper sx={{ padding: 2, mb: 2 }}>
       <Typography variant="h6" sx={{ mb: 1 }}>
@@ -209,7 +220,7 @@ export const UploadImagePaper = () => {
             }}
           />
           <div>
-            <SaveImageButton setIsSelected={setIsSelected} />
+            <SaveImageButton handleSaveChange={handleSaveChange} />
             <CancelButton setIsSelected={setIsSelected} />
           </div>
         </Fragment>
