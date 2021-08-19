@@ -59,6 +59,23 @@ export enum TableBodyText {
   DeleteIcon = 'Delete',
 }
 //#endregion
+//#region Error Messages
+export enum RegisterErrorText {
+  UsernameTooShort = 'username must be greater than 5 characters.',
+  UsernameCharacterError = 'username should only include numbers, letters, and underscores.',
+  UsernameAlreadyExist = 'The username already exists. Please use a different username.',
+  UsernameMismatch = 'username does not match.',
+  PasswordTooShort = 'password must be greater than 5 alphanumeric charcters. ',
+  PasswordMismatch = 'password does not match.',
+}
+//#endregion
+//#region Register Page
+export enum RegisterPageText {
+  PageHeader = 'Register New User',
+  ButtonRegister = 'Register',
+  ButtonSignin = 'Already have an accout? Sign in',
+}
+////#endregion
 //#region Setting Page
 export enum SettingsPageText {
   PageHeader = 'Settings:',

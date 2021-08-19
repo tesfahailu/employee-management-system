@@ -122,7 +122,7 @@ export const Drawer = ({
       icon: (
         <Avatar
           src={state.avatarUrl}
-          sx={{ width: 55, height: 55, ml: -1, mr: 2 }}
+          sx={{ width: 50, height: 50, ml: -1, mr: 2 }}
         >
           A
         </Avatar>

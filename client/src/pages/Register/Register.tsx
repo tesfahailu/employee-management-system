@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Typography,
   Link,
@@ -17,88 +17,105 @@ import {
 } from '../../generated/graphql';
 import { CopyRight } from '../../modules/components/CopyRight';
 import Logo from '../../modules/components/Logo';
+import { minMaxLength, userExists } from '../../modules/utils/errorCheck';
+import { RegisterErrorText as ErrorText, RegisterPageText } from '../../text';
 
-enum ErrorMessage {
-  UsernameTooShort = 'username must be greater than 5 characters.',
-  UsernameCharacterError = 'username should only include numbers, letters, and underscores.',
-  UsernameMismatch = 'username does not match.',
-  PasswordTooShort = 'password must be greater than 5 alphanumeric charcters. ',
-  PasswordMismatch = 'password does not match.',
+function checkUsername(username: string, setErrors: any) {
+  let errorText = '';
+  if (minMaxLength(username, 5)) {
+    errorText = ErrorText.UsernameTooShort;
+  } else {
+    userExists(username).then((result) => {
+      if (result) {
+        errorText = ErrorText.UsernameAlreadyExist;
+      } else {
+        errorText = '';
+      }
+      setErrors((prevErrors: any) => ({
+        ...prevErrors,
+        username: errorText,
+      }));
+    });
+  }
+  return errorText;
 }
 
-export const Register: React.FC<RouteComponentProps> = ({ history }) => {
-  const [username, setUsername] = useState('');
-  const [confirmUsername, setConfirmUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+function checkConfirmUsername(username: string, confirmUsername: string) {
+  let errorText = '';
+  if (username !== confirmUsername) {
+    errorText = ErrorText.UsernameMismatch;
+  }
+  return errorText;
+}
 
-  const [error, setError] = useState({
+function checkPassword(password: string) {
+  let errorText = '';
+  if (minMaxLength(password, 5)) {
+    errorText = ErrorText.PasswordTooShort;
+  }
+  return errorText;
+}
+
+function checkConfirmPassword(password: string, confirmPassword: string) {
+  let errorText = '';
+  if (password !== confirmPassword) {
+    errorText = ErrorText.PasswordMismatch;
+  }
+  return errorText;
+}
+
+export const Register = ({ history }: RouteComponentProps) => {
+  const initialState = {
     username: '',
     confirmUsername: '',
     password: '',
     confirmPassword: '',
-  });
+  };
+
+  const [user, setUser] = useState(initialState);
+  const [errors, setErrors] = useState<typeof initialState>(initialState);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    let errorText: string;
+
+    switch (name) {
+      case 'username':
+        errorText = checkUsername(value, setErrors);
+        break;
+      case 'confirmUsername':
+        errorText = checkConfirmUsername(user.username, value);
+        break;
+      case 'password':
+        errorText = checkPassword(value);
+        break;
+      case 'confirmPassword':
+        errorText = checkConfirmPassword(user.password, value);
+        break;
+      default:
+        return;
+    }
+    setUser((user) => ({ ...user, [name]: value }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: errorText,
+    }));
+  };
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [register] = useRegisterMutation();
 
-  const formValidation = () => {
-    let isInvalidInput = false;
-
-    let usernameErrorText = '';
-    if (username.length < 5) {
-      usernameErrorText = ErrorMessage.UsernameTooShort;
-      isInvalidInput = true;
-    } else if (!RegExp('^[a-zA-Z0-9_]*$').test(username)) {
-      usernameErrorText = ErrorMessage.UsernameCharacterError;
-      isInvalidInput = true;
-    }
-    setError((previousError) => ({
-      ...previousError,
-      username: usernameErrorText,
-    }));
-
-    let confirmUsernameErrorText = '';
-    if (confirmUsername !== username) {
-      confirmUsernameErrorText = ErrorMessage.UsernameMismatch;
-      isInvalidInput = true;
-    }
-    setError((previousError) => ({
-      ...previousError,
-      confirmUsername: confirmUsernameErrorText,
-    }));
-
-    let passwordErrorText = '';
-    if (password.length < 5) {
-      passwordErrorText = ErrorMessage.PasswordTooShort;
-      isInvalidInput = true;
-    }
-    setError((previousError) => ({
-      ...previousError,
-      password: passwordErrorText,
-    }));
-
-    let confirmPasswordErrorText = '';
-    if (confirmPassword !== password) {
-      confirmPasswordErrorText = ErrorMessage.PasswordMismatch;
-      isInvalidInput = true;
-    }
-    setError((previousError) => ({
-      ...previousError,
-      confirmPassword: confirmPasswordErrorText,
-    }));
-
-    return isInvalidInput;
-  };
-
-  const firstRender = useRef(true);
   useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-    setIsButtonDisabled(formValidation());
-  }, [username, confirmUsername, password, confirmPassword]);
+    let isInvalid = false;
+    (Object.keys(user) as Array<keyof typeof user>).map((key) => {
+      if (errors[key] !== '' || user[key] === '') {
+        isInvalid = true;
+      }
+    });
+    setIsButtonDisabled(isInvalid);
+  }, [user, errors]);
 
   return (
     <Container component="main" maxWidth="xs" sx={{ mt: 12 }}>
@@ -112,7 +129,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
       >
         <Logo />
         <Typography component="h1" variant="h6">
-          Register New User
+          {RegisterPageText.PageHeader}
         </Typography>
         <Container
           component="form"
@@ -121,8 +138,8 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
             e.preventDefault();
             await register({
               variables: {
-                username,
-                password,
+                username: user.username,
+                password: user.password,
               },
               update: (store, { data }) => {
                 if (!data) return null;
@@ -139,55 +156,55 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
             <Grid item xs={12}>
               <TextField
                 autoComplete="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                name="username"
+                onBlur={handleChange}
                 required
                 fullWidth
                 id="username"
                 label="Username"
                 autoFocus
-                error={!!error.username}
-                helperText={error.username}
+                error={!!errors.username}
+                helperText={errors.username}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                value={confirmUsername}
-                onChange={(e) => setConfirmUsername(e.target.value)}
+                name="confirmUsername"
+                onBlur={handleChange}
                 required
                 fullWidth
                 id="confirmUsername"
                 label="Confirm Username"
-                error={!!error.confirmUsername}
-                helperText={error.confirmUsername}
+                error={!!errors.confirmUsername}
+                helperText={errors.confirmUsername}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                onBlur={handleChange}
                 required
                 fullWidth
                 id="password"
                 label="Password"
                 type="password"
-                error={!!error.password}
-                helperText={error.password}
+                error={!!errors.password}
+                helperText={errors.password}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 autoComplete="current-password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                name="confirmPassword"
+                onChange={handleChange}
                 required
                 fullWidth
                 id="confirmPassword"
-                label="Password"
+                label="Confirm Password"
                 type="password"
-                error={!!error.confirmPassword}
-                helperText={error.confirmPassword}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword}
               />
             </Grid>
           </Grid>
@@ -197,12 +214,12 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
             sx={{ mt: 3, mr: 0, mb: 2 }}
             disabled={isButtonDisabled}
           >
-            Register
+            {RegisterPageText.ButtonRegister}
           </Button>
           <Grid container>
             <Grid item>
               <Link variant="body2" onClick={() => history.push('/login')}>
-                Already have an accout? Sign in
+                {RegisterPageText.ButtonSignin}
               </Link>
             </Grid>
           </Grid>
