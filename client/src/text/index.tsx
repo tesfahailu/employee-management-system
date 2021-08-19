@@ -75,7 +75,15 @@ export enum RegisterPageText {
   ButtonRegister = 'Register',
   ButtonSignin = 'Already have an accout? Sign in',
 }
-////#endregion
+//#endregion
+//#region Login Page
+export enum LoginPageText {
+  PageHeader = 'Sign In',
+  ButtonSignin = 'Sign In',
+  ButtonForgotPassword = 'Forgot Password?',
+  ButtonRegister = "Don't have an account? Register!",
+}
+//#endregion
 //#region Setting Page
 export enum SettingsPageText {
   PageHeader = 'Settings:',
