@@ -20,7 +20,10 @@ import Logo from '../../modules/components/Logo';
 import { minMaxLength, userExists } from '../../modules/utils/errorCheck';
 import { RegisterErrorText as ErrorText, RegisterPageText } from '../../text';
 
-function checkUsername(username: string, setErrors: any) {
+function checkUsername<T>(
+  username: string,
+  setErrors: React.Dispatch<React.SetStateAction<T>>,
+) {
   let errorText = '';
   if (minMaxLength(username, 5)) {
     errorText = ErrorText.UsernameTooShort;
@@ -31,8 +34,8 @@ function checkUsername(username: string, setErrors: any) {
       } else {
         errorText = '';
       }
-      setErrors((prevErrors: any) => ({
-        ...prevErrors,
+      setErrors((errors) => ({
+        ...errors,
         username: errorText,
       }));
     });
@@ -79,11 +82,11 @@ export const Register = ({ history }: RouteComponentProps) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    let errorText: string;
+    let errorText = '';
 
     switch (name) {
       case 'username':
-        errorText = checkUsername(value, setErrors);
+        errorText = checkUsername<typeof errors>(value, setErrors);
         break;
       case 'confirmUsername':
         errorText = checkConfirmUsername(user.username, value);
@@ -98,8 +101,8 @@ export const Register = ({ history }: RouteComponentProps) => {
         return;
     }
     setUser((user) => ({ ...user, [name]: value }));
-    setErrors((prevErrors) => ({
-      ...prevErrors,
+    setErrors((errors) => ({
+      ...errors,
       [name]: errorText,
     }));
   };
