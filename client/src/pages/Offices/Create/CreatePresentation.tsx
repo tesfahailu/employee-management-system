@@ -13,6 +13,7 @@ const states = [
 
 export const CreatePresentation = ({
   address,
+  addressErrors,
   onAddressChange,
   isFormComplete,
   saveChanges,
@@ -23,7 +24,11 @@ export const CreatePresentation = ({
       subtitle={OfficeCreatePageText.PageSubHeader}
       isButton={false}
     />
-    <FormOffice address={address} onAddressChange={onAddressChange} />
+    <FormOffice
+      address={address}
+      addressErrors={addressErrors}
+      onAddressChange={onAddressChange}
+    />
     <Button
       sx={{ mr: 1, mb: 1 }}
       disabled={!isFormComplete}

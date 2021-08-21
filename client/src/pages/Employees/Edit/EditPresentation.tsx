@@ -10,8 +10,10 @@ import { FormProjectsList } from '../../../modules/components/FormProjectsList';
 
 export const EditPresentation = ({
   employee,
+  employeeErrors,
   onEmployeeInfoChange,
   address,
+  addressErrors,
   onAddressChange,
   office,
   onOfficeChange,
@@ -41,10 +43,12 @@ export const EditPresentation = ({
       <Box sx={{ mt: 1 }}>
         <FormEmployee<Employee>
           employee={employee}
+          employeeErrors={employeeErrors}
           onEmployeeInfoChange={onEmployeeInfoChange}
         />
         <FormEmployeeAddress
           address={address}
+          addressErrors={addressErrors}
           onAddressChange={onAddressChange}
         />
         <FormCompany

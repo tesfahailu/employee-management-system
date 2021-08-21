@@ -13,6 +13,7 @@ const states = [
 
 export const EditPresentation = ({
   address,
+  addressErrors,
   onAddressChange,
   isFormChanged,
   saveChanges,
@@ -23,7 +24,11 @@ export const EditPresentation = ({
       subtitle={OfficeEditPageText.PageSubHeader}
       isButton={false}
     />
-    <FormOffice address={address} onAddressChange={onAddressChange} />
+    <FormOffice
+      address={address}
+      addressErrors={addressErrors}
+      onAddressChange={onAddressChange}
+    />
     <Button
       sx={{ mr: 1, mb: 1 }}
       disabled={!isFormChanged}

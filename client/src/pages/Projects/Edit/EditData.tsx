@@ -15,10 +15,11 @@ export const EditData = () => {
     setProject(dataProject);
   }, []);
 
-  const onProjectChange: OnChangeField<Project> = (field) => (event) => {
+  const onProjectChange: OnChangeField = (event) => {
+    const { name, value } = event.target;
     setIsFormChanged(true);
     setProject((previousProject) => {
-      return { ...previousProject, [field]: event.target.value };
+      return { ...previousProject, [name]: value };
     });
   };
 

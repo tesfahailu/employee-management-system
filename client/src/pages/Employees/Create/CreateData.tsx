@@ -1,121 +1,155 @@
 import React, { useState } from 'react';
 import {
-  Address,
-  Department,
-  Employee,
-  OfficeLabel,
-  OnChangeSelect,
-  OnMouseClick,
-  Project,
-  Role,
-} from '../../../types/types';
+  validEmail,
+  validPhoneNumber,
+} from '../../../modules/utils/errorCheck';
+import { OnChangeSelect, OnMouseClick, Project } from '../../../types/types';
 import { CreatePresentation } from './CreatePresentation';
+import { departmentsList, officesList, projectsList, rolesList } from './data';
+import { EmployeeCreateErrorText as ErrorText } from '../../../text';
+import { useEffect } from 'react';
 
-const officesList = [
-  { id: 0, name: 'los angeles', description: '' },
-  { id: 1, name: 'boston', description: '' },
-  { id: 2, name: 'miama', description: '' },
-];
-const departmentsList = [
-  { id: 0, name: 'marketing', description: '' },
-  { id: 1, name: 'operations', description: '' },
-  { id: 2, name: 'finanace', description: '' },
-  { id: 3, name: 'sales', description: '' },
-  { id: 4, name: 'product', description: '' },
-];
-const rolesList = [
-  {
-    id: 0,
-    name: 'admin',
-    description: 'can view, edit, and delete all resources',
-  },
-  {
-    id: 1,
-    name: 'basic',
-    description: 'can view, edit, and delete own resources',
-  },
-];
-const projectsList = [
-  { id: 0, name: 'Amazon', description: 'Integrate with AWS' },
-  { id: 1, name: 'Microsoft', description: 'Integrate with Azure' },
-  { id: 2, name: 'Google', description: 'Integrate with Firebase' },
-];
+const initialEmployee = {
+  firstName: '',
+  lastName: '',
+  mobile: '',
+  email: '',
+};
+
+const initialStreetAddress = {
+  streetAddress1: '',
+  streetAddress2: '',
+  city: '',
+  state: '',
+  country: '',
+  zipCode: '',
+};
+
+const initialSelection = {
+  id: 0,
+  name: '',
+  description: '',
+};
 
 export const CreateData = () => {
-  const [employee, setEmployee] = useState<Omit<Employee, 'id'>>({
-    firstName: '',
-    lastName: '',
-    mobile: '',
-    email: '',
-    type: '',
-  });
-  const [employeeAddress, setEmployeeAddress] = useState<Omit<Address, 'id'>>({
-    streetAddress1: '',
-    streetAddress2: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-  });
-  const [office, setOffice] = useState<OfficeLabel>({
-    id: 0,
-    name: '',
-    description: '',
-  });
-  const [department, setDepartment] = useState<Department>({
-    id: 0,
-    name: '',
-    description: '',
-  });
-  const [role, setRole] = useState({ id: 0, name: '', description: '' });
+  //#region employee info
+  const [employee, setEmployee] = useState(initialEmployee);
+  const [employeeErrors, setEmployeeErrors] = useState(initialEmployee);
+  const onEmployeeInfoChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+
+    let errorText = '';
+
+    switch (name) {
+      case 'firstName':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'lastName':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'mobile':
+        errorText = validPhoneNumber(value) ? '' : ErrorText.PhoneNumberInvalid;
+        break;
+      case 'email':
+        errorText = validEmail(value) ? '' : ErrorText.EmailInvalid;
+        break;
+    }
+
+    setEmployee((employee) => {
+      return {
+        ...employee,
+        [name]: value,
+      };
+    });
+    setEmployeeErrors((errors) => ({
+      ...errors,
+      [name]: errorText,
+    }));
+  };
+  //#endregion
+
+  //#region address
+  const [employeeAddress, setEmployeeAddress] = useState(initialStreetAddress);
+  const [employeeAddressErrors, setEmployeeAddressErrors] =
+    useState(initialStreetAddress);
+  const onEmployeeAddressChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    let errorText = '';
+
+    switch (name) {
+      case 'streetAddress1':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'streetAddress2':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'city':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'state':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'country':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'zipCode':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+    }
+
+    console.log('on employee address change', value);
+    setEmployeeAddress((address) => {
+      return {
+        ...address,
+        [name]: value,
+      };
+    });
+    setEmployeeAddressErrors((errors) => {
+      return {
+        ...errors,
+        [name]: errorText,
+      };
+    });
+  };
+  //#endregion
+
+  //#region company
+  const [office, setOffice] = useState(initialSelection);
+  const onOfficeChange: OnChangeSelect = (event) => {
+    const { value } = event.target;
+    setOffice((office) => {
+      return {
+        ...office,
+        name: value,
+      };
+    });
+  };
+  const [department, setDepartment] = useState(initialSelection);
+  const onDepartmentChange: OnChangeSelect = (event) => {
+    const { value } = event.target;
+
+    setDepartment((department) => {
+      return {
+        ...department,
+        name: value,
+      };
+    });
+  };
+  const [role, setRole] = useState(initialSelection);
+  const onRoleChange: OnChangeSelect = (event) => {
+    const { value } = event.target;
+
+    setRole((role) => {
+      return {
+        ...role,
+        name: value,
+      };
+    });
+  };
+  //#endregion
+
+  //#region projects
   const [projects, setProjects] = useState<Project[]>([]);
-  const [open, setOpen] = useState(false);
-  const [isFormComplete, setIsFormComplete] = useState(false);
-
-  const saveChanges = () => console.log('save changes');
-
-  const onEmployeeInfoChange: OnChangeSelect<Employee> = (field) => (event) =>
-    setEmployee((previousEmployee) => {
-      return {
-        ...previousEmployee,
-        [field]: event.target!.value,
-      };
-    });
-
-  const onEmployeeAddressChange: OnChangeSelect<Address> = (field) => (event) =>
-    setEmployeeAddress((previousAddress) => {
-      return {
-        ...previousAddress,
-        [field]: event.target!.value,
-      };
-    });
-
-  const onOfficeChange: OnChangeSelect<OfficeLabel> = (field) => (event) => {
-    setOffice((previousAddress) => {
-      return {
-        ...previousAddress,
-        [field]: event.target!.value,
-      };
-    });
-  };
-
-  const onDepartmentChange: OnChangeSelect<Department> = (field) => (event) =>
-    setDepartment((previousDepartment) => {
-      return {
-        ...previousDepartment,
-        [field]: event.target!.value,
-      };
-    });
-
-  const onRoleChange: OnChangeSelect<Role> = (field) => (event) => {
-    setRole((previousRole) => {
-      return {
-        ...previousRole,
-        [field]: event.target!.value,
-      };
-    });
-  };
-
   const onProjectAdd: OnMouseClick = (id) => (_) => {
     setOpen(false);
     const projectToAdd = projectsList.find((project) => project.id === id)!;
@@ -123,7 +157,6 @@ export const CreateData = () => {
       return [...previousProjects, { ...projectToAdd }];
     });
   };
-
   const onProjectRemove: OnMouseClick = (id) => (_) => {
     setProjects((previousProjects) => {
       const index = previousProjects.findIndex((project) => project.id === id);
@@ -132,11 +165,45 @@ export const CreateData = () => {
       return [...prevProjects, ...postProjects];
     });
   };
+  //#endregion
+
+  //#region save
+  const [isFormComplete, setIsFormComplete] = useState(false);
+  useEffect(() => {
+    let isValid = true;
+    console.log(employee, employeeErrors);
+    (Object.keys(employeeErrors) as Array<keyof typeof employeeErrors>).map(
+      (key) => {
+        if (employeeErrors[key] !== '' || employee[key] === '') {
+          isValid = false;
+        }
+      },
+    );
+
+    console.log(employeeAddress, employeeAddressErrors);
+    (
+      Object.keys(employeeAddressErrors) as Array<
+        keyof typeof employeeAddressErrors
+      >
+    ).map((key) => {
+      if (employeeAddressErrors[key] !== '' || employeeAddress[key] === '') {
+        isValid = false;
+      }
+    });
+    setIsFormComplete(isValid);
+  }, [employee, employeeErrors, employeeAddress, employeeAddressErrors]);
+
+  const [open, setOpen] = useState(false);
+  const saveChanges = () => console.log('save changes');
+  //#endregion
+
   return (
     <CreatePresentation
       employee={employee}
+      employeeErrors={employeeErrors}
       onEmployeeInfoChange={onEmployeeInfoChange}
       address={employeeAddress}
+      addressErrors={employeeAddressErrors}
       onAddressChange={onEmployeeAddressChange}
       office={office}
       onOfficeChange={onOfficeChange}

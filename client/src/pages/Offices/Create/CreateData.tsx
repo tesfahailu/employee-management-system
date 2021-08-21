@@ -3,25 +3,30 @@ import React, { ChangeEvent, useState } from 'react';
 import { Address, OnChangeSelect } from '../../../types/types';
 import { CreatePresentation } from './CreatePresentation';
 
-export const CreateData = ({}) => {
-  const [address, setAddress] = useState({
-    streetAddress1: '',
-    streetAddress2: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-  });
-  const [isFormComplete, setIsFormComplete] = useState(false);
+const intialOffice = {
+  streetAddress1: '',
+  streetAddress2: '',
+  city: '',
+  state: '',
+  country: '',
+  zipCode: '',
+};
 
-  const onAddressChange: OnChangeSelect<Address> = (field) => (event) => {
+export const CreateData = ({}) => {
+  const [address, setAddress] = useState(intialOffice);
+  const [addressErrors, setAddressErrors] = useState(intialOffice);
+
+  const onAddressChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setAddress((previousAddress) => {
       return {
         ...previousAddress,
-        [field]: event.target!.value,
+        [name]: value,
       };
     });
   };
+
+  const [isFormComplete, setIsFormComplete] = useState(false);
 
   const saveChanges = () => {
     console.log('Saved changes');
@@ -31,6 +36,7 @@ export const CreateData = ({}) => {
   return (
     <CreatePresentation
       address={address}
+      addressErrors={addressErrors}
       onAddressChange={onAddressChange}
       isFormComplete={isFormComplete}
       saveChanges={saveChanges}

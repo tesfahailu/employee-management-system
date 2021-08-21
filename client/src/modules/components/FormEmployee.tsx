@@ -19,10 +19,10 @@ const types = [
   { value: 'PartTime', text: 'Part Time' },
 ];
 
-export function FormEmployee<R extends Omit<Employee, 'id'>>({
-  employee,
-  onEmployeeInfoChange,
-}: EmployeeForm<R>) {
+export function FormEmployee<R extends Omit<Employee, 'id'>>(
+  props: EmployeeForm<R>,
+) {
+  const { employee, employeeErrors: errors, onEmployeeInfoChange } = props;
   return (
     <Card sx={{ mb: 2 }}>
       <CardContent>
@@ -31,36 +31,44 @@ export function FormEmployee<R extends Omit<Employee, 'id'>>({
         </Typography>
         <Box sx={{ mt: 2 }}>
           <TextField
+            name="firstName"
             margin="normal"
             fullWidth
             id="firstName"
             label="First Name:"
-            value={employee!.firstName}
-            onChange={onEmployeeInfoChange('firstName')}
+            onBlur={onEmployeeInfoChange}
+            error={!!errors.firstName}
+            helperText={errors.firstName}
           />
           <TextField
+            name="lastName"
             margin="normal"
             fullWidth
             id="lastName"
             label="Last Name:"
-            value={employee!.lastName}
-            onChange={onEmployeeInfoChange('lastName')}
+            onBlur={onEmployeeInfoChange}
+            error={!!errors.lastName}
+            helperText={errors.lastName}
           />
           <TextField
+            name="mobile"
             margin="normal"
             fullWidth
             id="mobile"
             label="Mobile:"
-            value={employee!.mobile}
-            onChange={onEmployeeInfoChange('mobile')}
+            onBlur={onEmployeeInfoChange}
+            error={!!errors.mobile}
+            helperText={errors.mobile}
           />
           <TextField
+            name="email"
             margin="normal"
             fullWidth
             id="email"
             label="Email:"
-            value={employee!.email}
-            onChange={onEmployeeInfoChange('email')}
+            onBlur={onEmployeeInfoChange}
+            error={!!errors.email}
+            helperText={errors.email}
           />
           {employee.type && (
             <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
@@ -69,8 +77,7 @@ export function FormEmployee<R extends Omit<Employee, 'id'>>({
               </InputLabel>
               <Select
                 native
-                value={employee.type}
-                onChange={onEmployeeInfoChange('type')}
+                onChange={onEmployeeInfoChange}
                 label="Type"
                 inputProps={{
                   name: 'type',

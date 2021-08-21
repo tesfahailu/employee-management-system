@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from '@material-ui/core';
-import { ChangeEvent, MouseEvent, MouseEventHandler } from 'react';
+import React, { ChangeEvent, MouseEvent, MouseEventHandler } from 'react';
 
 //#region General Categories
 export interface Employee {
@@ -50,20 +50,20 @@ export interface OfficeLabel {
 //#endregion
 
 //#region EventHandlers
-export type OnChangeField<Context> = (
-  field: keyof Context,
-) => (event: ChangeEvent<HTMLInputElement>) => void;
+export type OnChangeField = (event: ChangeEvent<HTMLInputElement>) => void;
 
-export type OnChangeSelect<Context> = (
-  field: keyof Context,
-) => (
+export type OnChangeSelect = (
   event:
     | SelectChangeEvent
     | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 ) => void;
 
+export type OnMouseSelect = (
+  event: MouseEvent<HTMLDivElement, MouseEvent>,
+) => void;
+
 export type OnMouseClick = (
-  index: number,
+  id: number,
 ) => (event: MouseEvent<HTMLInputElement>) => void;
 
 export type HandleDeleteRow = (
@@ -87,25 +87,27 @@ export type HandleDeleteRows = (
 //#region Forms
 export interface EmployeeForm<R> {
   employee: R;
-  onEmployeeInfoChange: OnChangeSelect<R>;
+  employeeErrors: R;
+  onEmployeeInfoChange: OnChangeSelect;
 }
 
 export interface AddressForm<R> {
   address: R;
-  onAddressChange: OnChangeSelect<R>;
+  addressErrors: R;
+  onAddressChange: OnChangeSelect;
 }
 
 export interface CompanyForm {
   office: OfficeLabel;
-  onOfficeChange: OnChangeSelect<OfficeLabel>;
+  onOfficeChange: OnChangeSelect;
   officesList: OfficeLabel[];
 
   department: Department;
-  onDepartmentChange: OnChangeSelect<Department>;
+  onDepartmentChange: OnChangeSelect;
   departmentsList: Department[];
 
   role: Role;
-  onRoleChange: OnChangeSelect<Role>;
+  onRoleChange: OnChangeSelect;
   rolesList: Role[];
 }
 
@@ -121,17 +123,17 @@ export interface ProjectsListForm {
 
 export interface ProjectForm {
   project: Project;
-  onProjectChange: OnChangeField<Project>;
+  onProjectChange: OnChangeField;
 }
 
 export interface DepartmentForm<R> {
   department: R;
-  onDepartmentChange: OnChangeSelect<Department>;
+  onDepartmentChange: OnChangeSelect;
 }
 
 export interface RoleForm<R> {
   role: R;
-  onRoleChange: OnChangeField<Role>;
+  onRoleChange: OnChangeField;
 }
 //#endregion
 
@@ -172,14 +174,16 @@ export interface EmployeePageViewAll {
 //#region Office Pages
 export interface OfficePageCreate {
   address: Omit<Address, 'id'>;
-  onAddressChange: OnChangeSelect<Address>;
+  addressErrors: Omit<Address, 'id'>;
+  onAddressChange: OnChangeSelect;
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface OfficePageEdit {
   address: Address;
-  onAddressChange: OnChangeSelect<Address>;
+  addressErrors: Address;
+  onAddressChange: OnChangeSelect;
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }

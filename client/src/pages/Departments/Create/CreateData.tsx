@@ -12,11 +12,12 @@ export const CreateData = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
   const saveChanges = () => console.log('save changes');
 
-  const onDepartmentChange: OnChangeSelect<Department> = (field) => (event) => {
+  const onDepartmentChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setDepartment((previousDepartment) => {
       return {
         ...previousDepartment,
-        [field]: event.target!.value,
+        [name]: value,
       };
     });
   };

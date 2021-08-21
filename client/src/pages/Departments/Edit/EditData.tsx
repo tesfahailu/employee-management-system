@@ -19,10 +19,11 @@ export const EditData = () => {
     });
   }, []);
 
-  const onDepartmentChange: OnChangeSelect<Department> = (field) => (event) => {
+  const onDepartmentChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setIsFormChanged(true);
     setDepartment((previousDepartment) => {
-      return { ...previousDepartment, [field]: event.target!.value };
+      return { ...previousDepartment, [name]: value };
     });
   };
 
