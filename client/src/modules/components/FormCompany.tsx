@@ -33,13 +33,14 @@ export const FormCompany = ({
         <Select
           native
           value={office.name}
-          onChange={onOfficeChange('name')}
+          onChange={onOfficeChange}
           label={FormCompanyText.OfficeLabel}
           inputProps={{
             name: 'office',
             id: 'outlined-office-native-simple',
           }}
         >
+          <option aria-label="None" value="" />
           {officesList.map(({ name }, index) => (
             <option value={name} key={`${name}-${index}`}>
               {name}
@@ -54,13 +55,14 @@ export const FormCompany = ({
         <Select
           native
           value={department.name}
-          onChange={onDepartmentChange('name')}
+          onChange={onDepartmentChange}
           label={FormCompanyText.DepartmentLabel}
           inputProps={{
             name: 'department',
             id: 'outlined-department-native-simple',
           }}
         >
+          <option aria-label="None" value="" />
           {departmentsList.map(({ name }, index) => (
             <option value={name} key={`${name}-${index}`}>
               {name}
@@ -75,13 +77,14 @@ export const FormCompany = ({
         <Select
           native
           value={role.name}
-          onChange={onRoleChange('name')}
+          onChange={onRoleChange}
           label={FormCompanyText.RoleLabel}
           inputProps={{
             name: 'role',
             id: 'outlined-role-native-simple',
           }}
         >
+          <option aria-label="None" value="" />
           {rolesList.map(({ name }, index) => (
             <option value={name} key={`${name}-${index}`}>
               {name}

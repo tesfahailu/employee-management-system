@@ -11,10 +11,12 @@ export const CreateData = () => {
   });
   const [isFormComplete, setIsFormComplete] = useState(false);
 
-  const onRoleChange: OnChangeSelect<Role> = (field) => (event) =>
+  const onRoleChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setRole((previousRole) => {
-      return { ...previousRole, [field]: event.target.value };
+      return { ...previousRole, [name]: value };
     });
+  };
 
   const saveChanges = () => {
     console.log('Saved changes');

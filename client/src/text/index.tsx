@@ -1,4 +1,14 @@
 //#region Forms, Dialog, Table
+export enum FormEmployeeAddressText {
+  Header = 'Employee Address: ',
+  StreetAddress1 = 'Street Address 1: ',
+  StreetAddress2 = 'Street Address 2: ',
+  City = 'City: ',
+  State = 'State: ',
+  Country = 'Country: ',
+  ZipCode = 'Zip Code: ',
+}
+
 export enum FormCompanyText {
   Header = 'Company:',
   OfficeLabel = 'Office Location:',
@@ -67,6 +77,12 @@ export enum RegisterErrorText {
   UsernameMismatch = 'username does not match.',
   PasswordTooShort = 'password must be greater than 5 alphanumeric charcters. ',
   PasswordMismatch = 'password does not match.',
+}
+
+export enum EmployeeCreateErrorText {
+  FieldEmpty = 'field cannot be empty.',
+  EmailInvalid = 'email is invalid.',
+  PhoneNumberInvalid = 'phone number is invalid.',
 }
 //#endregion
 //#region Register Page

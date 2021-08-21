@@ -10,12 +10,14 @@ export const CreateData = () => {
   });
   const [isFormComplete, setIsFormComplete] = useState(false);
 
-  const onProjectChange: OnChangeField<Project> =
-    (field) => (event: ChangeEvent<HTMLInputElement>) => {
-      setProject((previousProject) => {
-        return { ...previousProject, [field]: event.target.value };
-      });
-    };
+  const onProjectChange: OnChangeField = (
+    event: ChangeEvent<HTMLInputElement>,
+  ) => {
+    const { name, value } = event.target;
+    setProject((previousProject) => {
+      return { ...previousProject, [name]: value };
+    });
+  };
 
   const saveChanges = () => {
     console.log('Saved changes');

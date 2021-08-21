@@ -67,14 +67,14 @@ function checkConfirmPassword(password: string, confirmPassword: string) {
   return errorText;
 }
 
-export const Register = ({ history }: RouteComponentProps) => {
-  const initialState = {
-    username: '',
-    confirmUsername: '',
-    password: '',
-    confirmPassword: '',
-  };
+const initialState = {
+  username: '',
+  confirmUsername: '',
+  password: '',
+  confirmPassword: '',
+};
 
+export const Register = ({ history }: RouteComponentProps) => {
   const [user, setUser] = useState(initialState);
   const [errors, setErrors] = useState<typeof initialState>(initialState);
 

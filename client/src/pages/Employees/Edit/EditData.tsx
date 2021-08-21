@@ -22,24 +22,33 @@ const {
   zipCode: employeeZipCode,
 } = employeeData.employee.employeeAddress!;
 
+const initialEmployee = {
+  id: 0,
+  firstName: '',
+  lastName: '',
+  mobile: '',
+  email: '',
+  type: '',
+};
+
+const initialAddress = {
+  id: 0,
+  streetAddress1: '',
+  streetAddress2: '',
+  city: '',
+  state: '',
+  country: '',
+  zipCode: '',
+};
+
 export const EditData = () => {
-  const [employee, setEmployee] = useState({
-    id: 0,
-    firstName: '',
-    lastName: '',
-    mobile: '',
-    email: '',
-    type: '',
-  });
-  const [employeeAddress, setEmployeeAddress] = useState({
-    id: 0,
-    streetAddress1: '',
-    streetAddress2: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-  });
+  const [employee, setEmployee] = useState(initialEmployee);
+  const [employeeErrors, setEmployeeErrors] = useState(initialEmployee);
+
+  const [employeeAddress, setEmployeeAddress] = useState(initialAddress);
+  const [employeeAddressErrors, setEmployeeAddressErrors] =
+    useState(initialAddress);
+
   const [office, setOffice] = useState({
     id: 0,
     name: '',
@@ -126,53 +135,57 @@ export const EditData = () => {
     ]);
   }, []);
 
-  const onEmployeeInfoChange: OnChangeSelect<Employee> = (field) => (event) => {
+  const onEmployeeInfoChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setIsFormChanged(true);
     setEmployee((previousEmployee) => {
       return {
         ...previousEmployee,
-        [field]: event.target!.value,
+        [name]: value,
       };
     });
   };
 
-  const onEmployeeAddressChange: OnChangeSelect<Address> =
-    (field) => (event) => {
-      setIsFormChanged(true);
-      setEmployeeAddress((previousAddress) => {
-        return {
-          ...previousAddress,
-          [field]: event.target!.value,
-        };
-      });
-    };
+  const onEmployeeAddressChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    setIsFormChanged(true);
+    setEmployeeAddress((previousAddress) => {
+      return {
+        ...previousAddress,
+        [name]: value,
+      };
+    });
+  };
 
-  const onOfficeChange: OnChangeSelect<OfficeLabel> = (field) => (event) => {
+  const onOfficeChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setIsFormChanged(true);
     setOffice((previousAddress) => {
       return {
         ...previousAddress,
-        [field]: event.target!.value,
+        [name]: value,
       };
     });
   };
 
-  const onDepartmentChange: OnChangeSelect<Department> = (field) => (event) => {
+  const onDepartmentChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setIsFormChanged(true);
     setDepartment((previousDepartment) => {
       return {
         ...previousDepartment,
-        [field]: event.target!.value,
+        [name]: value,
       };
     });
   };
 
-  const onRoleChange: OnChangeSelect<Role> = (field) => (event) => {
+  const onRoleChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setIsFormChanged(true);
     setRole((previousRole) => {
       return {
         ...previousRole,
-        [field]: event.target!.value,
+        [name]: value,
       };
     });
   };
@@ -203,8 +216,10 @@ export const EditData = () => {
   return (
     <EditPresentation
       employee={employee}
+      employeeErrors={employeeErrors}
       onEmployeeInfoChange={onEmployeeInfoChange}
       address={employeeAddress}
+      addressErrors={employeeAddressErrors}
       onAddressChange={onEmployeeAddressChange}
       office={office}
       onOfficeChange={onOfficeChange}

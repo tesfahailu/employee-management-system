@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   FormControl,
+  FormHelperText,
   InputLabel,
   Select,
   TextField,
@@ -10,7 +11,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { Address, AddressForm } from '../../types/types';
-import { EmployeeEditPageText } from '../../text';
+import { EmployeeEditPageText, FormEmployeeAddressText } from '../../text';
 
 const countries = [{ value: 'USA', text: 'USA' }];
 const states = [
@@ -20,50 +21,62 @@ const states = [
 
 export const FormEmployeeAddress = ({
   address,
+  addressErrors,
   onAddressChange,
 }: AddressForm<Omit<Address, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
-      <Typography variant="h6">
-        {EmployeeEditPageText.EmployeeAddress}
-      </Typography>
+      <Typography variant="h6">{FormEmployeeAddressText.Header}</Typography>
       <Box sx={{ mt: 2 }}>
         <TextField
+          name="streetAddress1"
           margin="normal"
           fullWidth
           id="eStreetAddress1"
-          label="Street Address 1:"
-          value={address.streetAddress1}
-          onChange={onAddressChange('streetAddress1')}
+          label={FormEmployeeAddressText.StreetAddress1}
+          onBlur={onAddressChange}
+          error={!!addressErrors.streetAddress1}
+          helperText={addressErrors.streetAddress1}
         />
         <TextField
+          name="streetAddress2"
           margin="normal"
           fullWidth
           id="eStreetAddress2"
-          label="Street Address 2:"
-          value={address.streetAddress2}
-          onChange={onAddressChange('streetAddress2')}
+          label={FormEmployeeAddressText.StreetAddress2}
+          onBlur={onAddressChange}
+          error={!!addressErrors.streetAddress2}
+          helperText={addressErrors.streetAddress2}
         />
         <TextField
+          name="city"
           margin="normal"
           fullWidth
           id="eCity"
-          label="City:"
-          value={address.city}
-          onChange={onAddressChange('city')}
+          label={FormEmployeeAddressText.City}
+          onBlur={onAddressChange}
+          error={!!addressErrors.city}
+          helperText={addressErrors.city}
         />
         <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
-          <InputLabel htmlFor="outlined-state-native-simple">State:</InputLabel>
+          <InputLabel htmlFor="outlined-state-native-simple">
+            {FormEmployeeAddressText.State}
+          </InputLabel>
           <Select
+            name="state"
             native
+            displayEmpty={true}
             value={address.state}
-            onChange={onAddressChange('state')}
-            label="State"
+            onChange={onAddressChange}
+            label={FormEmployeeAddressText.State}
             inputProps={{
-              name: 'type',
+              name: 'state',
               id: 'outlined-state-native-simple',
+              error: !!addressErrors.state,
+              helperText: addressErrors.state,
             }}
           >
+            <option aria-label="None" value="" />
             {states.map(({ value, text }, index) => (
               <option value={value} key={`text-${index}`}>
                 {text}
@@ -73,18 +86,21 @@ export const FormEmployeeAddress = ({
         </FormControl>
         <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
           <InputLabel htmlFor="outlined-country-native-simple">
-            Country:
+            {FormEmployeeAddressText.Country}
           </InputLabel>
           <Select
+            name="country"
             native
+            displayEmpty={true}
             value={address.country}
-            onChange={onAddressChange('country')}
-            label="Country"
+            onChange={onAddressChange}
+            label={FormEmployeeAddressText.Country}
             inputProps={{
-              name: 'type',
+              name: 'country',
               id: 'outlined-country-native-simple',
             }}
           >
+            <option aria-label="None" value="" />
             {countries.map(({ value, text }, index) => (
               <option value={value} key={`text-${index}`}>
                 {text}
@@ -93,12 +109,14 @@ export const FormEmployeeAddress = ({
           </Select>
         </FormControl>
         <TextField
+          name="zipCode"
           margin="normal"
           fullWidth
           id="eZipCode"
-          label="Zip Code:"
-          value={address.zipCode}
-          onChange={onAddressChange('zipCode')}
+          label={FormEmployeeAddressText.ZipCode}
+          onBlur={onAddressChange}
+          error={!!addressErrors.zipCode}
+          helperText={addressErrors.zipCode}
         />
       </Box>
     </CardContent>

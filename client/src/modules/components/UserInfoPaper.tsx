@@ -2,21 +2,26 @@ import React, { useState } from 'react';
 import { Employee, OnChangeSelect } from '../../types/types';
 import { FormEmployee } from './FormEmployee';
 
-export const UserInfoPaper = () => {
-  const [employee, setEmployee] = useState({
-    id: 10,
-    firstName: 'Tesfa',
-    lastName: 'Hailu',
-    email: 'th@gmail.com',
-    mobile: '6666666666',
-    type: null,
-  });
+const initialEmployee = {
+  id: 10,
+  firstName: 'Tesfa',
+  lastName: 'Hailu',
+  email: 'th@gmail.com',
+  mobile: '6666666666',
+  type: null,
+};
 
-  const onEmployeeInfoChange: OnChangeSelect<Employee> = (field) => (event) => {
+export const UserInfoPaper = () => {
+  const [employee, setEmployee] = useState(initialEmployee);
+
+  const [errors, setErrors] = useState(initialEmployee);
+
+  const onEmployeeInfoChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setEmployee((previousEmployee) => {
       return {
         ...previousEmployee,
-        [field]: event.target!.value,
+        [name]: value,
       };
     });
   };
@@ -25,6 +30,7 @@ export const UserInfoPaper = () => {
     <FormEmployee<Employee>
       employee={employee}
       onEmployeeInfoChange={onEmployeeInfoChange}
+      employeeErrors={errors}
     />
   );
 };

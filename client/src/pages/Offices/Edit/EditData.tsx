@@ -1,18 +1,20 @@
-import { SelectChangeEvent } from '@material-ui/core';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Address, OnChangeSelect } from '../../../types/types';
+import React, { useEffect, useState } from 'react';
+import { OnChangeSelect } from '../../../types/types';
 import { EditPresentation } from './EditPresentation';
 
+const initialAddress = {
+  id: 0,
+  streetAddress1: '',
+  streetAddress2: '',
+  city: '',
+  state: '',
+  country: '',
+  zipCode: '',
+};
+
 export const EditData = () => {
-  const [address, setAddress] = useState({
-    id: 0,
-    streetAddress1: '',
-    streetAddress2: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-  });
+  const [address, setAddress] = useState(initialAddress);
+  const [addressErrors, setAddressErrors] = useState(initialAddress);
 
   useEffect(() => {
     setAddress({
@@ -28,13 +30,15 @@ export const EditData = () => {
 
   const [isFormChanged, setIsFormChanged] = useState(false);
 
-  const onAddressChange: OnChangeSelect<Address> = (field) => (event) =>
+  const onAddressChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
     setAddress((previousAddress) => {
       return {
         ...previousAddress,
-        [field]: event.target!.value,
+        [name]: value,
       };
     });
+  };
 
   const saveChanges = () => {
     console.log('Saved changes');
@@ -43,6 +47,7 @@ export const EditData = () => {
   return (
     <EditPresentation
       address={address}
+      addressErrors={addressErrors}
       isFormChanged={isFormChanged}
       onAddressChange={onAddressChange}
       saveChanges={saveChanges}

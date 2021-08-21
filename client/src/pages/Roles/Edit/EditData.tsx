@@ -15,10 +15,12 @@ export const EditData = () => {
     setRole(dataRole);
   }, []);
 
-  const onRoleChange: OnChangeField<Role> = (field) => (event) =>
+  const onRoleChange: OnChangeField = (event) => {
+    const { name, value } = event.target;
     setRole((previousRole) => {
-      return { ...previousRole, [field]: event.target.value };
+      return { ...previousRole, [name]: value };
     });
+  };
 
   const saveChanges = () => {
     setIsFormChanged(false);
