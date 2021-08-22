@@ -7,9 +7,6 @@ export const rows: Array<Employee> = [
     firstName: '20Jon',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 2,
@@ -17,9 +14,6 @@ export const rows: Array<Employee> = [
     firstName: '3Cersei',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 3,
@@ -27,9 +21,6 @@ export const rows: Array<Employee> = [
     firstName: 'Jaime',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 4,
@@ -37,9 +28,6 @@ export const rows: Array<Employee> = [
     firstName: 'Arya',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 5,
@@ -47,9 +35,6 @@ export const rows: Array<Employee> = [
     firstName: 'Daenerys',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 6,
@@ -57,9 +42,6 @@ export const rows: Array<Employee> = [
     firstName: 'Cool',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 7,
@@ -67,9 +49,6 @@ export const rows: Array<Employee> = [
     firstName: 'Ferrara',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 8,
@@ -77,9 +56,6 @@ export const rows: Array<Employee> = [
     firstName: 'Rossini',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 9,
@@ -87,9 +63,6 @@ export const rows: Array<Employee> = [
     firstName: 'Harvey',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 10,
@@ -97,9 +70,6 @@ export const rows: Array<Employee> = [
     firstName: 'Jon',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 11,
@@ -107,9 +77,6 @@ export const rows: Array<Employee> = [
     firstName: 'Jon',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 12,
@@ -117,9 +84,6 @@ export const rows: Array<Employee> = [
     firstName: 'Cersei',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 13,
@@ -127,9 +91,6 @@ export const rows: Array<Employee> = [
     firstName: 'Jaime',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 14,
@@ -137,9 +98,6 @@ export const rows: Array<Employee> = [
     firstName: 'Arya',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 15,
@@ -147,9 +105,6 @@ export const rows: Array<Employee> = [
     firstName: 'Daenerys',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 16,
@@ -157,9 +112,6 @@ export const rows: Array<Employee> = [
     firstName: 'Cool',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 17,
@@ -167,9 +119,6 @@ export const rows: Array<Employee> = [
     firstName: 'Ferrara',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 18,
@@ -177,9 +126,6 @@ export const rows: Array<Employee> = [
     firstName: 'Rossini',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
   {
     id: 19,
@@ -187,8 +133,5 @@ export const rows: Array<Employee> = [
     firstName: 'Harvey',
     email: 't@gmail.com',
     mobile: '6666666666',
-    role: null,
-    office: null,
-    department: null,
   },
 ];

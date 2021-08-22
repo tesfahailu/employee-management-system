@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Typography,
-  FormControl,
-  InputLabel,
-  Select,
-} from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import React from 'react';
 import { FormCompanyText } from '../../text';
 import { CompanyForm } from '../../types/types';

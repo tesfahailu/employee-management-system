@@ -8,7 +8,6 @@ const initialEmployee = {
   lastName: 'Hailu',
   email: 'th@gmail.com',
   mobile: '6666666666',
-  type: null,
 };
 
 export const UserInfoPaper = () => {
