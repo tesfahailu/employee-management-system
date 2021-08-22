@@ -2,17 +2,12 @@ import {
   Box,
   Card,
   CardContent,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  OutlinedInput,
-  Select,
   TextField,
   Typography,
 } from '@material-ui/core';
 import React from 'react';
 import { Address, AddressForm } from '../../types/types';
-import { EmployeeEditPageText, FormEmployeeAddressText } from '../../text';
+import { FormEmployeeAddressText } from '../../text';
 import { SelectComponent } from './SelectComponent';
 
 export const FormEmployeeAddress = ({
