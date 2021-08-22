@@ -15,6 +15,7 @@ import {
 } from './data';
 import { EmployeeCreateErrorText as ErrorText } from '../../../text';
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const initialEmployee = {
   firstName: '',
@@ -32,13 +33,18 @@ const initialStreetAddress = {
   zipCode: '',
 };
 
+const initialCompany = {
+  office: '',
+  department: '',
+  role: '',
+};
+
 export const CreateData = () => {
   //#region employee info
   const [employee, setEmployee] = useState(initialEmployee);
   const [employeeErrors, setEmployeeErrors] = useState(initialEmployee);
   const onEmployeeInfoChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
-
     let errorText = '';
 
     switch (name) {
@@ -76,7 +82,6 @@ export const CreateData = () => {
   const onEmployeeAddressChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
     let errorText = '';
-    console.log('name: ', name, 'value: ', value);
     switch (name) {
       case 'streetAddress1':
         errorText = value === '' ? ErrorText.FieldEmpty : '';
@@ -101,12 +106,9 @@ export const CreateData = () => {
     const state = statesList.find(
       (state) => state.name === employeeAddress.state,
     );
-    console.log(state?.id);
-
     const country = countriesList.find(
       (country) => country.name === employeeAddress.country,
     );
-    console.log(country?.id);
 
     setEmployeeAddress((address) => {
       return {
@@ -124,16 +126,8 @@ export const CreateData = () => {
   //#endregion
 
   //#region company
-  const [company, setCompany] = useState({
-    office: '',
-    department: '',
-    role: '',
-  });
-  const [companyErrors, setCompanyErrors] = useState({
-    office: '',
-    department: '',
-    role: '',
-  });
+  const [company, setCompany] = useState(initialCompany);
+  const [companyErrors, setCompanyErrors] = useState(initialCompany);
 
   const onCompanyChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
@@ -152,15 +146,10 @@ export const CreateData = () => {
     }
 
     const office = officesList.find((office) => office.name === company.office);
-    console.log(office?.id);
-
     const department = departmentsList.find(
       (department) => department.name === company.department,
     );
-    console.log(department?.id);
-
     const role = rolesList.find((role) => role.name === company.role);
-    console.log(role?.id);
 
     setCompany((company) => {
       return {
@@ -182,21 +171,22 @@ export const CreateData = () => {
   const onProjectAdd: OnMouseClick = (id) => (_) => {
     setOpen(false);
     const projectToAdd = projectsList.find((project) => project.id === id)!;
-    setProjects((previousProjects) => {
-      return [...previousProjects, { ...projectToAdd }];
+    setProjects((project) => {
+      return [...project, { ...projectToAdd }];
     });
   };
   const onProjectRemove: OnMouseClick = (id) => (_) => {
-    setProjects((previousProjects) => {
-      const index = previousProjects.findIndex((project) => project.id === id);
-      const prevProjects = previousProjects.splice(0, index);
-      const postProjects = previousProjects.splice(index + 1);
-      return [...prevProjects, ...postProjects];
+    setProjects((project) => {
+      const index = project.findIndex((project) => project.id === id);
+      const leftArr = project.splice(0, index);
+      const rightArr = project.splice(index + 1);
+      return [...leftArr, ...rightArr];
     });
   };
   //#endregion
 
   //#region save
+  const history = useHistory();
   const [isFormComplete, setIsFormComplete] = useState(false);
   useEffect(() => {
     let isValid = true;
@@ -221,7 +211,9 @@ export const CreateData = () => {
   }, [employee, employeeErrors, employeeAddress, employeeAddressErrors]);
 
   const [open, setOpen] = useState(false);
-  const saveChanges = () => console.log('save changes');
+  const saveChanges = () => {
+    history.push('/employees');
+  };
   //#endregion
 
   return (

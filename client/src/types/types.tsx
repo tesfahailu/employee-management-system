@@ -8,10 +8,10 @@ export interface Employee {
   lastName: string;
   mobile: string;
   email: string;
-  type?: string | null;
-  role?: string | null;
-  office?: string | null;
-  department?: string | null;
+  type?: string;
+  role?: string;
+  office?: string;
+  department?: string;
 }
 
 export interface Address {
