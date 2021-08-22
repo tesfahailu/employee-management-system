@@ -5,6 +5,7 @@ import {
   FormControl,
   FormHelperText,
   InputLabel,
+  OutlinedInput,
   Select,
   TextField,
   Typography,
@@ -12,17 +13,14 @@ import {
 import React from 'react';
 import { Address, AddressForm } from '../../types/types';
 import { EmployeeEditPageText, FormEmployeeAddressText } from '../../text';
-
-const countries = [{ value: 'USA', text: 'USA' }];
-const states = [
-  { value: 'MA', text: 'Massachusetts' },
-  { value: 'NY', text: 'New York' },
-];
+import { SelectComponent } from './SelectComponent';
 
 export const FormEmployeeAddress = ({
   address,
   addressErrors,
   onAddressChange,
+  statesList,
+  countriesList,
 }: AddressForm<Omit<Address, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
@@ -58,56 +56,22 @@ export const FormEmployeeAddress = ({
           error={!!addressErrors.city}
           helperText={addressErrors.city}
         />
-        <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
-          <InputLabel htmlFor="outlined-state-native-simple">
-            {FormEmployeeAddressText.State}
-          </InputLabel>
-          <Select
-            name="state"
-            native
-            displayEmpty={true}
-            value={address.state}
-            onChange={onAddressChange}
-            label={FormEmployeeAddressText.State}
-            inputProps={{
-              name: 'state',
-              id: 'outlined-state-native-simple',
-              error: !!addressErrors.state,
-              helperText: addressErrors.state,
-            }}
-          >
-            <option aria-label="None" value="" />
-            {states.map(({ value, text }, index) => (
-              <option value={value} key={`text-${index}`}>
-                {text}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
-          <InputLabel htmlFor="outlined-country-native-simple">
-            {FormEmployeeAddressText.Country}
-          </InputLabel>
-          <Select
-            name="country"
-            native
-            displayEmpty={true}
-            value={address.country}
-            onChange={onAddressChange}
-            label={FormEmployeeAddressText.Country}
-            inputProps={{
-              name: 'country',
-              id: 'outlined-country-native-simple',
-            }}
-          >
-            <option aria-label="None" value="" />
-            {countries.map(({ value, text }, index) => (
-              <option value={value} key={`text-${index}`}>
-                {text}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
+        <SelectComponent
+          name="state"
+          labelText={FormEmployeeAddressText.State}
+          onChange={onAddressChange}
+          value={address.state}
+          options={statesList}
+          error={addressErrors.state}
+        />
+        <SelectComponent
+          name="country"
+          labelText={FormEmployeeAddressText.Country}
+          onChange={onAddressChange}
+          value={address.country}
+          options={countriesList}
+          error={addressErrors.country}
+        />
         <TextField
           name="zipCode"
           margin="normal"

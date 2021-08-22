@@ -42,10 +42,17 @@ export interface Project {
   description: string | null;
 }
 
-export interface OfficeLabel {
+export interface SelectLabel {
   id: number;
   name: string;
-  description: string | null;
+  description?: string | null;
+  abbreviation?: string | null;
+}
+
+export interface Company {
+  office: string;
+  department: string;
+  role: string;
 }
 //#endregion
 
@@ -95,20 +102,17 @@ export interface AddressForm<R> {
   address: R;
   addressErrors: R;
   onAddressChange: OnChangeSelect;
+  statesList: SelectLabel[];
+  countriesList: SelectLabel[];
 }
 
 export interface CompanyForm {
-  office: OfficeLabel;
-  onOfficeChange: OnChangeSelect;
-  officesList: OfficeLabel[];
-
-  department: Department;
-  onDepartmentChange: OnChangeSelect;
-  departmentsList: Department[];
-
-  role: Role;
-  onRoleChange: OnChangeSelect;
-  rolesList: Role[];
+  company: Company;
+  companyErrors: Company;
+  onCompanyChange: OnChangeSelect;
+  officesList: SelectLabel[];
+  departmentsList: SelectLabel[];
+  rolesList: SelectLabel[];
 }
 
 export interface ProjectsListForm {
@@ -176,6 +180,8 @@ export interface OfficePageCreate {
   address: Omit<Address, 'id'>;
   addressErrors: Omit<Address, 'id'>;
   onAddressChange: OnChangeSelect;
+  statesList: SelectLabel[];
+  countriesList: SelectLabel[];
   isFormComplete: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -184,6 +190,8 @@ export interface OfficePageEdit {
   address: Address;
   addressErrors: Address;
   onAddressChange: OnChangeSelect;
+  statesList: SelectLabel[];
+  countriesList: SelectLabel[];
   isFormChanged: boolean;
   saveChanges: React.MouseEventHandler<HTMLButtonElement>;
 }

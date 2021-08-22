@@ -15,6 +15,8 @@ export const EditPresentation = ({
   address,
   addressErrors,
   onAddressChange,
+  statesList,
+  countriesList,
   isFormChanged,
   saveChanges,
 }: OfficePageEdit) => (
@@ -28,6 +30,8 @@ export const EditPresentation = ({
       address={address}
       addressErrors={addressErrors}
       onAddressChange={onAddressChange}
+      statesList={statesList}
+      countriesList={countriesList}
     />
     <Button
       sx={{ mr: 1, mb: 1 }}

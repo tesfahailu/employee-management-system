@@ -1,6 +1,7 @@
 import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useState } from 'react';
 import { Address, OnChangeSelect } from '../../../types/types';
+import { countriesList, statesList } from '../../Employees/Create/data';
 import { CreatePresentation } from './CreatePresentation';
 
 const intialOffice = {
@@ -38,6 +39,8 @@ export const CreateData = ({}) => {
       address={address}
       addressErrors={addressErrors}
       onAddressChange={onAddressChange}
+      statesList={statesList}
+      countriesList={countriesList}
       isFormComplete={isFormComplete}
       saveChanges={saveChanges}
     />

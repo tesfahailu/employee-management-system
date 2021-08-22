@@ -1,3 +1,13 @@
+export const statesList = [
+  { id: 0, name: 'Massachusetts', abbreviation: 'MA' },
+  { id: 1, name: 'New York', abbreviation: 'NY' },
+];
+
+export const countriesList = [
+  { id: 0, name: 'United States of America', abbreviation: 'USA' },
+  { id: 1, name: 'Canada', abbreviation: 'CANA' },
+];
+
 export const officesList = [
   { id: 0, name: 'los angeles', description: '' },
   { id: 1, name: 'boston', description: '' },

@@ -127,6 +127,15 @@ export function ThemeProvider(props: { children: any }) {
               disableRipple: true,
             },
           },
+          MuiSelect: {
+            defaultProps: {
+              inputProps: {
+                shrink: true,
+              },
+              variant: 'outlined',
+              color: 'primary',
+            },
+          },
           MuiTextField: {
             defaultProps: {
               InputLabelProps: {

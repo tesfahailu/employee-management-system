@@ -9,89 +9,47 @@ import {
 import React from 'react';
 import { FormCompanyText } from '../../text';
 import { CompanyForm } from '../../types/types';
+import { SelectComponent } from './SelectComponent';
 
 export const FormCompany = ({
-  office,
-  onOfficeChange,
+  company,
+  companyErrors,
+  onCompanyChange,
   officesList,
-  department,
-  onDepartmentChange,
   departmentsList,
-  role,
-  onRoleChange,
   rolesList,
-}: CompanyForm) => (
-  <Card sx={{ mb: 2 }}>
-    <CardContent>
-      <Typography variant="h6" sx={{ mb: 2 }}>
-        {FormCompanyText.Header}
-      </Typography>
-      <FormControl fullWidth sx={{ mt: 2, mb: 1 }}>
-        <InputLabel htmlFor="outlined-office-native-simple">
-          {FormCompanyText.OfficeLabel}
-        </InputLabel>
-        <Select
-          native
-          value={office.name}
-          onChange={onOfficeChange}
-          label={FormCompanyText.OfficeLabel}
-          inputProps={{
-            name: 'office',
-            id: 'outlined-office-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          {officesList.map(({ name }, index) => (
-            <option value={name} key={`${name}-${index}`}>
-              {name}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl fullWidth sx={{ mt: 2, mb: 1 }}>
-        <InputLabel htmlFor="outlined-department-native-simple">
-          {FormCompanyText.DepartmentLabel}
-        </InputLabel>
-        <Select
-          native
-          value={department.name}
-          onChange={onDepartmentChange}
-          label={FormCompanyText.DepartmentLabel}
-          inputProps={{
-            name: 'department',
-            id: 'outlined-department-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          {departmentsList.map(({ name }, index) => (
-            <option value={name} key={`${name}-${index}`}>
-              {name}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl fullWidth sx={{ mt: 2, mb: 1 }}>
-        <InputLabel htmlFor="outlined-role-native-simple">
-          {FormCompanyText.RoleLabel}
-        </InputLabel>
-        <Select
-          native
-          value={role.name}
-          onChange={onRoleChange}
-          label={FormCompanyText.RoleLabel}
-          inputProps={{
-            name: 'role',
-            id: 'outlined-role-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          {rolesList.map(({ name }, index) => (
-            <option value={name} key={`${name}-${index}`}>
-              {name}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
-    </CardContent>
-  </Card>
-);
+}: CompanyForm) => {
+  return (
+    <Card sx={{ mb: 2 }}>
+      <CardContent>
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          {FormCompanyText.Header}
+        </Typography>
+        <SelectComponent
+          name="office"
+          labelText={FormCompanyText.OfficeLabel}
+          onChange={onCompanyChange}
+          value={company.office}
+          options={officesList}
+          error={companyErrors.office}
+        />
+        <SelectComponent
+          name="department"
+          labelText={FormCompanyText.OfficeLabel}
+          onChange={onCompanyChange}
+          value={company.department}
+          options={departmentsList}
+          error={companyErrors.department}
+        />
+        <SelectComponent
+          name="role"
+          labelText={FormCompanyText.RoleLabel}
+          onChange={onCompanyChange}
+          value={company.role}
+          options={rolesList}
+          error={companyErrors.role}
+        />
+      </CardContent>
+    </Card>
+  );
+};
