@@ -5,7 +5,14 @@ import {
 } from '../../../modules/utils/errorCheck';
 import { OnChangeSelect, OnMouseClick, Project } from '../../../types/types';
 import { CreatePresentation } from './CreatePresentation';
-import { departmentsList, officesList, projectsList, rolesList } from './data';
+import {
+  statesList,
+  countriesList,
+  departmentsList,
+  officesList,
+  projectsList,
+  rolesList,
+} from './data';
 import { EmployeeCreateErrorText as ErrorText } from '../../../text';
 import { useEffect } from 'react';
 
@@ -23,12 +30,6 @@ const initialStreetAddress = {
   state: '',
   country: '',
   zipCode: '',
-};
-
-const initialSelection = {
-  id: 0,
-  name: '',
-  description: '',
 };
 
 export const CreateData = () => {
@@ -75,7 +76,7 @@ export const CreateData = () => {
   const onEmployeeAddressChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
     let errorText = '';
-
+    console.log('name: ', name, 'value: ', value);
     switch (name) {
       case 'streetAddress1':
         errorText = value === '' ? ErrorText.FieldEmpty : '';
@@ -97,7 +98,16 @@ export const CreateData = () => {
         break;
     }
 
-    console.log('on employee address change', value);
+    const state = statesList.find(
+      (state) => state.name === employeeAddress.state,
+    );
+    console.log(state?.id);
+
+    const country = countriesList.find(
+      (country) => country.name === employeeAddress.country,
+    );
+    console.log(country?.id);
+
     setEmployeeAddress((address) => {
       return {
         ...address,
@@ -114,35 +124,54 @@ export const CreateData = () => {
   //#endregion
 
   //#region company
-  const [office, setOffice] = useState(initialSelection);
-  const onOfficeChange: OnChangeSelect = (event) => {
-    const { value } = event.target;
-    setOffice((office) => {
+  const [company, setCompany] = useState({
+    office: '',
+    department: '',
+    role: '',
+  });
+  const [companyErrors, setCompanyErrors] = useState({
+    office: '',
+    department: '',
+    role: '',
+  });
+
+  const onCompanyChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    let errorText = '';
+
+    switch (name) {
+      case 'office':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'department':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'role':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+    }
+
+    const office = officesList.find((office) => office.name === company.office);
+    console.log(office?.id);
+
+    const department = departmentsList.find(
+      (department) => department.name === company.department,
+    );
+    console.log(department?.id);
+
+    const role = rolesList.find((role) => role.name === company.role);
+    console.log(role?.id);
+
+    setCompany((company) => {
       return {
-        ...office,
-        name: value,
+        ...company,
+        [name]: value,
       };
     });
-  };
-  const [department, setDepartment] = useState(initialSelection);
-  const onDepartmentChange: OnChangeSelect = (event) => {
-    const { value } = event.target;
-
-    setDepartment((department) => {
+    setCompanyErrors((errors) => {
       return {
-        ...department,
-        name: value,
-      };
-    });
-  };
-  const [role, setRole] = useState(initialSelection);
-  const onRoleChange: OnChangeSelect = (event) => {
-    const { value } = event.target;
-
-    setRole((role) => {
-      return {
-        ...role,
-        name: value,
+        ...errors,
+        [name]: errorText,
       };
     });
   };
@@ -171,7 +200,6 @@ export const CreateData = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
   useEffect(() => {
     let isValid = true;
-    console.log(employee, employeeErrors);
     (Object.keys(employeeErrors) as Array<keyof typeof employeeErrors>).map(
       (key) => {
         if (employeeErrors[key] !== '' || employee[key] === '') {
@@ -180,7 +208,6 @@ export const CreateData = () => {
       },
     );
 
-    console.log(employeeAddress, employeeAddressErrors);
     (
       Object.keys(employeeAddressErrors) as Array<
         keyof typeof employeeAddressErrors
@@ -205,14 +232,13 @@ export const CreateData = () => {
       address={employeeAddress}
       addressErrors={employeeAddressErrors}
       onAddressChange={onEmployeeAddressChange}
-      office={office}
-      onOfficeChange={onOfficeChange}
+      statesList={statesList}
+      countriesList={countriesList}
+      company={company}
+      companyErrors={companyErrors}
+      onCompanyChange={onCompanyChange}
       officesList={officesList}
-      department={department}
-      onDepartmentChange={onDepartmentChange}
       departmentsList={departmentsList}
-      role={role}
-      onRoleChange={onRoleChange}
       rolesList={rolesList}
       projects={projects}
       onProjectAdd={onProjectAdd}

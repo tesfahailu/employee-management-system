@@ -15,14 +15,13 @@ export const EditPresentation = ({
   address,
   addressErrors,
   onAddressChange,
-  office,
-  onOfficeChange,
+  statesList,
+  countriesList,
+  company,
+  companyErrors,
+  onCompanyChange,
   officesList,
-  department,
-  onDepartmentChange,
   departmentsList,
-  role,
-  onRoleChange,
   rolesList,
   projects,
   onProjectAdd,
@@ -50,16 +49,15 @@ export const EditPresentation = ({
           address={address}
           addressErrors={addressErrors}
           onAddressChange={onAddressChange}
+          statesList={statesList}
+          countriesList={countriesList}
         />
         <FormCompany
-          office={office}
-          onOfficeChange={onOfficeChange}
+          company={company}
+          companyErrors={companyErrors}
+          onCompanyChange={onCompanyChange}
           officesList={officesList}
-          department={department}
-          onDepartmentChange={onDepartmentChange}
           departmentsList={departmentsList}
-          role={role}
-          onRoleChange={onRoleChange}
           rolesList={rolesList}
         />
         <FormProjectsList

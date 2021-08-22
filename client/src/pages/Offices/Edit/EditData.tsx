@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { OnChangeSelect } from '../../../types/types';
+import { countriesList, statesList } from '../../Employees/Create/data';
 import { EditPresentation } from './EditPresentation';
 
 const initialAddress = {
@@ -48,6 +49,8 @@ export const EditData = () => {
     <EditPresentation
       address={address}
       addressErrors={addressErrors}
+      statesList={statesList}
+      countriesList={countriesList}
       isFormChanged={isFormChanged}
       onAddressChange={onAddressChange}
       saveChanges={saveChanges}
