@@ -69,11 +69,7 @@ export const CreatePresentation = (props: EmployeePageCreate) => {
         open={open}
         setOpen={setOpen}
       />
-      <Button
-        sx={{ mb: 1, mr: 1 }}
-        disabled={!isFormComplete}
-        onClick={saveChanges}
-      >
+      <Button sx={{ mt: 2 }} disabled={!isFormComplete} onClick={saveChanges}>
         {EmployeeCreatePageText.ButtonSave}
       </Button>
     </Fragment>
