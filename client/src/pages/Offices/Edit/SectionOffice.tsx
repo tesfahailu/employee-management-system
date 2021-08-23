@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { OnChangeSelect } from '../../../types/types';
-import { countriesList, statesList } from '../../Employees/Create/services';
-import { EditPresentation } from './EditPresentation';
+import { FormOffice } from '../../../modules/components/FormOffice';
+import { statesList, countriesList } from '../../Employees/Edit/services';
 
 const initialAddress = {
   id: 0,
@@ -13,7 +13,13 @@ const initialAddress = {
   zipCode: '',
 };
 
-export const EditData = () => {
+const countries = [{ value: 'USA', text: 'USA' }];
+const states = [
+  { value: 'MA', text: 'Massachusetts' },
+  { value: 'NY', text: 'New York' },
+];
+
+export const SectionOffice = () => {
   const [address, setAddress] = useState(initialAddress);
   const [addressErrors, setAddressErrors] = useState(initialAddress);
 
@@ -30,30 +36,24 @@ export const EditData = () => {
   }, []);
 
   const [isFormChanged, setIsFormChanged] = useState(false);
-
   const onAddressChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
-    setAddress((previousAddress) => {
+    setAddress((address) => {
       return {
-        ...previousAddress,
+        ...address,
         [name]: value,
       };
     });
   };
 
-  const saveChanges = () => {
-    console.log('Saved changes');
-    setIsFormChanged(false);
-  };
   return (
-    <EditPresentation
+    <FormOffice
       address={address}
       addressErrors={addressErrors}
+      onChange={onAddressChange}
+      onErrorChange={onAddressChange}
       statesList={statesList}
       countriesList={countriesList}
-      isFormChanged={isFormChanged}
-      onAddressChange={onAddressChange}
-      saveChanges={saveChanges}
     />
   );
 };

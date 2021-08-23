@@ -12,10 +12,10 @@ import { ViewOneData as ProjectsViewOne } from '../pages/Projects/ViewOne/ViewOn
 import { EditData as ProjectsEdit } from '../pages/Projects/Edit/EditData';
 import { CreateData as ProjectsCreate } from '../pages/Projects/Create/CreateData';
 
-import { ViewAllData as OfficesViewAll } from '../pages/Offices/ViewAll/ViewAllData';
-import { ViewOneData as OfficesViewOne } from '../pages/Offices/ViewOne/ViewOneData';
-import { EditData as OfficesEdit } from '../pages/Offices/Edit/EditData';
-import { CreateData as OfficesCreate } from '../pages/Offices/Create/CreateData';
+import { ViewAll as OfficesViewAll } from '../pages/Offices/ViewAll';
+import { ViewOne as OfficesViewOne } from '../pages/Offices/ViewOne';
+import { Edit as OfficesEdit } from '../pages/Offices/Edit';
+import { Create as OfficesCreate } from '../pages/Offices/Create';
 
 import { ViewAllData as DepartmentsViewAll } from '../pages/Departments/ViewAll/ViewAllData';
 import { ViewOneData as DepartmentsViewOne } from '../pages/Departments/ViewOne/ViewOneData';

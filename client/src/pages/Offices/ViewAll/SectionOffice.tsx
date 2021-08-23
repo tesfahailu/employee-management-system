@@ -1,29 +1,60 @@
 import React, { MouseEventHandler, useState } from 'react';
-import { Address } from '../../../types/types';
-import { ViewAllPresentation } from './ViewAllPresentation';
+import Table from '../../../modules/components/Table';
+import { OfficesViewPageText } from '../../../text';
+import { Address, HeadCell } from '../../../types/types';
+import { rows } from './services';
 
-const rows: Address[] = [
+const headCells: Array<HeadCell<Address>> = [
   {
-    id: 1,
-    streetAddress1: '121 E. Cream St.',
-    streetAddress2: 'Apt. 1',
-    city: 'Cambridge',
-    state: 'MA',
-    country: 'USA',
-    zipCode: '45625',
+    id: 'streetAddress1',
+    numeric: false,
+    disablePadding: true,
+    label: 'Street Address 1',
   },
   {
-    id: 2,
-    streetAddress1: '565 Cramer St.',
-    streetAddress2: 'Apt. 5',
-    city: 'Chicago',
-    state: 'New York',
-    country: 'USA',
-    zipCode: '65784',
+    id: 'streetAddress2',
+    numeric: false,
+    disablePadding: false,
+    label: 'Street Address 2',
+  },
+  {
+    id: 'city',
+    numeric: false,
+    disablePadding: false,
+    label: 'City',
+  },
+  {
+    id: 'state',
+    numeric: false,
+    disablePadding: false,
+    label: 'State',
+  },
+  {
+    id: 'country',
+    numeric: false,
+    disablePadding: false,
+    label: 'Country',
+  },
+  {
+    id: 'zipCode',
+    numeric: false,
+    disablePadding: false,
+    label: 'Zip Code',
+  },
+  {
+    id: 'action',
+    numeric: false,
+    disablePadding: true,
+    label: 'Action',
   },
 ];
 
-export const ViewAllData: React.FC = () => {
+const actionButtonLinks = {
+  view: `/offices/viewOne`,
+  edit: `/offices/edit`,
+};
+
+export const SectionOffice = () => {
   const [rowsData, setRowsData] = useState(rows);
   const handleDeleteRow =
     (
@@ -57,12 +88,15 @@ export const ViewAllData: React.FC = () => {
         return prevData.filter((val) => selected.indexOf(val.id) === -1);
       });
     };
-
   return (
-    <ViewAllPresentation
+    <Table<Address>
+      actionButtonLinks={actionButtonLinks}
+      title={OfficesViewPageText.TableHeader}
       rowsData={rowsData}
       handleDeleteRow={handleDeleteRow}
       handleDeleteRows={handleDeleteRows}
+      headCells={headCells}
+      minWidth="1400px"
     />
   );
 };

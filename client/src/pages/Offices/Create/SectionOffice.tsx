@@ -1,8 +1,7 @@
-import { SelectChangeEvent } from '@material-ui/core';
-import React, { ChangeEvent, useState } from 'react';
-import { Address, OnChangeSelect } from '../../../types/types';
-import { countriesList, statesList } from '../../Employees/Create/services';
-import { CreatePresentation } from './CreatePresentation';
+import React, { useState } from 'react';
+import { FormOffice } from '../../../modules/components/FormOffice';
+import { OnChangeSelect } from '../../../types/types';
+import { statesList, countriesList } from '../../Employees/Edit/services';
 
 const intialOffice = {
   streetAddress1: '',
@@ -13,7 +12,7 @@ const intialOffice = {
   zipCode: '',
 };
 
-export const CreateData = ({}) => {
+export const SectionOffice = () => {
   const [address, setAddress] = useState(intialOffice);
   const [addressErrors, setAddressErrors] = useState(intialOffice);
 
@@ -37,23 +36,14 @@ export const CreateData = ({}) => {
     });
   };
 
-  const [isFormComplete, setIsFormComplete] = useState(false);
-
-  const saveChanges = () => {
-    console.log('Saved changes');
-    setIsFormComplete(false);
-  };
-
   return (
-    <CreatePresentation
+    <FormOffice
       address={address}
       addressErrors={addressErrors}
-      onAddressChange={onAddressChange}
+      onChange={onAddressChange}
       onErrorChange={onErrorChange}
       statesList={statesList}
       countriesList={countriesList}
-      isFormComplete={isFormComplete}
-      saveChanges={saveChanges}
     />
   );
 };
