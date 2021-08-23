@@ -17,10 +17,10 @@ import { ViewOne as OfficesViewOne } from '../pages/Offices/ViewOne';
 import { Edit as OfficesEdit } from '../pages/Offices/Edit';
 import { Create as OfficesCreate } from '../pages/Offices/Create';
 
-import { ViewAllData as DepartmentsViewAll } from '../pages/Departments/ViewAll/ViewAllData';
-import { ViewOneData as DepartmentsViewOne } from '../pages/Departments/ViewOne/ViewOneData';
-import { EditData as DepartmentsEdit } from '../pages/Departments/Edit/EditData';
-import { CreateData as DepartmentsCreate } from '../pages/Departments/Create/CreateData';
+import { ViewAll as DepartmentsViewAll } from '../pages/Departments/ViewAll';
+import { ViewOne as DepartmentsViewOne } from '../pages/Departments/ViewOne';
+import { Edit as DepartmentsEdit } from '../pages/Departments/Edit';
+import { Create as DepartmentsCreate } from '../pages/Departments/Create';
 
 import { ViewAllData as RolesViewAll } from '../pages/Roles/ViewAll/ViewAllData';
 import { ViewOneData as RolesViewOne } from '../pages/Roles/ViewOne/ViewOneData';

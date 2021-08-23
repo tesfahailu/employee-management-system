@@ -1,15 +1,13 @@
-import { SelectChangeEvent } from '@material-ui/core';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Department, OnChangeSelect } from '../../../types/types';
-import { EditPresentation } from './EditPresentation';
+import React, { useEffect, useState } from 'react';
+import { OnChangeSelect } from '../../../types/types';
+import { FormDepartment } from '../../../modules/components/FormDepartment';
 
-export const EditData = () => {
+export const EditPresentation = () => {
   const [department, setDepartment] = useState({
     id: 0,
     name: '',
     description: '',
   });
-  const [isFormChanged, setIsFormChanged] = useState(false);
 
   useEffect(() => {
     setDepartment({
@@ -21,19 +19,15 @@ export const EditData = () => {
 
   const onDepartmentChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
-    setIsFormChanged(true);
+    // setIsFormChanged(true);
     setDepartment((previousDepartment) => {
       return { ...previousDepartment, [name]: value };
     });
   };
-
-  const saveChanges = () => console.log('Changes saved');
   return (
-    <EditPresentation
+    <FormDepartment
       department={department}
       onDepartmentChange={onDepartmentChange}
-      isFormChanged={isFormChanged}
-      saveChanges={saveChanges}
     />
   );
 };
