@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { ProjectCreatePageText } from '../../../text';
 import { ProjectPageCreate } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { FormProject } from '../../../modules/components/FormProject';
 
 export const CreatePresentation = ({
@@ -12,7 +12,7 @@ export const CreatePresentation = ({
   saveChanges,
 }: ProjectPageCreate) => (
   <Fragment>
-    <PageHeader
+    <SectionHeader
       title={ProjectCreatePageText.PageHeader}
       subtitle={ProjectCreatePageText.PageSubHeader}
       isButton={false}

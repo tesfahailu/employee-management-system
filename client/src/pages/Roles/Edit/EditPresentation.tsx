@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { RoleEditPageText } from '../../../text';
 import { RolePageEdit } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { FormRole } from '../../../modules/components/FormRole';
 
 export const EditPresentation = ({
@@ -12,7 +12,7 @@ export const EditPresentation = ({
   saveChanges,
 }: RolePageEdit) => (
   <Fragment>
-    <PageHeader
+    <SectionHeader
       title={RoleEditPageText.PageHeader}
       subtitle={RoleEditPageText.PageSubHeader}
       isButton={false}

@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EmployeeEditPageText } from '../../text';
+import { EmployeeEditPageText, FormEmployeeText } from '../../text';
 import { Employee, EmployeeForm } from '../../types/types';
 
 const types = [
@@ -22,21 +22,21 @@ const types = [
 export function FormEmployee<R extends Omit<Employee, 'id'>>(
   props: EmployeeForm<R>,
 ) {
-  const { employee, employeeErrors: errors, onEmployeeInfoChange } = props;
+  const { employee, employeeErrors: errors, onChange, onErrorChange } = props;
   return (
     <Card sx={{ mb: 2 }}>
       <CardContent>
-        <Typography variant="h6">
-          {EmployeeEditPageText.EmployeeInfo}
-        </Typography>
+        <Typography variant="h6">{FormEmployeeText.Header}</Typography>
         <Box sx={{ mt: 2 }}>
           <TextField
             name="firstName"
             margin="normal"
             fullWidth
             id="firstName"
-            label="First Name:"
-            onBlur={onEmployeeInfoChange}
+            label={FormEmployeeText.FirstName}
+            value={employee.firstName}
+            onChange={onChange}
+            onBlur={onErrorChange}
             error={!!errors.firstName}
             helperText={errors.firstName}
           />
@@ -45,8 +45,10 @@ export function FormEmployee<R extends Omit<Employee, 'id'>>(
             margin="normal"
             fullWidth
             id="lastName"
-            label="Last Name:"
-            onBlur={onEmployeeInfoChange}
+            label={FormEmployeeText.LastName}
+            value={employee.lastName}
+            onChange={onChange}
+            onBlur={onErrorChange}
             error={!!errors.lastName}
             helperText={errors.lastName}
           />
@@ -55,8 +57,10 @@ export function FormEmployee<R extends Omit<Employee, 'id'>>(
             margin="normal"
             fullWidth
             id="mobile"
-            label="Mobile:"
-            onBlur={onEmployeeInfoChange}
+            label={FormEmployeeText.Mobile}
+            value={employee.mobile}
+            onChange={onChange}
+            onBlur={onErrorChange}
             error={!!errors.mobile}
             helperText={errors.mobile}
           />
@@ -65,20 +69,22 @@ export function FormEmployee<R extends Omit<Employee, 'id'>>(
             margin="normal"
             fullWidth
             id="email"
-            label="Email:"
-            onBlur={onEmployeeInfoChange}
+            label={FormEmployeeText.Email}
+            value={employee.email}
+            onChange={onChange}
+            onBlur={onErrorChange}
             error={!!errors.email}
             helperText={errors.email}
           />
           {employee.type && (
             <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
               <InputLabel htmlFor="outlined-type-native-simple">
-                Type:
+                {FormEmployeeText.Type}
               </InputLabel>
               <Select
                 native
-                onChange={onEmployeeInfoChange}
-                label="Type"
+                onChange={onErrorChange}
+                label={FormEmployeeText.Type}
                 inputProps={{
                   name: 'type',
                   id: 'outlined-type-native-simple',

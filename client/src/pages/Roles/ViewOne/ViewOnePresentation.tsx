@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { RoleViewPageText } from '../../../text';
 import { Role } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { CardStyledDisplay } from '../../../modules/components/CardStyledDisplay';
 
 interface ViewOnePresentationProps {
@@ -12,7 +12,7 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
   role,
 }) => (
   <Fragment>
-    <PageHeader
+    <SectionHeader
       title={RoleViewPageText.PageHeader}
       subtitle={RoleViewPageText.PageSubHeader}
       isButton={false}

@@ -4,12 +4,12 @@ import { ToggleDarkMode } from '../../modules/components/ToggleDarkMode';
 import { UploadImagePaper } from '../../modules/components/UploadImagePaper';
 import { UserInfoPaper } from '../../modules/components/UserInfoPaper';
 import { SettingsPageText } from '../../text';
-import { PageHeader } from '../../modules/components/PageHeader';
+import { SectionHeader } from '../../modules/components/SectionHeader';
 import { Box } from '@material-ui/system';
 
 export const SettingsPresentation = () => (
   <Fragment>
-    <PageHeader
+    <SectionHeader
       title={SettingsPageText.PageHeader}
       subtitle={SettingsPageText.PageSubHeader}
       isBreadCrumb={false}

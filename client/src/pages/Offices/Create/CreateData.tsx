@@ -1,7 +1,7 @@
 import { SelectChangeEvent } from '@material-ui/core';
 import React, { ChangeEvent, useState } from 'react';
 import { Address, OnChangeSelect } from '../../../types/types';
-import { countriesList, statesList } from '../../Employees/Create/data';
+import { countriesList, statesList } from '../../Employees/Create/services';
 import { CreatePresentation } from './CreatePresentation';
 
 const intialOffice = {
@@ -27,6 +27,16 @@ export const CreateData = ({}) => {
     });
   };
 
+  const onErrorChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    setAddress((previousAddress) => {
+      return {
+        ...previousAddress,
+        [name]: value,
+      };
+    });
+  };
+
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   const saveChanges = () => {
@@ -39,6 +49,7 @@ export const CreateData = ({}) => {
       address={address}
       addressErrors={addressErrors}
       onAddressChange={onAddressChange}
+      onErrorChange={onErrorChange}
       statesList={statesList}
       countriesList={countriesList}
       isFormComplete={isFormComplete}

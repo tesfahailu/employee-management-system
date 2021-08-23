@@ -13,12 +13,14 @@ export function SelectComponent<R>({
   labelText,
   value,
   onChange,
+  onErrorChange,
   options,
   error,
 }: {
   name: string;
   labelText: string;
   onChange: OnChangeSelect;
+  onErrorChange: OnChangeSelect;
   value: string;
   options: SelectLabel[];
   error: string;
@@ -31,8 +33,8 @@ export function SelectComponent<R>({
       <Select
         native
         value={value}
-        onBlur={onChange}
         onChange={onChange}
+        onBlur={onErrorChange}
         label={labelText}
         input={
           <OutlinedInput
@@ -45,7 +47,7 @@ export function SelectComponent<R>({
       >
         <option aria-label="None" value="" />
         {options.map(({ name }, index) => (
-          <option value={name} key={`text-${index}`}>
+          <option value={value} key={`text-${index}`}>
             {name}
           </option>
         ))}

@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { DepartmentEditPageText } from '../../../text';
 import { DepartmentPageEdit } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { FormDepartment } from '../../../modules/components/FormDepartment';
 
 export const EditPresentation: React.FC<DepartmentPageEdit> = ({
@@ -12,7 +12,7 @@ export const EditPresentation: React.FC<DepartmentPageEdit> = ({
   saveChanges,
 }) => (
   <Fragment>
-    <PageHeader
+    <SectionHeader
       title={DepartmentEditPageText.PageHeader}
       subtitle={DepartmentEditPageText.PageSubHeader}
       isButton={false}

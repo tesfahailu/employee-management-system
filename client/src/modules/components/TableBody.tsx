@@ -4,7 +4,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import { getComparator, Order } from './TableUtils';
-import { HeadCell } from '../../pages/Employees/ViewAll/ViewAllPresentation';
 import { Alert, Snackbar, Typography } from '@material-ui/core';
 import Highlighter from 'react-highlight-words';
 import { IconButton, Stack } from '@material-ui/core';
@@ -18,7 +17,7 @@ import { DialogDeleteRow } from './DialogDeleteRow';
 import { Tooltip } from '@material-ui/core';
 import { DialogDeleteRowText, TableBodyText } from '../../text';
 import { SyntheticEvent } from 'react';
-import { HandleDeleteRow } from '../../types/types';
+import { HandleDeleteRow, HeadCell } from '../../types/types';
 
 interface ActionButton {
   rowId: number;

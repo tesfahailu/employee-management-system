@@ -12,10 +12,19 @@ const initialEmployee = {
 
 export const UserInfoPaper = () => {
   const [employee, setEmployee] = useState(initialEmployee);
-
   const [errors, setErrors] = useState(initialEmployee);
 
-  const onEmployeeInfoChange: OnChangeSelect = (event) => {
+  const onChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    setEmployee((previousEmployee) => {
+      return {
+        ...previousEmployee,
+        [name]: value,
+      };
+    });
+  };
+
+  const onErrorChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
     setEmployee((previousEmployee) => {
       return {
@@ -28,7 +37,8 @@ export const UserInfoPaper = () => {
   return (
     <FormEmployee<Employee>
       employee={employee}
-      onEmployeeInfoChange={onEmployeeInfoChange}
+      onChange={onChange}
+      onErrorChange={onErrorChange}
       employeeErrors={errors}
     />
   );

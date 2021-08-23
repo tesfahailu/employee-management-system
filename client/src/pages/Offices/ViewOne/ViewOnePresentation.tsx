@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { OfficeViewPageText } from '../../../text';
 import { Address } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { CardStyledDisplay } from '../../../modules/components/CardStyledDisplay';
 
 interface ViewOnePresentationProps {
@@ -12,7 +12,7 @@ export const ViewOnePresentation: React.FC<ViewOnePresentationProps> = ({
   address,
 }) => (
   <Fragment>
-    <PageHeader
+    <SectionHeader
       title={OfficeViewPageText.PageHeader}
       subtitle={OfficeViewPageText.PageSubHeader}
       isButton={false}

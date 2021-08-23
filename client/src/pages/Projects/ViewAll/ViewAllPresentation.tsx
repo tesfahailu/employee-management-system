@@ -1,18 +1,11 @@
 import React, { Fragment, MouseEventHandler } from 'react';
 import { ProjectsViewPageText } from '../../../text';
-import { Project, ProjectPageViewAll } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { Project, ProjectPageViewAll, HeadCell } from '../../../types/types';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import Table from '../../../modules/components/Table';
 import { Rows } from './ViewAllData';
 
-export interface HeadCell {
-  disablePadding: boolean;
-  id: keyof Rows | 'action';
-  label: string;
-  numeric: boolean;
-}
-
-const columns: HeadCell[] = [
+const columns: HeadCell<Rows>[] = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
   {
     id: 'description',
@@ -52,7 +45,7 @@ export const ViewAllPresentation = ({
   };
   return (
     <Fragment>
-      <PageHeader
+      <SectionHeader
         title={ProjectsViewPageText.PageHeader}
         subtitle={ProjectsViewPageText.PageSubHeader}
         isButton={true}

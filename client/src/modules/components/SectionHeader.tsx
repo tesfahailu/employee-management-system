@@ -13,7 +13,7 @@ interface HeaderProps {
   buttonHref?: string;
 }
 
-export const PageHeader: React.FC<HeaderProps> = ({
+export const SectionHeader: React.FC<HeaderProps> = ({
   title,
   subtitle,
   isButton = false,

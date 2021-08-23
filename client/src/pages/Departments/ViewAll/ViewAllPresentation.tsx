@@ -1,9 +1,8 @@
 import React, { Fragment, MouseEventHandler } from 'react';
 import { DepartmentsViewPageText } from '../../../text';
-import { PageHeader } from '../../../modules/components/PageHeader';
-import { HeadCell } from '../../Employees/ViewAll/ViewAllPresentation';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import Table from '../../../modules/components/Table';
-import { DepartmentPageViewAll, Role } from '../../../types/types';
+import { DepartmentPageViewAll, Role, HeadCell } from '../../../types/types';
 
 const headCells: Array<HeadCell<Role>> = [
   {
@@ -37,7 +36,7 @@ export const ViewAllPresentation = ({
   };
   return (
     <Fragment>
-      <PageHeader
+      <SectionHeader
         title={DepartmentsViewPageText.PageHeader}
         subtitle={DepartmentsViewPageText.PageSubHeader}
         isButton={true}

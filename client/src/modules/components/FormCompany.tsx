@@ -8,6 +8,7 @@ export const FormCompany = ({
   company,
   companyErrors,
   onCompanyChange,
+  onErrorChange,
   officesList,
   departmentsList,
   rolesList,
@@ -22,14 +23,16 @@ export const FormCompany = ({
           name="office"
           labelText={FormCompanyText.OfficeLabel}
           onChange={onCompanyChange}
+          onErrorChange={onErrorChange}
           value={company.office}
           options={officesList}
           error={companyErrors.office}
         />
         <SelectComponent
           name="department"
-          labelText={FormCompanyText.OfficeLabel}
+          labelText={FormCompanyText.DepartmentLabel}
           onChange={onCompanyChange}
+          onErrorChange={onErrorChange}
           value={company.department}
           options={departmentsList}
           error={companyErrors.department}
@@ -38,6 +41,7 @@ export const FormCompany = ({
           name="role"
           labelText={FormCompanyText.RoleLabel}
           onChange={onCompanyChange}
+          onErrorChange={onErrorChange}
           value={company.role}
           options={rolesList}
           error={companyErrors.role}

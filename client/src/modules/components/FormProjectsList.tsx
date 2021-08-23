@@ -18,11 +18,11 @@ import { DialogAddProject } from './DialogAddProjects';
 
 export const FormProjectsList = ({
   projects,
+  open,
+  setOpen,
   onProjectAdd,
   onProjectRemove,
   projectsList,
-  open,
-  setOpen,
 }: ProjectsListForm) => (
   <Fragment>
     <Card>
