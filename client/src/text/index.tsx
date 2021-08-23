@@ -1,6 +1,15 @@
 //#region Forms, Dialog, Table
+export enum FormEmployeeText {
+  Header = 'Employee: ',
+  FirstName = 'First Name: ',
+  LastName = 'Last Name: ',
+  Mobile = 'Mobile: ',
+  Email = 'Email: ',
+  Type = 'Type: ',
+}
+
 export enum FormEmployeeAddressText {
-  Header = 'Employee Address: ',
+  Header = 'Address: ',
   StreetAddress1 = 'Street Address 1: ',
   StreetAddress2 = 'Street Address 2: ',
   City = 'City: ',
@@ -129,8 +138,8 @@ export enum EmployeeViewPageText {
 export enum EmployeeEditPageText {
   PageHeader = 'Edit Employee:',
   PageSubHeader = "Edit employee / employee address or assign to a department, office, or projects. Don't forget to save",
-  EmployeeInfo = 'Employee Info:',
-  EmployeeAddress = 'Employee Address:',
+  EmployeeInfo = 'Employee:',
+  EmployeeAddress = 'Address:',
   Company = 'Company:',
   OfficeeAddress = 'Office Address:',
   Projects = 'Projects:',

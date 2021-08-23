@@ -7,9 +7,8 @@ import { TableToolBar } from './TableToolBar';
 import { TableHead } from './TableHead';
 import { Order } from './TableUtils';
 import { TableBody } from './TableBody';
-import { HeadCell } from '../../pages/Employees/ViewAll/ViewAllPresentation';
 import { useEffect } from 'react';
-import { HandleDeleteRow, HandleDeleteRows } from '../../types/types';
+import { HandleDeleteRow, HandleDeleteRows, HeadCell } from '../../types/types';
 
 export interface Props<R> {
   actionButtonLinks: { view: string; edit: string };

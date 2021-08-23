@@ -13,7 +13,8 @@ import { SelectComponent } from './SelectComponent';
 export const FormEmployeeAddress = ({
   address,
   addressErrors,
-  onAddressChange,
+  onChange,
+  onErrorChange,
   statesList,
   countriesList,
 }: AddressForm<Omit<Address, 'id'>>) => (
@@ -27,7 +28,9 @@ export const FormEmployeeAddress = ({
           fullWidth
           id="eStreetAddress1"
           label={FormEmployeeAddressText.StreetAddress1}
-          onBlur={onAddressChange}
+          value={address.streetAddress1}
+          onChange={onChange}
+          onBlur={onErrorChange}
           error={!!addressErrors.streetAddress1}
           helperText={addressErrors.streetAddress1}
         />
@@ -37,7 +40,9 @@ export const FormEmployeeAddress = ({
           fullWidth
           id="eStreetAddress2"
           label={FormEmployeeAddressText.StreetAddress2}
-          onBlur={onAddressChange}
+          value={address.streetAddress2}
+          onChange={onChange}
+          onBlur={onErrorChange}
           error={!!addressErrors.streetAddress2}
           helperText={addressErrors.streetAddress2}
         />
@@ -47,14 +52,17 @@ export const FormEmployeeAddress = ({
           fullWidth
           id="eCity"
           label={FormEmployeeAddressText.City}
-          onBlur={onAddressChange}
+          value={address.city}
+          onChange={onChange}
+          onBlur={onErrorChange}
           error={!!addressErrors.city}
           helperText={addressErrors.city}
         />
         <SelectComponent
           name="state"
           labelText={FormEmployeeAddressText.State}
-          onChange={onAddressChange}
+          onChange={onChange}
+          onErrorChange={onErrorChange}
           value={address.state}
           options={statesList}
           error={addressErrors.state}
@@ -62,7 +70,8 @@ export const FormEmployeeAddress = ({
         <SelectComponent
           name="country"
           labelText={FormEmployeeAddressText.Country}
-          onChange={onAddressChange}
+          onChange={onChange}
+          onErrorChange={onErrorChange}
           value={address.country}
           options={countriesList}
           error={addressErrors.country}
@@ -73,7 +82,9 @@ export const FormEmployeeAddress = ({
           fullWidth
           id="eZipCode"
           label={FormEmployeeAddressText.ZipCode}
-          onBlur={onAddressChange}
+          value={address.zipCode}
+          onChange={onChange}
+          onBlur={onErrorChange}
           error={!!addressErrors.zipCode}
           helperText={addressErrors.zipCode}
         />

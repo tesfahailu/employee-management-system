@@ -1,8 +1,4 @@
-import {
-  DepartmentType,
-  EmployeeQuery,
-  EmployeeType,
-} from '../../../generated/graphql';
+import { DepartmentType, EmployeeType } from '../../../generated/graphql';
 
 export const employeeData = {
   __typename: 'Query',

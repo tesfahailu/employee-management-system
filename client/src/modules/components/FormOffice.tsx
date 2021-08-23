@@ -20,7 +20,8 @@ const states = [
 
 export const FormOffice = ({
   address,
-  onAddressChange,
+  onChange,
+  onErrorChange,
 }: AddressForm<Omit<Address, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
@@ -35,7 +36,7 @@ export const FormOffice = ({
           id="oStreetAddress1"
           label="Street Address 1:"
           value={address.streetAddress1}
-          onChange={onAddressChange}
+          onChange={onChange}
         />
         <TextField
           name="streetAddress2"
@@ -44,7 +45,7 @@ export const FormOffice = ({
           id="oStreetAddress2"
           label="Street Address 2:"
           value={address.streetAddress2}
-          onChange={onAddressChange}
+          onChange={onChange}
         />
         <TextField
           name="city"
@@ -53,7 +54,7 @@ export const FormOffice = ({
           id="oCity"
           label="City:"
           value={address.city}
-          onChange={onAddressChange}
+          onChange={onChange}
         />
         <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
           <InputLabel htmlFor="outlined-state-native-simple">State:</InputLabel>
@@ -61,7 +62,7 @@ export const FormOffice = ({
             name="state"
             native
             value={address.state}
-            onChange={onAddressChange}
+            onChange={onChange}
             label="Statee"
             inputProps={{
               name: 'type',
@@ -83,7 +84,7 @@ export const FormOffice = ({
             name="country"
             native
             value={address.country}
-            onChange={onAddressChange}
+            onChange={onChange}
             label="Country"
             inputProps={{
               name: 'type',
@@ -104,7 +105,7 @@ export const FormOffice = ({
           id="oZipCode"
           label="Zip Code:"
           value={address.zipCode}
-          onChange={onAddressChange}
+          onChange={onChange}
         />
       </Box>
     </CardContent>

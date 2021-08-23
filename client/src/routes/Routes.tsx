@@ -2,10 +2,10 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { AppLayout } from './../layout/AppLayout';
 
-import { ViewAllData as EmployeesViewAll } from '../pages/Employees/ViewAll/ViewAllData';
-import { ViewOneData as EmployeesViewOne } from '../pages/Employees/ViewOne/ViewOneData';
-import { EditData as EmployeesEdit } from '../pages/Employees/Edit/EditData';
-import { CreateData as EmployeesCreate } from '../pages/Employees/Create/CreateData';
+import { ViewAll as EmployeesViewAll } from '../pages/Employees/ViewAll';
+import { ViewOne as EmployeesViewOne } from '../pages/Employees/ViewOne';
+import { Edit as EmployeesEdit } from '../pages/Employees/Edit';
+import { Create as EmployeesCreate } from '../pages/Employees/Create';
 
 import { ViewAllData as ProjectsViewAll } from '../pages/Projects/ViewAll/ViewAllData';
 import { ViewOneData as ProjectsViewOne } from '../pages/Projects/ViewOne/ViewOneData';

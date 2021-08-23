@@ -1,25 +1,11 @@
-import { IconButton, Stack } from '@material-ui/core';
 import React, { Fragment, MouseEventHandler } from 'react';
-import { useHistory } from 'react-router-dom';
 import { RolesViewPageText } from '../../../text';
-import {
-  Pageview as PageViewIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-} from '@material-ui/icons';
-import { Role, RolePageViewAll } from '../../../types/types';
+import { HeadCell, RolePageViewAll } from '../../../types/types';
 import { Rows } from './ViewAllData';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import Table from '../../../modules/components/Table';
 
-export interface HeadCell {
-  disablePadding: boolean;
-  id: keyof Rows | 'action';
-  label: string;
-  numeric: boolean;
-}
-
-const columns: HeadCell[] = [
+const columns: HeadCell<Rows>[] = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
   {
     id: 'description',
@@ -46,7 +32,7 @@ export const ViewAllPresentation = ({
   };
   return (
     <Fragment>
-      <PageHeader
+      <SectionHeader
         title={RolesViewPageText.PageHeader}
         subtitle={RolesViewPageText.PageSubHeader}
         isButton={true}

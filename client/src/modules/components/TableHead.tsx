@@ -8,8 +8,8 @@ import {
 import { Box } from '@material-ui/system';
 import { visuallyHidden } from '@material-ui/utils';
 import React from 'react';
+import { HeadCell } from '../../types/types';
 import { Order } from './TableUtils';
-import { HeadCell } from './../../pages/Employees/ViewAll/ViewAllPresentation';
 
 interface TableHead<R> {
   numSelected: number;

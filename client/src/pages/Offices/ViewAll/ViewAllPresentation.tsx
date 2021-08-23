@@ -1,15 +1,8 @@
 import React, { Fragment, MouseEventHandler } from 'react';
 import Table from '../../../modules/components/Table';
 import { OfficesViewPageText } from '../../../text';
-import { Address, OfficePageViewAll } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
-
-export interface HeadCell<R> {
-  id: Omit<keyof R, 'id'> | 'action';
-  numeric: boolean;
-  disablePadding: boolean;
-  label: string;
-}
+import { Address, HeadCell, OfficePageViewAll } from '../../../types/types';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 
 const headCells: Array<HeadCell<Address>> = [
   {
@@ -67,7 +60,7 @@ export const ViewAllPresentation = ({
   };
   return (
     <Fragment>
-      <PageHeader
+      <SectionHeader
         title={OfficesViewPageText.PageHeader}
         subtitle={OfficesViewPageText.PageSubHeader}
         isButton={true}

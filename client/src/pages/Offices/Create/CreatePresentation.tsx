@@ -2,20 +2,21 @@ import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { OfficeCreatePageText } from '../../../text';
 import { OfficePageCreate } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { FormOffice } from '../../../modules/components/FormOffice';
 
 export const CreatePresentation = ({
   address,
   addressErrors,
   onAddressChange,
+  onErrorChange,
   statesList,
   countriesList,
   isFormComplete,
   saveChanges,
 }: OfficePageCreate) => (
   <Fragment>
-    <PageHeader
+    <SectionHeader
       title={OfficeCreatePageText.PageHeader}
       subtitle={OfficeCreatePageText.PageSubHeader}
       isButton={false}
@@ -23,7 +24,8 @@ export const CreatePresentation = ({
     <FormOffice
       address={address}
       addressErrors={addressErrors}
-      onAddressChange={onAddressChange}
+      onChange={onAddressChange}
+      onErrorChange={onErrorChange}
       statesList={statesList}
       countriesList={countriesList}
     />

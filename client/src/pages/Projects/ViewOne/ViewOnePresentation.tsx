@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { ProjectViewPageText } from '../../../text';
 import { Project } from '../../../types/types';
-import { PageHeader } from '../../../modules/components/PageHeader';
+import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { CardStyledDisplay } from '../../../modules/components/CardStyledDisplay';
 
 export const ViewOnePresentation: React.FC<{
@@ -9,7 +9,7 @@ export const ViewOnePresentation: React.FC<{
 }> = ({ project }) => (
   <Fragment>
     <Fragment>
-      <PageHeader
+      <SectionHeader
         title={ProjectViewPageText.PageHeader}
         subtitle={ProjectViewPageText.PageSubHeader}
         isButton={false}

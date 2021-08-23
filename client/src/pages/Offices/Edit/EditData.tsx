@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { OnChangeSelect } from '../../../types/types';
-import { countriesList, statesList } from '../../Employees/Create/data';
+import { countriesList, statesList } from '../../Employees/Create/services';
 import { EditPresentation } from './EditPresentation';
 
 const initialAddress = {

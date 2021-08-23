@@ -54,6 +54,17 @@ export interface Company {
   department: string;
   role: string;
 }
+
+export interface SectionProp {
+  setIsError: React.Dispatch<
+    React.SetStateAction<{
+      employee: boolean;
+      address: boolean;
+      company: boolean;
+    }>
+  >;
+  setIsFormChanged?: React.Dispatch<React.SetStateAction<boolean>>;
+}
 //#endregion
 
 //#region EventHandlers
@@ -95,13 +106,15 @@ export type HandleDeleteRows = (
 export interface EmployeeForm<R> {
   employee: R;
   employeeErrors: R;
-  onEmployeeInfoChange: OnChangeSelect;
+  onChange: OnChangeSelect;
+  onErrorChange: OnChangeSelect;
 }
 
 export interface AddressForm<R> {
   address: R;
   addressErrors: R;
-  onAddressChange: OnChangeSelect;
+  onChange: OnChangeSelect;
+  onErrorChange: OnChangeSelect;
   statesList: SelectLabel[];
   countriesList: SelectLabel[];
 }
@@ -110,6 +123,7 @@ export interface CompanyForm {
   company: Company;
   companyErrors: Company;
   onCompanyChange: OnChangeSelect;
+  onErrorChange: OnChangeSelect;
   officesList: SelectLabel[];
   departmentsList: SelectLabel[];
   rolesList: SelectLabel[];
@@ -117,12 +131,11 @@ export interface CompanyForm {
 
 export interface ProjectsListForm {
   projects: Array<Project>;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onProjectAdd: OnMouseClick;
   onProjectRemove: OnMouseClick;
   projectsList: Project[];
-
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ProjectForm {
@@ -138,6 +151,15 @@ export interface DepartmentForm<R> {
 export interface RoleForm<R> {
   role: R;
   onRoleChange: OnChangeField;
+}
+//#endregion
+
+//#region Table
+export interface HeadCell<R> {
+  id: Omit<keyof R, 'id'> | 'action';
+  numeric: boolean;
+  disablePadding: boolean;
+  label: string;
 }
 //#endregion
 
@@ -180,6 +202,7 @@ export interface OfficePageCreate {
   address: Omit<Address, 'id'>;
   addressErrors: Omit<Address, 'id'>;
   onAddressChange: OnChangeSelect;
+  onErrorChange: OnChangeSelect;
   statesList: SelectLabel[];
   countriesList: SelectLabel[];
   isFormComplete: boolean;
