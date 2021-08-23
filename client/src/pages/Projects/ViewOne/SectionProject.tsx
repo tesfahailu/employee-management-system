@@ -1,12 +1,10 @@
 import React, { Fragment } from 'react';
 import { ProjectViewPageText } from '../../../text';
-import { Project } from '../../../types/types';
 import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { CardStyledDisplay } from '../../../modules/components/CardStyledDisplay';
+import { project } from './services';
 
-export const ViewOnePresentation: React.FC<{
-  project: Omit<Project, 'id'>;
-}> = ({ project }) => (
+export const SectionProject = () => (
   <Fragment>
     <Fragment>
       <SectionHeader
