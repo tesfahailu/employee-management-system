@@ -22,10 +22,11 @@ import { ViewOne as DepartmentsViewOne } from '../pages/Departments/ViewOne';
 import { Edit as DepartmentsEdit } from '../pages/Departments/Edit';
 import { Create as DepartmentsCreate } from '../pages/Departments/Create';
 
-import { ViewAllData as RolesViewAll } from '../pages/Roles/ViewAll/ViewAllData';
-import { ViewOneData as RolesViewOne } from '../pages/Roles/ViewOne/ViewOneData';
-import { EditData as RolesEdit } from '../pages/Roles/Edit/EditData';
-import { CreateData as RolesCreate } from '../pages/Roles/Create/CreateData';
+import { ViewAll as RolesViewAll } from '../pages/Roles/ViewAll';
+import { ViewOne as RolesViewOne } from '../pages/Roles/ViewOne';
+import { Edit as RolesEdit } from '../pages/Roles/Edit';
+import { Create as RolesCreate } from '../pages/Roles/Create';
+
 import { SettingsData as Settings } from '../pages/Settings/SettingsData';
 import { Register } from '../pages/Register/Register';
 import { Login } from '../pages/Login/Login';
