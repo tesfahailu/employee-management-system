@@ -39,18 +39,20 @@ export const SectionAddress = ({
       (country) => country.name === address.country,
     );
 
-    // setIsFormChanged(true);
     setAddress((address) => {
       return {
         ...address,
         [name]: value,
       };
     });
+    setIsFormChanged!(true);
   };
 
   const onErrorChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
     let errorText = '';
+
+    console.log('address', name, value);
 
     switch (name) {
       case 'streetAddress1':
@@ -79,6 +81,10 @@ export const SectionAddress = ({
         [name]: errorText,
       };
     });
+    setIsError((isError) => ({
+      ...isError,
+      address: errorText ? true : false,
+    }));
   };
 
   useEffect(() => {
@@ -87,23 +93,11 @@ export const SectionAddress = ({
       streetAddress1: employeeStreetAddress1,
       streetAddress2: employeeStreetAddress2,
       city: employeeCity,
-      state: employeeState.abbreviation,
+      state: employeeState.name,
       country: employeeCountry.name,
       zipCode: employeeZipCode,
     });
   }, []);
-
-  useEffect(() => {
-    let isValid = true;
-    (Object.keys(addressErrors) as Array<keyof typeof addressErrors>).map(
-      (key) => {
-        if (addressErrors[key] !== '' || address[key] === '') {
-          isValid = false;
-        }
-      },
-    );
-    setIsError((error) => ({ ...error, address: !isValid }));
-  }, [addressErrors]);
 
   return (
     <FormEmployeeAddress

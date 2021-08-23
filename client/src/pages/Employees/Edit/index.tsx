@@ -17,20 +17,20 @@ export const Edit = () => {
   };
 
   const [isError, setIsError] = useState({
-    employee: true,
-    address: true,
-    company: true,
+    employee: false,
+    address: false,
+    company: false,
   });
 
   useEffect(() => {
+    let isValid = true;
     Object.keys(isError).map((key) => {
-      let isValid = false;
       if (isError[key as keyof typeof isError]) {
         isValid = false;
       }
-      setIsFormComplete(isValid);
     });
-  }, [isError.employee, isError.address, isError.company]);
+    setIsFormComplete(isValid);
+  }, [isError, isError.employee, isError.address, isError.company]);
 
   return (
     <Fragment>
@@ -53,8 +53,8 @@ export const Edit = () => {
       />
       <SectionProjects />
       <Button
-        sx={{ ml: 1, mt: 1 }}
-        disabled={!isFormChanged && !isFormComplete}
+        sx={{ mt: 2 }}
+        disabled={!isFormComplete || !isFormChanged}
         onClick={saveChanges}
       >
         {EmployeeEditPageText.ButtonSave}

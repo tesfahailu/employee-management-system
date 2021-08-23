@@ -28,13 +28,13 @@ export const SectionEmployee = ({
 
   const onChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
-    setIsFormChanged!(true);
     setEmployee((employee) => {
       return {
         ...employee,
         [name]: value,
       };
     });
+    setIsFormChanged!(true);
   };
 
   const onErrorChange: OnChangeSelect = (event) => {
@@ -54,9 +54,14 @@ export const SectionEmployee = ({
         errorText = validEmail(value) ? '' : ErrorText.EmailInvalid;
         break;
     }
+
     setEmployeeErrors((errors) => ({
       ...errors,
       [name]: errorText,
+    }));
+    setIsError((isError) => ({
+      ...isError,
+      employee: errorText ? true : false,
     }));
   };
 

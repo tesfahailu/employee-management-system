@@ -47,7 +47,7 @@ export function SelectComponent<R>({
       >
         <option aria-label="None" value="" />
         {options.map(({ name }, index) => (
-          <option value={value} key={`text-${index}`}>
+          <option value={name} key={`text-${index}`}>
             {name}
           </option>
         ))}

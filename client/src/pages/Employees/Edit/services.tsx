@@ -16,7 +16,7 @@ export const officesList = [
 export const departmentsList = [
   { id: 0, name: 'marketing', description: '' },
   { id: 1, name: 'operations', description: '' },
-  { id: 2, name: 'finanace', description: '' },
+  { id: 2, name: 'finance', description: '' },
   { id: 3, name: 'sales', description: '' },
   { id: 4, name: 'product', description: '' },
 ];

@@ -25,6 +25,7 @@ export const SectionCompany = ({
         [name]: value,
       };
     });
+    setIsFormChanged!(true);
   };
 
   const onErrorChange: OnChangeSelect = (event) => {
@@ -49,6 +50,10 @@ export const SectionCompany = ({
         [name]: errorText,
       };
     });
+    setIsError((isError) => ({
+      ...isError,
+      company: errorText ? true : false,
+    }));
   };
 
   useEffect(() => {
