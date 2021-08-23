@@ -7,10 +7,10 @@ import { ViewOne as EmployeesViewOne } from '../pages/Employees/ViewOne';
 import { Edit as EmployeesEdit } from '../pages/Employees/Edit';
 import { Create as EmployeesCreate } from '../pages/Employees/Create';
 
-import { ViewAllData as ProjectsViewAll } from '../pages/Projects/ViewAll/ViewAllData';
-import { ViewOneData as ProjectsViewOne } from '../pages/Projects/ViewOne/ViewOneData';
-import { EditData as ProjectsEdit } from '../pages/Projects/Edit/EditData';
-import { CreateData as ProjectsCreate } from '../pages/Projects/Create/CreateData';
+import { ViewAll as ProjectsViewAll } from '../pages/Projects/ViewAll';
+import { ViewOne as ProjectsViewOne } from '../pages/Projects/ViewOne';
+import { Edit as ProjectsEdit } from '../pages/Projects/Edit';
+import { Create as ProjectsCreate } from '../pages/Projects/Create';
 
 import { ViewAll as OfficesViewAll } from '../pages/Offices/ViewAll';
 import { ViewOne as OfficesViewOne } from '../pages/Offices/ViewOne';
