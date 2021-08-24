@@ -26,7 +26,7 @@ const {
 } = employeeData.employee.employeeAddress!;
 
 export const SectionAddress = ({
-  setIsError,
+  setIsErrors,
   setIsFormChanged,
 }: SectionProp) => {
   const [address, setAddress] = useState(initialAddress);
@@ -81,7 +81,7 @@ export const SectionAddress = ({
         [name]: errorText,
       };
     });
-    setIsError((isError) => ({
+    setIsErrors!((isError) => ({
       ...isError,
       address: errorText ? true : false,
     }));

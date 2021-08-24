@@ -16,7 +16,7 @@ export const Create = () => {
     history.push('/employees');
   };
 
-  const [isError, setIsError] = useState({
+  const [isError, setIsErrors] = useState({
     employee: true,
     address: true,
     company: true,
@@ -39,9 +39,9 @@ export const Create = () => {
         subtitle={EmployeeCreatePageText.PageSubHeader}
         isButton={false}
       />
-      <SectionEmployee setIsError={setIsError} />
-      <SectionAddress setIsError={setIsError} />
-      <SectionCompany setIsError={setIsError} />
+      <SectionEmployee setIsErrors={setIsErrors} />
+      <SectionAddress setIsErrors={setIsErrors} />
+      <SectionCompany setIsErrors={setIsErrors} />
       <SectionProjects />
       <Button sx={{ mt: 2 }} disabled={!isFormComplete} onClick={saveChanges}>
         {EmployeeCreatePageText.ButtonSave}

@@ -11,7 +11,7 @@ const initialCompany = {
 };
 
 export const SectionCompany = ({
-  setIsError,
+  setIsErrors,
   setIsFormChanged,
 }: SectionProp) => {
   const [company, setCompany] = useState(initialCompany);
@@ -50,7 +50,7 @@ export const SectionCompany = ({
         [name]: errorText,
       };
     });
-    setIsError((isError) => ({
+    setIsErrors!((isError) => ({
       ...isError,
       company: errorText ? true : false,
     }));

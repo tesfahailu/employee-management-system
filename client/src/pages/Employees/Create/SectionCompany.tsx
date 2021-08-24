@@ -10,7 +10,7 @@ const initialCompany = {
   role: '',
 };
 
-export const SectionCompany = ({ setIsError }: SectionProp) => {
+export const SectionCompany = ({ setIsErrors }: SectionProp) => {
   const [company, setCompany] = useState(initialCompany);
   const [errors, setErrors] = useState(initialCompany);
   const onCompanyChange: OnChangeSelect = (event) => {
@@ -59,7 +59,7 @@ export const SectionCompany = ({ setIsError }: SectionProp) => {
         isValid = false;
       }
     });
-    setIsError((error) => ({ ...error, company: !isValid }));
+    setIsErrors!((error) => ({ ...error, company: !isValid }));
   }, [errors]);
 
   return (

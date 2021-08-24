@@ -23,7 +23,7 @@ const initialEmployee = {
 };
 
 export const SectionEmployee = ({
-  setIsError,
+  setIsErrors,
   setIsFormChanged,
 }: SectionProp) => {
   const [employee, setEmployee] = useState(initialEmployee);
@@ -62,7 +62,7 @@ export const SectionEmployee = ({
       ...errors,
       [name]: errorText,
     }));
-    setIsError((isError) => ({
+    setIsErrors!((isError) => ({
       ...isError,
       employee: errorText ? true : false,
     }));
@@ -75,8 +75,6 @@ export const SectionEmployee = ({
         isValid = false;
       }
     });
-
-    // setIsFormComplete(isValid);
   }, [errors]);
 
   useEffect(() => {

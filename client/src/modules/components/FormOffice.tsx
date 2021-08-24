@@ -2,21 +2,14 @@ import {
   Box,
   Card,
   CardContent,
-  FormControl,
-  InputLabel,
-  Select,
   TextField,
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EmployeeEditPageText } from '../../text';
+import { countriesList, statesList } from '../../pages/Employees/Edit/services';
+import { EmployeeEditPageText, FormAddressText } from '../../text';
 import { Address, FormAddress } from '../../types/types';
-
-const countries = [{ value: 'USA', text: 'USA' }];
-const states = [
-  { value: 'MA', text: 'Massachusetts' },
-  { value: 'NY', text: 'New York' },
-];
+import { SelectComponent } from './SelectComponent';
 
 export const FormOffice = ({
   address,
@@ -34,79 +27,67 @@ export const FormOffice = ({
           name="streetAddress1"
           margin="normal"
           fullWidth
-          id="oStreetAddress1"
-          label="Street Address 1:"
+          id="streetAddress1"
+          label={FormAddressText.StreetAddress1}
           value={address.streetAddress1}
           onChange={onChange}
+          onBlur={onErrorChange}
+          error={!!errors.streetAddress1}
+          helperText={errors.streetAddress1}
         />
         <TextField
           name="streetAddress2"
           margin="normal"
           fullWidth
-          id="oStreetAddress2"
-          label="Street Address 2:"
+          id="streetAddress2"
+          label={FormAddressText.StreetAddress2}
           value={address.streetAddress2}
           onChange={onChange}
+          onBlur={onErrorChange}
+          error={!!errors.streetAddress2}
+          helperText={errors.streetAddress2}
         />
         <TextField
           name="city"
           margin="normal"
           fullWidth
-          id="oCity"
-          label="City:"
+          id="city"
+          label={FormAddressText.City}
           value={address.city}
           onChange={onChange}
+          onBlur={onErrorChange}
+          error={!!errors.city}
+          helperText={errors.city}
         />
-        <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
-          <InputLabel htmlFor="outlined-state-native-simple">State:</InputLabel>
-          <Select
-            name="state"
-            native
-            value={address.state}
-            onChange={onChange}
-            label="Statee"
-            inputProps={{
-              name: 'type',
-              id: 'outlined-state-native-simple',
-            }}
-          >
-            {states.map(({ value, text }, index) => (
-              <option value={value} key={`${value}-${index}`}>
-                {text}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl sx={{ mt: 2, mb: 1 }} fullWidth>
-          <InputLabel htmlFor="outlined-country-native-simple">
-            Country:
-          </InputLabel>
-          <Select
-            name="country"
-            native
-            value={address.country}
-            onChange={onChange}
-            label="Country"
-            inputProps={{
-              name: 'type',
-              id: 'outlined-country-native-simple',
-            }}
-          >
-            {countries.map(({ value, text }, index) => (
-              <option value={value} key={`${value}-${index}`}>
-                {text}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
+        <SelectComponent
+          name="state"
+          labelText={FormAddressText.State}
+          onChange={onChange}
+          onErrorChange={onErrorChange}
+          value={address.state}
+          options={statesList}
+          error={errors.state}
+        />
+        <SelectComponent
+          name="country"
+          labelText={FormAddressText.Country}
+          onChange={onChange}
+          onErrorChange={onErrorChange}
+          value={address.country}
+          options={countriesList}
+          error={errors.country}
+        />
         <TextField
           name="zipCode"
           margin="normal"
           fullWidth
-          id="oZipCode"
-          label="Zip Code:"
+          id="zipCode"
+          label={FormAddressText.ZipCode}
           value={address.zipCode}
           onChange={onChange}
+          onBlur={onErrorChange}
+          error={!!errors.zipCode}
+          helperText={errors.zipCode}
         />
       </Box>
     </CardContent>

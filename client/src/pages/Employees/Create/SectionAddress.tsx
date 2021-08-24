@@ -14,7 +14,7 @@ const initialAddress = {
   zipCode: '',
 };
 
-export const SectionAddress = ({ setIsError }: SectionProp) => {
+export const SectionAddress = ({ setIsErrors }: SectionProp) => {
   const [address, setAddress] = useState(initialAddress);
   const [errors, setErrors] = useState(initialAddress);
   const onChange: OnChangeSelect = (event) => {
@@ -70,7 +70,7 @@ export const SectionAddress = ({ setIsError }: SectionProp) => {
         isValid = false;
       }
     });
-    setIsError((error) => ({ ...error, address: !isValid }));
+    setIsErrors!((error) => ({ ...error, address: !isValid }));
   }, [errors]);
 
   return (

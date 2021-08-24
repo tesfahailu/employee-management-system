@@ -17,7 +17,7 @@ const initialEmployee = {
   email: '',
 };
 
-export const SectionEmployee = ({ setIsError }: SectionProp) => {
+export const SectionEmployee = ({ setIsErrors }: SectionProp) => {
   const [employee, setEmployee] = useState(initialEmployee);
   const [errors, setErrors] = useState(initialEmployee);
   const onChange: OnChangeSelect = (event) => {
@@ -60,7 +60,7 @@ export const SectionEmployee = ({ setIsError }: SectionProp) => {
       }
     });
 
-    setIsError((error) => ({ ...error, employee: !isValid }));
+    setIsErrors!((error) => ({ ...error, employee: !isValid }));
   }, [errors]);
 
   return (
