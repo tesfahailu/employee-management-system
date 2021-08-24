@@ -86,6 +86,7 @@ export const TableBody = <R extends { id: number }>({
   handleClick,
   handleDeleteRow,
 }: TableBody<R>) => {
+  console.log('rows data: ', rowsData);
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
   const [openDialog, setOpenDialog] = useState(false);

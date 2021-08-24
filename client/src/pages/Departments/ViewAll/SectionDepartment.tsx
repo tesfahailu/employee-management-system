@@ -1,13 +1,12 @@
-import React, { Fragment, MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import { DepartmentsViewPageText } from '../../../text';
-import { SectionHeader } from '../../../modules/components/SectionHeader';
 import Table from '../../../modules/components/Table';
 import { Role, HeadCell } from '../../../types/types';
 import { rows } from './services';
 
 const headCells: Array<HeadCell<Role>> = [
   {
-    id: 'title',
+    id: 'name',
     numeric: false,
     disablePadding: true,
     label: 'Title',
@@ -66,23 +65,14 @@ export const SectionDepartment = () => {
       });
     };
   return (
-    <Fragment>
-      <SectionHeader
-        title={DepartmentsViewPageText.PageHeader}
-        subtitle={DepartmentsViewPageText.PageSubHeader}
-        isButton={true}
-        buttonText={DepartmentsViewPageText.ButtonCreate}
-        buttonHref="/departments/create"
-      />
-      <Table<Role>
-        actionButtonLinks={actionButtonLinks}
-        title={DepartmentsViewPageText.TableHeader}
-        rowsData={rowsData}
-        handleDeleteRow={handleDeleteRow}
-        handleDeleteRows={handleDeleteRows}
-        headCells={headCells}
-        minWidth="850px"
-      />
-    </Fragment>
+    <Table<Role>
+      actionButtonLinks={actionButtonLinks}
+      title={DepartmentsViewPageText.TableHeader}
+      rowsData={rowsData}
+      handleDeleteRow={handleDeleteRow}
+      handleDeleteRows={handleDeleteRows}
+      headCells={headCells}
+      minWidth="850px"
+    />
   );
 };

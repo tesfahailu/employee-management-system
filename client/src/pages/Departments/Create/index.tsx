@@ -1,12 +1,17 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { DepartmentCreatePageText } from '../../../text';
 import { SectionDepartment } from './SectionDepartment';
 
 export const Create = () => {
+  const history = useHistory();
   const [isFormComplete, setIsFormComplete] = useState(false);
-  const saveChanges = () => console.log('save changes');
+  const saveChanges = () => {
+    history.push('/departments');
+  };
+
   return (
     <Fragment>
       <SectionHeader
@@ -14,7 +19,7 @@ export const Create = () => {
         subtitle={DepartmentCreatePageText.PageSubHeader}
         isButton={false}
       />
-      <SectionDepartment />
+      <SectionDepartment setIsFormComplete={setIsFormComplete} />
       <Button sx={{ mt: 1 }} disabled={!isFormComplete} onClick={saveChanges}>
         {DepartmentCreatePageText.ButtonSave}
       </Button>

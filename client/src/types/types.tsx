@@ -147,7 +147,9 @@ export interface FormProject {
 
 export interface FormDepartment<R> {
   department: R;
-  onDepartmentChange: OnChangeSelect;
+  errors: R;
+  onChange: OnChangeSelect;
+  onErrorChange: OnChangeSelect;
 }
 
 export interface FormRole<R> {
