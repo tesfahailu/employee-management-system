@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormCompany } from '../../../modules/components/FormCompany';
 import { OnChangeSelect, SectionProp } from '../../../types/types';
 import { officesList, departmentsList, rolesList } from './services';
-import { EmployeeCreateErrorText as ErrorText } from '../../../text';
+import { GeneralErrorText as ErrorText } from '../../../text';
 
 const initialCompany = {
   office: '',
@@ -12,7 +12,7 @@ const initialCompany = {
 
 export const SectionCompany = ({ setIsError }: SectionProp) => {
   const [company, setCompany] = useState(initialCompany);
-  const [companyErrors, setCompanyErrors] = useState(initialCompany);
+  const [errors, setErrors] = useState(initialCompany);
   const onCompanyChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
     const office = officesList.find((office) => office.name === company.office);
@@ -44,7 +44,7 @@ export const SectionCompany = ({ setIsError }: SectionProp) => {
         break;
     }
 
-    setCompanyErrors((errors) => {
+    setErrors((errors) => {
       return {
         ...errors,
         [name]: errorText,
@@ -54,20 +54,18 @@ export const SectionCompany = ({ setIsError }: SectionProp) => {
 
   useEffect(() => {
     let isValid = true;
-    (Object.keys(companyErrors) as Array<keyof typeof companyErrors>).map(
-      (key) => {
-        if (companyErrors[key] !== '' || company[key] === '') {
-          isValid = false;
-        }
-      },
-    );
+    (Object.keys(errors) as Array<keyof typeof errors>).map((key) => {
+      if (errors[key] !== '' || company[key] === '') {
+        isValid = false;
+      }
+    });
     setIsError((error) => ({ ...error, company: !isValid }));
-  }, [companyErrors]);
+  }, [errors]);
 
   return (
     <FormCompany
       company={company}
-      companyErrors={companyErrors}
+      errors={errors}
       onCompanyChange={onCompanyChange}
       onErrorChange={onCompanyErrorChange}
       officesList={officesList}

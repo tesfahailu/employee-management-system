@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormCompany } from '../../../modules/components/FormCompany';
 import { OnChangeSelect, SectionProp } from '../../../types/types';
 import { officesList, departmentsList, rolesList } from './services';
-import { EmployeeCreateErrorText as ErrorText } from '../../../text';
+import { GeneralErrorText as ErrorText } from '../../../text';
 
 const initialCompany = {
   office: '',
@@ -67,7 +67,7 @@ export const SectionCompany = ({
   return (
     <FormCompany
       company={company}
-      companyErrors={companyErrors}
+      errors={companyErrors}
       onCompanyChange={onChange}
       onErrorChange={onErrorChange}
       officesList={officesList}

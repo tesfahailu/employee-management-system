@@ -4,7 +4,10 @@ import {
   validEmail,
 } from '../../../modules/utils/errorCheck';
 import { Employee, OnChangeSelect, SectionProp } from '../../../types/types';
-import { EmployeeCreateErrorText as ErrorText } from '../../../text';
+import {
+  EmployeeErrorText as ErrorText,
+  GeneralErrorText,
+} from '../../../text';
 import { FormEmployee } from '../../../modules/components/FormEmployee';
 
 const initialEmployee = {
@@ -16,7 +19,7 @@ const initialEmployee = {
 
 export const SectionEmployee = ({ setIsError }: SectionProp) => {
   const [employee, setEmployee] = useState(initialEmployee);
-  const [employeeErrors, setEmployeeErrors] = useState(initialEmployee);
+  const [errors, setErrors] = useState(initialEmployee);
   const onChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
     setEmployee((employee) => {
@@ -31,10 +34,10 @@ export const SectionEmployee = ({ setIsError }: SectionProp) => {
     let errorText = '';
     switch (name) {
       case 'firstName':
-        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        errorText = value === '' ? GeneralErrorText.FieldEmpty : '';
         break;
       case 'lastName':
-        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        errorText = value === '' ? GeneralErrorText.FieldEmpty : '';
         break;
       case 'mobile':
         errorText = validPhoneNumber(value) ? '' : ErrorText.PhoneNumberInvalid;
@@ -43,7 +46,7 @@ export const SectionEmployee = ({ setIsError }: SectionProp) => {
         errorText = validEmail(value) ? '' : ErrorText.EmailInvalid;
         break;
     }
-    setEmployeeErrors((errors) => ({
+    setErrors((errors) => ({
       ...errors,
       [name]: errorText,
     }));
@@ -51,21 +54,19 @@ export const SectionEmployee = ({ setIsError }: SectionProp) => {
 
   useEffect(() => {
     let isValid = true;
-    (Object.keys(employeeErrors) as Array<keyof typeof employeeErrors>).map(
-      (key) => {
-        if (employeeErrors[key] !== '' || employee[key] === '') {
-          isValid = false;
-        }
-      },
-    );
+    (Object.keys(errors) as Array<keyof typeof errors>).map((key) => {
+      if (errors[key] !== '' || employee[key] === '') {
+        isValid = false;
+      }
+    });
 
     setIsError((error) => ({ ...error, employee: !isValid }));
-  }, [employeeErrors]);
+  }, [errors]);
 
   return (
     <FormEmployee<Omit<Employee, 'id'>>
       employee={employee}
-      employeeErrors={employeeErrors}
+      errors={errors}
       onChange={onChange}
       onErrorChange={onErrorChange}
     />

@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EmployeeEditPageText } from '../../text';
-import { Address, AddressForm } from '../../types/types';
+import { Address, FormAddress } from '../../types/types';
 
 const countries = [{ value: 'USA', text: 'USA' }];
 const states = [
@@ -20,9 +20,10 @@ const states = [
 
 export const FormOffice = ({
   address,
+  errors,
   onChange,
   onErrorChange,
-}: AddressForm<Omit<Address, 'id'>>) => (
+}: FormAddress<Omit<Address, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">

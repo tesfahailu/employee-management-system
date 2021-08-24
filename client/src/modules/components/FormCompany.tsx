@@ -1,18 +1,18 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
 import React from 'react';
 import { FormCompanyText } from '../../text';
-import { CompanyForm } from '../../types/types';
+import { FormCompany as Type } from '../../types/types';
 import { SelectComponent } from './SelectComponent';
 
 export const FormCompany = ({
   company,
-  companyErrors,
+  errors,
   onCompanyChange,
   onErrorChange,
   officesList,
   departmentsList,
   rolesList,
-}: CompanyForm) => {
+}: Type) => {
   return (
     <Card sx={{ mb: 2 }}>
       <CardContent>
@@ -26,7 +26,7 @@ export const FormCompany = ({
           onErrorChange={onErrorChange}
           value={company.office}
           options={officesList}
-          error={companyErrors.office}
+          error={errors.office}
         />
         <SelectComponent
           name="department"
@@ -35,7 +35,7 @@ export const FormCompany = ({
           onErrorChange={onErrorChange}
           value={company.department}
           options={departmentsList}
-          error={companyErrors.department}
+          error={errors.department}
         />
         <SelectComponent
           name="role"
@@ -44,7 +44,7 @@ export const FormCompany = ({
           onErrorChange={onErrorChange}
           value={company.role}
           options={rolesList}
-          error={companyErrors.role}
+          error={errors.role}
         />
       </CardContent>
     </Card>

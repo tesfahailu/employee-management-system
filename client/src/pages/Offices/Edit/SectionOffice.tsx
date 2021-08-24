@@ -21,7 +21,7 @@ const states = [
 
 export const SectionOffice = () => {
   const [address, setAddress] = useState(initialAddress);
-  const [addressErrors, setAddressErrors] = useState(initialAddress);
+  const [errors, setErrors] = useState(initialAddress);
 
   useEffect(() => {
     setAddress({
@@ -49,7 +49,7 @@ export const SectionOffice = () => {
   return (
     <FormOffice
       address={address}
-      addressErrors={addressErrors}
+      errors={errors}
       onChange={onAddressChange}
       onErrorChange={onAddressChange}
       statesList={statesList}

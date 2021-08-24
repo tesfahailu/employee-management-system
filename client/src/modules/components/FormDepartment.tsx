@@ -8,12 +8,12 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { FormDepartmentText } from '../../text';
-import { Department, DepartmentForm } from '../../types/types';
+import { Department, FormDepartment as Type } from '../../types/types';
 
 export const FormDepartment = ({
   department,
   onDepartmentChange,
-}: DepartmentForm<Omit<Department, 'id'>>) => (
+}: Type<Omit<Department, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">{FormDepartmentText.Header}</Typography>

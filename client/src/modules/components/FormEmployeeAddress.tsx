@@ -6,18 +6,18 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { Address, AddressForm } from '../../types/types';
+import { Address, FormAddress } from '../../types/types';
 import { FormEmployeeAddressText } from '../../text';
 import { SelectComponent } from './SelectComponent';
 
 export const FormEmployeeAddress = ({
   address,
-  addressErrors,
+  errors,
   onChange,
   onErrorChange,
   statesList,
   countriesList,
-}: AddressForm<Omit<Address, 'id'>>) => (
+}: FormAddress<Omit<Address, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
       <Typography variant="h6">{FormEmployeeAddressText.Header}</Typography>
@@ -31,8 +31,8 @@ export const FormEmployeeAddress = ({
           value={address.streetAddress1}
           onChange={onChange}
           onBlur={onErrorChange}
-          error={!!addressErrors.streetAddress1}
-          helperText={addressErrors.streetAddress1}
+          error={!!errors.streetAddress1}
+          helperText={errors.streetAddress1}
         />
         <TextField
           name="streetAddress2"
@@ -43,8 +43,8 @@ export const FormEmployeeAddress = ({
           value={address.streetAddress2}
           onChange={onChange}
           onBlur={onErrorChange}
-          error={!!addressErrors.streetAddress2}
-          helperText={addressErrors.streetAddress2}
+          error={!!errors.streetAddress2}
+          helperText={errors.streetAddress2}
         />
         <TextField
           name="city"
@@ -55,8 +55,8 @@ export const FormEmployeeAddress = ({
           value={address.city}
           onChange={onChange}
           onBlur={onErrorChange}
-          error={!!addressErrors.city}
-          helperText={addressErrors.city}
+          error={!!errors.city}
+          helperText={errors.city}
         />
         <SelectComponent
           name="state"
@@ -65,7 +65,7 @@ export const FormEmployeeAddress = ({
           onErrorChange={onErrorChange}
           value={address.state}
           options={statesList}
-          error={addressErrors.state}
+          error={errors.state}
         />
         <SelectComponent
           name="country"
@@ -74,7 +74,7 @@ export const FormEmployeeAddress = ({
           onErrorChange={onErrorChange}
           value={address.country}
           options={countriesList}
-          error={addressErrors.country}
+          error={errors.country}
         />
         <TextField
           name="zipCode"
@@ -85,8 +85,8 @@ export const FormEmployeeAddress = ({
           value={address.zipCode}
           onChange={onChange}
           onBlur={onErrorChange}
-          error={!!addressErrors.zipCode}
-          helperText={addressErrors.zipCode}
+          error={!!errors.zipCode}
+          helperText={errors.zipCode}
         />
       </Box>
     </CardContent>

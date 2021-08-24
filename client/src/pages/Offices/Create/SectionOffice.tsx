@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FormOffice } from '../../../modules/components/FormOffice';
 import { OnChangeSelect } from '../../../types/types';
 import { statesList, countriesList } from '../../Employees/Edit/services';
+import { GeneralErrorText as ErrorText } from '../../../text';
 
 const intialOffice = {
   streetAddress1: '',
@@ -14,13 +15,13 @@ const intialOffice = {
 
 export const SectionOffice = () => {
   const [address, setAddress] = useState(intialOffice);
-  const [addressErrors, setAddressErrors] = useState(intialOffice);
+  const [errors, setErrors] = useState(intialOffice);
 
-  const onAddressChange: OnChangeSelect = (event) => {
+  const onChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
-    setAddress((previousAddress) => {
+    setAddress((address) => {
       return {
-        ...previousAddress,
+        ...address,
         [name]: value,
       };
     });
@@ -28,9 +29,33 @@ export const SectionOffice = () => {
 
   const onErrorChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
-    setAddress((previousAddress) => {
+
+    let errorText = '';
+
+    switch (name) {
+      case 'streetAddress1':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'streetAddress2':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'city':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'state':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'country':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+      case 'zipCode':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+    }
+
+    setErrors((error) => {
       return {
-        ...previousAddress,
+        ...error,
         [name]: value,
       };
     });
@@ -39,8 +64,8 @@ export const SectionOffice = () => {
   return (
     <FormOffice
       address={address}
-      addressErrors={addressErrors}
-      onChange={onAddressChange}
+      errors={errors}
+      onChange={onChange}
       onErrorChange={onErrorChange}
       statesList={statesList}
       countriesList={countriesList}

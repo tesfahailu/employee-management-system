@@ -88,8 +88,11 @@ export enum RegisterErrorText {
   PasswordMismatch = 'password does not match.',
 }
 
-export enum EmployeeCreateErrorText {
+export enum GeneralErrorText {
   FieldEmpty = 'field cannot be empty.',
+}
+
+export enum EmployeeErrorText {
   EmailInvalid = 'email is invalid.',
   PhoneNumberInvalid = 'phone number is invalid.',
 }

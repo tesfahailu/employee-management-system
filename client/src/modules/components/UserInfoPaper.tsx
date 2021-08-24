@@ -39,7 +39,7 @@ export const UserInfoPaper = () => {
       employee={employee}
       onChange={onChange}
       onErrorChange={onErrorChange}
-      employeeErrors={errors}
+      errors={errors}
     />
   );
 };

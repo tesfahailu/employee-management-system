@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EmployeeEditPageText, FormEmployeeText } from '../../text';
-import { Employee, EmployeeForm } from '../../types/types';
+import { Employee, FormEmployee } from '../../types/types';
 
 const types = [
   { value: 'Permenant', text: 'Permenant' },
@@ -20,9 +20,9 @@ const types = [
 ];
 
 export function FormEmployee<R extends Omit<Employee, 'id'>>(
-  props: EmployeeForm<R>,
+  props: FormEmployee<R>,
 ) {
-  const { employee, employeeErrors: errors, onChange, onErrorChange } = props;
+  const { employee, errors, onChange, onErrorChange } = props;
   return (
     <Card sx={{ mb: 2 }}>
       <CardContent>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormEmployeeAddress } from '../../../modules/components/FormEmployeeAddress';
 import { OnChangeSelect, SectionProp } from '../../../types/types';
 import { statesList, countriesList } from './services';
-import { EmployeeCreateErrorText as ErrorText } from '../../../text';
+import { GeneralErrorText as ErrorText } from '../../../text';
 import { useEffect } from 'react';
 
 const initialAddress = {
@@ -16,7 +16,7 @@ const initialAddress = {
 
 export const SectionAddress = ({ setIsError }: SectionProp) => {
   const [address, setAddress] = useState(initialAddress);
-  const [addressErrors, setAddressErrors] = useState(initialAddress);
+  const [errors, setErrors] = useState(initialAddress);
   const onChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
     const state = statesList.find((state) => state.name === address.state);
@@ -55,7 +55,7 @@ export const SectionAddress = ({ setIsError }: SectionProp) => {
         break;
     }
 
-    setAddressErrors((errors) => {
+    setErrors((errors) => {
       return {
         ...errors,
         [name]: errorText,
@@ -65,20 +65,18 @@ export const SectionAddress = ({ setIsError }: SectionProp) => {
 
   useEffect(() => {
     let isValid = true;
-    (Object.keys(addressErrors) as Array<keyof typeof addressErrors>).map(
-      (key) => {
-        if (addressErrors[key] !== '' || address[key] === '') {
-          isValid = false;
-        }
-      },
-    );
+    (Object.keys(errors) as Array<keyof typeof errors>).map((key) => {
+      if (errors[key] !== '' || address[key] === '') {
+        isValid = false;
+      }
+    });
     setIsError((error) => ({ ...error, address: !isValid }));
-  }, [addressErrors]);
+  }, [errors]);
 
   return (
     <FormEmployeeAddress
       address={address}
-      addressErrors={addressErrors}
+      errors={errors}
       onChange={onChange}
       onErrorChange={onErrorChange}
       statesList={statesList}
