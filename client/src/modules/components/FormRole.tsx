@@ -8,12 +8,9 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { EmployeeEditPageText } from '../../text';
-import { Role, RoleForm } from '../../types/types';
+import { Role, FormRole as Type } from '../../types/types';
 
-export const FormRole = ({
-  role,
-  onRoleChange,
-}: RoleForm<Omit<Role, 'id'>>) => {
+export const FormRole = ({ role, onRoleChange }: Type<Omit<Role, 'id'>>) => {
   const { name, description } = role!;
   return (
     <Card sx={{ mb: 2 }}>

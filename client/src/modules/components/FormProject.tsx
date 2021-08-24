@@ -8,12 +8,9 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { FormProjectText } from '../../text';
-import { Project, ProjectForm } from '../../types/types';
+import { Project, FormProject as Type } from '../../types/types';
 
-const Project = ({
-  project: { name, description },
-  onProjectChange,
-}: ProjectForm) => (
+const Project = ({ project: { name, description }, onProjectChange }: Type) => (
   <Grid container spacing={2}>
     <Grid item xs={4}>
       <TextField
@@ -40,7 +37,7 @@ const Project = ({
   </Grid>
 );
 
-export const FormProject = ({ project, onProjectChange }: ProjectForm) => {
+export const FormProject = ({ project, onProjectChange }: Type) => {
   return (
     <Card sx={{ mb: 1 }}>
       <CardContent>

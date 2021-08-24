@@ -129,9 +129,6 @@ export function ThemeProvider(props: { children: any }) {
           },
           MuiSelect: {
             defaultProps: {
-              inputProps: {
-                shrink: true,
-              },
               variant: 'outlined',
               color: 'primary',
             },

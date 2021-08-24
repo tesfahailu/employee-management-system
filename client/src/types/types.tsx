@@ -103,25 +103,25 @@ export type HandleDeleteRows = (
 //#endregion
 
 //#region Forms
-export interface EmployeeForm<R> {
+export interface FormEmployee<R> {
   employee: R;
-  employeeErrors: R;
+  errors: R;
   onChange: OnChangeSelect;
   onErrorChange: OnChangeSelect;
 }
 
-export interface AddressForm<R> {
+export interface FormAddress<R> {
   address: R;
-  addressErrors: R;
+  errors: R;
   onChange: OnChangeSelect;
   onErrorChange: OnChangeSelect;
   statesList: SelectLabel[];
   countriesList: SelectLabel[];
 }
 
-export interface CompanyForm {
+export interface FormCompany {
   company: Company;
-  companyErrors: Company;
+  errors: Company;
   onCompanyChange: OnChangeSelect;
   onErrorChange: OnChangeSelect;
   officesList: SelectLabel[];
@@ -129,7 +129,7 @@ export interface CompanyForm {
   rolesList: SelectLabel[];
 }
 
-export interface ProjectsListForm {
+export interface FormProjectsList {
   projects: Array<Project>;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -138,17 +138,17 @@ export interface ProjectsListForm {
   projectsList: Project[];
 }
 
-export interface ProjectForm {
+export interface FormProject {
   project: Project;
   onProjectChange: OnChangeField;
 }
 
-export interface DepartmentForm<R> {
+export interface FormDepartment<R> {
   department: R;
   onDepartmentChange: OnChangeSelect;
 }
 
-export interface RoleForm<R> {
+export interface FormRole<R> {
   role: R;
   onRoleChange: OnChangeField;
 }
@@ -160,123 +160,5 @@ export interface HeadCell<R> {
   numeric: boolean;
   disablePadding: boolean;
   label: string;
-}
-//#endregion
-
-//#region Employee Pages
-export interface EmployeePageCreate
-  extends EmployeeForm<Omit<Employee, 'id'>>,
-    AddressForm<Omit<Address, 'id'>>,
-    CompanyForm,
-    ProjectsListForm {
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface EmployeePageEdit
-  extends EmployeeForm<Employee>,
-    AddressForm<Address>,
-    CompanyForm,
-    ProjectsListForm {
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface EmployeePageView {
-  employee: Employee;
-  department: Department;
-  employeeAddress: Address;
-  officeAddress: Address;
-  projects: Array<Project>;
-}
-
-export interface EmployeePageViewAll {
-  rowsData: Employee[];
-  handleDeleteRow: HandleDeleteRow;
-  handleDeleteRows: HandleDeleteRows;
-}
-//#endregion
-
-//#region Office Pages
-export interface OfficePageCreate {
-  address: Omit<Address, 'id'>;
-  addressErrors: Omit<Address, 'id'>;
-  onAddressChange: OnChangeSelect;
-  onErrorChange: OnChangeSelect;
-  statesList: SelectLabel[];
-  countriesList: SelectLabel[];
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface OfficePageEdit {
-  address: Address;
-  addressErrors: Address;
-  onAddressChange: OnChangeSelect;
-  statesList: SelectLabel[];
-  countriesList: SelectLabel[];
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface OfficePageViewAll {
-  rowsData: Address[];
-  handleDeleteRow: HandleDeleteRow;
-  handleDeleteRows: HandleDeleteRows;
-}
-//#endregion
-
-//#region Department Pages
-export interface DepartmentPageCreate
-  extends DepartmentForm<Omit<Department, 'id'>> {
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface DepartmentPageEdit extends DepartmentForm<Department> {
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface DepartmentPageViewAll {
-  rowsData: Department[];
-  handleDeleteRow: HandleDeleteRow;
-  handleDeleteRows: HandleDeleteRows;
-}
-//#endregion
-
-//#region Role Pages
-export interface RolePageCreate extends RoleForm<Omit<Role, 'id'>> {
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface RolePageEdit extends RoleForm<Role> {
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface RolePageViewAll {
-  rowsData: Role[];
-  handleDeleteRow: HandleDeleteRow;
-  handleDeleteRows: HandleDeleteRows;
-}
-//#endregion
-
-//#region Project Pages
-export interface ProjectPageEdit extends ProjectForm {
-  isFormChanged: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface ProjectPageCreate extends ProjectForm {
-  isFormComplete: boolean;
-  saveChanges: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-export interface ProjectPageViewAll {
-  rowsData: Project[];
-  handleDeleteRow: HandleDeleteRow;
-  handleDeleteRows: HandleDeleteRows;
 }
 //#endregion

@@ -153,7 +153,7 @@ export const TableBody = <R extends { id: number }>({
                           searchWords={[searchText]}
                           autoEscape={true}
                           textToHighlight={
-                            row[headCell['id'] as keyof R] as any
+                            (row[headCell['id'] as keyof R] as any) || ''
                           }
                         />
                       </TableCell>
@@ -185,7 +185,7 @@ export const TableBody = <R extends { id: number }>({
                           searchWords={[searchText]}
                           autoEscape={true}
                           textToHighlight={
-                            row[headCell['id'] as keyof R] as any
+                            (row[headCell['id'] as keyof R] as any) || ''
                           }
                         />
                       </TableCell>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { OnChangeSelect, RolePageCreate } from '../../../types/types';
+import { OnChangeSelect } from '../../../types/types';
 import { FormRole } from '../../../modules/components/FormRole';
 
 export const SectionRole = () => {

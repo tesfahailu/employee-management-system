@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormEmployeeAddress } from '../../../modules/components/FormEmployeeAddress';
 import { OnChangeSelect, SectionProp } from '../../../types/types';
 import { statesList, countriesList } from './services';
-import { EmployeeCreateErrorText as ErrorText } from '../../../text';
+import { GeneralErrorText as ErrorText } from '../../../text';
 import { employeeData } from '../ViewOne/services';
 
 const initialAddress = {
@@ -30,7 +30,7 @@ export const SectionAddress = ({
   setIsFormChanged,
 }: SectionProp) => {
   const [address, setAddress] = useState(initialAddress);
-  const [addressErrors, setAddressErrors] = useState(initialAddress);
+  const [errors, setErrors] = useState(initialAddress);
 
   const onChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
@@ -75,7 +75,7 @@ export const SectionAddress = ({
         break;
     }
 
-    setAddressErrors((errors) => {
+    setErrors((errors) => {
       return {
         ...errors,
         [name]: errorText,
@@ -102,7 +102,7 @@ export const SectionAddress = ({
   return (
     <FormEmployeeAddress
       address={address}
-      addressErrors={addressErrors}
+      errors={errors}
       onChange={onChange}
       onErrorChange={onErrorChange}
       statesList={statesList}

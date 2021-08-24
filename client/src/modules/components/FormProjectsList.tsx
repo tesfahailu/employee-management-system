@@ -13,7 +13,7 @@ import {
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import React, { Fragment } from 'react';
 import { FormProjectsListText } from '../../text';
-import { ProjectsListForm } from '../../types/types';
+import { FormProjectsList as Type } from '../../types/types';
 import { DialogAddProject } from './DialogAddProjects';
 
 export const FormProjectsList = ({
@@ -23,7 +23,7 @@ export const FormProjectsList = ({
   onProjectAdd,
   onProjectRemove,
   projectsList,
-}: ProjectsListForm) => (
+}: Type) => (
   <Fragment>
     <Card>
       <CardContent>
