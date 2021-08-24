@@ -7,15 +7,20 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EmployeeEditPageText } from '../../text';
+import { FormRoleText } from '../../text';
 import { Role, FormRole as Type } from '../../types/types';
 
-export const FormRole = ({ role, onRoleChange }: Type<Omit<Role, 'id'>>) => {
+export const FormRole = ({
+  role,
+  errors,
+  onChange,
+  onErrorChange,
+}: Type<Omit<Role, 'id'>>) => {
   const { name, description } = role!;
   return (
     <Card sx={{ mb: 2 }}>
       <CardContent>
-        <Typography variant="h6">{EmployeeEditPageText.Projects}</Typography>
+        <Typography variant="h6">{FormRoleText.Header}</Typography>
         <Box sx={{ mt: 2 }}>
           <Grid container spacing={2}>
             <Grid item xs={4}>
@@ -24,9 +29,12 @@ export const FormRole = ({ role, onRoleChange }: Type<Omit<Role, 'id'>>) => {
                 margin="normal"
                 fullWidth
                 key={'name'}
-                label="Name:"
+                label={FormRoleText.NameLabel}
                 value={name}
-                onChange={onRoleChange}
+                onChange={onChange}
+                onBlur={onErrorChange}
+                error={!!errors.name}
+                helperText={errors.name}
               />
             </Grid>
             <Grid item xs>
@@ -35,9 +43,12 @@ export const FormRole = ({ role, onRoleChange }: Type<Omit<Role, 'id'>>) => {
                 margin="normal"
                 fullWidth
                 key={'description'}
-                label="Description:"
+                label={FormRoleText.DescriptionLabel}
                 value={description}
-                onChange={onRoleChange}
+                onChange={onChange}
+                onBlur={onErrorChange}
+                error={!!errors.description}
+                helperText={errors.description}
               />
             </Grid>
           </Grid>

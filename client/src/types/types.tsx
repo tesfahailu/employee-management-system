@@ -154,7 +154,9 @@ export interface FormDepartment<R> {
 
 export interface FormRole<R> {
   role: R;
-  onRoleChange: OnChangeField;
+  errors: R;
+  onChange: OnChangeSelect;
+  onErrorChange: OnChangeSelect;
 }
 //#endregion
 

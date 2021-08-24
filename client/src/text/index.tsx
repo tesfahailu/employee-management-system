@@ -31,6 +31,12 @@ export enum FormDepartmentText {
   DescriptionLabel = 'Description:',
 }
 
+export enum FormRoleText {
+  Header = 'Role:',
+  NameLabel = 'Name:',
+  DescriptionLabel = 'Description:',
+}
+
 export enum FormProjectsListText {
   Header = 'Projects:',
   ButtonAdd = 'Add Project',
