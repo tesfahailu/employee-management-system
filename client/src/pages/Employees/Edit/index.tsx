@@ -16,7 +16,7 @@ export const Edit = () => {
     history.push('/employees');
   };
 
-  const [isError, setIsError] = useState({
+  const [isError, setIsErrors] = useState({
     employee: false,
     address: false,
     company: false,
@@ -40,15 +40,15 @@ export const Edit = () => {
         isButton={false}
       />
       <SectionEmployee
-        setIsError={setIsError}
+        setIsErrors={setIsErrors}
         setIsFormChanged={setIsFormChanged}
       />
       <SectionAddress
-        setIsError={setIsError}
+        setIsErrors={setIsErrors}
         setIsFormChanged={setIsFormChanged}
       />
       <SectionCompany
-        setIsError={setIsError}
+        setIsErrors={setIsErrors}
         setIsFormChanged={setIsFormChanged}
       />
       <SectionProjects />

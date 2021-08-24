@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormOffice } from '../../../modules/components/FormOffice';
-import { OnChangeSelect } from '../../../types/types';
+import { OnChangeSelect, SectionProp } from '../../../types/types';
 import { statesList, countriesList } from '../../Employees/Edit/services';
 import { GeneralErrorText as ErrorText } from '../../../text';
 
@@ -13,7 +13,7 @@ const intialOffice = {
   zipCode: '',
 };
 
-export const SectionOffice = () => {
+export const SectionOffice = ({ setIsFormComplete }: SectionProp) => {
   const [address, setAddress] = useState(intialOffice);
   const [errors, setErrors] = useState(intialOffice);
 
@@ -56,10 +56,20 @@ export const SectionOffice = () => {
     setErrors((error) => {
       return {
         ...error,
-        [name]: value,
+        [name]: errorText,
       };
     });
   };
+
+  useEffect(() => {
+    let isValid = true;
+    (Object.keys(errors) as Array<keyof typeof errors>).map((key) => {
+      if (errors[key] !== '' || address[key] === '') {
+        isValid = false;
+      }
+    });
+    setIsFormComplete!(isValid);
+  }, [errors]);
 
   return (
     <FormOffice

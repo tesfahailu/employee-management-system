@@ -56,13 +56,15 @@ export interface Company {
 }
 
 export interface SectionProp {
-  setIsError: React.Dispatch<
+  setIsError?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsErrors?: React.Dispatch<
     React.SetStateAction<{
       employee: boolean;
       address: boolean;
       company: boolean;
     }>
   >;
+  setIsFormComplete?: React.Dispatch<React.SetStateAction<boolean>>;
   setIsFormChanged?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 //#endregion

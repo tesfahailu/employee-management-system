@@ -4,7 +4,7 @@ import { SectionHeader } from '../../../modules/components/SectionHeader';
 import { OfficeCreatePageText } from '../../../text';
 import { SectionOffice } from './SectionOffice';
 
-export const Create = ({}) => {
+export const Create = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
   const saveChanges = () => {
     console.log('Saved changes');
@@ -18,7 +18,7 @@ export const Create = ({}) => {
         subtitle={OfficeCreatePageText.PageSubHeader}
         isButton={false}
       />
-      <SectionOffice />
+      <SectionOffice setIsFormComplete={setIsFormComplete} />
       <Button
         sx={{ mr: 1, mb: 1 }}
         disabled={!isFormComplete}

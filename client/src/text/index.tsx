@@ -8,7 +8,7 @@ export enum FormEmployeeText {
   Type = 'Type: ',
 }
 
-export enum FormEmployeeAddressText {
+export enum FormAddressText {
   Header = 'Address: ',
   StreetAddress1 = 'Street Address 1: ',
   StreetAddress2 = 'Street Address 2: ',

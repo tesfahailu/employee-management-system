@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { Address, FormAddress } from '../../types/types';
-import { FormEmployeeAddressText } from '../../text';
+import { FormAddressText } from '../../text';
 import { SelectComponent } from './SelectComponent';
 
 export const FormEmployeeAddress = ({
@@ -20,14 +20,14 @@ export const FormEmployeeAddress = ({
 }: FormAddress<Omit<Address, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
-      <Typography variant="h6">{FormEmployeeAddressText.Header}</Typography>
+      <Typography variant="h6">{FormAddressText.Header}</Typography>
       <Box sx={{ mt: 2 }}>
         <TextField
           name="streetAddress1"
           margin="normal"
           fullWidth
           id="eStreetAddress1"
-          label={FormEmployeeAddressText.StreetAddress1}
+          label={FormAddressText.StreetAddress1}
           value={address.streetAddress1}
           onChange={onChange}
           onBlur={onErrorChange}
@@ -39,7 +39,7 @@ export const FormEmployeeAddress = ({
           margin="normal"
           fullWidth
           id="eStreetAddress2"
-          label={FormEmployeeAddressText.StreetAddress2}
+          label={FormAddressText.StreetAddress2}
           value={address.streetAddress2}
           onChange={onChange}
           onBlur={onErrorChange}
@@ -51,7 +51,7 @@ export const FormEmployeeAddress = ({
           margin="normal"
           fullWidth
           id="eCity"
-          label={FormEmployeeAddressText.City}
+          label={FormAddressText.City}
           value={address.city}
           onChange={onChange}
           onBlur={onErrorChange}
@@ -60,7 +60,7 @@ export const FormEmployeeAddress = ({
         />
         <SelectComponent
           name="state"
-          labelText={FormEmployeeAddressText.State}
+          labelText={FormAddressText.State}
           onChange={onChange}
           onErrorChange={onErrorChange}
           value={address.state}
@@ -69,7 +69,7 @@ export const FormEmployeeAddress = ({
         />
         <SelectComponent
           name="country"
-          labelText={FormEmployeeAddressText.Country}
+          labelText={FormAddressText.Country}
           onChange={onChange}
           onErrorChange={onErrorChange}
           value={address.country}
@@ -81,7 +81,7 @@ export const FormEmployeeAddress = ({
           margin="normal"
           fullWidth
           id="eZipCode"
-          label={FormEmployeeAddressText.ZipCode}
+          label={FormAddressText.ZipCode}
           value={address.zipCode}
           onChange={onChange}
           onBlur={onErrorChange}
