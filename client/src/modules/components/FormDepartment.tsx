@@ -12,7 +12,9 @@ import { Department, FormDepartment as Type } from '../../types/types';
 
 export const FormDepartment = ({
   department,
-  onDepartmentChange,
+  errors,
+  onChange,
+  onErrorChange,
 }: Type<Omit<Department, 'id'>>) => (
   <Card sx={{ mb: 2 }}>
     <CardContent>
@@ -24,10 +26,13 @@ export const FormDepartment = ({
               name="name"
               margin="normal"
               fullWidth
-              key={'name'}
-              value={department.name}
-              onChange={onDepartmentChange}
+              id="name"
               label={FormDepartmentText.NameLabel}
+              value={department.name}
+              onChange={onChange}
+              onBlur={onErrorChange}
+              error={!!errors.name}
+              helperText={errors.name}
             />
           </Grid>
           <Grid item xs>
@@ -38,7 +43,10 @@ export const FormDepartment = ({
               id="description"
               label={FormDepartmentText.DescriptionLabel}
               value={department.description}
-              onChange={onDepartmentChange}
+              onChange={onChange}
+              onBlur={onErrorChange}
+              error={!!errors.description}
+              helperText={errors.description}
             />
           </Grid>
         </Grid>

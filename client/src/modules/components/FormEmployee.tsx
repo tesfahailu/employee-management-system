@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { EmployeeEditPageText, FormEmployeeText } from '../../text';
+import { FormEmployeeText } from '../../text';
 import { Employee, FormEmployee } from '../../types/types';
 
 const types = [
