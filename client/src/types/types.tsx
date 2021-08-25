@@ -142,7 +142,9 @@ export interface FormProjectsList {
 
 export interface FormProject {
   project: Project;
-  onProjectChange: OnChangeField;
+  errors: Project;
+  onChange: OnChangeSelect;
+  onErrorChange: OnChangeSelect;
 }
 
 export interface FormDepartment<R> {

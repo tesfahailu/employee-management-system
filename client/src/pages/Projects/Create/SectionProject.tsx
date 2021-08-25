@@ -1,22 +1,61 @@
-import React, { ChangeEvent, useState } from 'react';
-import { OnChangeField } from '../../../types/types';
+import React, { useEffect, useState } from 'react';
+import { OnChangeSelect, SectionProp } from '../../../types/types';
 import { FormProject } from '../../../modules/components/FormProject';
+import { GeneralErrorText as ErrorText } from '../../../text';
 
-export const SectionProject = () => {
-  const [project, setProject] = useState({
-    id: 0,
-    name: '',
-    description: '',
-  });
+const initialProject = {
+  id: 0,
+  name: '',
+  description: '',
+};
 
-  const onProjectChange: OnChangeField = (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
+export const SectionProject = ({ setIsFormComplete }: SectionProp) => {
+  const [project, setProject] = useState(initialProject);
+  const [errors, setErrors] = useState(initialProject);
+
+  const onChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
-    setProject((previousProject) => {
-      return { ...previousProject, [name]: value };
+    setProject((project) => {
+      return { ...project, [name]: value };
     });
   };
 
-  return <FormProject project={project} onProjectChange={onProjectChange} />;
+  const onErrorChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    let errorText = '';
+
+    switch (name) {
+      case 'name':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+    }
+
+    setErrors((error) => {
+      return {
+        ...error,
+        [name]: errorText,
+      };
+    });
+  };
+
+  useEffect(() => {
+    let isValid = true;
+
+    if (project.name === '' || errors.name) {
+      isValid = false;
+    } else if (errors.name) {
+      isValid = false;
+    }
+
+    setIsFormComplete!(isValid);
+  }, [errors]);
+
+  return (
+    <FormProject
+      project={project}
+      errors={errors}
+      onChange={onChange}
+      onErrorChange={onErrorChange}
+    />
+  );
 };

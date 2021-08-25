@@ -9,7 +9,7 @@ export const Create = () => {
   const history = useHistory();
   const [isFormComplete, setIsFormComplete] = useState(false);
   const saveChanges = () => {
-    history.push('/departments');
+    history.push('/roles');
   };
 
   return (
