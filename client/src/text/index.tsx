@@ -1,4 +1,4 @@
-//#region Forms, Dialog, Table
+//#region Forms
 export enum FormEmployeeText {
   Header = 'Employee: ',
   FirstName = 'First Name: ',
@@ -48,7 +48,8 @@ export enum FormProjectText {
   NameLabel = 'Name:',
   DescriptionLabel = 'Description:',
 }
-
+//#endregion
+//#region Dialog
 export enum DialogAddProjectText {
   PrimaryTitle = 'Add Project',
   Subtitle = 'Select a project to add',
@@ -70,7 +71,8 @@ export enum DialogDeleteRowsText {
   Success = 'Rows deleted successfully',
   Error = "Rows weren't deleted",
 }
-
+//#endregion
+//#region Table
 export enum TableToolBarText {
   SearchIcon = 'Search',
   CSVLink = 'Download CSV',
@@ -122,6 +124,15 @@ export enum LoginPageText {
 export enum SettingsPageText {
   PageHeader = 'Settings:',
   PageSubHeader = 'Update images, employee info, mode, or color',
+}
+
+export enum SettingsUploadText {
+  PaperHeader = 'Upload Image:',
+  PaperSelectImage = 'Select an image to change profile picture.',
+  PaperSelectedImage = 'Crop the image below and hit the save button.',
+  ButtonCancel = 'Cancel',
+  ButtonAccept = 'Save',
+  ButtonUpload = 'Upload',
 }
 //#endregion
 //#region Employee Page
