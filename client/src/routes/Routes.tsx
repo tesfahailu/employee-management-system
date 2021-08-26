@@ -27,7 +27,7 @@ import { ViewOne as RolesViewOne } from '../pages/Roles/ViewOne';
 import { Edit as RolesEdit } from '../pages/Roles/Edit';
 import { Create as RolesCreate } from '../pages/Roles/Create';
 
-import { SettingsData as Settings } from '../pages/Settings/SettingsData';
+import { SettingsData as Settings } from '../pages/Settings';
 import { Register } from '../pages/Register/Register';
 import { Login } from '../pages/Login/Login';
 

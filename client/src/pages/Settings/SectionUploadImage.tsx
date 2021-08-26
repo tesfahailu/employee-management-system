@@ -9,91 +9,9 @@ import {
 } from '@material-ui/core';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import UploadButton from './UploadButton';
-import { GlobalContext } from './Global';
+import { GlobalContext } from '../../modules/components/Global';
 
-const UploadImage = ({
-  url,
-  onSelectFile,
-}: {
-  url: string;
-  onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
-}) => (
-  <Grid item>
-    <Grid
-      container
-      direction="column"
-      justifyContent="flex-end"
-      alignItems="center"
-      spacing={1}
-    >
-      <Grid item>
-        <Avatar src={url} sx={{ width: 70, height: 70 }} />
-      </Grid>
-      <Grid item xs>
-        <UploadButton onSelectFile={onSelectFile} />
-      </Grid>
-    </Grid>
-  </Grid>
-);
-
-const FileAttributes = ({
-  isSelected,
-  selectedFile,
-}: {
-  isSelected: boolean;
-  selectedFile: File;
-}) => (
-  <Box sx={{ display: 'flex' }}>
-    {isSelected ? (
-      <Box sx={{ pt: 2 }}>
-        <Typography variant="body2">
-          Image Name: {selectedFile!.name}
-        </Typography>
-        <Typography variant="body2">
-          Image Type: {selectedFile!.type}
-        </Typography>
-        <Typography variant="body2">
-          Size in bytes: {selectedFile!.size}
-        </Typography>
-        <Typography variant="body2">
-          Last Modified Date: {selectedFile!.lastModified}
-        </Typography>
-      </Box>
-    ) : (
-      <Typography variant="body2" sx={{ pt: 2 }}>
-        Select an image to show details
-      </Typography>
-    )}
-  </Box>
-);
-
-const SaveImageButton = ({
-  handleSaveChange,
-}: {
-  handleSaveChange: () => void;
-}) => {
-  const [state, dispatch] = React.useContext(GlobalContext);
-  return (
-    <Button onClick={handleSaveChange} sx={{ mr: 1 }}>
-      Save Cropped Image
-    </Button>
-  );
-};
-
-const CancelButton = ({
-  setIsSelected,
-}: {
-  setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  return (
-    <Button color="secondary" onClick={() => setIsSelected(false)}>
-      Cancel
-    </Button>
-  );
-};
-
-export const UploadImagePaper = () => {
+export const SectionUploadImage = () => {
   const [src, setSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState<ReactCrop.Crop>({
     unit: '%',
@@ -182,26 +100,14 @@ export const UploadImagePaper = () => {
   };
 
   return (
-    <Paper sx={{ padding: 2, mb: 2 }}>
-      <Typography variant="h6" sx={{ mb: 1 }}>
+    <Paper sx={{ padding: 2 }}>
+      <Typography variant="h6" mb={1}>
         Upload Image:
       </Typography>
-      <Grid
-        container
-        spacing={1}
-        alignItems={!isSelected ? 'flex-start' : 'center'}
-      >
-        <UploadImage
-          url={croppedImageUrl ? croppedImageUrl : ''}
-          onSelectFile={onSelectFile}
-        />
-        <FileAttributes isSelected={isSelected} selectedFile={selectedFile!} />
-      </Grid>
-      {isSelected && (
+      {isSelected ? (
         <Fragment>
-          <Typography variant="subtitle1">
-            Crop the image below and press the save button to save your new
-            avatar.
+          <Typography variant="subtitle1" mb={2}>
+            Crop the image below.
           </Typography>
           <ReactCrop
             src={src!}
@@ -213,16 +119,53 @@ export const UploadImagePaper = () => {
             maxWidth={250}
             maxHeight={250}
             style={{
-              width: 500,
+              width: '100%',
+              maxWidth: '1000px',
               height: 'auto',
               display: 'block',
               marginBottom: 10,
             }}
           />
-          <div>
-            <SaveImageButton handleSaveChange={handleSaveChange} />
-            <CancelButton setIsSelected={setIsSelected} />
-          </div>
+          <Button onClick={handleSaveChange} sx={{ mr: 1 }}>
+            Save
+          </Button>
+          <Button color="secondary" onClick={() => setIsSelected(false)}>
+            Cancel
+          </Button>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <Box
+            sx={{
+              display: 'inline-flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar
+              src={croppedImageUrl ? croppedImageUrl : ''}
+              sx={{ width: 70, height: 70, m: 1 }}
+            />
+            <Box
+              component="input"
+              type="file"
+              accept="image/*"
+              sx={{ display: 'none' }}
+              id="contained-button-file"
+              onChange={onSelectFile}
+            />
+            <label htmlFor="contained-button-file">
+              <Button component="span">Upload</Button>
+            </label>
+          </Box>
+          <Typography
+            variant="body2"
+            display="inline-block"
+            position="absolute"
+            m={1}
+          >
+            Select an image to change profile picture
+          </Typography>
         </Fragment>
       )}
     </Paper>

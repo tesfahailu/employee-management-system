@@ -11,7 +11,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import Slider from '@material-ui/core/Slider';
 import { capitalize } from '@material-ui/core/utils';
 import { Button, Card, CardContent } from '@material-ui/core';
-import { DispatchContext } from './Theme';
+import { DispatchContext } from '../../modules/components/Theme';
 
 const defaults = {
   primary: '#2196f3',
@@ -77,7 +77,7 @@ interface IShades {
   A700: string;
 }
 
-export default function ColorTool() {
+export default function SectionPalette() {
   const dispatch = React.useContext(DispatchContext);
   const theme = useTheme();
   const [state, setState] = React.useState({

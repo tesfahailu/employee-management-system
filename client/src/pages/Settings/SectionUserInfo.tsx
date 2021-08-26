@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Employee, OnChangeSelect } from '../../types/types';
-import { FormEmployee } from './FormEmployee';
+import { FormEmployee } from '../../modules/components/FormEmployee';
+import { Box } from '@material-ui/system';
 
 const initialEmployee = {
   id: 10,
@@ -10,7 +11,7 @@ const initialEmployee = {
   mobile: '6666666666',
 };
 
-export const UserInfoPaper = () => {
+export const SectionUserInfo = () => {
   const [employee, setEmployee] = useState(initialEmployee);
   const [errors, setErrors] = useState(initialEmployee);
 
@@ -35,11 +36,13 @@ export const UserInfoPaper = () => {
   };
 
   return (
-    <FormEmployee<Employee>
-      employee={employee}
-      onChange={onChange}
-      onErrorChange={onErrorChange}
-      errors={errors}
-    />
+    <Box sx={{ mt: 2 }}>
+      <FormEmployee<Employee>
+        employee={employee}
+        onChange={onChange}
+        onErrorChange={onErrorChange}
+        errors={errors}
+      />
+    </Box>
   );
 };
