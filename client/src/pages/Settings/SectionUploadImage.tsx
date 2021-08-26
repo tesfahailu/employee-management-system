@@ -1,15 +1,9 @@
 import React, { ChangeEvent, useState, Fragment } from 'react';
-import {
-  Avatar,
-  Button,
-  Grid,
-  Paper,
-  Typography,
-  Box,
-} from '@material-ui/core';
+import { Avatar, Button, Paper, Typography, Box } from '@material-ui/core';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { GlobalContext } from '../../modules/components/Global';
+import { SettingsUploadText } from '../../text';
 
 export const SectionUploadImage = () => {
   const [src, setSrc] = useState<string | null>(null);
@@ -102,12 +96,12 @@ export const SectionUploadImage = () => {
   return (
     <Paper sx={{ padding: 2 }}>
       <Typography variant="h6" mb={1}>
-        Upload Image:
+        {SettingsUploadText.PaperHeader}
       </Typography>
       {isSelected ? (
         <Fragment>
-          <Typography variant="subtitle1" mb={2}>
-            Crop the image below.
+          <Typography variant="body2" mt={1} mb={1}>
+            {SettingsUploadText.PaperSelectedImage}
           </Typography>
           <ReactCrop
             src={src!}
@@ -116,21 +110,26 @@ export const SectionUploadImage = () => {
             onImageLoaded={(img) => setImgRef(img)}
             onComplete={(crop) => makeClientCrop(crop)}
             onChange={(crop) => setCrop(crop)}
-            maxWidth={250}
-            maxHeight={250}
+            maxWidth={200}
+            maxHeight={200}
             style={{
               width: '100%',
-              maxWidth: '1000px',
+              maxWidth: '500px',
               height: 'auto',
               display: 'block',
               marginBottom: 10,
             }}
           />
-          <Button onClick={handleSaveChange} sx={{ mr: 1 }}>
-            Save
+          <Button
+            color="secondary"
+            variant="outlined"
+            onClick={() => setIsSelected(false)}
+            sx={{ mr: 1 }}
+          >
+            {SettingsUploadText.ButtonCancel}
           </Button>
-          <Button color="secondary" onClick={() => setIsSelected(false)}>
-            Cancel
+          <Button onClick={handleSaveChange}>
+            {SettingsUploadText.ButtonAccept}
           </Button>
         </Fragment>
       ) : (
@@ -155,7 +154,9 @@ export const SectionUploadImage = () => {
               onChange={onSelectFile}
             />
             <label htmlFor="contained-button-file">
-              <Button component="span">Upload</Button>
+              <Button component="span">
+                {SettingsUploadText.ButtonUpload}
+              </Button>
             </label>
           </Box>
           <Typography
@@ -164,7 +165,7 @@ export const SectionUploadImage = () => {
             position="absolute"
             m={1}
           >
-            Select an image to change profile picture
+            {SettingsUploadText.PaperSelectImage}
           </Typography>
         </Fragment>
       )}
