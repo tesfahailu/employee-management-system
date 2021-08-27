@@ -1,6 +1,5 @@
 import {
-  Card,
-  CardContent,
+  Paper,
   Typography,
   List,
   Divider,
@@ -25,49 +24,47 @@ export const FormProjectsList = ({
   projectsList,
 }: Type) => (
   <Fragment>
-    <Card>
-      <CardContent>
-        <Typography variant="h6"> {FormProjectsListText.Header}</Typography>
-        <List dense={true}>
-          {projects.length > 0 ? (
-            projects.map(({ id, name, description }) => (
-              <Box key={`${name}-${id}`} component="div">
-                <Divider />
-                <ListItem
-                  secondaryAction={
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      component="div"
-                      onClick={onProjectRemove(id!)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemText
-                    primary={name}
-                    secondary={description ? description : null}
-                  />
-                </ListItem>
-                <Divider />
-              </Box>
-            ))
-          ) : (
-            <Typography variant="body1" sx={{ mt: 1, mb: 1 }}>
-              {FormProjectsListText.ListEmpty}
-            </Typography>
-          )}
-        </List>
-        <Button
-          variant="text"
-          startIcon={<AddIcon />}
-          onClick={() => setOpen(true)}
-        >
-          {FormProjectsListText.ButtonAdd}
-        </Button>
-      </CardContent>
-    </Card>
+    <Paper sx={{ mb: 2, p: 2 }}>
+      <Typography variant="h6"> {FormProjectsListText.Header}</Typography>
+      <List dense={true}>
+        {projects.length > 0 ? (
+          projects.map(({ id, name, description }) => (
+            <Box key={`${name}-${id}`} component="div">
+              <Divider />
+              <ListItem
+                secondaryAction={
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    component="div"
+                    onClick={onProjectRemove(id!)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                <ListItemText
+                  primary={name}
+                  secondary={description ? description : null}
+                />
+              </ListItem>
+              <Divider />
+            </Box>
+          ))
+        ) : (
+          <Typography variant="body1" sx={{ mt: 1, mb: 1 }}>
+            {FormProjectsListText.ListEmpty}
+          </Typography>
+        )}
+      </List>
+      <Button
+        variant="text"
+        startIcon={<AddIcon />}
+        onClick={() => setOpen(true)}
+      >
+        {FormProjectsListText.ButtonAdd}
+      </Button>
+    </Paper>
     <DialogAddProject
       open={open}
       setOpen={setOpen}

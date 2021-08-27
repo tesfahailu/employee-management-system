@@ -1,16 +1,21 @@
 import React, { Fragment } from 'react';
 import { rgbToHex, useTheme } from '@material-ui/core/styles';
 import * as colors from '@material-ui/core/colors';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import Radio, { RadioProps } from '@material-ui/core/Radio';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
-import Slider from '@material-ui/core/Slider';
 import { capitalize } from '@material-ui/core/utils';
-import { Button, Card, CardContent } from '@material-ui/core';
+import {
+  Button,
+  Card,
+  CardContent,
+  Box,
+  Grid,
+  Input,
+  Radio,
+  RadioProps,
+  Tooltip,
+  Typography,
+  Slider,
+} from '@material-ui/core';
 import { DispatchContext } from '../../modules/components/Theme';
 
 const defaults = {
@@ -197,8 +202,8 @@ export default function SectionPalette() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              backgroundColor: background[key],
             }}
-            style={{ backgroundColor: background[key] }}
             key={key}
           >
             <Typography

@@ -13,6 +13,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
 import { useChangeTheme } from '../../modules/components/Theme';
 import { getCookie } from '../../modules/utils/getCookie';
+import { SettingsModeText } from '../../text';
 
 export const SectionMode = () => {
   const changeTheme = useChangeTheme();
@@ -40,7 +41,7 @@ export const SectionMode = () => {
     <Card sx={{ mb: 1 }}>
       <CardContent>
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Mode:
+          {SettingsModeText.Header}
         </Typography>
         <ToggleButtonGroup
           exclusive
@@ -48,18 +49,19 @@ export const SectionMode = () => {
           onChange={handleChangeThemeMode}
           aria-labelledby="settings-mode"
           fullWidth
+          sx={{ maxWidth: 500 }}
         >
           <ToggleButton value="light" aria-label="light">
             <Brightness7Icon sx={{ mr: 1 }} />
-            {'light'}
+            {SettingsModeText.IconLight}
           </ToggleButton>
           <ToggleButton value="system" aria-label="system">
             <SettingsBrightnessIcon sx={{ mr: 1 }} />
-            {'system'}
+            {SettingsModeText.IconSystem}
           </ToggleButton>
           <ToggleButton value="dark" aria-label="dark">
             <Brightness4Icon sx={{ mr: 1 }} />
-            {'dark'}
+            {SettingsModeText.IconDark}
           </ToggleButton>
         </ToggleButtonGroup>
       </CardContent>
