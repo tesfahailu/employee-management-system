@@ -1,6 +1,7 @@
 //#region Forms
 export enum FormEmployeeText {
   Header = 'Employee: ',
+  SaveButton = 'Save',
   FirstName = 'First Name: ',
   LastName = 'Last Name: ',
   Mobile = 'Mobile: ',
@@ -133,6 +134,20 @@ export enum SettingsUploadText {
   ButtonCancel = 'Cancel',
   ButtonAccept = 'Save',
   ButtonUpload = 'Upload',
+}
+
+export enum SettingsModeText {
+  Header = 'Mode:',
+  IconLight = 'light',
+  IconSystem = 'system',
+  IconDark = 'dark',
+}
+
+export enum SettingsPaletteText {
+  Header = 'Palette:',
+  IconLight = 'light',
+  IconSystem = 'system',
+  IconDark = 'dark',
 }
 //#endregion
 //#region Employee Page

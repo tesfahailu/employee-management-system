@@ -19,7 +19,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <Box
         sx={{
           ml: { xs: 0, md: `${drawerWidth}px` },
-          width: { xs: '100%', md: `calc(100vw - ${drawerWidth}px )` },
+          width: { xs: '100%', md: `calc(100% - ${drawerWidth}px )` },
           maxWidth: '100%',
         }}
       >

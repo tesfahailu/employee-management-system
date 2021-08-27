@@ -110,6 +110,10 @@ export interface FormEmployee<R> {
   errors: R;
   onChange: OnChangeSelect;
   onErrorChange: OnChangeSelect;
+  showButton?: boolean;
+  isValid?: boolean;
+  isChanged?: boolean;
+  onSave?: () => void;
 }
 
 export interface FormAddress<R> {

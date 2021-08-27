@@ -7,7 +7,7 @@ import { SettingsPageText } from '../../text';
 import { SectionHeader } from '../../modules/components/SectionHeader';
 import { Box } from '@material-ui/system';
 
-export const SettingsData = () => {
+export const Settings = () => {
   return (
     <Fragment>
       <SectionHeader
@@ -17,8 +17,11 @@ export const SettingsData = () => {
       />
       <Box sx={{ mt: 2 }} />
       <SectionUploadImage />
+      <Box sx={{ mt: 2 }} />
       <SectionUserInfo />
+      <Box sx={{ mt: 2 }} />
       <SectionMode />
+      <Box sx={{ mt: 2 }} />
       <SectionPalette />
     </Fragment>
   );
