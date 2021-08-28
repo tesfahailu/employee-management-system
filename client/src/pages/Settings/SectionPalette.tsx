@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { rgbToHex, useTheme } from '@material-ui/core/styles';
 import * as colors from '@material-ui/core/colors';
 import CheckIcon from '@material-ui/icons/Check';
-import { capitalize } from '@material-ui/core/utils';
 import {
   Button,
   Card,
@@ -87,18 +86,18 @@ export default function SectionPalette() {
   const dispatch = React.useContext(DispatchContext);
   const theme = useTheme();
   const [state, setState] = React.useState({
-    [`${SettingsPaletteText.Primary}` as const]: defaults.primary,
-    [`${SettingsPaletteText.Secondary}` as const]: defaults.secondary,
-    [`${SettingsPaletteText.Primary}Input` as const]: defaults.primary,
-    [`${SettingsPaletteText.Secondary}Input` as const]: defaults.secondary,
-    [`${SettingsPaletteText.Primary}Hue` as const]: 'blue',
-    [`${SettingsPaletteText.Secondary}Hue` as const]: 'pink',
-    [`${SettingsPaletteText.Primary}Shade` as const]: 4,
-    [`${SettingsPaletteText.Secondary}Shade` as const]: 11,
+    primary: defaults.primary,
+    secondary: defaults.secondary,
+    primaryInput: defaults.primary,
+    secondaryInput: defaults.secondary,
+    primaryHue: 'blue',
+    secondaryHue: 'pink',
+    primaryShade: 4,
+    secondaryShade: 11,
   });
 
   const handleChangeColor =
-    (name: SettingsPaletteText.Primary | SettingsPaletteText.Secondary) =>
+    (name: 'primary' | 'secondary') =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const isRgb = (string: string) =>
         /rgb\([0-9]{1,3}\s*,\s*[0-9]{1,3}\s*,\s*[0-9]{1,3}\)/i.test(string);
@@ -112,7 +111,7 @@ export default function SectionPalette() {
 
       setState((state) => ({
         ...state,
-        [`${name}Input` as const]: color,
+        [`${name}Input`]: color,
       }));
 
       let isValidColor = false;
@@ -127,15 +126,15 @@ export default function SectionPalette() {
       }
 
       if (isValidColor) {
-        setState((prevState) => ({
-          ...prevState,
+        setState((state) => ({
+          ...state,
           [name]: color,
         }));
       }
     };
 
   const handleChangeHue =
-    (name: SettingsPaletteText.Primary | SettingsPaletteText.Secondary) =>
+    (name: 'primary' | 'secondary') =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const hue = event.target.value as hue;
       const color = (colors[hue] as IShades)[
@@ -151,7 +150,7 @@ export default function SectionPalette() {
     };
 
   const handleChangeShade =
-    (name: SettingsPaletteText.Primary | SettingsPaletteText.Secondary) =>
+    (name: 'primary' | 'secondary') =>
     (event: Event, shade: number | number[]) => {
       const color = (colors[state[`${name}Hue` as const] as hue] as IShades)[
         shades[shade as number]
@@ -166,8 +165,8 @@ export default function SectionPalette() {
 
   const handleChangeDocsColors = () => {
     const paletteColors = {
-      primary: { main: state[`${SettingsPaletteText.Primary}` as const] },
-      secondary: { main: state[`${SettingsPaletteText.Primary}` as const] },
+      primary: { main: state['primary'] },
+      secondary: { main: state['secondary'] },
     };
 
     dispatch({
@@ -221,9 +220,7 @@ export default function SectionPalette() {
     );
   };
 
-  const colorPicker = (
-    intent: SettingsPaletteText.Primary | SettingsPaletteText.Secondary,
-  ) => {
+  const colorPicker = (intent: 'primary' | 'secondary') => {
     const intentInput = state[`${intent}Input` as const];
     const intentShade = state[`${intent}Shade` as const];
     const color = state[`${intent}` as const];
@@ -236,7 +233,9 @@ export default function SectionPalette() {
           htmlFor={intent}
           variant="subtitle1"
         >
-          {capitalize(intent)}
+          {intent === 'primary'
+            ? SettingsPaletteText.Primary
+            : SettingsPaletteText.Secondary}
         </Typography>
         <Input
           id={intent}
@@ -262,11 +261,9 @@ export default function SectionPalette() {
         <Box sx={{ width: 192 }}>
           {hues.map((hue) => {
             const shade =
-              intent === SettingsPaletteText.Primary
-                ? shades[state[`${SettingsPaletteText.Primary}Shade` as const]]
-                : shades[
-                    state[`${SettingsPaletteText.Secondary}Shade` as const]
-                  ];
+              intent === 'primary'
+                ? shades[state['primaryShade']]
+                : shades[state['secondaryShade']];
             const backgroundColor = (colors as any)[hue][shade];
 
             return (
@@ -318,8 +315,8 @@ export default function SectionPalette() {
           {SettingsPaletteText.Header}
         </Typography>
         <Grid container spacing={4}>
-          <Grid item>{colorPicker(SettingsPaletteText.Primary)}</Grid>
-          <Grid item>{colorPicker(SettingsPaletteText.Primary)}</Grid>
+          <Grid item>{colorPicker('primary')}</Grid>
+          <Grid item>{colorPicker('secondary')}</Grid>
         </Grid>
         <Grid item xs={12} sx={{ mt: 2 }}>
           <Button onClick={handleChangeDocsColors}>
