@@ -17,6 +17,7 @@ import {
   Slider,
 } from '@material-ui/core';
 import { DispatchContext } from '../../modules/components/Theme';
+import { SettingsPaletteText } from '../../text';
 
 const defaults = {
   primary: '#2196f3',
@@ -86,18 +87,18 @@ export default function SectionPalette() {
   const dispatch = React.useContext(DispatchContext);
   const theme = useTheme();
   const [state, setState] = React.useState({
-    primary: defaults.primary,
-    secondary: defaults.secondary,
-    primaryInput: defaults.primary,
-    secondaryInput: defaults.secondary,
-    primaryHue: 'blue',
-    secondaryHue: 'pink',
-    primaryShade: 4,
-    secondaryShade: 11,
+    [`${SettingsPaletteText.Primary}` as const]: defaults.primary,
+    [`${SettingsPaletteText.Secondary}` as const]: defaults.secondary,
+    [`${SettingsPaletteText.Primary}Input` as const]: defaults.primary,
+    [`${SettingsPaletteText.Secondary}Input` as const]: defaults.secondary,
+    [`${SettingsPaletteText.Primary}Hue` as const]: 'blue',
+    [`${SettingsPaletteText.Secondary}Hue` as const]: 'pink',
+    [`${SettingsPaletteText.Primary}Shade` as const]: 4,
+    [`${SettingsPaletteText.Secondary}Shade` as const]: 11,
   });
 
   const handleChangeColor =
-    (name: 'primary' | 'secondary') =>
+    (name: SettingsPaletteText.Primary | SettingsPaletteText.Secondary) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const isRgb = (string: string) =>
         /rgb\([0-9]{1,3}\s*,\s*[0-9]{1,3}\s*,\s*[0-9]{1,3}\)/i.test(string);
@@ -109,8 +110,8 @@ export default function SectionPalette() {
         target: { value: color },
       } = event;
 
-      setState((prevState) => ({
-        ...prevState,
+      setState((state) => ({
+        ...state,
         [`${name}Input` as const]: color,
       }));
 
@@ -134,7 +135,7 @@ export default function SectionPalette() {
     };
 
   const handleChangeHue =
-    (name: 'primary' | 'secondary') =>
+    (name: SettingsPaletteText.Primary | SettingsPaletteText.Secondary) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const hue = event.target.value as hue;
       const color = (colors[hue] as IShades)[
@@ -150,7 +151,7 @@ export default function SectionPalette() {
     };
 
   const handleChangeShade =
-    (name: 'primary' | 'secondary') =>
+    (name: SettingsPaletteText.Primary | SettingsPaletteText.Secondary) =>
     (event: Event, shade: number | number[]) => {
       const color = (colors[state[`${name}Hue` as const] as hue] as IShades)[
         shades[shade as number]
@@ -165,8 +166,8 @@ export default function SectionPalette() {
 
   const handleChangeDocsColors = () => {
     const paletteColors = {
-      primary: { main: state.primary },
-      secondary: { main: state.secondary },
+      primary: { main: state[`${SettingsPaletteText.Primary}` as const] },
+      secondary: { main: state[`${SettingsPaletteText.Primary}` as const] },
     };
 
     dispatch({
@@ -220,7 +221,9 @@ export default function SectionPalette() {
     );
   };
 
-  const colorPicker = (intent: 'primary' | 'secondary') => {
+  const colorPicker = (
+    intent: SettingsPaletteText.Primary | SettingsPaletteText.Secondary,
+  ) => {
     const intentInput = state[`${intent}Input` as const];
     const intentShade = state[`${intent}Shade` as const];
     const color = state[`${intent}` as const];
@@ -242,7 +245,9 @@ export default function SectionPalette() {
           fullWidth
         />
         <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, mb: 2 }}>
-          <Typography id={`${intent}ShadeSliderLabel`}>Shade:</Typography>
+          <Typography id={`${intent}ShadeSliderLabel`}>
+            {SettingsPaletteText.Shade}
+          </Typography>
           <Slider
             sx={{ width: 'calc(100% - 80px)', ml: 3, mr: 3 }}
             value={intentShade as number}
@@ -257,9 +262,11 @@ export default function SectionPalette() {
         <Box sx={{ width: 192 }}>
           {hues.map((hue) => {
             const shade =
-              intent === 'primary'
-                ? shades[state.primaryShade]
-                : shades[state.secondaryShade];
+              intent === SettingsPaletteText.Primary
+                ? shades[state[`${SettingsPaletteText.Primary}Shade` as const]]
+                : shades[
+                    state[`${SettingsPaletteText.Secondary}Shade` as const]
+                  ];
             const backgroundColor = (colors as any)[hue][shade];
 
             return (
@@ -308,16 +315,22 @@ export default function SectionPalette() {
     <Card>
       <CardContent>
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Palette:
+          {SettingsPaletteText.Header}
         </Typography>
         <Grid container spacing={4}>
-          <Grid item>{colorPicker('primary')}</Grid>
-          <Grid item>{colorPicker('secondary')}</Grid>
+          <Grid item>{colorPicker(SettingsPaletteText.Primary)}</Grid>
+          <Grid item>{colorPicker(SettingsPaletteText.Primary)}</Grid>
         </Grid>
         <Grid item xs={12} sx={{ mt: 2 }}>
-          <Button onClick={handleChangeDocsColors}>Set App Colors</Button>
-          <Button onClick={handleResetDocsColors} sx={{ ml: 1 }}>
-            Reset App Colors
+          <Button onClick={handleChangeDocsColors}>
+            {SettingsPaletteText.ButtonSetColor}
+          </Button>
+          <Button
+            onClick={handleResetDocsColors}
+            variant="outlined"
+            sx={{ ml: 1 }}
+          >
+            {SettingsPaletteText.ButtonResetColor}
           </Button>
         </Grid>
       </CardContent>
