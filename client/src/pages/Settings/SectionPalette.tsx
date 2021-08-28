@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { rgbToHex, useTheme } from '@material-ui/core/styles';
 import * as colors from '@material-ui/core/colors';
 import CheckIcon from '@material-ui/icons/Check';
-import { capitalize } from '@material-ui/core/utils';
 import {
   Button,
   Card,
@@ -17,6 +16,7 @@ import {
   Slider,
 } from '@material-ui/core';
 import { DispatchContext } from '../../modules/components/Theme';
+import { SettingsPaletteText } from '../../text';
 
 const defaults = {
   primary: '#2196f3',
@@ -109,9 +109,9 @@ export default function SectionPalette() {
         target: { value: color },
       } = event;
 
-      setState((prevState) => ({
-        ...prevState,
-        [`${name}Input` as const]: color,
+      setState((state) => ({
+        ...state,
+        [`${name}Input`]: color,
       }));
 
       let isValidColor = false;
@@ -126,8 +126,8 @@ export default function SectionPalette() {
       }
 
       if (isValidColor) {
-        setState((prevState) => ({
-          ...prevState,
+        setState((state) => ({
+          ...state,
           [name]: color,
         }));
       }
@@ -165,8 +165,8 @@ export default function SectionPalette() {
 
   const handleChangeDocsColors = () => {
     const paletteColors = {
-      primary: { main: state.primary },
-      secondary: { main: state.secondary },
+      primary: { main: state['primary'] },
+      secondary: { main: state['secondary'] },
     };
 
     dispatch({
@@ -233,7 +233,9 @@ export default function SectionPalette() {
           htmlFor={intent}
           variant="subtitle1"
         >
-          {capitalize(intent)}
+          {intent === 'primary'
+            ? SettingsPaletteText.Primary
+            : SettingsPaletteText.Secondary}
         </Typography>
         <Input
           id={intent}
@@ -242,7 +244,9 @@ export default function SectionPalette() {
           fullWidth
         />
         <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, mb: 2 }}>
-          <Typography id={`${intent}ShadeSliderLabel`}>Shade:</Typography>
+          <Typography id={`${intent}ShadeSliderLabel`}>
+            {SettingsPaletteText.Shade}
+          </Typography>
           <Slider
             sx={{ width: 'calc(100% - 80px)', ml: 3, mr: 3 }}
             value={intentShade as number}
@@ -258,8 +262,8 @@ export default function SectionPalette() {
           {hues.map((hue) => {
             const shade =
               intent === 'primary'
-                ? shades[state.primaryShade]
-                : shades[state.secondaryShade];
+                ? shades[state['primaryShade']]
+                : shades[state['secondaryShade']];
             const backgroundColor = (colors as any)[hue][shade];
 
             return (
@@ -308,16 +312,22 @@ export default function SectionPalette() {
     <Card>
       <CardContent>
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Palette:
+          {SettingsPaletteText.Header}
         </Typography>
         <Grid container spacing={4}>
           <Grid item>{colorPicker('primary')}</Grid>
           <Grid item>{colorPicker('secondary')}</Grid>
         </Grid>
         <Grid item xs={12} sx={{ mt: 2 }}>
-          <Button onClick={handleChangeDocsColors}>Set App Colors</Button>
-          <Button onClick={handleResetDocsColors} sx={{ ml: 1 }}>
-            Reset App Colors
+          <Button onClick={handleChangeDocsColors}>
+            {SettingsPaletteText.ButtonSetColor}
+          </Button>
+          <Button
+            onClick={handleResetDocsColors}
+            variant="outlined"
+            sx={{ ml: 1 }}
+          >
+            {SettingsPaletteText.ButtonResetColor}
           </Button>
         </Grid>
       </CardContent>

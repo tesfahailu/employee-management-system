@@ -145,9 +145,11 @@ export enum SettingsModeText {
 
 export enum SettingsPaletteText {
   Header = 'Palette:',
-  IconLight = 'light',
-  IconSystem = 'system',
-  IconDark = 'dark',
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Shade = 'Shade:',
+  ButtonSetColor = 'Set App Colors',
+  ButtonResetColor = 'Reset App Colors',
 }
 //#endregion
 //#region Employee Page
