@@ -14,10 +14,10 @@ const columns: HeadCell<Project>[] = [
     label: 'Description',
   },
   {
-    id: 'action',
+    id: 'actions',
     numeric: false,
     disablePadding: true,
-    label: 'Action',
+    label: 'Actions',
   },
 ];
 

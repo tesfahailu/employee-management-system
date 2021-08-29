@@ -1,12 +1,18 @@
-import React, { MouseEventHandler, useState } from 'react';
-import MaterialTableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox';
+import React, { useState, SyntheticEvent } from 'react';
 import { getComparator, Order } from './TableUtils';
-import { Alert, Snackbar, Typography } from '@material-ui/core';
+import {
+  Alert,
+  Snackbar,
+  Typography,
+  IconButton,
+  Stack,
+  TableBody as MaterialTableBody,
+  TableCell,
+  TableRow,
+  Checkbox,
+  Tooltip,
+} from '@material-ui/core';
 import Highlighter from 'react-highlight-words';
-import { IconButton, Stack } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import {
   Pageview as PageViewIcon,
@@ -14,9 +20,7 @@ import {
   Delete as DeleteIcon,
 } from '@material-ui/icons';
 import { DialogDeleteRow } from './DialogDeleteRow';
-import { Tooltip } from '@material-ui/core';
 import { DialogDeleteRowText, TableBodyText } from '../../text';
-import { SyntheticEvent } from 'react';
 import { HandleDeleteRow, HeadCell } from '../../types/types';
 
 interface ActionButton {
@@ -86,15 +90,14 @@ export const TableBody = <R extends { id: number }>({
   handleClick,
   handleDeleteRow,
 }: TableBody<R>) => {
-  console.log('rows data: ', rowsData);
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteRowId, setDeleteRowId] = useState<number | null>(null);
-  const [openSnackBar, setOpenSnackBar] = useState<{
-    open: boolean;
-    success: boolean;
-  }>({ open: false, success: false });
+  const [openSnackBar, setOpenSnackBar] = useState({
+    open: false,
+    success: false,
+  });
 
   const handleClose = (event: SyntheticEvent<Element>, reason?: string) => {
     if (reason === 'clickaway') {
@@ -111,9 +114,19 @@ export const TableBody = <R extends { id: number }>({
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowsData.length) : 0;
   return (
-    <>
-      <MaterialTableBody>
-        {rowsData
+    <MaterialTableBody>
+      {rowsData.length === 0 ? (
+        <TableRow
+          sx={{
+            height: 81,
+          }}
+        >
+          <TableCell colSpan={headCells.length + 1}>
+            <Typography>{TableBodyText.NoData}</Typography>
+          </TableCell>
+        </TableRow>
+      ) : (
+        rowsData
           .slice()
           .sort(getComparator(order, orderBy as string))
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -140,83 +153,60 @@ export const TableBody = <R extends { id: number }>({
                     }}
                   />
                 </TableCell>
-                {headCells.map((headCell, columnIndex) => {
-                  if (columnIndex === 0) {
-                    return (
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                        key="head-first"
-                      >
-                        <Highlighter
-                          searchWords={[searchText]}
-                          autoEscape={true}
-                          textToHighlight={
-                            (row[headCell['id'] as keyof R] as any) || ''
-                          }
-                        />
-                      </TableCell>
-                    );
-                  }
-                  if (headCell['id'] === 'action') {
-                    return (
-                      <TableCell
-                        align="left"
-                        sx={{
-                          px: 2,
-                        }}
-                        key={`action-last`}
-                      >
-                        <ActionButtons
-                          rowId={row.id}
-                          actionButtonLinks={actionButtonLinks}
-                          toggleIsDelete={toggleIsDelete}
-                        />
-                      </TableCell>
-                    );
-                  } else {
-                    return (
-                      <TableCell
-                        align="left"
-                        key={`${headCell['id']}-${columnIndex}`}
-                      >
-                        <Highlighter
-                          searchWords={[searchText]}
-                          autoEscape={true}
-                          textToHighlight={
-                            (row[headCell['id'] as keyof R] as any) || ''
-                          }
-                        />
-                      </TableCell>
-                    );
-                  }
-                })}
+                <TableCell
+                  component="th"
+                  id={labelId}
+                  scope="row"
+                  padding="none"
+                  key="head-first"
+                >
+                  <Highlighter
+                    searchWords={[searchText]}
+                    autoEscape={true}
+                    textToHighlight={
+                      (row[headCells[0]['id'] as keyof R] as any) || ''
+                    }
+                  />
+                </TableCell>
+                {headCells
+                  .filter(
+                    (headCell, index) =>
+                      index !== 0 && headCell['id'] !== 'actions',
+                  )
+                  .map((headCell, columnIndex) => (
+                    <TableCell
+                      align="left"
+                      key={`${headCell['id']}-${columnIndex}`}
+                    >
+                      <Highlighter
+                        searchWords={[searchText]}
+                        autoEscape={true}
+                        textToHighlight={
+                          (row[headCell['id'] as keyof R] as any) || ''
+                        }
+                      />
+                    </TableCell>
+                  ))}
+                <TableCell align="left" padding="normal" key={`actions-last`}>
+                  <ActionButtons
+                    rowId={row.id}
+                    actionButtonLinks={actionButtonLinks}
+                    toggleIsDelete={toggleIsDelete}
+                  />
+                </TableCell>
               </TableRow>
             );
-          })}
-        {emptyRows > 0 && (
-          <TableRow
-            sx={{
-              height: 81 * emptyRows,
-            }}
-          >
-            <TableCell colSpan={6} />
-          </TableRow>
-        )}
-        {rowsData.length === 0 && (
-          <TableRow
-            sx={{
-              height: 81,
-            }}
-          >
-            <TableCell colSpan={headCells.length + 1}>
-              <Typography>{TableBodyText.NoData}</Typography>
-            </TableCell>
-          </TableRow>
-        )}
-      </MaterialTableBody>
+          })
+      )}
+      {emptyRows > 0 && (
+        <TableRow
+          sx={{
+            height: 81 * emptyRows,
+          }}
+        >
+          <TableCell colSpan={6} />
+        </TableRow>
+      )}
       <DialogDeleteRow
         open={openDialog}
         setOpen={setOpenDialog}
@@ -243,6 +233,6 @@ export const TableBody = <R extends { id: number }>({
           </Alert>
         )}
       </Snackbar>
-    </>
+    </MaterialTableBody>
   );
 };
