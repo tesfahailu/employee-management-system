@@ -155,7 +155,7 @@ export enum SettingsPaletteText {
 //#region Employee Page
 export enum EmployeesViewPageText {
   PageHeader = 'View Employees:',
-  PageSubHeader = 'View, edit or delete employee by clicking on the appropriate button in the action column',
+  PageSubHeader = 'View, edit or delete employee by clicking on the appropriate button in the actions column',
   ButtonCreate = 'Create',
   TableHeader = 'Employees Table:',
 }
@@ -275,7 +275,7 @@ export enum DepartmentCreatePageText {
 //#region Role Page
 export enum RolesViewPageText {
   PageHeader = 'View Roles:',
-  PageSubHeader = 'View roles detail or edit role by clicking on the edit button in the action column',
+  PageSubHeader = 'View roles detail or edit role by clicking on the edit button in the actions column',
   ButtonCreate = 'Create',
   TableHeader = 'Roles Table:',
 }

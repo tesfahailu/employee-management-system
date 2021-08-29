@@ -42,10 +42,10 @@ const headCells: Array<HeadCell<Address>> = [
     label: 'Zip Code',
   },
   {
-    id: 'action',
+    id: 'actions',
     numeric: false,
     disablePadding: true,
-    label: 'Action',
+    label: 'Actions',
   },
 ];
 

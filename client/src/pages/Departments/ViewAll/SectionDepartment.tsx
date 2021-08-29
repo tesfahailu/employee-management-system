@@ -18,7 +18,7 @@ const headCells: Array<HeadCell<Role>> = [
     label: 'Description',
   },
   {
-    id: 'action',
+    id: 'actions',
     numeric: false,
     disablePadding: true,
     label: 'Actions',

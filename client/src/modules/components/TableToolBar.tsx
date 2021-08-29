@@ -1,18 +1,20 @@
-import React, { Dispatch, SyntheticEvent, useState } from 'react';
+import React, { Fragment, SyntheticEvent, useState } from 'react';
 import {
   Alert,
   IconButton,
   InputBase,
   Snackbar,
   Stack,
+  Toolbar,
+  Typography,
+  Tooltip,
 } from '@material-ui/core';
 import { alpha, styled } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import { Delete as DeleteIcon } from '@material-ui/icons';
-import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import {
+  Search as SearchIcon,
+  Delete as DeleteIcon,
+  CloudDownload as CloudDownloadIcon,
+} from '@material-ui/icons';
 import { CSVLink } from 'react-csv';
 import { DialogDeleteRows } from './DialogDeleteRows';
 import { DialogDeleteRowsText, TableToolBarText } from '../../text';
@@ -60,31 +62,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function SearchBox({
-  toggleSearchBox,
-  searchText,
-  handleSearch,
-}: {
-  toggleSearchBox: () => void;
-  searchText: string;
-  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}) {
-  return (
-    <Search onBlur={toggleSearchBox}>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ 'aria-label': 'search' }}
-        autoFocus
-        value={searchText}
-        onChange={handleSearch}
-      />
-    </Search>
-  );
-}
-
 interface TableToolBar<R> {
   selected: readonly number[];
   setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>;
@@ -95,26 +72,16 @@ interface TableToolBar<R> {
   handleDeleteRows: HandleDeleteRows;
 }
 
-export const TableToolBar = <R extends { id: number }>(
-  props: TableToolBar<R>,
-) => {
-  const {
-    selected,
-    setSelected,
-    title,
-    searchText,
-    handleSearch,
-    rowsData,
-    handleDeleteRows,
-  } = props;
+export const TableToolBar = <R extends { id: number }>({
+  selected,
+  setSelected,
+  title,
+  searchText,
+  handleSearch,
+  rowsData,
+  handleDeleteRows,
+}: TableToolBar<R>) => {
   const numSelected = selected.length;
-  const [isSearch, setIsSearch] = useState(false);
-
-  const toggleSearchBox = () => {
-    setIsSearch((prevValue) => {
-      return !prevValue;
-    });
-  };
   const [open, setOpen] = useState(false);
   const toggleIsDeleteAll = () => {
     setOpen((prev) => !prev);
@@ -136,21 +103,21 @@ export const TableToolBar = <R extends { id: number }>(
   };
 
   return (
-    <>
-      <Toolbar
-        sx={{
-          pl: { sm: 2 },
-          pr: { xs: 1, sm: 1 },
-          ...(numSelected > 0 && {
-            bgcolor: (theme) =>
-              alpha(
-                theme.palette.primary.main,
-                theme.palette.action.activatedOpacity,
-              ),
-          }),
-        }}
-      >
-        {numSelected > 0 ? (
+    <Toolbar
+      sx={{
+        pl: { sm: 2 },
+        pr: { xs: 1, sm: 1 },
+        ...(numSelected > 0 && {
+          bgcolor: (theme) =>
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity,
+            ),
+        }),
+      }}
+    >
+      {numSelected > 0 ? (
+        <Fragment>
           <Typography
             sx={{ flex: '1 1 100%' }}
             color="inherit"
@@ -159,7 +126,14 @@ export const TableToolBar = <R extends { id: number }>(
           >
             {numSelected} {TableToolBarText.Selected}
           </Typography>
-        ) : (
+          <Tooltip title="Delete">
+            <IconButton onClick={toggleIsDeleteAll}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </Fragment>
+      ) : (
+        <Fragment>
           <Typography
             sx={{ flex: '1 1 100%' }}
             variant="h6"
@@ -168,28 +142,19 @@ export const TableToolBar = <R extends { id: number }>(
           >
             {title}
           </Typography>
-        )}
-        {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton onClick={toggleIsDeleteAll}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
           <Stack direction="row" spacing={0.8} justifyContent="flex-start">
-            {!isSearch && !searchText ? (
-              <Tooltip title={TableToolBarText.SearchIcon}>
-                <IconButton onClick={toggleSearchBox}>
-                  <SearchIcon />
-                </IconButton>
-              </Tooltip>
-            ) : (
-              <SearchBox
-                toggleSearchBox={toggleSearchBox}
-                searchText={searchText}
-                handleSearch={handleSearch}
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                autoFocus
+                value={searchText}
+                onChange={handleSearch}
               />
-            )}
+            </Search>
             <CSVLink
               data={rowsData.map(({ id, ...rest }) => rest)}
               id="contained-button-csv"
@@ -202,8 +167,8 @@ export const TableToolBar = <R extends { id: number }>(
               </Tooltip>
             </CSVLink>
           </Stack>
-        )}
-      </Toolbar>
+        </Fragment>
+      )}
       <DialogDeleteRows
         open={open}
         setOpen={setOpen}
@@ -217,20 +182,16 @@ export const TableToolBar = <R extends { id: number }>(
         autoHideDuration={2000}
         onClose={handleClose}
       >
-        {openSnackBar.success ? (
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            sx={{ width: '100%' }}
-          >
-            {DialogDeleteRowsText.Success}
-          </Alert>
-        ) : (
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            {DialogDeleteRowsText.Error}
-          </Alert>
-        )}
+        <Alert
+          onClose={handleClose}
+          severity={openSnackBar.success ? 'success' : 'error'}
+          sx={{ width: '100%' }}
+        >
+          {openSnackBar.success
+            ? DialogDeleteRowsText.Success
+            : DialogDeleteRowsText.Error}
+        </Alert>
       </Snackbar>
-    </>
+    </Toolbar>
   );
 };

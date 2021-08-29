@@ -13,10 +13,10 @@ const columns: HeadCell<Role>[] = [
     label: 'Description',
   },
   {
-    id: 'action',
+    id: 'actions',
     numeric: false,
     disablePadding: true,
-    label: 'Action',
+    label: 'Actions',
   },
 ];
 

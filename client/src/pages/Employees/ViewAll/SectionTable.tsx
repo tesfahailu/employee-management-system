@@ -53,10 +53,10 @@ const headCells: Array<HeadCell<Employee>> = [
     label: 'Department',
   },
   {
-    id: 'action',
+    id: 'actions',
     numeric: false,
     disablePadding: true,
-    label: 'Action',
+    label: 'Actions',
   },
 ];
 

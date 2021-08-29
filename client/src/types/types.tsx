@@ -168,7 +168,7 @@ export interface FormRole<R> {
 
 //#region Table
 export interface HeadCell<R> {
-  id: Omit<keyof R, 'id'> | 'action';
+  id: Omit<keyof R, 'id'> | 'actions';
   numeric: boolean;
   disablePadding: boolean;
   label: string;

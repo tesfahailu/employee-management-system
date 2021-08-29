@@ -24,20 +24,20 @@ interface TableHead<R> {
   headCells: HeadCell<R>[];
 }
 
-export function TableHead<R extends object>(props: TableHead<R>) {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-    headCells,
-  } = props;
+export function TableHead<R extends object>({
+  onSelectAllClick,
+  order,
+  orderBy,
+  numSelected,
+  rowCount,
+  onRequestSort,
+  headCells,
+}: TableHead<R>) {
   const createSortHandler =
     (property: HeadCell<R>['id']) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
+  const actionCell = headCells.find((headCell) => headCell.id === 'actions');
 
   return (
     <MaterialTableHead>
@@ -53,8 +53,9 @@ export function TableHead<R extends object>(props: TableHead<R>) {
             }}
           />
         </TableCell>
-        {headCells.map((headCell, index) => {
-          return headCell.id !== 'action' ? (
+        {headCells
+          .filter((headCell) => headCell.id !== 'actions')
+          .map((headCell, index) => (
             <TableCell
               sx={{ width: index === 0 ? '15%' : 'none' }}
               key={`key-${headCell.id}`}
@@ -77,18 +78,18 @@ export function TableHead<R extends object>(props: TableHead<R>) {
                 ) : null}
               </TableSortLabel>
             </TableCell>
-          ) : (
-            <TableCell
-              key="action"
-              align="left"
-              padding="none"
-              sortDirection={false}
-              sx={{ minWidth: 80, px: 2 }}
-            >
-              {headCell.label}
-            </TableCell>
-          );
-        })}
+          ))}
+        {actionCell && (
+          <TableCell
+            key="actions"
+            align="left"
+            padding="none"
+            sortDirection={false}
+            sx={{ width: 180, px: 2 }}
+          >
+            {actionCell.label}
+          </TableCell>
+        )}
       </TableRow>
     </MaterialTableHead>
   );
