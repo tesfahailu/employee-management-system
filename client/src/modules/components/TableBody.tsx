@@ -1,4 +1,4 @@
-import React, { useState, SyntheticEvent } from 'react';
+import React, { useState, SyntheticEvent, Fragment } from 'react';
 import { getComparator, Order } from './TableUtils';
 import {
   Alert,
@@ -11,6 +11,7 @@ import {
   TableRow,
   Checkbox,
   Tooltip,
+  TextField,
 } from '@material-ui/core';
 import Highlighter from 'react-highlight-words';
 import { useHistory } from 'react-router';
@@ -21,52 +22,95 @@ import {
 } from '@material-ui/icons';
 import { DialogDeleteRow } from './DialogDeleteRow';
 import { DialogDeleteRowText, TableBodyText } from '../../text';
-import { HandleDeleteRow, HeadCell } from '../../types/types';
+import {
+  Department,
+  HandleDeleteRow,
+  HandleSelectRow,
+  HeadCell,
+  OnChangeSelect,
+} from '../../types/types';
 
-interface ActionButton {
-  rowId: number;
+interface ActionButton<R extends { id: number }> {
+  row: R;
   actionButtonLinks: { view: string; edit: string };
   toggleIsDelete: (id: number) => void;
+  isRowsEditable?: boolean;
+  onEditRow?: HandleSelectRow<R>;
 }
 
-const ActionButtons = ({
-  rowId,
+function ActionButtons<R extends { id: number }>({
+  row,
   actionButtonLinks,
   toggleIsDelete,
-}: ActionButton) => {
+  isRowsEditable = false,
+  onEditRow,
+}: ActionButton<R>) {
   const history = useHistory();
   return (
     <Stack direction="row" spacing={0.8} justifyContent="flex-start">
-      <Tooltip title={TableBodyText.ViewIcon}>
-        <IconButton
-          onClick={() => history.push(`${actionButtonLinks.view}/${rowId}`)}
-          size="large"
-          sx={{ ml: -1.5 }}
-        >
-          <PageViewIcon />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title={TableBodyText.EditIcon}>
-        <IconButton
-          onClick={() => history.push(`${actionButtonLinks.edit}/${rowId}`)}
-          size="large"
-        >
-          <EditIcon />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title={TableBodyText.DeleteIcon}>
-        <IconButton size="large" onClick={() => toggleIsDelete(rowId)}>
-          <DeleteIcon />
-        </IconButton>
-      </Tooltip>
+      {!isRowsEditable ? (
+        <Fragment>
+          <Tooltip title={TableBodyText.ViewIcon}>
+            <IconButton
+              onClick={() =>
+                history.push(`${actionButtonLinks.view}/${row.id}`)
+              }
+              size="large"
+              sx={{ ml: -1.5 }}
+            >
+              <PageViewIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={TableBodyText.EditIcon}>
+            <IconButton
+              onClick={() =>
+                history.push(`${actionButtonLinks.edit}/${row.id}`)
+              }
+              size="large"
+            >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={TableBodyText.DeleteIcon}>
+            <IconButton size="large" onClick={() => toggleIsDelete(row.id)}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <Tooltip title={TableBodyText.EditIcon}>
+            <IconButton
+              onClick={(event) => onEditRow!(event, row)}
+              size="large"
+              sx={{ ml: isRowsEditable ? -1.5 : '' }}
+            >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={TableBodyText.DeleteIcon}>
+            <IconButton size="large" onClick={() => toggleIsDelete(row.id)}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </Fragment>
+      )}
     </Stack>
   );
-};
+}
 
 interface TableBody<R> {
   actionButtonLinks: { view: string; edit: string };
   searchText: string;
-  rowsData: Array<R>;
+  isRowsEditable?: boolean;
+  rowsData: R[];
+  editableRow?: R;
+  onEditRow?: HandleSelectRow<R>;
+  errors?: Omit<R, 'id'>;
+  onErrorChange?: OnChangeSelect;
+  handleSaveRow?: OnChangeSelect;
+  handleCancelRow?: OnChangeSelect;
+  handleDeleteRow: HandleDeleteRow;
   headCells: HeadCell<R>[];
   order: Order;
   orderBy: HeadCell<R>['id'];
@@ -74,13 +118,109 @@ interface TableBody<R> {
   rowsPerPage: number;
   selected: readonly number[];
   handleClick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
-  handleDeleteRow: HandleDeleteRow;
 }
+
+const VariableRow = <R extends { id: number }>({
+  labelId,
+  searchText,
+  row,
+  editableRow,
+  headCells,
+  handleSaveRow,
+}: {
+  labelId: string;
+  searchText: string;
+  row: R;
+  editableRow?: R;
+  selectedRowEdit?: number;
+  headCells: HeadCell<R>[];
+  handleSaveRow?: OnChangeSelect;
+}) => {
+  return editableRow?.id === row.id ? (
+    <Fragment>
+      <TableCell
+        component="th"
+        id={labelId}
+        scope="row"
+        padding="none"
+        key="head-first"
+      >
+        <TextField
+          margin="dense"
+          fullWidth
+          size="small"
+          value={(row[headCells[0]['id'] as keyof R] as any) || ''}
+          onChange={handleSaveRow}
+          multiline
+          // onBlur={onErrorChange}
+          // error={!!errors.firstName}
+          // helperText={errors.firstName}
+        />
+      </TableCell>
+      {headCells
+        .filter(
+          (headCell, index) => index !== 0 && headCell['id'] !== 'actions',
+        )
+        .map((headCell, columnIndex) => (
+          <TableCell align="left" key={`${headCell['id']}-${columnIndex}`}>
+            <TextField
+              margin="dense"
+              fullWidth
+              size="small"
+              value={(row[headCell['id'] as keyof R] as any) || ''}
+              onChange={handleSaveRow}
+              multiline
+              // onBlur={onErrorChange}
+              // error={!!errors.firstName}
+              // helperText={errors.firstName}
+            />
+          </TableCell>
+        ))}
+    </Fragment>
+  ) : (
+    <Fragment>
+      <TableCell
+        component="th"
+        id={labelId}
+        scope="row"
+        padding="none"
+        key="head-first"
+      >
+        <Highlighter
+          searchWords={[searchText]}
+          autoEscape={true}
+          textToHighlight={(row[headCells[0]['id'] as keyof R] as any) || ''}
+        />
+      </TableCell>
+      {headCells
+        .filter(
+          (headCell, index) => index !== 0 && headCell['id'] !== 'actions',
+        )
+        .map((headCell, columnIndex) => (
+          <TableCell align="left" key={`${headCell['id']}-${columnIndex}`}>
+            <Highlighter
+              searchWords={[searchText]}
+              autoEscape={true}
+              textToHighlight={(row[headCell['id'] as keyof R] as any) || ''}
+            />
+          </TableCell>
+        ))}
+    </Fragment>
+  );
+};
 
 export const TableBody = <R extends { id: number }>({
   actionButtonLinks,
   searchText,
+  isRowsEditable,
   rowsData,
+  editableRow,
+  onEditRow,
+  errors,
+  onErrorChange,
+  handleSaveRow,
+  handleCancelRow,
+  handleDeleteRow,
   headCells,
   order,
   orderBy,
@@ -88,7 +228,6 @@ export const TableBody = <R extends { id: number }>({
   rowsPerPage,
   selected,
   handleClick,
-  handleDeleteRow,
 }: TableBody<R>) => {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -130,9 +269,9 @@ export const TableBody = <R extends { id: number }>({
           .slice()
           .sort(getComparator(order, orderBy as string))
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          .map((row, rowIndex) => {
+          .map((row) => {
             const isItemSelected = isSelected(row.id);
-            const labelId = `enhanced-table-checkbox-${rowIndex}`;
+            const labelId = `enhanced-table-checkbox-${row.id}`;
 
             return (
               <TableRow
@@ -153,43 +292,19 @@ export const TableBody = <R extends { id: number }>({
                     }}
                   />
                 </TableCell>
-                <TableCell
-                  component="th"
-                  id={labelId}
-                  scope="row"
-                  padding="none"
-                  key="head-first"
-                >
-                  <Highlighter
-                    searchWords={[searchText]}
-                    autoEscape={true}
-                    textToHighlight={
-                      (row[headCells[0]['id'] as keyof R] as any) || ''
-                    }
-                  />
-                </TableCell>
-                {headCells
-                  .filter(
-                    (headCell, index) =>
-                      index !== 0 && headCell['id'] !== 'actions',
-                  )
-                  .map((headCell, columnIndex) => (
-                    <TableCell
-                      align="left"
-                      key={`${headCell['id']}-${columnIndex}`}
-                    >
-                      <Highlighter
-                        searchWords={[searchText]}
-                        autoEscape={true}
-                        textToHighlight={
-                          (row[headCell['id'] as keyof R] as any) || ''
-                        }
-                      />
-                    </TableCell>
-                  ))}
+                <VariableRow<R>
+                  labelId={labelId}
+                  searchText={searchText}
+                  row={row}
+                  editableRow={editableRow}
+                  handleSaveRow={handleSaveRow}
+                  headCells={headCells}
+                />
                 <TableCell align="left" padding="normal" key={`actions-last`}>
-                  <ActionButtons
-                    rowId={row.id}
+                  <ActionButtons<R>
+                    row={row}
+                    isRowsEditable={isRowsEditable}
+                    onEditRow={onEditRow}
                     actionButtonLinks={actionButtonLinks}
                     toggleIsDelete={toggleIsDelete}
                   />

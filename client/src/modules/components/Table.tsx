@@ -8,25 +8,45 @@ import { TableHead } from './TableHead';
 import { Order } from './TableUtils';
 import { TableBody } from './TableBody';
 import { useEffect } from 'react';
-import { HandleDeleteRow, HandleDeleteRows, HeadCell } from '../../types/types';
+import {
+  HandleDeleteRow,
+  HandleDeleteRows,
+  HandleSelectRow,
+  HeadCell,
+  OnChangeSelect,
+} from '../../types/types';
 
 export interface Props<R> {
   actionButtonLinks: { view: string; edit: string };
   title: string;
+  isRowsEditable?: boolean;
   rowsData: R[];
-  headCells: HeadCell<R>[];
+  editableRow?: R;
+  onEditRow?: HandleSelectRow<R>;
+  errors?: Omit<R, 'id'>;
+  onErrorChange?: OnChangeSelect;
+  handleSaveRow?: OnChangeSelect;
+  handleCancelRow?: OnChangeSelect;
   handleDeleteRow: HandleDeleteRow;
   handleDeleteRows: HandleDeleteRows;
+  headCells: HeadCell<R>[];
   minWidth: string;
 }
 
 export default function Table<R extends { id: number }>({
   actionButtonLinks,
   title,
+  isRowsEditable,
   rowsData,
-  headCells,
+  editableRow,
+  onEditRow,
+  errors,
+  onErrorChange,
+  handleSaveRow,
+  handleCancelRow,
   handleDeleteRow,
   handleDeleteRows,
+  headCells,
   minWidth,
 }: Props<R>) {
   const [order, setOrder] = React.useState<Order>('asc');
@@ -129,12 +149,21 @@ export default function Table<R extends { id: number }>({
             onSelectAllClick={handleSelectAllClick}
             onRequestSort={handleRequestSort}
             rowCount={filteredData.length}
+            isRowsEditable={isRowsEditable}
             headCells={headCells}
           />
           <TableBody<R>
             actionButtonLinks={actionButtonLinks}
             searchText={searchText}
-            rowsData={filteredData}
+            isRowsEditable={true}
+            rowsData={rowsData}
+            editableRow={editableRow}
+            onEditRow={onEditRow}
+            errors={errors}
+            onErrorChange={onErrorChange}
+            handleSaveRow={handleSaveRow}
+            handleCancelRow={handleCancelRow}
+            handleDeleteRow={handleDeleteRow}
             headCells={headCells}
             order={order}
             orderBy={orderBy}
@@ -142,7 +171,6 @@ export default function Table<R extends { id: number }>({
             rowsPerPage={rowsPerPage}
             selected={selected}
             handleClick={handleClick}
-            handleDeleteRow={handleDeleteRow}
           />
         </MaterialTable>
       </TableContainer>

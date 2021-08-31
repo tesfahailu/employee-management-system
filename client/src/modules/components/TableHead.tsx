@@ -21,6 +21,7 @@ interface TableHead<R> {
   order: Order;
   orderBy: HeadCell<R>['id'];
   rowCount: number;
+  isRowsEditable?: boolean;
   headCells: HeadCell<R>[];
 }
 
@@ -32,6 +33,7 @@ export function TableHead<R extends object>({
   rowCount,
   onRequestSort,
   headCells,
+  isRowsEditable = false,
 }: TableHead<R>) {
   const createSortHandler =
     (property: HeadCell<R>['id']) => (event: React.MouseEvent<unknown>) => {
@@ -85,7 +87,7 @@ export function TableHead<R extends object>({
             align="left"
             padding="none"
             sortDirection={false}
-            sx={{ width: 180, px: 2 }}
+            sx={{ width: isRowsEditable ? 120 : 180, px: 2 }}
           >
             {actionCell.label}
           </TableCell>

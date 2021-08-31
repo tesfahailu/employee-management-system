@@ -1,10 +1,16 @@
-import React, { MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useState, useEffect } from 'react';
 import { DepartmentsViewPageText } from '../../../text';
 import Table from '../../../modules/components/Table';
-import { Role, HeadCell } from '../../../types/types';
+import {
+  HeadCell,
+  OnChangeSelect,
+  HandleSelectRow,
+  Department,
+} from '../../../types/types';
 import { rows } from './services';
+import { GeneralErrorText as ErrorText } from '../../../text';
 
-const headCells: Array<HeadCell<Role>> = [
+const headCells: Array<HeadCell<Department>> = [
   {
     id: 'name',
     numeric: false,
@@ -32,6 +38,46 @@ const actionButtonLinks = {
 
 export const SectionDepartment = () => {
   const [rowsData, setRowsData] = useState(rows);
+
+  const [editableRow, setEditableRow] = useState<Department>({
+    id: -1,
+    name: '',
+    description: '',
+  });
+  const onEditRow: HandleSelectRow<Department> = (event, row) => {
+    event.stopPropagation();
+    setEditableRow(row);
+  };
+
+  const [errors, setErrors] = useState({ name: '', description: '' });
+  const onErrorChange: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    let errorText = '';
+
+    switch (name) {
+      case 'name':
+        errorText = value === '' ? ErrorText.FieldEmpty : '';
+        break;
+    }
+
+    setErrors((error) => {
+      return {
+        ...error,
+        [name]: errorText,
+      };
+    });
+  };
+
+  const handleSaveRow: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    console.log('save row change');
+  };
+
+  const handleCancelRow: OnChangeSelect = (event) => {
+    const { name, value } = event.target;
+    console.log('cancel row change');
+  };
+
   const handleDeleteRow =
     (
       rowId: number,
@@ -64,11 +110,19 @@ export const SectionDepartment = () => {
         return prevData.filter((val) => selected.indexOf(val.id) === -1);
       });
     };
+
   return (
-    <Table<Role>
+    <Table<Department>
       actionButtonLinks={actionButtonLinks}
       title={DepartmentsViewPageText.TableHeader}
+      isRowsEditable={true}
       rowsData={rowsData}
+      editableRow={editableRow}
+      onEditRow={onEditRow}
+      errors={errors}
+      onErrorChange={onErrorChange}
+      handleSaveRow={handleSaveRow}
+      handleCancelRow={handleCancelRow}
       handleDeleteRow={handleDeleteRow}
       handleDeleteRows={handleDeleteRows}
       headCells={headCells}
