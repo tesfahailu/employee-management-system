@@ -37,7 +37,7 @@ export interface Props<DataWithId, Data> {
 export default function Table<DataWithId extends { id: number }, Data>({
   actionButtonLinks,
   title,
-  isRowsEditable,
+  isRowsEditable = false,
   rowsData,
   editableRow,
   onEditRowChange,
@@ -161,7 +161,7 @@ export default function Table<DataWithId extends { id: number }, Data>({
           <TableBody<DataWithId, Data>
             actionButtonLinks={actionButtonLinks}
             searchText={searchText}
-            isRowsEditable={true}
+            isRowsEditable={isRowsEditable}
             rowsData={rowsData}
             editableRow={editableRow}
             onEditRowChange={onEditRowChange}

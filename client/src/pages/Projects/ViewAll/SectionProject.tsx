@@ -1,7 +1,6 @@
-import React, { Fragment, MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import { ProjectsViewPageText } from '../../../text';
 import { HeadCell, Project, ProjectWithId } from '../../../types/types';
-import { SectionHeader } from '../../../modules/components/SectionHeader';
 import Table from '../../../modules/components/Table';
 import { data } from './services';
 
@@ -63,23 +62,15 @@ export const SectionProject = () => {
     };
 
   return (
-    <Fragment>
-      <SectionHeader
-        title={ProjectsViewPageText.PageHeader}
-        subtitle={ProjectsViewPageText.PageSubHeader}
-        isButton={true}
-        buttonText={ProjectsViewPageText.ButtonCreate}
-        buttonHref="/projects/create"
-      />
-      <Table<ProjectWithId, Project>
-        actionButtonLinks={actionButtonLinks}
-        title={ProjectsViewPageText.TableHeader}
-        rowsData={rowsData}
-        handleDeleteRow={handleDeleteRow}
-        handleDeleteRows={handleDeleteRows}
-        headCells={columns}
-        minWidth="500px"
-      />
-    </Fragment>
+    <Table<ProjectWithId, Project>
+      actionButtonLinks={actionButtonLinks}
+      title={ProjectsViewPageText.TableHeader}
+      isRowsEditable={true}
+      rowsData={rowsData}
+      handleDeleteRow={handleDeleteRow}
+      handleDeleteRows={handleDeleteRows}
+      headCells={columns}
+      minWidth="500px"
+    />
   );
 };
