@@ -1,10 +1,10 @@
-import React, { Fragment, MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import { RolesViewPageText } from '../../../text';
-import { HeadCell, Role } from '../../../types/types';
+import { HeadCell, Role, RoleWithId } from '../../../types/types';
 import Table from '../../../modules/components/Table';
 import { rows } from './services';
 
-const columns: HeadCell<Role>[] = [
+const columns: HeadCell<RoleWithId>[] = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
   {
     id: 'description',
@@ -62,7 +62,7 @@ export const SectionRole = () => {
     };
 
   return (
-    <Table<Role>
+    <Table<RoleWithId, Role>
       actionButtonLinks={actionButtonLinks}
       title={RolesViewPageText.TableHeader}
       rowsData={rowsData}

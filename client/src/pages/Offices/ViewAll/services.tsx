@@ -1,6 +1,6 @@
-import { Address } from '../../../types/types';
+import { AddressWithId } from '../../../types/types';
 
-export const rows: Address[] = [
+export const rows: AddressWithId[] = [
   {
     id: 1,
     streetAddress1: '121 E. Cream St.',

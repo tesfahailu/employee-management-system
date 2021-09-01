@@ -89,7 +89,7 @@ export const SectionEmployee = ({
   }, []);
 
   return (
-    <FormEmployee<Omit<Employee, 'id'>>
+    <FormEmployee<Employee>
       employee={employee}
       errors={errors}
       onChange={onChange}

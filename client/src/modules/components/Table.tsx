@@ -16,25 +16,25 @@ import {
   OnChangeSelect,
 } from '../../types/types';
 
-export interface Props<R extends object> {
+export interface Props<DataWithId, Data> {
   actionButtonLinks: { view: string; edit: string };
   title: string;
   isRowsEditable?: boolean;
-  rowsData: R[];
-  editableRow?: R;
+  rowsData: DataWithId[];
+  editableRow?: DataWithId;
   onEditRowChange?: OnChangeSelect;
-  errors?: Omit<R, 'id'>;
+  errors?: Data;
   onErrorChange?: OnChangeSelect;
-  handleEditRow?: HandleSelectRow<R>;
-  handleSaveRow?: HandleSelectRow<R>;
-  handleCancelRow?: HandleSelectRow<R>;
+  handleEditRow?: HandleSelectRow<DataWithId>;
+  handleSaveRow?: HandleSelectRow<DataWithId>;
+  handleCancelRow?: HandleSelectRow<DataWithId>;
   handleDeleteRow: HandleDeleteRow;
   handleDeleteRows: HandleDeleteRows;
-  headCells: HeadCell<R>[];
+  headCells: HeadCell<DataWithId>[];
   minWidth: string;
 }
 
-export default function Table<R extends { id: number }>({
+export default function Table<DataWithId extends { id: number }, Data>({
   actionButtonLinks,
   title,
   isRowsEditable,
@@ -50,9 +50,10 @@ export default function Table<R extends { id: number }>({
   handleDeleteRows,
   headCells,
   minWidth,
-}: Props<R>) {
+}: Props<DataWithId, Data>) {
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<HeadCell<R>['id']>('');
+  const [orderBy, setOrderBy] =
+    React.useState<HeadCell<DataWithId>['id']>('actions');
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -61,11 +62,14 @@ export default function Table<R extends { id: number }>({
 
   useEffect(() => {
     setFilteredData(
-      rowsData.filter((el: any) => {
-        for (const key of Object.keys(el)) {
+      rowsData.filter((el: DataWithId) => {
+        for (const key of Object.keys(el) as Array<keyof DataWithId>) {
           if (typeof el[key] === 'number' || el[key] === null) continue;
           if (
-            (el[key] as string).toLowerCase().includes(searchText.toLowerCase())
+            typeof el[key] === 'string' &&
+            (el[key] as unknown as string)
+              .toLowerCase()
+              .includes(searchText.toLowerCase())
           )
             return true;
         }
@@ -80,7 +84,7 @@ export default function Table<R extends { id: number }>({
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: HeadCell<R>['id'],
+    property: HeadCell<DataWithId>['id'],
   ) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -130,7 +134,7 @@ export default function Table<R extends { id: number }>({
 
   return (
     <Paper sx={{ mb: 2 }}>
-      <TableToolBar<R>
+      <TableToolBar<DataWithId>
         selected={selected}
         setSelected={setSelected}
         title={title}
@@ -144,7 +148,7 @@ export default function Table<R extends { id: number }>({
           sx={{ tableLayout: 'auto', overflowY: 'auto', width: '100%' }}
           aria-labelledby="tableTitle"
         >
-          <TableHead<R>
+          <TableHead<DataWithId>
             numSelected={selected.length}
             order={order}
             orderBy={orderBy}
@@ -154,7 +158,7 @@ export default function Table<R extends { id: number }>({
             isRowsEditable={isRowsEditable}
             headCells={headCells}
           />
-          <TableBody<R>
+          <TableBody<DataWithId, Data>
             actionButtonLinks={actionButtonLinks}
             searchText={searchText}
             isRowsEditable={true}

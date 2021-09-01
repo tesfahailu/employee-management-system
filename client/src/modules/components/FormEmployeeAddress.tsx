@@ -11,7 +11,7 @@ export const FormEmployeeAddress = ({
   onErrorChange,
   statesList,
   countriesList,
-}: FormAddress<Omit<Address, 'id'>>) => (
+}: FormAddress<Address>) => (
   <Paper sx={{ mb: 2, p: 2 }}>
     <Typography variant="h6">{FormAddressText.Header}</Typography>
     <Box sx={{ mt: 2 }} />

@@ -1,6 +1,6 @@
-import { Role } from '../../../types/types';
+import { RoleWithId } from '../../../types/types';
 
-export const rows: Array<Role> = [
+export const rows: Array<RoleWithId> = [
   {
     id: 1,
     name: 'admin',

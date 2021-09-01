@@ -8,7 +8,7 @@ export const FormDepartment = ({
   errors,
   onChange,
   onErrorChange,
-}: Type<Omit<Department, 'id'>>) => (
+}: Type<Department>) => (
   <Paper sx={{ mb: 2, p: 2 }}>
     <Typography variant="h6">{FormDepartmentText.Header}</Typography>
     <Box sx={{ mt: 2 }} />

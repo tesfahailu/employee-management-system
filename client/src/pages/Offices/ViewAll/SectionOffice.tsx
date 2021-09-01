@@ -1,7 +1,7 @@
 import React, { MouseEventHandler, useState } from 'react';
 import Table from '../../../modules/components/Table';
 import { OfficesViewPageText } from '../../../text';
-import { Address, HeadCell } from '../../../types/types';
+import { Address, AddressWithId, HeadCell } from '../../../types/types';
 import { rows } from './services';
 
 const headCells: Array<HeadCell<Address>> = [
@@ -89,7 +89,7 @@ export const SectionOffice = () => {
       });
     };
   return (
-    <Table<Address>
+    <Table<AddressWithId, Address>
       actionButtonLinks={actionButtonLinks}
       title={OfficesViewPageText.TableHeader}
       rowsData={rowsData}

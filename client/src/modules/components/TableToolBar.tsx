@@ -62,17 +62,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-interface TableToolBar<R> {
+interface TableToolBar<DataWithId> {
   selected: readonly number[];
   setSelected: React.Dispatch<React.SetStateAction<readonly number[]>>;
   title: string;
   searchText: string;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  rowsData: R[];
+  rowsData: DataWithId[];
   handleDeleteRows: HandleDeleteRows;
 }
 
-export const TableToolBar = <R extends { id: number }>({
+export const TableToolBar = <DataWithId extends { id: number }>({
   selected,
   setSelected,
   title,
@@ -80,7 +80,7 @@ export const TableToolBar = <R extends { id: number }>({
   handleSearch,
   rowsData,
   handleDeleteRows,
-}: TableToolBar<R>) => {
+}: TableToolBar<DataWithId>) => {
   const numSelected = selected.length;
   const [open, setOpen] = useState(false);
   const toggleIsDeleteAll = () => {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { rows } from './services';
 import {
   Employee,
+  EmployeeWithId,
   HandleDeleteRow,
   HandleDeleteRows,
   HeadCell,
@@ -94,7 +95,7 @@ export const SectionTable = () => {
       setOpenSnackBar({ open: true, success: true });
     };
   return (
-    <Table<Employee>
+    <Table<EmployeeWithId, Employee>
       actionButtonLinks={actionButtonLinks}
       title={EmployeesViewPageText.TableHeader}
       rowsData={rowsData}
