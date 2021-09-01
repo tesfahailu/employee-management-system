@@ -11,7 +11,7 @@ import React from 'react';
 import { HeadCell } from '../../types/types';
 import { Order } from './TableUtils';
 
-interface TableHead<R> {
+interface TableHead<R extends object> {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,

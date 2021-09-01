@@ -85,6 +85,8 @@ export enum TableBodyText {
   ViewIcon = 'View',
   EditIcon = 'Edit',
   DeleteIcon = 'Delete',
+  SAVE = 'Save',
+  CANCEL = 'Cancel',
 }
 //#endregion
 //#region Error Messages
