@@ -1,6 +1,6 @@
-import { Role } from '../../../types/types';
+import { Department } from '../../../types/types';
 
-export const rows: Array<Role> = [
+export const rows: Array<Department> = [
   {
     id: 1,
     name: 'marketing',

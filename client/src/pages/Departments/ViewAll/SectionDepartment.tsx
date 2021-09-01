@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState, useEffect } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import { DepartmentsViewPageText } from '../../../text';
 import Table from '../../../modules/components/Table';
 import {
@@ -44,12 +44,19 @@ export const SectionDepartment = () => {
     name: '',
     description: '',
   });
-  const onEditRow: HandleSelectRow<Department> = (event, row) => {
+  const onEditRowChange: OnChangeSelect = (event) => {
     event.stopPropagation();
-    setEditableRow(row);
+    const { name, value } = event.target;
+    setEditableRow((row) => ({
+      ...row,
+      [name]: value,
+    }));
   };
 
-  const [errors, setErrors] = useState({ name: '', description: '' });
+  const [errors, setErrors] = useState<Omit<Department, 'id'>>({
+    name: '',
+    description: '',
+  });
   const onErrorChange: OnChangeSelect = (event) => {
     const { name, value } = event.target;
     let errorText = '';
@@ -68,13 +75,18 @@ export const SectionDepartment = () => {
     });
   };
 
-  const handleSaveRow: OnChangeSelect = (event) => {
-    const { name, value } = event.target;
+  const handleEditRow: HandleSelectRow<Department> = (event, row) => {
+    event.stopPropagation();
+    setEditableRow(row);
+  };
+
+  const handleSaveRow: HandleSelectRow<Department> = (event, row) => {
+    event.stopPropagation();
     console.log('save row change');
   };
 
-  const handleCancelRow: OnChangeSelect = (event) => {
-    const { name, value } = event.target;
+  const handleCancelRow: HandleSelectRow<Department> = (event, row) => {
+    event.stopPropagation();
     console.log('cancel row change');
   };
 
@@ -118,9 +130,10 @@ export const SectionDepartment = () => {
       isRowsEditable={true}
       rowsData={rowsData}
       editableRow={editableRow}
-      onEditRow={onEditRow}
+      onEditRowChange={onEditRowChange}
       errors={errors}
       onErrorChange={onErrorChange}
+      handleEditRow={handleEditRow}
       handleSaveRow={handleSaveRow}
       handleCancelRow={handleCancelRow}
       handleDeleteRow={handleDeleteRow}

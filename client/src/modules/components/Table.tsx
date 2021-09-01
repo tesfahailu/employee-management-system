@@ -16,17 +16,18 @@ import {
   OnChangeSelect,
 } from '../../types/types';
 
-export interface Props<R> {
+export interface Props<R extends object> {
   actionButtonLinks: { view: string; edit: string };
   title: string;
   isRowsEditable?: boolean;
   rowsData: R[];
   editableRow?: R;
-  onEditRow?: HandleSelectRow<R>;
+  onEditRowChange?: OnChangeSelect;
   errors?: Omit<R, 'id'>;
   onErrorChange?: OnChangeSelect;
-  handleSaveRow?: OnChangeSelect;
-  handleCancelRow?: OnChangeSelect;
+  handleEditRow?: HandleSelectRow<R>;
+  handleSaveRow?: HandleSelectRow<R>;
+  handleCancelRow?: HandleSelectRow<R>;
   handleDeleteRow: HandleDeleteRow;
   handleDeleteRows: HandleDeleteRows;
   headCells: HeadCell<R>[];
@@ -39,9 +40,10 @@ export default function Table<R extends { id: number }>({
   isRowsEditable,
   rowsData,
   editableRow,
-  onEditRow,
+  onEditRowChange,
   errors,
   onErrorChange,
+  handleEditRow,
   handleSaveRow,
   handleCancelRow,
   handleDeleteRow,
@@ -158,9 +160,10 @@ export default function Table<R extends { id: number }>({
             isRowsEditable={true}
             rowsData={rowsData}
             editableRow={editableRow}
-            onEditRow={onEditRow}
+            onEditRowChange={onEditRowChange}
             errors={errors}
             onErrorChange={onErrorChange}
+            handleEditRow={handleEditRow}
             handleSaveRow={handleSaveRow}
             handleCancelRow={handleCancelRow}
             handleDeleteRow={handleDeleteRow}

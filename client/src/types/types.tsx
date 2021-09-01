@@ -25,9 +25,10 @@ export interface Address {
 }
 
 export interface Department {
+  [index: string]: number | string | undefined;
   id: number;
   name: string;
-  description?: string | null;
+  description?: string;
 }
 
 export interface Role {
@@ -86,6 +87,8 @@ export type OnMouseClick = (
   id: number,
 ) => (event: MouseEvent<HTMLInputElement>) => void;
 
+export type HandleSelectRow<R> = (event: MouseEvent, row: R) => void;
+
 export type HandleDeleteRow = (
   rowId: number,
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -103,7 +106,6 @@ export type HandleDeleteRows = (
   >,
 ) => React.MouseEventHandler<HTMLButtonElement>;
 
-export type HandleSelectRow<R> = (event: MouseEvent, row: R) => void;
 //#endregion
 
 //#region Forms
