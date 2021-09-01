@@ -178,25 +178,27 @@ const VariableRow = <R extends { id: number }>({
       <Fragment>
         {headCells.map(({ id, disablePadding }, columnIndex) => {
           if (id === 'actions') return;
-          <TableCell
-            padding={disablePadding ? 'none' : 'normal'}
-            align="left"
-            key={`${id}-${columnIndex}`}
-          >
-            <TextField
-              name={id! as string}
-              margin="dense"
-              fullWidth
-              size="small"
-              value={(editableRow[id as typeof R] as any) || ''}
-              onClick={(event) => event.stopPropagation()}
-              onChange={onEditRowChange}
-              multiline
-              onBlur={onErrorChange}
-              error={!!errors![id]}
-              // helperText={errors.firstName}
-            />
-          </TableCell>;
+          return (
+            <TableCell
+              padding={disablePadding ? 'none' : 'normal'}
+              align="left"
+              key={`${id}-${columnIndex}`}
+            >
+              <TextField
+                name={id! as string}
+                margin="dense"
+                fullWidth
+                size="small"
+                value={editableRow[id as keyof R]}
+                onClick={(event) => event.stopPropagation()}
+                onChange={onEditRowChange}
+                multiline
+                onBlur={onErrorChange}
+                error={!!errors![id as keyof Omit<R, 'id'>]}
+                helperText={errors![id as keyof Omit<R, 'id'>]}
+              />
+            </TableCell>
+          );
         })}
       </Fragment>
     );
