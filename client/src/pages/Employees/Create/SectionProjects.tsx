@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { FormProjectsList } from '../../../modules/components/FormProjectsList';
-import { OnMouseClick, Project, SectionProp } from '../../../types/types';
+import { OnMouseClick, ProjectWithId } from '../../../types/types';
 import { projectsList } from './services';
 
 export const SectionProjects = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ProjectWithId[]>([]);
   const [open, setOpen] = useState(false);
 
   const onProjectAdd: OnMouseClick = (id) => (_) => {

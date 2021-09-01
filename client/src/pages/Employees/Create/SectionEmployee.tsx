@@ -64,7 +64,7 @@ export const SectionEmployee = ({ setIsErrors }: SectionProp) => {
   }, [errors]);
 
   return (
-    <FormEmployee<Omit<Employee, 'id'>>
+    <FormEmployee<Employee>
       employee={employee}
       errors={errors}
       onChange={onChange}

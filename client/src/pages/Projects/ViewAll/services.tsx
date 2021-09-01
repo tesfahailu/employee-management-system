@@ -1,6 +1,6 @@
-import { Project } from '../../../types/types';
+import { ProjectWithId } from '../../../types/types';
 
-export const data: Project[] = [
+export const data: ProjectWithId[] = [
   {
     id: 1,
     name: 'Amazon',

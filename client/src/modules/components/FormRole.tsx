@@ -8,7 +8,7 @@ export const FormRole = ({
   errors,
   onChange,
   onErrorChange,
-}: Type<Omit<Role, 'id'>>) => {
+}: Type<Role>) => {
   const { name, description } = role!;
   return (
     <Paper sx={{ mb: 2, p: 2 }}>

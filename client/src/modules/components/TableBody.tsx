@@ -30,18 +30,18 @@ import {
   OnChangeSelect,
 } from '../../types/types';
 
-interface ActionButton<R extends { id: number }> {
-  row: R;
+interface ActionButton<DataWithId> {
+  row: DataWithId;
   actionButtonLinks: { view: string; edit: string };
   toggleIsDelete: (id: number) => void;
   isRowsEditable?: boolean;
-  editableRow?: R;
-  handleEditRow?: HandleSelectRow<R>;
-  handleSaveRow?: HandleSelectRow<R>;
-  handleCancelRow?: HandleSelectRow<R>;
+  editableRow?: DataWithId;
+  handleEditRow?: HandleSelectRow<DataWithId>;
+  handleSaveRow?: HandleSelectRow<DataWithId>;
+  handleCancelRow?: HandleSelectRow<DataWithId>;
 }
 
-function ActionButtons<R extends { id: number }>({
+function ActionButtons<DataWithId extends { id: number }>({
   row,
   actionButtonLinks,
   toggleIsDelete,
@@ -50,7 +50,7 @@ function ActionButtons<R extends { id: number }>({
   handleEditRow,
   handleSaveRow,
   handleCancelRow,
-}: ActionButton<R>) {
+}: ActionButton<DataWithId>) {
   const history = useHistory();
   return (
     <Stack direction="row" spacing={0.8} justifyContent="flex-start">
@@ -131,30 +131,18 @@ function ActionButtons<R extends { id: number }>({
   );
 }
 
-interface TableBody<R extends object> {
-  actionButtonLinks: { view: string; edit: string };
+interface VariableRowProp<DataWithId, Data> {
   searchText: string;
-  isRowsEditable?: boolean;
-  rowsData: R[];
-  editableRow?: R;
+  row: DataWithId;
+  editableRow?: DataWithId;
+  selectedRowEdit?: number;
   onEditRowChange?: OnChangeSelect;
-  errors?: Omit<R, 'id'>;
+  headCells: HeadCell<DataWithId>[];
+  errors?: Data;
   onErrorChange?: OnChangeSelect;
-  handleEditRow?: HandleSelectRow<R>;
-  handleSaveRow?: HandleSelectRow<R>;
-  handleCancelRow?: HandleSelectRow<R>;
-  handleDeleteRow: HandleDeleteRow;
-  headCells: HeadCell<R>[];
-  order: Order;
-  orderBy: HeadCell<R>['id'];
-  page: number;
-  rowsPerPage: number;
-  selected: readonly number[];
-  handleClick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
 }
 
-const VariableRow = <R extends { id: number }>({
-  labelId,
+const VariableRow = <DataWithId extends { id: number }, Data>({
   searchText,
   row,
   editableRow,
@@ -162,17 +150,7 @@ const VariableRow = <R extends { id: number }>({
   headCells,
   errors,
   onErrorChange,
-}: {
-  labelId: string;
-  searchText: string;
-  row: R;
-  editableRow?: R;
-  selectedRowEdit?: number;
-  onEditRowChange?: OnChangeSelect;
-  headCells: HeadCell<R>[];
-  errors?: Omit<R, 'id'>;
-  onErrorChange?: OnChangeSelect;
-}) => {
+}: VariableRowProp<DataWithId, Data>) => {
   if (editableRow?.id === row.id) {
     return (
       <Fragment>
@@ -189,13 +167,13 @@ const VariableRow = <R extends { id: number }>({
                 margin="dense"
                 fullWidth
                 size="small"
-                value={editableRow[id as keyof R]}
+                value={editableRow[id as keyof DataWithId]}
                 onClick={(event) => event.stopPropagation()}
                 onChange={onEditRowChange}
                 multiline
                 onBlur={onErrorChange}
-                error={!!errors![id as keyof Omit<R, 'id'>]}
-                helperText={errors![id as keyof Omit<R, 'id'>]}
+                error={!!errors![id as keyof Data]}
+                helperText={errors![id as keyof Data]}
               />
             </TableCell>
           );
@@ -217,7 +195,9 @@ const VariableRow = <R extends { id: number }>({
             <Highlighter
               searchWords={[searchText]}
               autoEscape={true}
-              textToHighlight={(row[headCell['id'] as keyof R] as any) || ''}
+              textToHighlight={
+                (row[headCell['id'] as keyof DataWithId] as any) || ''
+              }
             />
           </TableCell>
         ))}
@@ -225,7 +205,29 @@ const VariableRow = <R extends { id: number }>({
   );
 };
 
-export const TableBody = <R extends { id: number }>({
+interface TableBody<DataWithId, Data> {
+  actionButtonLinks: { view: string; edit: string };
+  searchText: string;
+  isRowsEditable?: boolean;
+  rowsData: DataWithId[];
+  editableRow?: DataWithId;
+  onEditRowChange?: OnChangeSelect;
+  errors?: Data;
+  onErrorChange?: OnChangeSelect;
+  handleEditRow?: HandleSelectRow<DataWithId>;
+  handleSaveRow?: HandleSelectRow<DataWithId>;
+  handleCancelRow?: HandleSelectRow<DataWithId>;
+  handleDeleteRow: HandleDeleteRow;
+  headCells: HeadCell<DataWithId>[];
+  order: Order;
+  orderBy: HeadCell<DataWithId>['id'];
+  page: number;
+  rowsPerPage: number;
+  selected: readonly number[];
+  handleClick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
+}
+
+export const TableBody = <DataWithId extends { id: number }, Data>({
   actionButtonLinks,
   searchText,
   isRowsEditable,
@@ -245,7 +247,7 @@ export const TableBody = <R extends { id: number }>({
   rowsPerPage,
   selected,
   handleClick,
-}: TableBody<R>) => {
+}: TableBody<DataWithId, Data>) => {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   // Avoid a layout jump when reaching the last page with empty rows.
   const [openDialog, setOpenDialog] = useState(false);
@@ -309,8 +311,7 @@ export const TableBody = <R extends { id: number }>({
                     }}
                   />
                 </TableCell>
-                <VariableRow<R>
-                  labelId={labelId}
+                <VariableRow<DataWithId, Data>
                   searchText={searchText}
                   row={row}
                   editableRow={editableRow}
@@ -320,7 +321,7 @@ export const TableBody = <R extends { id: number }>({
                   onErrorChange={onErrorChange}
                 />
                 <TableCell align="left" padding="normal" key={`actions-last`}>
-                  <ActionButtons<R>
+                  <ActionButtons<DataWithId>
                     row={row}
                     isRowsEditable={isRowsEditable}
                     editableRow={editableRow}

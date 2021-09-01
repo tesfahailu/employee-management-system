@@ -6,6 +6,7 @@ import {
   OnChangeSelect,
   HandleSelectRow,
   Department,
+  DepartmentWithId,
 } from '../../../types/types';
 import { rows } from './services';
 import { GeneralErrorText as ErrorText } from '../../../text';
@@ -39,7 +40,7 @@ const actionButtonLinks = {
 export const SectionDepartment = () => {
   const [rowsData, setRowsData] = useState(rows);
 
-  const [editableRow, setEditableRow] = useState<Department>({
+  const [editableRow, setEditableRow] = useState<DepartmentWithId>({
     id: -1,
     name: '',
     description: '',
@@ -53,7 +54,7 @@ export const SectionDepartment = () => {
     }));
   };
 
-  const [errors, setErrors] = useState<Omit<Department, 'id'>>({
+  const [errors, setErrors] = useState<Department>({
     name: '',
     description: '',
   });
@@ -75,17 +76,17 @@ export const SectionDepartment = () => {
     });
   };
 
-  const handleEditRow: HandleSelectRow<Department> = (event, row) => {
+  const handleEditRow: HandleSelectRow<DepartmentWithId> = (event, row) => {
     event.stopPropagation();
     setEditableRow(row);
   };
 
-  const handleSaveRow: HandleSelectRow<Department> = (event, row) => {
+  const handleSaveRow: HandleSelectRow<DepartmentWithId> = (event, row) => {
     event.stopPropagation();
     console.log('save row change');
   };
 
-  const handleCancelRow: HandleSelectRow<Department> = (event, row) => {
+  const handleCancelRow: HandleSelectRow<DepartmentWithId> = (event, row) => {
     event.stopPropagation();
     console.log('cancel row change');
   };
@@ -124,7 +125,7 @@ export const SectionDepartment = () => {
     };
 
   return (
-    <Table<Department>
+    <Table<DepartmentWithId, Department>
       actionButtonLinks={actionButtonLinks}
       title={DepartmentsViewPageText.TableHeader}
       isRowsEditable={true}

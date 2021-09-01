@@ -3,7 +3,6 @@ import React, { ChangeEvent, MouseEvent, MouseEventHandler } from 'react';
 
 //#region General Categories
 export interface Employee {
-  id: number;
   firstName: string;
   lastName: string;
   mobile: string;
@@ -14,40 +13,55 @@ export interface Employee {
   department?: string;
 }
 
-export interface Address {
+export interface EmployeeWithId extends Employee {
   id: number;
+}
+
+export interface Address {
   streetAddress1: string;
-  streetAddress2: string | null;
+  streetAddress2?: string;
   city: string;
   state: string;
   country: string;
   zipCode: string;
 }
 
-export interface Department {
-  [index: string]: number | string | undefined;
+export interface AddressWithId extends Address {
   id: number;
+}
+
+export interface Department {
   name: string;
   description?: string;
 }
 
-export interface Role {
+export interface DepartmentWithId extends Department {
   id: number;
+}
+
+export interface Role {
   name: string;
-  description: string | null;
+  description?: string;
+}
+
+export interface RoleWithId extends Role {
+  id: number;
 }
 
 export interface Project {
-  id: number;
   name: string;
-  description: string | null;
+  description?: string;
+}
+
+export interface ProjectWithId extends Project {
+  id: number;
 }
 
 export interface SelectLabel {
   id: number;
   name: string;
-  description?: string | null;
-  abbreviation?: string | null;
+  description?: string;
+  abbreviation?: string;
 }
 
 export interface Company {
@@ -140,12 +154,12 @@ export interface FormCompany {
 }
 
 export interface FormProjectsList {
-  projects: Array<Project>;
+  projects: Array<ProjectWithId>;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onProjectAdd: OnMouseClick;
   onProjectRemove: OnMouseClick;
-  projectsList: Project[];
+  projectsList: ProjectWithId[];
 }
 
 export interface FormProject {
@@ -172,7 +186,7 @@ export interface FormRole<R> {
 
 //#region Table
 export interface HeadCell<R> {
-  id: Omit<keyof R, 'id'> | 'actions';
+  id: keyof R | 'actions';
   numeric: boolean;
   disablePadding: boolean;
   label: string;

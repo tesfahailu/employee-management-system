@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { OnChangeSelect, SectionProp } from '../../../types/types';
+import { Department, OnChangeSelect, SectionProp } from '../../../types/types';
 import { FormDepartment } from '../../../modules/components/FormDepartment';
 import { GeneralErrorText as ErrorText } from '../../../text';
 
-const initialDepartment = {
+const initialDepartment: Department = {
   name: '',
   description: '',
 };

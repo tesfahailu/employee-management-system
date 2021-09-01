@@ -11,21 +11,21 @@ import React from 'react';
 import { HeadCell } from '../../types/types';
 import { Order } from './TableUtils';
 
-interface TableHead<R extends object> {
+interface TableHead<DataWithId> {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: HeadCell<R>['id'],
+    property: HeadCell<DataWithId>['id'],
   ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
-  orderBy: HeadCell<R>['id'];
+  orderBy: HeadCell<DataWithId>['id'];
   rowCount: number;
   isRowsEditable?: boolean;
-  headCells: HeadCell<R>[];
+  headCells: HeadCell<DataWithId>[];
 }
 
-export function TableHead<R extends object>({
+export function TableHead<DataWithId>({
   onSelectAllClick,
   order,
   orderBy,
@@ -34,9 +34,10 @@ export function TableHead<R extends object>({
   onRequestSort,
   headCells,
   isRowsEditable = false,
-}: TableHead<R>) {
+}: TableHead<DataWithId>) {
   const createSortHandler =
-    (property: HeadCell<R>['id']) => (event: React.MouseEvent<unknown>) => {
+    (property: HeadCell<DataWithId>['id']) =>
+    (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
   const actionCell = headCells.find((headCell) => headCell.id === 'actions');
