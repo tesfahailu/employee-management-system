@@ -59,7 +59,10 @@ export function TableHead<R extends object>({
           .filter((headCell) => headCell.id !== 'actions')
           .map((headCell, index) => (
             <TableCell
-              sx={{ width: index === 0 ? '15%' : 'none' }}
+              sx={{
+                width: index === 0 ? '20%' : 'none',
+                minWidth: index === 0 ? 150 : 'none',
+              }}
               key={`key-${headCell.id}`}
               align={headCell.numeric ? 'right' : 'left'}
               padding={headCell.disablePadding ? 'none' : 'normal'}
